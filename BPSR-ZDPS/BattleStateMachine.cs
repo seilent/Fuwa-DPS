@@ -1,0 +1,223 @@
+﻿using BPSR_ZDPS.DataTypes;
+using Serilog;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zproto;
+
+namespace BPSR_ZDPS
+{
+    public static class BattleStateMachine
+    {
+        public static ConcurrentQueue<KeyValuePair<EDungeonState, DateTime>> DungeonStateHistory { get; private set; } = new();
+        public static ConcurrentQueue<KeyValuePair<DungeonTargetData, DateTime>> DungeonTargetDataHistory { get; private set; } = new();
+        public static DateTime? DeferredEncounterStartTime { get; private set; } = null;
+        public static EncounterStartReason DeferredEncounterStartReason { get; private set; } = EncounterStartReason.None;
+        public static DateTime? DeferredEncounterEndFinalTime { get; private set; } = null;
+        public static EncounterEndFinalData? DeferredEncounterEndFinalData { get; private set; } = null;
+        static KeyValuePair<DungeonTargetData, DateTime>? PreviousDungeonTargetData = null;
+
+        // Called at the start of a Map Load/Enter event before Objective and State data is set
+        public static void StartNewBattle()
+        {
+            Log.Information($"{DateTime.Now} - BattleStateMachine.StartNewBattle");
+            PreviousDungeonTargetData = null;
+            DeferredEncounterStartTime = null;
+            DeferredEncounterStartReason = EncounterStartReason.None;
+            DeferredEncounterEndFinalTime = null;
+            // We do not null the DeferredEncounterEndFinalData as we use it to ensure we don't send multiple End Final calls
+            DungeonTargetDataHistory.Clear();
+            DungeonStateHistory.Clear();
+
+            EncounterManager.StartNewBattle();
+            EncounterManager.StartEncounter(true, EncounterStartReason.Force);
+
+            AppState.IsEncounterSavingPaused = false;
+        }
+
+        public static void DungeonStateHistoryAdd(EDungeonState dungeonState)
+        {
+            DungeonStateHistory.Enqueue(new KeyValuePair<EDungeonState, DateTime>(dungeonState, DateTime.Now));
+            Log.Information($"{DateTime.Now} - BattleStateMachine.DungeonStateHistoryAdd: {dungeonState}");
+
+            if (dungeonState != EDungeonState.DungeonStateNull)
+            {
+                AppState.IsEncounterSavingPaused = false;
+            }
+
+            if (dungeonState == EDungeonState.DungeonStateNull)
+            {
+                // Start encounter (this is the Open World)
+                // We can call this safely as it will reuse the current encounter if nothing has happened (which is the most likely case)
+                // Note: While we are in Open World we will want to use different logic for detecting encounters
+                EncounterManager.StartEncounter();
+            }
+            else if (dungeonState == EDungeonState.DungeonStatePlaying)
+            {
+                // Start encounter (this is when a dungeon's timer typically begins ticking)
+                if (EncounterManager.Current.HasStatsBeenRecorded())
+                {
+                    // A battle was already created for us but we are forcing a new encounter to be made to keep the generated data separate from the prior states
+                    EncounterManager.StartEncounter(true, EncounterStartReason.Force);
+                }
+                else
+                {
+                    EncounterManager.StartEncounter();
+                }
+            }
+            else if (dungeonState == EDungeonState.DungeonStateEnd)
+            {
+                // End encounter (this is when a dungeon's timer typically stops ticking)
+                EncounterManager.StopEncounter(true, EncounterStartReason.DungeonStateEnd);
+                // Do not have to worry about Settlement or Vote state as they can only occur after End
+            }
+
+            // Stimen Vaults failure state flow will go End > Settlement > Active. On starting a run it will immediately perform Ready > Playing
+        }
+
+        public static void DungeonTargetDataHistoryAdd(DungeonTargetData dungeonTargetData)
+        {
+            // We'll ensure there's an upper limit just in case something goes very wrong though if it does we're already in trouble
+            if (DungeonTargetDataHistory.Count > 300)
+            {
+                DungeonTargetDataHistory.TryDequeue(out _);
+            }
+
+            // Store the current last data before we add the latest to the stack so we can make sure targets are actually changing
+            var newDungeonTargetData = new KeyValuePair<DungeonTargetData, DateTime>(dungeonTargetData, DateTime.Now);
+
+            DungeonTargetDataHistory.Enqueue(newDungeonTargetData);
+            Log.Information($"{DateTime.Now} - BattleStateMachine.DungeonTargetDataHistoryAdd: TargetId={dungeonTargetData.TargetId}, Complete={dungeonTargetData.Complete}, Nums={dungeonTargetData.Nums}");
+
+            if (DungeonTargetDataHistory.Count > 2 && dungeonTargetData.Complete == 0 && dungeonTargetData.Nums == 0)
+            {
+                // We got a new update, we'll check if it's the same as our map entry objective
+                var firstObjective = DungeonTargetDataHistory.First();
+                if (firstObjective.Key != null && PreviousDungeonTargetData != null)
+                {
+                    if (firstObjective.Key.TargetId != 0 && PreviousDungeonTargetData.Value.Key.TargetId != 0 && PreviousDungeonTargetData.Value.Key.TargetId != firstObjective.Key.TargetId && firstObjective.Key.TargetId == dungeonTargetData.TargetId)
+                    {
+                        PreviousDungeonTargetData = newDungeonTargetData;
+                        Log.Information($"{DateTime.Now} - BattleStateMachine.DungeonTargetDataHistoryAdd: RestartCheckHit!");
+                        // Our first map entry objective is the same as the newest one we were just given
+                        // This is likely some form of reset such as killing one of the Raid bosses but others have not been beat yet
+                        EncounterManager.StopEncounter();
+                        EncounterManager.StartEncounter(false, EncounterStartReason.Restart);
+                        return;
+                    }
+                }
+            }
+
+            if (PreviousDungeonTargetData != null)
+            {
+                if (PreviousDungeonTargetData.Value.Key.Complete == 0 && dungeonTargetData.Complete == 0 && PreviousDungeonTargetData.Value.Key.TargetId == dungeonTargetData.TargetId)
+                {
+                    // The last objective and this one are the same "new objective" being set, this can happen if a player is watching a cutscene while others skip it/finish first and begin playing
+                    // As each player finishes a cutscene, the objective is resent from the server to all players
+                    // In order to continue the current encounter and use the first player done as the starting point we can just early exit now and everything will be handled
+                    PreviousDungeonTargetData = newDungeonTargetData;
+                    return;
+                }
+            }
+
+            // We can set this here since we don't need it again in this function, if that changes then move it down lower
+            PreviousDungeonTargetData = newDungeonTargetData;
+
+            if (Settings.Instance.SplitEncountersOnNewPhases)
+            {
+                if (dungeonTargetData.Complete == 0 && dungeonTargetData.Nums == 0)
+                {
+                    // New objective set
+                    Log.Debug("DungeonTargetDataHistoryAdd - Deferring a New Objective EncounterStart");
+                    // TODO: If this was set within a very short time after Complete, delay the start creation to allow resolving effects against despawning enemies properly
+                    DeferredEncounterStartReason = EncounterStartReason.NewObjective;
+                    DeferredEncounterStartTime = DateTime.Now.AddSeconds(1);
+                    //Task.Run(() => { Thread.Sleep(1000); EncounterManager.StartEncounter(); });
+                    //EncounterManager.StartEncounter();
+                }
+                else if (dungeonTargetData.Complete == 1 && dungeonTargetData.Nums > 0)
+                {
+                    // Objective complete
+
+                    // Note: As long as a new encounter is not made, new data will still be applied to this ended encounter (this is the desired behavior)
+                    EncounterManager.StopEncounter();
+                }
+            }
+        }
+
+        public static void SetDeferredEncounterEndFinalData(DateTime dateTime, EncounterEndFinalData data)
+        {
+            if (DeferredEncounterEndFinalData != null && DeferredEncounterEndFinalData.EncounterId == data.EncounterId)
+            {
+                // We have previously set the End Final data for this Encounter, if we have no Time set then the actual Signal has been completed and we don't want to do it again
+                // If the time however does exist and is later than our incoming time, then we'll allow updating it to be sooner
+                if (DeferredEncounterEndFinalTime == null)
+                {
+                    // Encounter has already signaled the final end
+                    Log.Debug("SetDeferredEncounterEndFinalData - Encounter has already signaled the final end");
+                    return;
+                }
+                else if (dateTime.CompareTo(DeferredEncounterEndFinalTime) >= 0)
+                {
+                    // We'll only allow updating the time to be sooner, not later
+                    Log.Debug("SetDeferredEncounterEndFinalData - New time is not sooner than already set callback");
+                    return;
+                }
+            }
+
+            DeferredEncounterEndFinalTime = dateTime;
+            DeferredEncounterEndFinalData = data;
+        }
+
+        public static void CheckDeferredCalls()
+        {
+            if (AppState.IsBenchmarkMode && AppState.HasBenchmarkBegun)
+            {
+                if (EncounterManager.Current.GetDuration().TotalSeconds >= AppState.BenchmarkTime)
+                {
+                    AppState.HasBenchmarkBegun = false;
+                    AppState.IsBenchmarkMode = false;
+
+                    var endData = new EncounterEndFinalData() { BattleId = EncounterManager.CurrentBattleId, EncounterId = (ulong)EncounterManager.Current.EncounterId, Reason = EncounterStartReason.BenchmarkEnd, Encounter = EncounterManager.Current };
+                    SetDeferredEncounterEndFinalData(DateTime.Now, endData);
+
+                    DeferredEncounterEndFinalTime = null;
+
+                    EncounterManager.SignalEncounterEndFinal(endData);
+                    EncounterManager.StartEncounter(false, EncounterStartReason.BenchmarkEnd);
+                    
+                    return;
+                }
+            }
+
+            if (DeferredEncounterStartTime.HasValue && DateTime.Now.CompareTo(DeferredEncounterStartTime) >= 0)
+            {
+                DeferredEncounterStartTime = null;
+
+                EncounterManager.StartEncounter(false, DeferredEncounterStartReason);
+
+                DeferredEncounterStartReason = EncounterStartReason.None;
+            }
+
+            if (DeferredEncounterEndFinalTime.HasValue && DateTime.Now.CompareTo(DeferredEncounterEndFinalTime) >= 0)
+            {
+                DeferredEncounterEndFinalTime = null;
+
+                EncounterManager.SignalEncounterEndFinal(DeferredEncounterEndFinalData);
+
+                // We do not null the DeferredEncounterEndFinalData as we use it to ensure we don't send multiple End Final calls
+            }
+        }
+    }
+
+    public class EncounterEndFinalData
+    {
+        public ulong EncounterId;
+        public int BattleId;
+        public EncounterStartReason Reason;
+        public Encounter? Encounter;
+    }
+}

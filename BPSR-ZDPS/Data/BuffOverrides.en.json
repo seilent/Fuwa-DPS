@@ -1,0 +1,153 @@
+{
+    "55401":
+    {
+        "Name": "Sword and Shield Initial Buff"
+    },
+    "55418":
+    {
+        "Name": "Divine Circle Buff"
+    },
+    "510701":
+    {
+        "Name": "Float"
+    },
+    "510801":
+    {
+        "Name": "Glide"
+    },
+    "521001":
+    {
+        "Name": "Invincible"
+    },
+    "521003":
+    {
+        "Name": "Invincible"
+    },
+    "55405":
+    {
+        "Name": "Aegis Ward",
+        "BuffType": 1
+    },
+    "55420":
+    {
+        "Name": "Shield Toss",
+        "Desc": "Actions Interrupted. DMG -10%"
+    },
+    "55421":
+    {
+        "Name": "Judgment Healing",
+        "BuffType": 1
+    },
+    "55424":
+    {
+        "Name": "Condemn Boost",
+        "BuffType": 1
+    },
+    "680101":
+    {
+        "Name": "Air Float",
+        "BuffType": 1
+    },
+    "680201":
+    {
+        "Name": "Dash Jump",
+        "BuffType": 1
+    },
+    "680401":
+    {
+        "Name": "Wall Jump",
+        "BuffType": 1
+    },
+    "680501":
+    {
+        "Name": "Wall Running",
+        "BuffType": 1
+    },
+    "680701":
+    {
+        "Name": "Auto Vault",
+        "BuffType": 1
+    },
+    "681701":
+    {
+        "Name": "Skills Disabled In City"
+    },
+    "682501":
+    {
+        "Name": "Chain Jump",
+        "BuffType": 1
+    },
+    "682503":
+    {
+        "Name": "Chain Jump",
+        "BuffType": 1
+    },
+    "682505":
+    {
+        "Name": "Chain Jump",
+        "BuffType": 1
+    },
+    "683104":
+    {
+        "Name": "Automatic Health Regen In City"
+    },
+    "2031010":
+    {
+        "Name": "Sword and Shield - Strength"
+    },
+    "2110091":
+    {
+        "Name": "Convert damage received into healing",
+        "BuffType": 1
+    },
+    "2200601":
+    {
+        "Name": "Divine Scythe",
+        "BuffType": 1
+    },
+    "2206010":
+    {
+        "Name": "Lightforged Body",
+        "BuffType": 1
+    },
+    "2206020":
+    {
+        "Name": "Condemn",
+        "BuffType": 1
+    },
+    "2206040":
+    {
+        "Name": "Ring of Judgment",
+        "Desc": "Casting Judgment generates a Divine Circle."
+    },
+    "2206041":
+    {
+        "Name": "Ring of Judgment - Buff"
+    },
+    "2206060":
+    {
+        "Name": "Haste Sigil",
+        "Desc": "Haste increases the recovery speed of Holy Sigil."
+    },
+    "2206171":
+    {
+        "Name": "Lightforged Greatsword",
+        "Desc": "Aegis Ward Sword - Sub Buff",
+        "BuffType": 1
+    },
+    "2206660":
+    {
+        "Name": "Sacred Blade Enhancement",
+        "Desc": "Resolved to Return Talent."
+    },
+    "3210030":
+    {
+        "Name": "Arcane! Thunderfall Grasp - Passive",
+        "BuffType": 1
+    },
+    "3210060":
+    {
+        "Name": "Stunt! Super Critical - Passive",
+        "BuffType": 1
+    }
+}
