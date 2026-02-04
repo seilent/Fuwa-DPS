@@ -84,6 +84,8 @@ public class Settings
 
     public bool LowPerformanceMode { get; set; } = false;
 
+    public ETheme Theme { get; set; } = ETheme.Dark;
+
     public uint HotkeysEncounterReset { get; set; }
     public uint HotkeysPinnedWindowClickthrough { get; set; }
 
@@ -147,6 +149,13 @@ public enum EWebhookReportsMode
     Discord,
     Custom,
     FallbackDiscordDeduplication,
+}
+
+public enum ETheme
+{
+    Dark,
+    Black,
+    Light,
 }
 
 public class SettingsExternal

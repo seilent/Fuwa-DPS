@@ -95,6 +95,8 @@ namespace BPSR_ZDPS.Windows
 
         static WindowSettings windowSettings;
 
+        static ETheme theme;
+
         static bool IsDiscordWebhookUrlValid = true;
 
         static int RunOnceDelayed = 0;
@@ -910,6 +912,49 @@ namespace BPSR_ZDPS.Windows
                         ImGui.EndDisabled();
                         ImGui.Unindent();
 
+                        ImGui.SeparatorText("Appearance");
+
+                        ImGui.AlignTextToFramePadding();
+                        ImGui.Text("Theme: ");
+                        ImGui.SameLine();
+
+                        string currentThemeName = theme switch
+                        {
+                            ETheme.Dark => "Dark (VS Dark)",
+                            ETheme.Black => "Black",
+                            ETheme.Light => "Light",
+                            _ => "Dark (VS Dark)"
+                        };
+
+                        ImGui.SetNextItemWidth(200);
+                        if (ImGui.BeginCombo("##ThemeCombo", currentThemeName))
+                        {
+                            if (ImGui.Selectable("Dark (VS Dark)"))
+                            {
+                                theme = ETheme.Dark;
+                            }
+                            ImGui.SetItemTooltip("The default dark theme with VS Dark color scheme.");
+
+                            if (ImGui.Selectable("Black"))
+                            {
+                                theme = ETheme.Black;
+                            }
+                            ImGui.SetItemTooltip("A darker theme with pure black backgrounds for reduced eye strain in low-light environments.");
+
+                            if (ImGui.Selectable("Light"))
+                            {
+                                theme = ETheme.Light;
+                            }
+                            ImGui.SetItemTooltip("A light theme optimized for daytime use and well-lit environments.");
+
+                            ImGui.EndCombo();
+                        }
+                        ImGui.Indent();
+                        ImGui.BeginDisabled(true);
+                        ImGui.TextWrapped("Select the visual theme for the ZDPS interface. Takes effect immediately after saving.");
+                        ImGui.EndDisabled();
+                        ImGui.Unindent();
+
                         ImGui.EndChild();
                         ImGui.EndTabItem();
                     }
@@ -1513,6 +1558,8 @@ namespace BPSR_ZDPS.Windows
 
             lowPerformanceMode = Settings.Instance.LowPerformanceMode;
 
+            theme = Settings.Instance.Theme;
+
             // External
             externalBPTimerEnabled = Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled;
             externalBPTimerIncludeCharacterId = Settings.Instance.External.BPTimerSettings.ExternalBPTimerIncludeCharacterId;
@@ -1613,6 +1660,8 @@ namespace BPSR_ZDPS.Windows
 
             Settings.Instance.LowPerformanceMode = lowPerformanceMode;
 
+            Settings.Instance.Theme = theme;
+
             // External
             Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled = externalBPTimerEnabled;
             Settings.Instance.External.BPTimerSettings.ExternalBPTimerIncludeCharacterId = externalBPTimerIncludeCharacterId;
@@ -1624,6 +1673,9 @@ namespace BPSR_ZDPS.Windows
 
             // Write out the new settings to file now that they've been applied
             Settings.Save();
+
+            // Apply the new theme immediately
+            Theme.ApplyTheme(Settings.Instance.Theme);
 
             if (externalBPTimerEnabled && externalBPTimerFieldBossHpReportsEnabled)
             {
