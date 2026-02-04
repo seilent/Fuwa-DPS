@@ -77,14 +77,15 @@ namespace BPSR_ZDPS.Windows
             //ImGui.SetNextWindowPos(new Vector2(main_viewport.WorkPos.X + 200, main_viewport.WorkPos.Y + 120), ImGuiCond.FirstUseEver);
             ImGui.SetNextWindowSize(DefaultWindowSize, ImGuiCond.FirstUseEver);
 
-            if (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld)
-            {
-                ImGui.SetNextWindowSizeConstraints(new Vector2(375, 150), new Vector2(ImGui.GETFLTMAX()));
-            }
-            else
-            {
-                ImGui.SetNextWindowSizeConstraints(new Vector2(400, 220), new Vector2(ImGui.GETFLTMAX()));
-            }
+            // Size constraints removed for auto-resize - content determines window size
+            // if (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld)
+            // {
+            //     ImGui.SetNextWindowSizeConstraints(new Vector2(375, 150), new Vector2(ImGui.GETFLTMAX()));
+            // }
+            // else
+            // {
+            //     ImGui.SetNextWindowSizeConstraints(new Vector2(400, 220), new Vector2(ImGui.GETFLTMAX()));
+            // }
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
@@ -116,7 +117,7 @@ namespace BPSR_ZDPS.Windows
                 exWindowFlags |= ImGuiWindowFlags.NoInputs;
             }
 
-            ImGuiWindowFlags window_flags = ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoDocking | exWindowFlags;
+            ImGuiWindowFlags window_flags = ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.AlwaysAutoResize | exWindowFlags;
             
             if (!p_open)
             {
@@ -291,10 +292,9 @@ namespace BPSR_ZDPS.Windows
 
             if (isMergeMode)
             {
-                // In merge mode, wrap in a parent child for proper layout
-                ImGui.BeginChild("##MergeModeContainer", new Vector2(0, 0));
+                // In merge mode, just render sections directly without wrapper
+                // The main window's AlwaysAutoResize will handle the sizing
                 DrawMergedDpsHealingView();
-                ImGui.EndChild();
             }
             else
             {
@@ -356,9 +356,7 @@ namespace BPSR_ZDPS.Windows
                     SelectedTabIndex = 0;
                 }
 
-                // Meter content
-                ImGui.BeginChild("MeterChild", new Vector2(0, -1.0f));
-
+                // Meter content - draw directly, the meter will set its own ListBox height
                 if (SelectedTabIndex > -1 && SelectedTabIndex < visibleMeters.Count)
                 {
                     // Map visible index back to actual meter index
@@ -368,8 +366,6 @@ namespace BPSR_ZDPS.Windows
                         Meters[actualIndex].Draw(this);
                     }
                 }
-
-                ImGui.EndChild();
             }
 
             ImGui.End();
@@ -716,18 +712,12 @@ namespace BPSR_ZDPS.Windows
             // Check if we have healers
             bool hasHealers = healerList != null && healerList.Length > 0;
 
-            // Calculate the exact height needed for healing section
-            float scale = Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
-            float entryHeight = (14.0f * scale) + ImGui.GetStyle().FramePadding.Y * 2;
-            float headerHeight = ImGui.GetTextLineHeight() + ImGui.GetStyle().ItemSpacing.Y;
-            float healingHeight = headerHeight + (healerList.Length * entryHeight) + (ImGui.GetStyle().ItemSpacing.Y * (healerList.Length - 1));
-
-            // DPS section - fills remaining space after reserving room for healing AND item spacing between children
+            // Calculate heights using the same calculation as GetListHeight
+            float entryHeight = ImGui.GetFrameHeight() + 2.0f;
             float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
-            float dpsHeight = hasHealers ? -(healingHeight + itemSpacing) : 0.0f;
-            ImGui.BeginChild("##DpsSection", new Vector2(0, dpsHeight));
+
+            // DPS section - just draw the meter directly, it will use its calculated height
             Meters[0].Draw(this); // DpsMeter is always at index 0
-            ImGui.EndChild();
 
             // Only show healing section if there are healers with healing
             if (hasHealers)
@@ -737,9 +727,10 @@ namespace BPSR_ZDPS.Windows
                 // Add header for the healing section - use SeparatorText for better styling
                 ImGui.SeparatorText(DataTypes.AppStrings.GetLocalized("Header_Healing"));
 
-                // Healing section with exact calculated height (subtract header height since it's rendered outside)
-                // Use BeginListBox for unified background like DPS meter
-                if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight - headerHeight)))
+                // Healing section height
+                float healingHeight = (healerList.Length * entryHeight) + (itemSpacing * Math.Max(0, healerList.Length - 1)) + 4.0f;
+
+                if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight)))
                 {
                     ImGui.PopStyleVar();
 

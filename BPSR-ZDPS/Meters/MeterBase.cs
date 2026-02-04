@@ -18,6 +18,33 @@ namespace BPSR_ZDPS.Meters
 
         public virtual void Draw(MainWindow mainWindow) { }
 
+        /// <summary>
+        /// Returns the number of entries that will be displayed in this meter.
+        /// Used for calculating the exact height needed for auto-sizing the window.
+        /// </summary>
+        public virtual int GetEntryCount()
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Calculates the exact height needed for the meter's ListBox based on entry count.
+        /// Uses a simple calculation that accounts for the selectable height with AlignTextToFramePadding.
+        /// </summary>
+        protected float GetListHeight(int entryCount)
+        {
+            if (entryCount <= 0)
+                return 0;
+
+            // Each selectable with AlignTextToFramePadding takes approximately GetFrameHeight() space
+            // Add a small buffer to account for any rounding or theme differences
+            float entryHeight = ImGui.GetFrameHeight() + 2.0f;
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
+
+            // Total height: N entries + spacing between them
+            return (entryCount * entryHeight) + (itemSpacing * Math.Max(0, entryCount - 1)) + 4.0f;
+        }
+
         public static bool SelectableWithHintImage(string number, string name, string value, int profession)
         {
             var startPoint = ImGui.GetCursorPos();

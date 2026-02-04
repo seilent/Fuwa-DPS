@@ -28,9 +28,41 @@ namespace BPSR_ZDPS.Meters
             return ret;
         }
 
+        public override int GetEntryCount()
+        {
+            if (Settings.Instance.KeepPastEncounterInMeterUntilNextDamage)
+            {
+                if (ActiveEncounter?.BattleId != EncounterManager.Current?.BattleId)
+                {
+                    ActiveEncounter = EncounterManager.Current;
+                }
+                else if (ActiveEncounter?.EncounterId != EncounterManager.Current?.EncounterId)
+                {
+                    if (EncounterManager.Current.HasStatsBeenRecorded())
+                    {
+                        ActiveEncounter = EncounterManager.Current;
+                    }
+                }
+            }
+            else
+            {
+                if (ActiveEncounter?.EncounterId != EncounterManager.Current?.EncounterId || ActiveEncounter?.BattleId != EncounterManager.Current?.BattleId)
+                {
+                    ActiveEncounter = EncounterManager.Current;
+                }
+            }
+
+            return ActiveEncounter?.Entities.AsValueEnumerable()
+                .Where(x => x.Value.EntityType == Zproto.EEntityType.EntMonster)
+                .Count() ?? 0;
+        }
+
         public override void Draw(MainWindow mainWindow)
         {
-            if (ImGui.BeginListBox("##TakenMeterList", new Vector2(-1, -1)))
+            // Calculate exact height based on entry count
+            float listHeight = GetListHeight(GetEntryCount());
+
+            if (ImGui.BeginListBox("##TakenMeterList", new Vector2(-1, listHeight)))
             {
                 if (Settings.Instance.KeepPastEncounterInMeterUntilNextDamage)
                 {

@@ -20,11 +20,43 @@ namespace BPSR_ZDPS.Meters
             Name = "DPS";
         }
 
+        public override int GetEntryCount()
+        {
+            if (Settings.Instance.KeepPastEncounterInMeterUntilNextDamage)
+            {
+                if (ActiveEncounter?.BattleId != EncounterManager.Current?.BattleId)
+                {
+                    ActiveEncounter = EncounterManager.Current;
+                }
+                else if (ActiveEncounter?.EncounterId != EncounterManager.Current?.EncounterId)
+                {
+                    if (EncounterManager.Current.HasStatsBeenRecorded())
+                    {
+                        ActiveEncounter = EncounterManager.Current;
+                    }
+                }
+            }
+            else
+            {
+                if (ActiveEncounter?.EncounterId != EncounterManager.Current?.EncounterId || ActiveEncounter?.BattleId != EncounterManager.Current?.BattleId)
+                {
+                    ActiveEncounter = EncounterManager.Current;
+                }
+            }
+
+            return ActiveEncounter?.Entities.AsValueEnumerable()
+                .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && (Settings.Instance.OnlyShowDamageContributorsInMeters ? x.Value.TotalDamage > 0 : true))
+                .Count() ?? 0;
+        }
+
         public override void Draw(MainWindow mainWindow)
         {
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new Vector2(2, ImGui.GetStyle().FramePadding.Y));
 
-            if (ImGui.BeginListBox("##DPSMeterList", new Vector2(-1, -1)))
+            // Calculate exact height based on entry count
+            float listHeight = GetListHeight(GetEntryCount());
+
+            if (ImGui.BeginListBox("##DPSMeterList", new Vector2(-1, listHeight)))
             {
                 ImGui.PopStyleVar();
 
