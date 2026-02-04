@@ -40,6 +40,14 @@ public class Settings
     public bool MeterSettingsNpcTakenHideMaxHp { get; set; } = false;
     public bool MeterSettingsNpcTakenUseHpMeter { get; set; } = false;
 
+    // Tab visibility settings (DPS is always visible)
+    public bool ShowHealingTab { get; set; } = true;
+    public bool ShowTankingTab { get; set; } = true;
+    public bool ShowNpcTakenTab { get; set; } = true;
+
+    // Merge DPS and Healing into single view
+    public bool MergeDpsAndHealTabs { get; set; } = false;
+
     public bool LogToFile { get; set; } = true;
     public EGameCapturePreference GameCapturePreference { get; set; } = EGameCapturePreference.Auto;
     public string GameCaptureCustomExeName { get; set; } = "";

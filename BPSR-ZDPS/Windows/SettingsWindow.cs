@@ -44,6 +44,12 @@ namespace BPSR_ZDPS.Windows
         static bool meterSettingsNpcTakenHideMaxHp;
         static bool meterSettingsNpcTakenUseHpMeter;
 
+        // Tab visibility settings
+        static bool showHealingTab;
+        static bool showTankingTab;
+        static bool showNpcTakenTab;
+        static bool mergeDpsAndHealTabs;
+
         static bool playNotificationSoundOnMatchmake;
         static string matchmakeNotificationSoundPath;
         static bool loopNotificationSoundOnMatchmake;
@@ -754,6 +760,45 @@ namespace BPSR_ZDPS.Windows
 
                         if(ImGui.CollapsingHeader("Meter Settings"))
                         {
+                            ImGui.SeparatorText("Tab Visibility");
+
+                            ImGui.AlignTextToFramePadding();
+                            ImGui.Text("Show Healing Tab");
+                            ImGui.SameLine();
+                            ImGui.Checkbox("##ShowHealingTab", ref showHealingTab);
+
+                            ImGui.AlignTextToFramePadding();
+                            ImGui.Text("Show Tanking Tab");
+                            ImGui.SameLine();
+                            ImGui.Checkbox("##ShowTankingTab", ref showTankingTab);
+
+                            ImGui.AlignTextToFramePadding();
+                            ImGui.Text("Show NPC Taken Tab");
+                            ImGui.SameLine();
+                            ImGui.Checkbox("##ShowNpcTakenTab", ref showNpcTakenTab);
+
+                            ImGui.SeparatorText("Layout");
+
+                            ImGui.BeginDisabled(!showHealingTab);
+                            if (showHealingTab)
+                            {
+                                ImGui.AlignTextToFramePadding();
+                                ImGui.Text("Merge DPS and Healing Tabs");
+                                ImGui.SameLine();
+                                ImGui.Checkbox("##MergeDpsAndHealTabs", ref mergeDpsAndHealTabs);
+                                ImGui.Indent();
+                                ImGui.BeginDisabled(true);
+                                ImGui.TextWrapped("When enabled, combines DPS and Healing into a single split view. Tanking and NPC Taken tabs will be hidden.");
+                                ImGui.EndDisabled();
+                                ImGui.Unindent();
+                            }
+                            else
+                            {
+                                // Force disable merge mode when healing tab is hidden
+                                mergeDpsAndHealTabs = false;
+                            }
+                            ImGui.EndDisabled();
+
                             ImGui.SeparatorText("Tanking");
 
                             ImGui.AlignTextToFramePadding();
@@ -1430,6 +1475,12 @@ namespace BPSR_ZDPS.Windows
             meterSettingsNpcTakenHideMaxHp = Settings.Instance.MeterSettingsNpcTakenHideMaxHp;
             meterSettingsNpcTakenUseHpMeter = Settings.Instance.MeterSettingsNpcTakenUseHpMeter;
 
+            // Tab visibility settings
+            showHealingTab = Settings.Instance.ShowHealingTab;
+            showTankingTab = Settings.Instance.ShowTankingTab;
+            showNpcTakenTab = Settings.Instance.ShowNpcTakenTab;
+            mergeDpsAndHealTabs = Settings.Instance.MergeDpsAndHealTabs;
+
             GameCapturePreference = Settings.Instance.GameCapturePreference;
             gameCaptureCustomExeName = Settings.Instance.GameCaptureCustomExeName;
 
@@ -1526,6 +1577,12 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.MeterSettingsNpcTakenShowHpData = meterSettingsNpcTakenShowHpData;
             Settings.Instance.MeterSettingsNpcTakenHideMaxHp = meterSettingsNpcTakenHideMaxHp;
             Settings.Instance.MeterSettingsNpcTakenUseHpMeter = meterSettingsNpcTakenUseHpMeter;
+
+            // Tab visibility settings
+            Settings.Instance.ShowHealingTab = showHealingTab;
+            Settings.Instance.ShowTankingTab = showTankingTab;
+            Settings.Instance.ShowNpcTakenTab = showNpcTakenTab;
+            Settings.Instance.MergeDpsAndHealTabs = mergeDpsAndHealTabs;
 
             Settings.Instance.PlayNotificationSoundOnMatchmake = playNotificationSoundOnMatchmake;
             Settings.Instance.MatchmakeNotificationSoundPath = matchmakeNotificationSoundPath;

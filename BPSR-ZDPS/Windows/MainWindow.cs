@@ -266,39 +266,11 @@ namespace BPSR_ZDPS.Windows
                 UpdateAvailableWindow.Open();
             }
 
-            ImGuiTableFlags table_flags = ImGuiTableFlags.SizingStretchSame;
-            if (ImGui.BeginTable("##MetersTable", Meters.Count, table_flags))
-            {
-                ImGui.TableSetupColumn("##TabBtn", ImGuiTableColumnFlags.WidthStretch | ImGuiTableColumnFlags.DefaultHide | ImGuiTableColumnFlags.NoResize, 1f, 0);
+            // Build visible meters list based on settings
+            List<MeterBase> visibleMeters = new();
+            visibleMeters.Add(Meters[0]); // DPS is always shown
 
-                for (int i = 0; i < Meters.Count; i++)
-                {
-                    ImGui.TableNextColumn();
-
-                    bool isSelected = (SelectedTabIndex == i);
-
-                    ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 5);
-
-                    if (isSelected)
-                    {
-                        ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
-                    }
-
-                    if (ImGui.Button($"{Meters[i].Name}##TabBtn_{i}", new Vector2(-1, 0)))
-                    {
-                        SelectedTabIndex = i;
-                    }
-
-                    if (isSelected)
-                    {
-                        ImGui.PopStyleColor();
-                    }
-
-                    ImGui.PopStyleVar();
-                }
-
-                ImGui.EndTable();
-            }
+            bool isMergeMode = Settings.Instance.MergeDpsAndHealTabs && Settings.Instance.ShowHealingTab;
 
             if (AppState.IsEncounterSavingPaused)
             {
@@ -317,16 +289,88 @@ namespace BPSR_ZDPS.Windows
                 ImGui.PopStyleColor();
             }
 
-            ImGui.BeginChild("MeterChild", new Vector2(0, - ImGui.GetFrameHeightWithSpacing()));
-
-            if (SelectedTabIndex > -1)
+            if (isMergeMode)
             {
-                Meters[SelectedTabIndex].Draw(this);
+                // In merge mode, wrap in a parent child for proper layout
+                ImGui.BeginChild("##MergeModeContainer", new Vector2(0, 0));
+                DrawMergedDpsHealingView();
+                ImGui.EndChild();
             }
+            else
+            {
+                // Normal tab mode
+                if (Settings.Instance.ShowHealingTab)
+                    visibleMeters.Add(Meters[1]); // Healing
+                if (Settings.Instance.ShowTankingTab)
+                    visibleMeters.Add(Meters[2]); // Tanking
+                if (Settings.Instance.ShowNpcTakenTab)
+                    visibleMeters.Add(Meters[3]); // NPC Taken
 
-            ImGui.EndChild();
+                // Only show tabs if more than one meter is visible
+                if (visibleMeters.Count > 1)
+                {
+                    ImGuiTableFlags table_flags = ImGuiTableFlags.SizingStretchSame;
+                    if (ImGui.BeginTable("##MetersTable", visibleMeters.Count, table_flags))
+                    {
+                        ImGui.TableSetupColumn("##TabBtn", ImGuiTableColumnFlags.WidthStretch |
+                                              ImGuiTableColumnFlags.DefaultHide | ImGuiTableColumnFlags.NoResize, 1f, 0);
 
-            DrawStatusBar();
+                        for (int i = 0; i < visibleMeters.Count; i++)
+                        {
+                            ImGui.TableNextColumn();
+
+                            bool isSelected = (SelectedTabIndex == i);
+
+                            ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 5);
+
+                            if (isSelected)
+                            {
+                                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+                            }
+
+                            if (ImGui.Button($"{visibleMeters[i].Name}##TabBtn_{i}", new Vector2(-1, 0)))
+                            {
+                                SelectedTabIndex = i;
+                            }
+
+                            if (isSelected)
+                            {
+                                ImGui.PopStyleColor();
+                            }
+
+                            ImGui.PopStyleVar();
+                        }
+
+                        ImGui.EndTable();
+                    }
+
+                    // Ensure SelectedTabIndex is valid
+                    if (SelectedTabIndex >= visibleMeters.Count)
+                    {
+                        SelectedTabIndex = 0;
+                    }
+                }
+                else
+                {
+                    // Only one tab visible, reset to 0
+                    SelectedTabIndex = 0;
+                }
+
+                // Meter content
+                ImGui.BeginChild("MeterChild", new Vector2(0, -ImGui.GetFrameHeightWithSpacing()));
+
+                if (SelectedTabIndex > -1 && SelectedTabIndex < visibleMeters.Count)
+                {
+                    // Map visible index back to actual meter index
+                    int actualIndex = Meters.IndexOf(visibleMeters[SelectedTabIndex]);
+                    if (actualIndex >= 0)
+                    {
+                        Meters[actualIndex].Draw(this);
+                    }
+                }
+
+                ImGui.EndChild();
+            }
 
             ImGui.End();
         }
@@ -340,13 +384,37 @@ namespace BPSR_ZDPS.Windows
 
                 MainMenuBarSize = ImGui.GetWindowSize();
 
-                ImGui.Text("ZDPS - BPSR Damage Meter");
-
-                if (Utils.AppVersion != null)
+                // Area info, time, and player stats at top left
+                string duration = "00:00:00";
+                if (EncounterManager.Current?.GetDuration().TotalSeconds > 0)
                 {
-                    //ImGui.SetCursorPosX(MainMenuBarSize.X - (35 * 5)); // This pushes it against the previous button instead of having a gap
-                    //ImGui.SetCursorPosX(ImGui.GetContentRegionAvail().X); // This loosely locks it to right side
-                    ImGui.TextDisabled($"v{Utils.AppVersion} (S1)");
+                    duration = EncounterManager.Current.GetDuration().ToString("hh\\:mm\\:ss");
+                }
+
+                // Display: [Rank] Duration - AreaName - PlayerTotal (PlayerPerSecond)
+                ImGui.Text($"[{AppState.PlayerMeterPlacement}] {duration}");
+
+                if (!string.IsNullOrEmpty(EncounterManager.Current.SceneName))
+                {
+                    ImGui.SameLine();
+                    string subName = "";
+                    if (!string.IsNullOrEmpty(EncounterManager.Current.SceneSubName))
+                    {
+                        subName = $" ({EncounterManager.Current.SceneSubName})";
+                    }
+                    ImGui.TextUnformatted($"- {EncounterManager.Current.SceneName}{subName}");
+                }
+
+                // Player stats (Total DPS/HPS)
+                ImGui.SameLine();
+                string currentValuePerSecond = $"{Utils.NumberToShorthand(AppState.PlayerTotalMeterValue)} ({Utils.NumberToShorthand(AppState.PlayerMeterValuePerSecond)})";
+                ImGui.Text(currentValuePerSecond);
+
+                // Benchmark indicator
+                if (AppState.IsBenchmarkMode)
+                {
+                    ImGui.SameLine();
+                    ImGui.TextUnformatted($"[BENCHMARK ({AppState.BenchmarkTime}s)]");
                 }
 
                 if (Settings.Instance.AllowEncounterSavingPausingInOpenWorld && BattleStateMachine.DungeonStateHistory.Count > 0 && BattleStateMachine.DungeonStateHistory.LastOrDefault().Key == EDungeonState.DungeonStateNull)
@@ -627,62 +695,135 @@ namespace BPSR_ZDPS.Windows
                     SettingsRunOnceDelayedPerOpen = 0;
                     ImGui.PopFont();
                 }
+
                 settingsWidth = ImGui.GetItemRectSize().X;
 
                 ImGui.EndMenuBar();
             }
         }
 
-        void DrawStatusBar()
+        void DrawMergedDpsHealingView()
         {
-            ImGui.BeginChild("StatusChild", new Vector2(0, -1));
+            // Get healer list first
+            var currentEncounter = EncounterManager.Current;
+            var healerList = currentEncounter?.Entities.Values
+                .Where(x => x.EntityType == Zproto.EEntityType.EntChar
+                    && x.TotalHealing > 0
+                    && (x.ProfessionId == 5 || x.ProfessionId == 13))
+                .OrderByDescending(x => x.TotalHealing)
+                .ToArray();
 
-            ImGui.Text("Status:");
+            // Check if we have healers
+            bool hasHealers = healerList != null && healerList.Length > 0;
 
-            ImGui.SameLine();
-            // Self position in current displayed meter list
-            ImGui.Text($"[{AppState.PlayerMeterPlacement}]");
+            // Calculate the exact height needed for healing section
+            float scale = Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+            float entryHeight = (14.0f * scale) + ImGui.GetStyle().FramePadding.Y * 2;
+            float healingHeight = (healerList.Length * entryHeight) + (ImGui.GetStyle().ItemSpacing.Y * (healerList.Length - 1));
 
-            ImGui.SameLine();
-            // Duration of current encounter
-            string duration = "00:00:00";
-            if (EncounterManager.Current?.GetDuration().TotalSeconds > 0)
-            {
-                duration = EncounterManager.Current.GetDuration().ToString("hh\\:mm\\:ss");
-            }
-
-            if (AppState.IsBenchmarkMode && !AppState.HasBenchmarkBegun)
-            {
-                duration = "00:00:00";
-            }
-
-            ImGui.Text(duration);
-
-            if (!string.IsNullOrEmpty(EncounterManager.Current.SceneName))
-            {
-                ImGui.SameLine();
-                string subName = "";
-                if (!string.IsNullOrEmpty(EncounterManager.Current.SceneSubName))
-                {
-                    subName = $" ({EncounterManager.Current.SceneSubName})";
-                }
-
-                // We don't need to prefix with a space due to actual item spacing handling it for us
-                ImGui.TextUnformatted($"- {EncounterManager.Current.SceneName}{subName}");
-            }
-
-            if (AppState.IsBenchmarkMode)
-            {
-                ImGui.SameLine();
-                ImGui.TextUnformatted($"[BENCHMARK ({AppState.BenchmarkTime}s)]");
-            }
-
-            ImGui.SameLine();
-            string currentValuePerSecond = $"{Utils.NumberToShorthand(AppState.PlayerTotalMeterValue)} ({Utils.NumberToShorthand(AppState.PlayerMeterValuePerSecond)})";
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + float.Max(0.0f, ImGui.GetContentRegionAvail().X - ImGui.CalcTextSize(currentValuePerSecond).X));
-            ImGui.Text(currentValuePerSecond);
-
+            // DPS section - fills remaining space after reserving room for healing AND item spacing between children
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
+            float dpsHeight = hasHealers ? -(healingHeight + itemSpacing) : 0.0f;
+            ImGui.BeginChild("##DpsSection", new Vector2(0, dpsHeight));
+            Meters[0].Draw(this); // DpsMeter is always at index 0
             ImGui.EndChild();
+
+            // Only show healing section if there are healers with healing
+            if (hasHealers)
+            {
+                ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new Vector2(2, ImGui.GetStyle().FramePadding.Y));
+
+                // Healing section with exact calculated height
+                ImGui.BeginChild("##HealingSection", new Vector2(0, healingHeight));
+                    ulong topTotalValue = 0;
+
+                    for (int i = 0; i < healerList.Length; i++)
+                    {
+                    var entity = healerList[i];
+
+                    if (i == 0 && Settings.Instance.NormalizeMeterContributions)
+                    {
+                        topTotalValue = entity.TotalHealing;
+                    }
+
+                    string name = "Unknown";
+                    if (!string.IsNullOrEmpty(entity.Name))
+                    {
+                        name = entity.Name;
+                    }
+                    else
+                    {
+                        name = $"[U:{entity.UID}]";
+                    }
+
+                    string profession = "Unknown";
+                    if (!string.IsNullOrEmpty(entity.SubProfession))
+                    {
+                        profession = entity.SubProfession;
+                    }
+                    else if (!string.IsNullOrEmpty(entity.Profession))
+                    {
+                        profession = entity.Profession;
+                    }
+
+                    double contribution = 0.0;
+                    double contributionProgressBar = 0.0;
+                    if (currentEncounter.TotalHealing != 0)
+                    {
+                        contribution = Math.Round(((double)entity.TotalHealing / (double)currentEncounter.TotalHealing) * 100, 4);
+
+                        if (Settings.Instance.NormalizeMeterContributions)
+                        {
+                            contributionProgressBar = Math.Round(((double)entity.TotalHealing / (double)topTotalValue) * 100, 4);
+                        }
+                        else
+                        {
+                            contributionProgressBar = contribution;
+                        }
+                    }
+
+                    string truePerSecond = "";
+                    if (Settings.Instance.DisplayTruePerSecondValuesInMeters)
+                    {
+                        truePerSecond = $"[{Utils.NumberToShorthand(entity.HealingStats.TrueValuePerSecond)}] ";
+                    }
+
+                    string totalHealing = Utils.NumberToShorthand(entity.TotalHealing);
+                    string totalHps = Utils.NumberToShorthand(entity.HealingStats.ValuePerSecond);
+                    string hps_format = $"{totalHealing} {truePerSecond}({totalHps}) {contribution.ToString("F0").PadLeft(3, ' ')}%";
+                    var startPoint = ImGui.GetCursorPos();
+
+                    ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * Settings.Instance.WindowSettings.MainWindow.MeterBarScale);
+
+                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, DataTypes.Professions.ProfessionColors(profession));
+                    ImGui.ProgressBar((float)contributionProgressBar / 100.0f, new Vector2(-1, 0), $"##HpsEntryContribution_{i}");
+                    ImGui.PopStyleColor();
+
+                    string professionStr = $"-{profession}";
+                    if (!Settings.Instance.ShowSubProfessionNameInMeters)
+                    {
+                        professionStr = "";
+                    }
+
+                    string abilityScoreStr = $" ({entity.AbilityScore})";
+                    if (!Settings.Instance.ShowAbilityScoreInMeters)
+                    {
+                        abilityScoreStr = "";
+                    }
+
+                    ImGui.SetCursorPos(startPoint);
+                    if (MeterBase.SelectableWithHintImage($" {(i + 1).ToString().PadLeft((healerList.Length < 101 ? 2 : 3), '0')}.", $"{name}{professionStr}{abilityScoreStr}##HpsEntry_{i}", hps_format, entity.ProfessionId))
+                    {
+                        entityInspector = new EntityInspector();
+                        entityInspector.LoadEntity(entity, currentEncounter.StartTime);
+                        entityInspector.Open();
+                    }
+
+                    ImGui.PopFont();
+                }
+                ImGui.EndChild();
+                ImGui.PopStyleVar();
+            }
         }
 
         public void CreateNewEncounter()
