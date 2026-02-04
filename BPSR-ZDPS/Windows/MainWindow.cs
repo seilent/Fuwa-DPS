@@ -77,17 +77,24 @@ namespace BPSR_ZDPS.Windows
             //ImGui.SetNextWindowPos(new Vector2(main_viewport.WorkPos.X + 200, main_viewport.WorkPos.Y + 120), ImGuiCond.FirstUseEver);
             ImGui.SetNextWindowSize(DefaultWindowSize, ImGuiCond.FirstUseEver);
 
-            // Size constraints removed for auto-resize - content determines window size
-            // if (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld)
-            // {
-            //     ImGui.SetNextWindowSizeConstraints(new Vector2(375, 150), new Vector2(ImGui.GETFLTMAX()));
-            // }
-            // else
-            // {
-            //     ImGui.SetNextWindowSizeConstraints(new Vector2(400, 220), new Vector2(ImGui.GETFLTMAX()));
-            // }
-
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
+
+            // Restore saved width every frame to allow user-controlled horizontal sizing
+            // Height will be auto-resized by AlwaysAutoResize flag
+            if (windowSettings.WindowSize.X > 0)
+            {
+                ImGui.SetNextWindowSize(new Vector2(windowSettings.WindowSize.X, 0), ImGuiCond.Always);
+            }
+
+            // Set size constraints: minimum width for usability
+            if (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld)
+            {
+                ImGui.SetNextWindowSizeConstraints(new Vector2(375, 0), new Vector2(ImGui.GETFLTMAX(), ImGui.GETFLTMAX()));
+            }
+            else
+            {
+                ImGui.SetNextWindowSizeConstraints(new Vector2(400, 0), new Vector2(ImGui.GETFLTMAX(), ImGui.GETFLTMAX()));
+            }
 
             if (windowSettings.WindowPosition != new Vector2())
             {
