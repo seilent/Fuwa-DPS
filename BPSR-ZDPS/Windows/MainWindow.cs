@@ -719,7 +719,8 @@ namespace BPSR_ZDPS.Windows
             // Calculate the exact height needed for healing section
             float scale = Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
             float entryHeight = (14.0f * scale) + ImGui.GetStyle().FramePadding.Y * 2;
-            float healingHeight = (healerList.Length * entryHeight) + (ImGui.GetStyle().ItemSpacing.Y * (healerList.Length - 1));
+            float headerHeight = ImGui.GetTextLineHeight() + ImGui.GetStyle().ItemSpacing.Y;
+            float healingHeight = headerHeight + (healerList.Length * entryHeight) + (ImGui.GetStyle().ItemSpacing.Y * (healerList.Length - 1));
 
             // DPS section - fills remaining space after reserving room for healing AND item spacing between children
             float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
@@ -733,8 +734,12 @@ namespace BPSR_ZDPS.Windows
             {
                 ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new Vector2(2, ImGui.GetStyle().FramePadding.Y));
 
-                // Healing section with exact calculated height
-                ImGui.BeginChild("##HealingSection", new Vector2(0, healingHeight));
+                // Add header for the healing section
+                ImGui.Text(DataTypes.AppStrings.GetLocalized("Header_Healing"));
+                ImGui.Separator();
+
+                // Healing section with exact calculated height (subtract header height since it's rendered outside)
+                ImGui.BeginChild("##HealingSection", new Vector2(0, healingHeight - headerHeight));
                     ulong topTotalValue = 0;
 
                     for (int i = 0; i < healerList.Length; i++)

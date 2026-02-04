@@ -132,5 +132,10 @@
     {
         "en": "Wildpack",
         "zh": "狼弓"
+    },
+    "Header_Healing":
+    {
+        "en": "Healing",
+        "zh": "治疗"
     }
 }
