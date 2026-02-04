@@ -144,35 +144,35 @@ namespace BPSR_ZDPS.DataTypes
             }
             else if (professionName == AppStrings.GetLocalized("Profession_Stormblade") || professionName == AppStrings.GetLocalized("SubProfession_Iaido") || professionName == AppStrings.GetLocalized("SubProfession_Moonstrike"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#805AA3"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#A080C4"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_FrostMage") || professionName == AppStrings.GetLocalized("SubProfession_Frostbeam") || professionName == AppStrings.GetLocalized("SubProfession_Icicle"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#7788D4"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#99AAE8"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_WindKnight") || professionName == AppStrings.GetLocalized("SubProfession_Skyward") || professionName == AppStrings.GetLocalized("SubProfession_Vanguard"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#799A9C"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#9CBEC0"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_VerdantOracle") || professionName == AppStrings.GetLocalized("SubProfession_Lifebind") || professionName == AppStrings.GetLocalized("SubProfession_Smite"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#639C70"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#7EC090"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_HeavyGuardian") || professionName == AppStrings.GetLocalized("SubProfession_Earthfort") || professionName == AppStrings.GetLocalized("SubProfession_Block"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#537758"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#6B9970"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_Marksman") || professionName == AppStrings.GetLocalized("SubProfession_Falconry") || professionName == AppStrings.GetLocalized("SubProfession_Wildpack"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#8E8b47"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#B8B46A"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_ShieldKnight") || professionName == AppStrings.GetLocalized("SubProfession_Recovery") || professionName == AppStrings.GetLocalized("SubProfession_Shield"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#9C9b75"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#C0BF92"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_BeatPerformer") || professionName == AppStrings.GetLocalized("SubProfession_Concerto") || professionName == AppStrings.GetLocalized("SubProfession_Dissonance"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#9C5353"));
+                return Colors.FromColor(ColorTranslator.FromHtml("#C07A7A"));
             }
 
             // TODO: Add SubProfessions as their own entries to allow further coloring
@@ -234,13 +234,13 @@ namespace BPSR_ZDPS.DataTypes
             {
                 case ERoleType.DPS:
                     //return new Vector4(230 / 255f, 0, 0, 0.50f);
-                    return new Vector4(227 / 255f, 36 / 255f, 36 / 255f, 0.50f);
+                    return new Vector4(227 / 255f, 60 / 255f, 60 / 255f, 0.70f);
                 case ERoleType.Tank:
                     //return new Vector4(51 / 255f, 102 / 255f, 255 / 255f, 0.50f);
                     //return new Vector4(69 / 255f, 174 / 255f, 240 / 255f, 0.50f);
-                    return new Vector4(17 / 255f, 136 / 255f, 212 / 255f, 0.50f);
+                    return new Vector4(40 / 255f, 160 / 255f, 220 / 255f, 0.70f);
                 case ERoleType.Healer:
-                    return new Vector4(0, 204 / 255f, 0, 0.50f);
+                    return new Vector4(40 / 255f, 220 / 255f, 40 / 255f, 0.70f);
                 default:
                     return new Vector4(1, 1, 1, 1);
             }

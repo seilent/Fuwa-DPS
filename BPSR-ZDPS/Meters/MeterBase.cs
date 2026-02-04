@@ -36,8 +36,18 @@ namespace BPSR_ZDPS.Meters
             }
 
             ImGui.SetCursorPosX(offset);
-            
+
+            // Add semi-transparent background for better text contrast against colored progress bar
+            Vector4 bgColor = Settings.Instance.Theme == ETheme.Light
+                ? new Vector4(1, 1, 1, 0.7f)  // Light theme: white with opacity
+                : new Vector4(0, 0, 0, 0.5f); // Dark/Black theme: black with opacity
+            ImGui.PushStyleColor(ImGuiCol.Header, bgColor);
+            ImGui.PushStyleColor(ImGuiCol.HeaderHovered, bgColor);
+            ImGui.PushStyleColor(ImGuiCol.HeaderActive, bgColor);
+
             bool ret = ImGui.Selectable(name, false, ImGuiSelectableFlags.SpanAllColumns);
+
+            ImGui.PopStyleColor(3);
             ImGui.SameLine();
 
             ImGui.SetCursorPos(startPoint);
