@@ -79,17 +79,15 @@ namespace BPSR_ZDPS.Windows
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
-            // Set size constraints: fixed width (from saved settings), auto height
-            // This prevents horizontal expansion while allowing vertical auto-resize
+            // Set size constraints: fixed width, max height to prevent infinite expansion
             float constrainedWidth = windowSettings.WindowSize.X > 0 ? windowSettings.WindowSize.X : 500.0f;
             float minWidth = !Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f;
             constrainedWidth = Math.Max(minWidth, constrainedWidth);
 
-            // Set both min and max width to the same value to fix horizontal sizing
-            // Height remains 0 to FLTMAX for auto-resize
+            // Set width constraints, max height cap to prevent infinite expansion
             ImGui.SetNextWindowSizeConstraints(
                 new Vector2(constrainedWidth, 0),
-                new Vector2(constrainedWidth, ImGui.GETFLTMAX())
+                new Vector2(constrainedWidth, 800.0f)  // Max height 800px
             );
 
             if (windowSettings.WindowPosition != new Vector2())
@@ -703,12 +701,21 @@ namespace BPSR_ZDPS.Windows
 
         void DrawMergedDpsHealingView()
         {
-            // Get healer list first
             var currentEncounter = EncounterManager.Current;
+
+            // Get top 20 DPS entities first
+            var topDpsEntities = currentEncounter?.Entities.Values
+                .Where(x => x.EntityType == Zproto.EEntityType.EntChar && (Settings.Instance.OnlyShowDamageContributorsInMeters ? x.TotalDamage > 0 : true))
+                .OrderByDescending(x => x.TotalDamage)
+                .Take(20)
+                .ToHashSet();
+
+            // Get healer list, filtered to only those in top 20 DPS
             var healerList = currentEncounter?.Entities.Values
                 .Where(x => x.EntityType == Zproto.EEntityType.EntChar
                     && x.TotalHealing > 0
-                    && (x.ProfessionId == 5 || x.ProfessionId == 13))
+                    && (x.ProfessionId == 5 || x.ProfessionId == 13)
+                    && topDpsEntities.Contains(x))
                 .OrderByDescending(x => x.TotalHealing)
                 .ToArray();
 
@@ -726,12 +733,15 @@ namespace BPSR_ZDPS.Windows
                 // Add header for the healing section - use SeparatorText for better styling
                 ImGui.SeparatorText(DataTypes.AppStrings.GetLocalized("Header_Healing"));
 
-                // Calculate exact height for healing section (fixed height per entry)
-                int healerCount = healerList.Length;
-                const float fixedEntryHeight = 23.0f;
-                float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
-                float totalHeight = (healerCount * fixedEntryHeight) + ((healerCount - 1) * itemSpacing);
-                float healingHeight = Math.Max(0.0f, totalHeight);
+                // Calculate height for the healing section based on healer count
+                float scale = Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+                ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+                float frameHeight = ImGui.GetFrameHeight();
+                ImGui.PopFont();
+                float entryHeight = frameHeight;
+                float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
+                float itemSpacing = ImGui.GetStyle().ItemSpacing.Y * Math.Max(0, healerList.Length - 1);
+                float healingHeight = (healerList.Length * entryHeight) + itemSpacing + listPadding;
 
                 if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight)))
                 {

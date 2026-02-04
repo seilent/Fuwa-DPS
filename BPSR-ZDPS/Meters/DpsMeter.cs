@@ -44,9 +44,10 @@ namespace BPSR_ZDPS.Meters
                 }
             }
 
-            return ActiveEncounter?.Entities.AsValueEnumerable()
+            int count = ActiveEncounter?.Entities.AsValueEnumerable()
                 .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && (Settings.Instance.OnlyShowDamageContributorsInMeters ? x.Value.TotalDamage > 0 : true))
                 .Count() ?? 0;
+            return Math.Min(count, 20); // Hard limit of 20 entries for display
         }
 
         public override void Draw(MainWindow mainWindow)
@@ -88,7 +89,7 @@ namespace BPSR_ZDPS.Meters
 
                 ulong topTotalValue = 0;
 
-                for (int i = 0; i < playerList?.Count(); i++)
+                for (int i = 0; i < Math.Min(playerList?.Count() ?? 0, 20); i++)
                 {
                     var entity = playerList[i].Value;
 
@@ -200,7 +201,7 @@ namespace BPSR_ZDPS.Meters
                     }
 
                     ImGui.SetCursorPos(startPoint);
-                    if (SelectableWithHintImage($" {(i + 1).ToString().PadLeft((playerList.Count() < 101 ? 2 : 3), '0')}.", $"{nameFormat}##DpsEntry_{i}", dps_format, entity.ProfessionId))
+                    if (SelectableWithHintImage($" {(i + 1).ToString().PadLeft(2, '0')}.", $"{nameFormat}##DpsEntry_{i}", dps_format, entity.ProfessionId))
                     //if (SelectableWithHint($" {(i + 1).ToString().PadLeft((playerList.Count() < 101 ? 2 : 3), '0')}. {name}-{profession} ({entity.AbilityScore})##DpsEntry_{i}", dps_format))
                     //if (ImGui.Selectable($"{name}-{profession} ({entity.AbilityScore}) [{entity.UID.ToString()}] ({entity.TotalDamage})##DpsEntry_{i}"))
                     {

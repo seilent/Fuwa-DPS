@@ -1,6 +1,7 @@
 ﻿using BPSR_ZDPS.DataTypes;
 using BPSR_ZDPS.Windows;
 using Hexa.NET.ImGui;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace BPSR_ZDPS.Meters
 
         protected Encounter? ActiveEncounter = null;
 
+        // Cache for height calculation to avoid recalculating every frame
+        private int _cachedEntryCount = -1;
+        private float _cachedHeight = 0.0f;
+
         public virtual void Draw(MainWindow mainWindow) { }
 
         /// <summary>
@@ -28,23 +33,44 @@ namespace BPSR_ZDPS.Meters
         }
 
         /// <summary>
-        /// Calculates the exact height needed for the ListBox based on entry count.
-        /// Uses fixed height per entry for predictable sizing.
+        /// Returns calculated height for the ListBox based on entry count.
+        /// Using a simple per-entry height to avoid over-expansion.
         /// </summary>
         protected float GetListHeight(int entryCount)
         {
             if (entryCount <= 0)
                 return 0.0f;
 
-            // Fixed height per entry - simple and predictable
-            // Each entry has: ProgressBar + Selectable with AlignTextToFramePadding
-            const float fixedEntryHeight = 23.0f;
+            // Return cached height if entry count hasn't changed
+            if (entryCount == _cachedEntryCount)
+                return _cachedHeight;
 
-            // Add spacing between entries
-            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
-            float totalHeight = (entryCount * fixedEntryHeight) + ((entryCount - 1) * itemSpacing);
+            // Calculate entry height based on actual font scale used in rendering
+            // The meters push font: 14.0f * MeterBarScale, then use AlignTextToFramePadding()
+            float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
 
-            return Math.Max(0.0f, totalHeight);
+            // Push the same font that will be used during rendering to get accurate frame height
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+            float frameHeight = ImGui.GetFrameHeight();
+            ImGui.PopFont();
+
+            // Each entry: ProgressBar + Selectable with AlignTextToFramePadding
+            // AlignTextToFramePadding makes the Selectable frame height larger
+            float entryHeight = frameHeight;
+
+            // ListBox has internal padding AND spacing between entries
+            float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y * Math.Max(0, entryCount - 1);
+
+            float totalHeight = (entryCount * entryHeight) + itemSpacing + listPadding;
+
+            // Update cache
+            _cachedEntryCount = entryCount;
+            _cachedHeight = totalHeight;
+
+            Log.Debug("[GetListHeight] entryCount={EntryCount}, scale={Scale:F2}, frameHeight={FrameHeight:F2}, entryHeight={EntryHeight:F2}, itemSpacing={ItemSpacing:F2}, listPadding={ListPadding:F2}, totalHeight={TotalHeight:F2}", entryCount, scale, frameHeight, entryHeight, itemSpacing, listPadding, totalHeight);
+
+            return totalHeight;
         }
 
         public static bool SelectableWithHintImage(string number, string name, string value, int profession)
