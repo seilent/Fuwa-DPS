@@ -119,11 +119,14 @@ namespace BPSR_ZDPS.Meters
                 }
                 else
                 {
-                    var roleColor = DataTypes.Professions.RoleTypeColors(DataTypes.Professions.GetRoleFromBaseProfessionId(profession));
+                    var roleIconColor = DataTypes.Professions.RoleTypeIconColors(
+                        DataTypes.Professions.GetRoleFromBaseProfessionId(profession),
+                        DataTypes.Settings.Instance.Theme
+                    );
 
                     if (DataTypes.Settings.Instance.ColorClassIconsByRole)
                     {
-                        ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), roleColor);
+                        ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), roleIconColor);
                     }
                     else
                     {

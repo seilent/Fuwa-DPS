@@ -138,45 +138,55 @@ namespace BPSR_ZDPS.DataTypes
 
         public static Vector4 ProfessionColors(string professionName)
         {
+            // Call the theme-aware version with current theme
+            return ProfessionColors(professionName, Settings.Instance.Theme);
+        }
+
+        public static Vector4 ProfessionColors(string professionName, ETheme theme)
+        {
+            // Light theme uses lighter colors for better text contrast
+            // Dark/Black themes use darker colors like GitHub repo
+            bool isLightTheme = (theme == ETheme.Light);
+
             if (professionName == AppStrings.GetLocalized("Profession_Unknown"))
             {
                 return Colors.FromColor(ColorTranslator.FromHtml("#67AEF6"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_Stormblade") || professionName == AppStrings.GetLocalized("SubProfession_Iaido") || professionName == AppStrings.GetLocalized("SubProfession_Moonstrike"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#3D3566"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#A080C4" : "#3D3566"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_FrostMage") || professionName == AppStrings.GetLocalized("SubProfession_Frostbeam") || professionName == AppStrings.GetLocalized("SubProfession_Icicle"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#434366"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#99AAE8" : "#434366"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_TwinStriker"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#4A3636"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#D47878" : "#4A3636"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_WindKnight") || professionName == AppStrings.GetLocalized("SubProfession_Skyward") || professionName == AppStrings.GetLocalized("SubProfession_Vanguard"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#435657"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#9CBEC0" : "#435657"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_VerdantOracle") || professionName == AppStrings.GetLocalized("SubProfession_Lifebind") || professionName == AppStrings.GetLocalized("SubProfession_Smite"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#37563E"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#7EC090" : "#37563E"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_HeavyGuardian") || professionName == AppStrings.GetLocalized("SubProfession_Earthfort") || professionName == AppStrings.GetLocalized("SubProfession_Block"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#2E4231"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#6B9970" : "#2E4231"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_Marksman") || professionName == AppStrings.GetLocalized("SubProfession_Falconry") || professionName == AppStrings.GetLocalized("SubProfession_Wildpack"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#4E4C27"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#B8B46A" : "#4E4C27"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_ShieldKnight") || professionName == AppStrings.GetLocalized("SubProfession_Recovery") || professionName == AppStrings.GetLocalized("SubProfession_Shield"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#555541"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#C0BF92" : "#555541"));
             }
             else if (professionName == AppStrings.GetLocalized("Profession_BeatPerformer") || professionName == AppStrings.GetLocalized("SubProfession_Concerto") || professionName == AppStrings.GetLocalized("SubProfession_Dissonance"))
             {
-                return Colors.FromColor(ColorTranslator.FromHtml("#552E2E"));
+                return Colors.FromColor(ColorTranslator.FromHtml(isLightTheme ? "#C07A7A" : "#552E2E"));
             }
 
             // TODO: Add SubProfessions as their own entries to allow further coloring
@@ -247,6 +257,31 @@ namespace BPSR_ZDPS.DataTypes
                     return new Vector4(40 / 255f, 220 / 255f, 40 / 255f, 0.70f);
                 default:
                     return new Vector4(1, 1, 1, 1);
+            }
+        }
+
+        public static Vector4 RoleTypeIconColors(ERoleType roleType, ETheme theme)
+        {
+            // Light theme uses brighter role colors for icons
+            // Dark/Black themes use standard role colors
+            if (theme == ETheme.Light)
+            {
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(1.0f, 100 / 255f, 100 / 255f, 0.70f);    // Light Red
+                    case ERoleType.Tank:
+                        return new Vector4(100 / 255f, 200 / 255f, 1.0f, 0.70f);    // Light Blue
+                    case ERoleType.Healer:
+                        return new Vector4(100 / 255f, 1.0f, 100 / 255f, 0.70f);    // Light Green
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
+            else
+            {
+                // Use standard role colors for dark/black themes
+                return RoleTypeColors(roleType);
             }
         }
     }
