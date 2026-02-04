@@ -357,7 +357,7 @@ namespace BPSR_ZDPS.Windows
                 }
 
                 // Meter content
-                ImGui.BeginChild("MeterChild", new Vector2(0, -ImGui.GetFrameHeightWithSpacing()));
+                ImGui.BeginChild("MeterChild", new Vector2(0, -1.0f));
 
                 if (SelectedTabIndex > -1 && SelectedTabIndex < visibleMeters.Count)
                 {
