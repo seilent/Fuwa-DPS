@@ -734,12 +734,15 @@ namespace BPSR_ZDPS.Windows
             {
                 ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new Vector2(2, ImGui.GetStyle().FramePadding.Y));
 
-                // Add header for the healing section
-                ImGui.Text(DataTypes.AppStrings.GetLocalized("Header_Healing"));
-                ImGui.Separator();
+                // Add header for the healing section - use SeparatorText for better styling
+                ImGui.SeparatorText(DataTypes.AppStrings.GetLocalized("Header_Healing"));
 
                 // Healing section with exact calculated height (subtract header height since it's rendered outside)
-                ImGui.BeginChild("##HealingSection", new Vector2(0, healingHeight - headerHeight));
+                // Use BeginListBox for unified background like DPS meter
+                if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight - headerHeight)))
+                {
+                    ImGui.PopStyleVar();
+
                     ulong topTotalValue = 0;
 
                     for (int i = 0; i < healerList.Length; i++)
@@ -826,8 +829,12 @@ namespace BPSR_ZDPS.Windows
 
                     ImGui.PopFont();
                 }
-                ImGui.EndChild();
-                ImGui.PopStyleVar();
+                ImGui.EndListBox();
+                }
+                else
+                {
+                    ImGui.PopStyleVar();
+                }
             }
         }
 
