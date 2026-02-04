@@ -79,22 +79,18 @@ namespace BPSR_ZDPS.Windows
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
-            // Restore saved width every frame to allow user-controlled horizontal sizing
-            // Height will be auto-resized by AlwaysAutoResize flag
-            if (windowSettings.WindowSize.X > 0)
-            {
-                ImGui.SetNextWindowSize(new Vector2(windowSettings.WindowSize.X, 0), ImGuiCond.Always);
-            }
+            // Set size constraints: fixed width (from saved settings), auto height
+            // This prevents horizontal expansion while allowing vertical auto-resize
+            float constrainedWidth = windowSettings.WindowSize.X > 0 ? windowSettings.WindowSize.X : 500.0f;
+            float minWidth = !Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f;
+            constrainedWidth = Math.Max(minWidth, constrainedWidth);
 
-            // Set size constraints: minimum width for usability
-            if (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld)
-            {
-                ImGui.SetNextWindowSizeConstraints(new Vector2(375, 0), new Vector2(ImGui.GETFLTMAX(), ImGui.GETFLTMAX()));
-            }
-            else
-            {
-                ImGui.SetNextWindowSizeConstraints(new Vector2(400, 0), new Vector2(ImGui.GETFLTMAX(), ImGui.GETFLTMAX()));
-            }
+            // Set both min and max width to the same value to fix horizontal sizing
+            // Height remains 0 to FLTMAX for auto-resize
+            ImGui.SetNextWindowSizeConstraints(
+                new Vector2(constrainedWidth, 0),
+                new Vector2(constrainedWidth, ImGui.GETFLTMAX())
+            );
 
             if (windowSettings.WindowPosition != new Vector2())
             {
@@ -719,11 +715,7 @@ namespace BPSR_ZDPS.Windows
             // Check if we have healers
             bool hasHealers = healerList != null && healerList.Length > 0;
 
-            // Calculate heights using the same calculation as GetListHeight
-            float entryHeight = ImGui.GetFrameHeight() + 2.0f;
-            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
-
-            // DPS section - just draw the meter directly, it will use its calculated height
+            // DPS section - just draw the meter directly
             Meters[0].Draw(this); // DpsMeter is always at index 0
 
             // Only show healing section if there are healers with healing
@@ -734,8 +726,12 @@ namespace BPSR_ZDPS.Windows
                 // Add header for the healing section - use SeparatorText for better styling
                 ImGui.SeparatorText(DataTypes.AppStrings.GetLocalized("Header_Healing"));
 
-                // Healing section height
-                float healingHeight = (healerList.Length * entryHeight) + (itemSpacing * Math.Max(0, healerList.Length - 1)) + 4.0f;
+                // Calculate exact height for healing section (fixed height per entry)
+                int healerCount = healerList.Length;
+                const float fixedEntryHeight = 23.0f;
+                float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
+                float totalHeight = (healerCount * fixedEntryHeight) + ((healerCount - 1) * itemSpacing);
+                float healingHeight = Math.Max(0.0f, totalHeight);
 
                 if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight)))
                 {
