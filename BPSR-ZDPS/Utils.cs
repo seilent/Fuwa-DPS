@@ -312,6 +312,12 @@ namespace BPSR_ZDPS
             viewport = viewport ?? ImGui.GetWindowViewport();
             UnsetWindowTopmost((IntPtr)viewport.Value.PlatformHandleRaw);
         }
+
+        public static void SendWindowToBack(ImGuiViewportPtr? viewport = null)
+        {
+            viewport = viewport ?? ImGui.GetWindowViewport();
+            SendWindowToBack((IntPtr)viewport.Value.PlatformHandleRaw);
+        }
         
         public static void SetWindowOpacity(float alpha, ImGuiViewportPtr? viewport = null)
         {
@@ -345,6 +351,11 @@ namespace BPSR_ZDPS
         public static void UnsetWindowTopmost(IntPtr hWnd)
         {
             User32.SetWindowPos(hWnd, User32.HWND_NOTOPMOST, 0, 0, 0, 0, User32.SWP_NOMOVE | User32.SWP_NOSIZE);
+        }
+
+        public static void SendWindowToBack(IntPtr hWnd)
+        {
+            User32.SetWindowPos(hWnd, User32.HWND_BOTTOM, 0, 0, 0, 0, User32.SWP_NOMOVE | User32.SWP_NOSIZE);
         }
 
         public static void SetWindowLong(int nIndex, IntPtr dwNewLong, ImGuiViewportPtr? viewport = null)

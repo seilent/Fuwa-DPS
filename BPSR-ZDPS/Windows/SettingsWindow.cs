@@ -49,6 +49,7 @@ namespace BPSR_ZDPS.Windows
         static bool showTankingTab;
         static bool showNpcTakenTab;
         static bool mergeDpsAndHealTabs;
+        static bool disableTopMostWhenNoEntities;
 
         static bool playNotificationSoundOnMatchmake;
         static string matchmakeNotificationSoundPath;
@@ -634,6 +635,22 @@ namespace BPSR_ZDPS.Windows
                             ImGui.Indent();
                             ImGui.BeginDisabled(true);
                             ImGui.TextWrapped("How transparent the Main Window is while pinned.");
+                            ImGui.EndDisabled();
+                            ImGui.Unindent();
+
+                            ImGui.Separator();
+
+                            ImGui.AlignTextToFramePadding();
+                            ImGui.Text("Disable 'On Top' when no entities");
+                            ImGui.SameLine();
+                            ImGui.Checkbox("##DisableTopMostWhenNoEntities", ref disableTopMostWhenNoEntities);
+                            if (ImGui.IsItemHovered())
+                            {
+                                ImGui.SetTooltip("Temporarily disables 'On Top' mode when no entities are shown. Re-enables automatically when combat starts.");
+                            }
+                            ImGui.Indent();
+                            ImGui.BeginDisabled(true);
+                            ImGui.TextWrapped("When enabled, the window will stop being 'On Top' when there are no entities to show. The pin button will remain in the 'on' state and the window will automatically return to 'On Top' when entities appear.");
                             ImGui.EndDisabled();
                             ImGui.Unindent();
 
@@ -1564,6 +1581,7 @@ namespace BPSR_ZDPS.Windows
             showTankingTab = Settings.Instance.ShowTankingTab;
             showNpcTakenTab = Settings.Instance.ShowNpcTakenTab;
             mergeDpsAndHealTabs = Settings.Instance.MergeDpsAndHealTabs;
+            disableTopMostWhenNoEntities = Settings.Instance.DisableTopMostWhenNoEntities;
 
             GameCapturePreference = Settings.Instance.GameCapturePreference;
             gameCaptureCustomExeName = Settings.Instance.GameCaptureCustomExeName;
@@ -1670,6 +1688,7 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.ShowTankingTab = showTankingTab;
             Settings.Instance.ShowNpcTakenTab = showNpcTakenTab;
             Settings.Instance.MergeDpsAndHealTabs = mergeDpsAndHealTabs;
+            Settings.Instance.DisableTopMostWhenNoEntities = disableTopMostWhenNoEntities;
 
             Settings.Instance.PlayNotificationSoundOnMatchmake = playNotificationSoundOnMatchmake;
             Settings.Instance.MatchmakeNotificationSoundPath = matchmakeNotificationSoundPath;

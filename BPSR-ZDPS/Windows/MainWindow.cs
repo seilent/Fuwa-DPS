@@ -36,7 +36,9 @@ namespace BPSR_ZDPS.Windows
         List<MeterBase> Meters = new();
         public EntityInspector entityInspector = new();
         static bool IsPinned = false;
+        static bool IsTemporarilyNotTopMost = false;
         static int LastPinnedOpacity = 100;
+        static int _autoDisableTopMostFrameCounter = 0;
         public Vector2 WindowPosition;
         public Vector2 NextWindowPosition = new();
         public Vector2 DefaultWindowSize = new Vector2(400, 300);
@@ -128,7 +130,7 @@ namespace BPSR_ZDPS.Windows
             }
 
             ImGuiWindowFlags exWindowFlags = ImGuiWindowFlags.None;
-            if (AppState.MousePassthrough && windowSettings.TopMost)
+            if (AppState.MousePassthrough && windowSettings.TopMost && !IsTemporarilyNotTopMost)
             {
                 exWindowFlags |= ImGuiWindowFlags.NoInputs;
             }
@@ -254,10 +256,41 @@ namespace BPSR_ZDPS.Windows
             }
             else if (RunOnceDelayed >= 2)
             {
-                if (windowSettings.TopMost && LastPinnedOpacity != windowSettings.Opacity)
+                if (windowSettings.TopMost && !IsTemporarilyNotTopMost && LastPinnedOpacity != windowSettings.Opacity)
                 {
                     Utils.SetWindowOpacity(windowSettings.Opacity * 0.01f);
                     LastPinnedOpacity = windowSettings.Opacity;
+                }
+
+                // Auto-disable topmost when no combat activity (throttled to every 10 frames)
+                // Only checks for actual DPS damage (not healing), because in merged DPS/heal mode
+                // the window only shows entities that have dealt damage, even though healing is recorded
+                if (windowSettings.TopMost && Settings.Instance.DisableTopMostWhenNoEntities)
+                {
+                    _autoDisableTopMostFrameCounter++;
+                    if (_autoDisableTopMostFrameCounter % 10 == 0)
+                    {
+                        // Check if the current encounter has any recorded DPS damage
+                        // (healing alone doesn't count since merged mode only shows damage dealers)
+                        bool hasDpsDamage = EncounterManager.Current?.TotalDamage > 0;
+
+                        bool shouldBeOnTop = hasDpsDamage;
+
+                        if (shouldBeOnTop && IsTemporarilyNotTopMost)
+                        {
+                            // In active combat with damage, re-enable topmost
+                            Utils.SetWindowTopmost();
+                            Utils.SetWindowOpacity(LastPinnedOpacity * 0.01f);
+                            IsTemporarilyNotTopMost = false;
+                        }
+                        else if (!shouldBeOnTop && !IsTemporarilyNotTopMost && IsPinned)
+                        {
+                            // No DPS damage, send window to back and temporarily disable topmost
+                            Utils.SendWindowToBack();
+                            Utils.SetWindowOpacity(1.0f);
+                            IsTemporarilyNotTopMost = true;
+                        }
+                    }
                 }
             }
 
@@ -462,6 +495,12 @@ namespace BPSR_ZDPS.Windows
                 ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, (windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f) * buttonAlpha));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}##TopMostBtn"))
                 {
+                    // Reset temporary state if manually toggling
+                    if (IsTemporarilyNotTopMost)
+                    {
+                        IsTemporarilyNotTopMost = false;
+                    }
+
                     if (!windowSettings.TopMost)
                     {
                         Utils.SetWindowTopmost();
@@ -476,6 +515,7 @@ namespace BPSR_ZDPS.Windows
                         Utils.SetWindowOpacity(1.0f);
                         windowSettings.TopMost = false;
                         IsPinned = false;
+                        IsTemporarilyNotTopMost = false;
                     }
                 }
                 ImGui.PopStyleColor();
