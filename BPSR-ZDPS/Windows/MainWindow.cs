@@ -355,7 +355,7 @@ namespace BPSR_ZDPS.Windows
 
                             if (isSelected)
                             {
-                                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+                                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                             }
 
                             if (ImGui.Button($"{visibleMeters[i].Name}##TabBtn_{i}", new Vector2(-1, 0)))
@@ -449,7 +449,7 @@ namespace BPSR_ZDPS.Windows
 
                     ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 5));
                     ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                    ImGui.PushStyleColor(ImGuiCol.Text, (AppState.IsEncounterSavingPaused ? Colors.Red_Transparent : Colors.White));
+                    ImGui.PushStyleColor(ImGuiCol.Text, (AppState.IsEncounterSavingPaused ? Theme.GetWarningTextColor() : Theme.GetPrimaryTextColor()));
                     if (ImGui.MenuItem($"{FASIcons.Pause}##PauseEncounterSavingBtn"))
                     {
                         AppState.IsEncounterSavingPaused = !AppState.IsEncounterSavingPaused;
@@ -471,7 +471,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 3));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, windowSettings.TopMost ? 1.0f : 0.5f));
+                var pinColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}##TopMostBtn"))
                 {
                     if (!windowSettings.TopMost)
@@ -797,14 +798,10 @@ namespace BPSR_ZDPS.Windows
                         name = $"[U:{entity.UID}]";
                     }
 
-                    string profession = "Unknown";
+                    string profession = "";
                     if (!string.IsNullOrEmpty(entity.SubProfession))
                     {
                         profession = entity.SubProfession;
-                    }
-                    else if (!string.IsNullOrEmpty(entity.Profession))
-                    {
-                        profession = entity.Profession;
                     }
 
                     double contribution = 0.0;

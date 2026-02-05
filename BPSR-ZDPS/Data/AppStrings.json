@@ -2,17 +2,20 @@
     "Profession_Unknown":
     {
         "en": "Unknown",
-        "zh": "未知"
+        "zh": "未知",
+        "ja": "未知"
     },
     "Profession_Stormblade":
     {
         "en": "Stormblade",
-        "zh": "雷影剑士"
+        "zh": "雷影剑士",
+        "ja": "ストームブレイド"
     },
     "Profession_FrostMage":
     {
         "en": "Frost Mage",
-        "zh": "冰魔导师"
+        "zh": "冰魔导师",
+        "ja": "フロストメイジ"
     },
     "Profession_TwinStriker":
     {
@@ -21,121 +24,145 @@
     "Profession_WindKnight":
     {
         "en": "Wind Knight",
-        "zh": "青岚骑士"
+        "zh": "青岚骑士",
+        "ja": "ゲイルランサー"
     },
     "Profession_VerdantOracle":
     {
         "en": "Oracle",
-        "zh": "森语者"
+        "zh": "森语者",
+        "ja": "ヴァーダントオラクル"
     },
     "Profession_HeavyGuardian":
     {
         "en": "Heavy Guardian",
-        "zh": "巨刃守护者"
+        "zh": "巨刃守护者",
+        "ja": "ヘヴィガーディアン"
     },
     "Profession_Marksman":
     {
         "en": "Marksman",
-        "zh": "神射手"
+        "zh": "神射手",
+        "ja": "ディバインアーチャー"
     },
     "Profession_ShieldKnight":
     {
         "en": "Shield Knight",
-        "zh": "神盾骑士"
+        "zh": "神盾骑士",
+        "ja": "シールドファイター"
     },
     "Profession_BeatPerformer":
     {
         "en": "Beat Performer",
-        "zh": "灵魂乐手"
+        "zh": "灵魂乐手",
+        "ja": "ビートパフォーマー"
     },
     "SubProfession_Unknown":
     {
         "en": "Unknown",
-        "zh": "未知"
+        "zh": "未知",
+        "ja": "未知"
     },
     "SubProfession_Skyward":
     {
         "en": "Skyward",
-        "zh": "空枪"
+        "zh": "空枪",
+        "ja": "乱風"
     },
     "SubProfession_Block":
     {
         "en": "Block",
-        "zh": "格挡"
+        "zh": "格挡",
+        "ja": "剛守"
     },
     "SubProfession_Concerto":
     {
         "en": "Concerto",
-        "zh": "协奏"
+        "zh": "协奏",
+        "ja": "響奏"
     },
     "SubProfession_Falconry":
     {
         "en": "Falconry",
-        "zh": "鹰弓"
+        "zh": "鹰弓",
+        "ja": "鷹弓"
     },
     "SubProfession_Iaido":
     {
         "en": "Iaido",
-        "zh": "居合"
+        "zh": "居合",
+        "ja": "雷刃"
     },
     "SubProfession_Frostbeam":
     {
         "en": "Frostbeam",
-        "zh": "射线"
+        "zh": "射线",
+        "ja": "氷牙"
     },
     "SubProfession_Icicle":
     {
         "en": "Icicle",
-        "zh": "冰矛"
+        "zh": "冰矛",
+        "ja": "霜天"
     },
     "SubProfession_Lifebind":
     {
         "en": "Lifebind",
-        "zh": "愈合"
+        "zh": "愈合",
+        "ja": "森癒"
     },
     "SubProfession_Shield":
     {
         "en": "Shield",
-        "zh": "光盾"
+        "zh": "光盾",
+        "ja": "光砕"
     },
     "SubProfession_Moonstrike":
     {
         "en": "Moonstrike",
-        "zh": "月刃"
+        "zh": "月刃",
+        "ja": "月影"
     },
     "SubProfession_Vanguard":
     {
         "en": "Vanguard",
-        "zh": "重装"
+        "zh": "重装",
+        "ja": "烈風"
     },
     "SubProfession_Recovery":
     {
         "en": "Recovery",
-        "zh": "防盾"
+        "zh": "防盾",
+        "ja": "光盾"
     },
     "SubProfession_Dissonance":
     {
         "en": "Dissonance",
-        "zh": "狂音"
+        "zh": "狂音",
+        "ja": "狂音"
     },
     "SubProfession_Earthfort":
     {
         "en": "Earthfort",
-        "zh": "岩盾"
+        "zh": "岩盾",
+        "ja": "剛身"
     },
     "SubProfession_Smite":
     {
         "en": "Smite",
-        "zh": "惩戒"
+        "zh": "惩戒",
+        "ja": "威咲"
     },
     "SubProfession_Wildpack":
     {
         "en": "Wildpack",
-        "zh": "狼弓"
+        "zh": "狼弓",
+        "ja": "狼弓"
     },
     "Header_Healing":
     {
         "en": "Healing",
-        "zh": "治疗"
+        "zh": "治疗",
+        "ja": "治癒"
     }
 }

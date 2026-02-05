@@ -84,7 +84,7 @@ namespace BPSR_ZDPS
 
                 ImGui.SameLine(ImGui.GetContentRegionAvail().X - 250);
 
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkRed_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.ButtonRed));
                 if (ImGui.Button("Keep Disabled", new Vector2(250, 0)))
                 {
                     Settings.Instance.HasPromptedEnableUpdateChecks = true;

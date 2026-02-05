@@ -152,7 +152,7 @@ namespace BPSR_ZDPS.Windows
 
                 if (viewMode == 0)
                 {
-                    ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+                    ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                 }
                 if (ImGui.Button("View By Each Individual Encounter", new Vector2(tabButtonHalfWidth, 0)))
                 {
@@ -170,7 +170,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.SameLine();
                 if (viewMode == 1)
                 {
-                    ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+                    ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                 }
                 if (ImGui.Button("View By Each Grouped Battle", new Vector2(tabButtonHalfWidth, 0)))
                 {

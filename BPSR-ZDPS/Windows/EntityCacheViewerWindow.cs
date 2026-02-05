@@ -168,7 +168,8 @@ namespace BPSR_ZDPS
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 3));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, windowSettings.TopMost ? 1.0f : 0.5f));
+                var pinColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}##TopMostBtn"))
                 {
                     if (!windowSettings.TopMost)
@@ -193,7 +194,8 @@ namespace BPSR_ZDPS
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 2));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, 1.0f, 1.0f, CollapseToContentOnly ? 1.0f : 0.5f));
+                var collapseColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(collapseColor.X, collapseColor.Y, collapseColor.Z, CollapseToContentOnly ? collapseColor.W : collapseColor.W * 0.5f));
                 if (ImGui.MenuItem($"{(CollapseToContentOnly ? FASIcons.AnglesDown : FASIcons.AnglesUp)}##CollapseToContentBtn"))
                 {
                     CollapseToContentOnly = !CollapseToContentOnly;

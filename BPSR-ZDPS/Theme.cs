@@ -261,6 +261,82 @@ namespace BPSR_ZDPS
             return colors;
         }
 
+        // Semantic color storage for theme-aware UI colors
+        private static Dictionary<ThemeColor, Vector4> _semanticColors = new();
+
+        private static void LoadSemanticColors(ETheme theme)
+        {
+            _semanticColors = theme switch
+            {
+                ETheme.Light => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors
+                    { ThemeColor.PrimaryText, new Vector4(20/255f, 20/255f, 20/255f, 1.0f) },
+                    { ThemeColor.WarningText, new Vector4(0.8f, 0.0f, 0.0f, 0.75f) },
+                    { ThemeColor.SuccessText, new Vector4(0.0f, 0.5f, 0.0f, 0.75f) },
+
+                    // Button colors
+                    { ThemeColor.SelectedButton, new Vector4(0.4f, 0.4f, 0.4f, 1.0f) },
+                    { ThemeColor.DestructiveButton, new Vector4(0.9f, 0.3f, 0.3f, 1.0f) },
+                    { ThemeColor.ButtonRed, new Vector4(0.8f, 0.2f, 0.2f, 1.0f) },
+
+                    // Buff header colors
+                    { ThemeColor.BuffHeader_Default, new Vector4(0.7f, 0.7f, 0.7f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.6f, 0.6f, 0.75f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.6f, 0.9f, 0.6f, 0.75f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(0.9f, 0.8f, 0.4f, 0.75f) },
+
+                    // Status colors
+                    { ThemeColor.ConnectionConnected, new Vector4(0.0f, 0.5f, 0.0f, 1.0f) },
+                    { ThemeColor.ConnectionDisconnected, new Vector4(0.8f, 0.0f, 0.0f, 1.0f) }
+                },
+                ETheme.Dark => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors
+                    { ThemeColor.PrimaryText, new Vector4(1.0f, 1.0f, 1.0f, 1.0f) },
+                    { ThemeColor.WarningText, Colors.Red_Transparent },
+                    { ThemeColor.SuccessText, Colors.Green_Transparent },
+
+                    // Button colors
+                    { ThemeColor.SelectedButton, Colors.DimGray },
+                    { ThemeColor.DestructiveButton, Colors.Red },
+                    { ThemeColor.ButtonRed, Colors.DarkRed },
+
+                    // Buff header colors
+                    { ThemeColor.BuffHeader_Default, Colors.DimGray },
+                    { ThemeColor.BuffHeader_Debuff, Colors.DarkRed_Transparent },
+                    { ThemeColor.BuffHeader_Buff, Colors.LightGreen_Transparent },
+                    { ThemeColor.BuffHeader_Unknown, Colors.Goldenrod_Transparent },
+
+                    // Status colors
+                    { ThemeColor.ConnectionConnected, Colors.Green },
+                    { ThemeColor.ConnectionDisconnected, Colors.Red }
+                },
+                ETheme.Black => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors - same as Dark
+                    { ThemeColor.PrimaryText, new Vector4(240/255f, 240/255f, 240/255f, 1.0f) },
+                    { ThemeColor.WarningText, Colors.Red_Transparent },
+                    { ThemeColor.SuccessText, Colors.Green_Transparent },
+
+                    // Button colors - same as Dark
+                    { ThemeColor.SelectedButton, Colors.DimGray },
+                    { ThemeColor.DestructiveButton, Colors.Red },
+                    { ThemeColor.ButtonRed, Colors.DarkRed },
+
+                    // Buff header colors - same as Dark
+                    { ThemeColor.BuffHeader_Default, Colors.DimGray },
+                    { ThemeColor.BuffHeader_Debuff, Colors.DarkRed_Transparent },
+                    { ThemeColor.BuffHeader_Buff, Colors.LightGreen_Transparent },
+                    { ThemeColor.BuffHeader_Unknown, Colors.Goldenrod_Transparent },
+
+                    // Status colors - same as Dark
+                    { ThemeColor.ConnectionConnected, Colors.Green },
+                    { ThemeColor.ConnectionDisconnected, Colors.Red }
+                }
+            };
+        }
+
         public static void ApplyTheme(ETheme theme)
         {
             Dictionary<ImGuiCol, Vector4> colors = theme switch
@@ -273,7 +349,55 @@ namespace BPSR_ZDPS
 
             Apply(colors);
             ApplyThemeStyles(theme);
+
+            // Load semantic colors for the new theme system
+            LoadSemanticColors(theme);
         }
+
+        // ========================================================================
+        // NEW THEME SYSTEM - Unified color accessor
+        // ========================================================================
+
+        /// <summary>
+        /// Get a theme-aware semantic color by key.
+        /// This is the primary method for accessing theme colors.
+        /// </summary>
+        public static Vector4 GetColor(ThemeColor colorKey)
+        {
+            return _semanticColors.TryGetValue(colorKey, out var color)
+                ? color
+                : Vector4.One; // Fallback to white if not found
+        }
+
+        // ========================================================================
+        // BACKWARD COMPATIBILITY WRAPPERS
+        // These methods maintain compatibility with existing code.
+        // New code should use Theme.GetColor(ThemeColor.X) directly.
+        // ========================================================================
+
+        public static Vector4 GetPrimaryTextColor() => GetColor(ThemeColor.PrimaryText);
+        public static Vector4 GetSelectedButtonColor() => GetColor(ThemeColor.SelectedButton);
+        public static Vector4 GetWarningTextColor() => GetColor(ThemeColor.WarningText);
+        public static Vector4 GetSuccessTextColor() => GetColor(ThemeColor.SuccessText);
+
+        public static Vector4 GetBuffHeaderColor(int buffTypeColor)
+        {
+            ThemeColor key = buffTypeColor switch
+            {
+                99 => ThemeColor.BuffHeader_Default,
+                0  => ThemeColor.BuffHeader_Debuff,
+                1  => ThemeColor.BuffHeader_Buff,
+                2  => ThemeColor.BuffHeader_Unknown,
+                _  => ThemeColor.BuffHeader_Default
+            };
+            return GetColor(key);
+        }
+
+        public static Vector4 GetDestructiveButtonColor() => GetColor(ThemeColor.DestructiveButton);
+        public static Vector4 GetButtonRedColor() => GetColor(ThemeColor.ButtonRed);
+
+        public static Vector4 GetConnectionStatusColor(bool isConnected)
+            => GetColor(isConnected ? ThemeColor.ConnectionConnected : ThemeColor.ConnectionDisconnected);
 
         // Backward compatibility wrapper
         public static void VSDarkTheme()

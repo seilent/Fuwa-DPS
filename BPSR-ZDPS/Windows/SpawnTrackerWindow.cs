@@ -539,7 +539,8 @@ namespace BPSR_ZDPS.Windows
                 bool hasConnectionError = BPTimerManager.SpawnDataLoaded == BPTimerManager.ESpawnDataLoadStatus.Error || BPTimerManager.SpawnDataRealtimeConnection == BPTimerManager.ESpawnDataLoadStatus.Error;
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 4));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, hasConnectionError ? 0.0f : 1.0f, hasConnectionError ? 0.0f : 1.0f, 1.0f));
+                var statusColor = hasConnectionError ? Theme.GetWarningTextColor() : Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, statusColor);
                 if (ImGui.MenuItem($"{FASIcons.Server}##ReconnectBtn"))
                 {
                     Serilog.Log.Information("User performing manual BPTimer reconnect.");
@@ -553,7 +554,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 3));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, AppState.MousePassthrough ? 0.0f : 1.0f, windowSettings.TopMost ? 1.0f : 0.5f));
+                var pinColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}##TopMostBtn"))
                 {
                     if (!windowSettings.TopMost)
@@ -578,7 +580,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 2));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, 1.0f, 1.0f, CollapseToContentOnly ? 1.0f : 0.5f));
+                var collapseColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(collapseColor.X, collapseColor.Y, collapseColor.Z, CollapseToContentOnly ? collapseColor.W : collapseColor.W * 0.5f));
                 if (ImGui.MenuItem($"{(CollapseToContentOnly ? FASIcons.AnglesDown : FASIcons.AnglesUp)}##CollapseToContentBtn"))
                 {
                     CollapseToContentOnly = !CollapseToContentOnly;

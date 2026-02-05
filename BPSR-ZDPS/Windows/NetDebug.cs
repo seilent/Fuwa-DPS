@@ -118,7 +118,7 @@ public static class NetDebug
                         ImGui.Text(conn.Key.ToString());
                         
                         ImGui.TableNextColumn();
-                        ImGui.PushStyleColor(ImGuiCol.Text, conn.Value.IsSynced ? Colors.Green : Colors.Red);
+                        ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetConnectionStatusColor(conn.Value.IsSynced));
                         ImGui.Text(conn.Value.IsSynced ? "Yes" : "No");
                         ImGui.PopStyleColor();
 

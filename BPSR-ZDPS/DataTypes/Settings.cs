@@ -86,6 +86,8 @@ public class Settings
 
     public ETheme Theme { get; set; } = ETheme.Dark;
 
+    public string Locale { get; set; } = "en";  // en, zh, ja
+
     public uint HotkeysEncounterReset { get; set; }
     public uint HotkeysPinnedWindowClickthrough { get; set; }
 
@@ -94,8 +96,9 @@ public class Settings
     public void Apply()
     {
         MessageManager.NetCaptureDeviceName = NetCaptureDeviceName;
+        AppStrings.CurrentLocale = Locale;
 
-        
+
     }
 
     public void ApplyHotKeys(MainWindow mainWindow)

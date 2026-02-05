@@ -491,7 +491,7 @@ namespace BPSR_ZDPS
             }
             else if (!IsCalculating && BestModResults != null)
             {
-                ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                 ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], 22f);
                 ImGui.TextUnformatted("Unable to create a valid combination. Please adjust the Stat Priorities and try again.");
                 ImGui.PopFont();
@@ -578,7 +578,7 @@ namespace BPSR_ZDPS
 
             ImGui.SetCursorPos(pos + new Vector2(availSize.X - 25, 0));
             ImGui.PushFont(HelperMethods.Fonts["FASIcons"], 13.0f);
-            ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkRed);
+            ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.ButtonRed));
             if (ImGui.Button($"{FASIcons.TrashCan}##{i}", new Vector2(25, 40)))
             {
                 shouldRemove = true;
@@ -711,7 +711,8 @@ namespace BPSR_ZDPS
             ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], 30.0f);
             var txtSize = ImGui.CalcTextSize(msg);
             var txtStartPos = start + new Vector2(size.X / 2 - txtSize.X / 2, (bannerheight / 2) - (txtSize.Y / 2));
-            drawList.AddText(txtStartPos, ImGui.ColorConvertFloat4ToU32(Colors.White), msg);
+            var textColor = Theme.GetColor(ThemeColor.PrimaryText);
+            drawList.AddText(txtStartPos, ImGui.ColorConvertFloat4ToU32(textColor), msg);
             ImGui.PopFont();
 
             var imgRef = ImageHelper.LoadTexture(Path.Combine(ModuleImgBasePath, img));

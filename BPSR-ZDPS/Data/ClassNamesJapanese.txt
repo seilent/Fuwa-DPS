@@ -1,0 +1,61 @@
+# Japanese Class Names Reference
+# Source: https://gamerch.com/bpsr/954948 and https://gamewith.jp/bpsr/532288
+
+## Professions (Classes)
+
+Defense Role:
+- ヘヴィガーディアン (Heavy Guardian)
+- シールドファイター (Shield Fighter/Shield Knight)
+
+Attack Role:
+- ストームブレイド (Stormblade)
+- ゲイルランサー (Gale Lancer/Wind Knight)
+- ディバインアーチャー (Divine Archer/Marksman)
+- フロストメイジ (Frost Mage)
+
+Support Role:
+- ヴァーダントオラクル (Verdant Oracle)
+- ビートパフォーマー (Beat Performer)
+
+## Sub-Professions (型/Builds)
+
+Stormblade (ストームブレイド):
+- 雷刃型 - English: "Skyward"
+- 月影型 - English: "Moonstrike"
+
+Gale Lancer (ゲイルランサー):
+- 烈風型 - English: "Gale"
+- 乱風型 - English: "Rampant"
+
+Frost Mage (フロストメイジ):
+- 氷牙型 - English: "Frostbeam"
+- 霜天型 - English: "Icicle"
+
+Divine Archer (ディバインアーチャー):
+- 狼弓型 - English: "Wildpack"
+- 鷹弓型 - English: "Falconry"
+
+Heavy Guardian (ヘヴィガーディアン):
+- 剛身型 - English: "Vanguard"
+- 剛守型 - English: "Recovery"
+
+Shield Fighter (シールドファイター):
+- 光砕型 - English: "Smite"
+- 光盾型 - English: "Shield"
+
+Verdant Oracle (ヴァーダントオラクル):
+- 威咲型 - English: "Dissonance"
+- 森癒型 - English: "Lifebind"
+
+Beat Performer (ビートパフォーマー):
+- 狂音型 - English: "Dissonance"
+- 響奏型 - English: "Concerto"
+
+## Other Terms
+
+Unknown: 未知
+Healing: 治癒
+
+## Sources
+- https://gamerch.com/bpsr/954948
+- https://gamewith.jp/bpsr/532288

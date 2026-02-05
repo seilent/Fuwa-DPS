@@ -131,7 +131,7 @@ namespace BPSR_ZDPS.Windows
                             ImGui.SetCursorPosX(ImGui.GetContentRegionAvail().X - texSize - ImGui.GetStyle().ItemSpacing.X - ImGui.GetStyle().FramePadding.X);
                             if (Settings.Instance.ColorClassIconsByRole)
                             {
-                                var roleColor = Professions.RoleTypeColors(Professions.GetRoleFromBaseProfessionId(LoadedEntity.ProfessionId));
+                                var roleColor = Professions.RoleTypeIconColors(Professions.GetRoleFromBaseProfessionId(LoadedEntity.ProfessionId), Settings.Instance.Theme);
                                 roleColor.W = roleColor.W * 0.75f;
                                 ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), roleColor);
                             }
@@ -396,7 +396,7 @@ namespace BPSR_ZDPS.Windows
 
                     if (isSelected)
                     {
-                        ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+                        ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                     }
 
                     if (ImGui.Button($"{FilterButtons[filerBtnIdx]}##SkillStats_FilterBtn_{filerBtnIdx}"))
@@ -861,21 +861,9 @@ namespace BPSR_ZDPS.Windows
                                     }
                                 }
 
-                                if (buffTypeColor == 99)
+                                if (buffTypeColor == 99 || buffTypeColor == 0 || buffTypeColor == 1 || buffTypeColor == 2)
                                 {
-                                    ImGui.PushStyleColor(ImGuiCol.Header, Colors.DimGray);
-                                }
-                                else if (buffTypeColor == 0)
-                                {
-                                    ImGui.PushStyleColor(ImGuiCol.Header, Colors.DarkRed_Transparent);
-                                }
-                                else if (buffTypeColor == 1)
-                                {
-                                    ImGui.PushStyleColor(ImGuiCol.Header, Colors.LightGreen_Transparent);
-                                }
-                                if (buffTypeColor == 2)
-                                {
-                                    ImGui.PushStyleColor(ImGuiCol.Header, Colors.Goldenrod_Transparent);
+                                    ImGui.PushStyleColor(ImGuiCol.Header, Theme.GetBuffHeaderColor(buffTypeColor));
                                 }
 
                                 if (ImGui.Selectable($"{buffUuid}##BuffEventEntry_{i}", true, ImGuiSelectableFlags.SpanAllColumns))

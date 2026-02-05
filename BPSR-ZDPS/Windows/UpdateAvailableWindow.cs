@@ -100,7 +100,7 @@ namespace BPSR_ZDPS
 
                 ImGui.SameLine(ImGui.GetContentRegionAvail().X - 250);
 
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkRed_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.ButtonRed));
                 if (ImGui.Button("Remind Me Later", new Vector2(250, 0)))
                 {
                     ImGui.CloseCurrentPopup();

@@ -96,7 +96,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.SeparatorText("Delete Encounter History");
                 if (!isAllowedToManage)
                 {
-                    ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red);
+                    ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                     ImGui.TextUnformatted("Please close Encounter History and Entity Inspector windows to enable management options.");
                     ImGui.PopStyleColor();
                 }
@@ -104,9 +104,9 @@ namespace BPSR_ZDPS.Windows
                 ImGui.BeginDisabled(!isAllowedToManage);
                 ImGui.TextUnformatted("Select duration to delete encounter history for:");
 
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkRed_Transparent);
-                ImGui.PushStyleColor(ImGuiCol.ButtonHovered, Colors.Red_Transparent);
-                ImGui.PushStyleColor(ImGuiCol.ButtonActive, Colors.Red);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.ButtonRed));
+                ImGui.PushStyleColor(ImGuiCol.ButtonHovered, Theme.GetColor(ThemeColor.DestructiveButton));
+                ImGui.PushStyleColor(ImGuiCol.ButtonActive, Theme.GetColor(ThemeColor.DestructiveButton));
                 if (ImGui.Button("Older than 1 day", new Vector2(220, 0)))
                 {
                     DeleteTimeFrame = EDeleteDuration.OneDay;

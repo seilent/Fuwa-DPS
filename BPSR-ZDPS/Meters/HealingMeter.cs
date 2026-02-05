@@ -112,14 +112,10 @@ namespace BPSR_ZDPS.Meters
                         AppState.PlayerMeterValuePerSecond = entity.HealingStats.ValuePerSecond;
                     }
 
-                    string profession = "Unknown";
+                    string profession = "";
                     if (!string.IsNullOrEmpty(entity.SubProfession))
                     {
                         profession = entity.SubProfession;
-                    }
-                    else if (!string.IsNullOrEmpty(entity.Profession))
-                    {
-                        profession = entity.Profession;
                     }
 
                     double contribution = 0.0;

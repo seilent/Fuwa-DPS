@@ -224,7 +224,7 @@ namespace BPSR_ZDPS.Windows
             ImGui.PushID((int)tab.Config.Id);
             bool tabIsSelected = SelectedChatTab == tab;
 
-            if (tabIsSelected) ImGui.PushStyleColor(ImGuiCol.Button, Colors.DimGray);
+            if (tabIsSelected) ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
             if (ImGui.Button(tab.Config.Name))
             {
                 SelectedChatTab = tab;
@@ -471,7 +471,7 @@ namespace BPSR_ZDPS.Windows
                                     {
                                         if (!ChatManager.IsUserBlocked(match.Value.UID))
                                         {
-                                            ImGui.PushStyleColor(ImGuiCol.Text, Colors.Green_Transparent);
+                                            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.SuccessText));
                                             ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                                             if (ImGui.Button($"{FASIcons.Plus}##AddBtn_{matchIdx}", new Vector2(30, 30)))
                                             {
@@ -487,7 +487,7 @@ namespace BPSR_ZDPS.Windows
                                         }
                                         else
                                         {
-                                            ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red_Transparent);
+                                            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                                             ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                                             if (ImGui.Button($"{FASIcons.Minus}##RemoveBtn_{matchIdx}", new Vector2(30, 30)))
                                             {

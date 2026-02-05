@@ -96,6 +96,7 @@ namespace BPSR_ZDPS.Windows
         static WindowSettings windowSettings;
 
         static ETheme theme;
+        static string locale;
 
         static bool IsDiscordWebhookUrlValid = true;
 
@@ -955,6 +956,44 @@ namespace BPSR_ZDPS.Windows
                         ImGui.EndDisabled();
                         ImGui.Unindent();
 
+                        ImGui.AlignTextToFramePadding();
+                        ImGui.Text("Language: ");
+                        ImGui.SameLine();
+
+                        string currentLocaleName = locale switch
+                        {
+                            "en" => "English",
+                            "zh" => "中文",
+                            "ja" => "日本語",
+                            _ => "English"
+                        };
+
+                        ImGui.SetNextItemWidth(200);
+                        if (ImGui.BeginCombo("##LocaleCombo", currentLocaleName))
+                        {
+                            if (ImGui.Selectable("English"))
+                            {
+                                locale = "en";
+                            }
+
+                            if (ImGui.Selectable("中文"))
+                            {
+                                locale = "zh";
+                            }
+
+                            if (ImGui.Selectable("日本語"))
+                            {
+                                locale = "ja";
+                            }
+
+                            ImGui.EndCombo();
+                        }
+                        ImGui.Indent();
+                        ImGui.BeginDisabled(true);
+                        ImGui.TextWrapped("Select the language for profession names and other localized text. Requires ZDPS restart to take full effect.");
+                        ImGui.EndDisabled();
+                        ImGui.Unindent();
+
                         ImGui.EndChild();
                         ImGui.EndTabItem();
                     }
@@ -1559,6 +1598,7 @@ namespace BPSR_ZDPS.Windows
             lowPerformanceMode = Settings.Instance.LowPerformanceMode;
 
             theme = Settings.Instance.Theme;
+            locale = Settings.Instance.Locale;
 
             // External
             externalBPTimerEnabled = Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled;
@@ -1661,6 +1701,7 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.LowPerformanceMode = lowPerformanceMode;
 
             Settings.Instance.Theme = theme;
+            Settings.Instance.Locale = locale;
 
             // External
             Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled = externalBPTimerEnabled;

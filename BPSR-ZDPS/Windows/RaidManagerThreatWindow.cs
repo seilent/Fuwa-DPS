@@ -241,7 +241,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 3));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, 1.0f, 1.0f, windowSettings.TopMost ? 1.0f : 0.5f));
+                var pinColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, pinColor.Y, pinColor.Z, windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}"))
                 {
                     if (!windowSettings.TopMost)
@@ -266,7 +267,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 2));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1.0f, 1.0f, 1.0f, CollapseToContentOnly ? 1.0f : 0.5f));
+                var collapseColor = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(collapseColor.X, collapseColor.Y, collapseColor.Z, CollapseToContentOnly ? collapseColor.W : collapseColor.W * 0.5f));
                 if (ImGui.MenuItem($"{(CollapseToContentOnly ? FASIcons.AnglesDown : FASIcons.AnglesUp)}"))
                 {
                     CollapseToContentOnly = !CollapseToContentOnly;
