@@ -43,9 +43,8 @@ namespace BPSR_ZDPS.Windows
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
-        // Cache for size calculation (width and height)
-        private string _cachedSizeHash = "";
-        private Vector2 _cachedSize = new();
+        // Cache frame height per scale value to avoid calling ImGui functions before Begin
+        private Dictionary<float, float> _frameHeightCache = new();
 
         // Flag to bypass width constraint for one frame after resetting meters
         private bool _bypassWidthConstraint = false;
@@ -98,7 +97,7 @@ namespace BPSR_ZDPS.Windows
                 Settings.Instance.WindowSettings.MainWindow.WindowSize = new Vector2(0, Settings.Instance.WindowSettings.MainWindow.WindowSize.Y);
                 ImGui.SetNextWindowSizeConstraints(
                     new Vector2(minWidth, 0),
-                    new Vector2(ImGui.GETFLTMAX(), 800.0f)
+                    new Vector2(minWidth, ImGui.GETFLTMAX())
                 );
                 NextWindowSize = calculatedSize;
                 _bypassWidthConstraint = false;
@@ -115,7 +114,7 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetNextWindowSizeConstraints(
                     new Vector2(targetWidth, 0),
-                    new Vector2(targetWidth, 800.0f)
+                    new Vector2(targetWidth, ImGui.GETFLTMAX())
                 );
             }
 
@@ -323,7 +322,7 @@ namespace BPSR_ZDPS.Windows
             if (isMergeMode)
             {
                 // In merge mode, just render sections directly without wrapper
-                // The main window's AlwaysAutoResize will handle the sizing
+                // Window sizing is handled by SetNextWindowSizeConstraints based on CalculateRequiredSize
                 DrawMergedDpsHealingView();
             }
             else
@@ -903,8 +902,6 @@ namespace BPSR_ZDPS.Windows
             Meters.Add(new HealingMeter());
             Meters.Add(new TankingMeter());
             Meters.Add(new TakenMeter());
-            // Clear the cache so recalculation happens with new settings
-            _cachedSizeHash = "";
             _bypassWidthConstraint = true;
         }
 
@@ -914,7 +911,9 @@ namespace BPSR_ZDPS.Windows
         /// </summary>
         public void InvalidateSizeCache()
         {
-            _cachedSizeHash = "";
+            // Size is recalculated every frame, no cache to invalidate
+            // Clear frame height cache so it recalculates if scale changed
+            _frameHeightCache.Clear();
         }
 
         Vector2 CalculateRequiredSize(float scale)
@@ -926,6 +925,9 @@ namespace BPSR_ZDPS.Windows
             {
                 return new Vector2(baseMinWidth, 0);
             }
+
+            // Get cached or calculate frame height for this scale
+            float frameHeight = GetFrameHeightForScale(scale);
 
             // Determine which meter(s) will be displayed and calculate for each
             bool isMergeMode = Settings.Instance.MergeDpsAndHealTabs && Settings.Instance.ShowHealingTab;
@@ -952,38 +954,6 @@ namespace BPSR_ZDPS.Windows
                 meterTypesToCheck.Add(3); // NPC Taken tab
             }
 
-            // Create a hash of properties that affect size (exclude damage values that change every frame)
-            // Sort by UID to make hash order-independent (position swaps shouldn't recalculate size)
-            StringBuilder hashBuilder = new();
-            hashBuilder.Append($"merge:{isMergeMode};");
-            hashBuilder.Append($"showScore:{Settings.Instance.ShowAbilityScoreInMeters};");
-            hashBuilder.Append($"showProf:{Settings.Instance.ShowSubProfessionNameInMeters};");
-            hashBuilder.Append($"showIcon:{Settings.Instance.ShowClassIconsInMeters};");
-            hashBuilder.Append($"truePS:{Settings.Instance.DisplayTruePerSecondValuesInMeters};");
-            hashBuilder.Append($"onlyContrib:{Settings.Instance.OnlyShowDamageContributorsInMeters};");
-
-            // Only include entity properties that affect the displayed size
-            // Sort by UID to ensure hash is stable regardless of DPS order changes
-            foreach (var entity in currentEncounter.Entities.Values
-                .Where(x => x.EntityType == Zproto.EEntityType.EntChar)
-                .OrderBy(x => x.UID))
-            {
-                hashBuilder.Append($"{entity.UID}:{entity.Name}:{entity.AbilityScore}:{entity.SubProfession};");
-            }
-            string entityHash = hashBuilder.ToString();
-
-            // Return cached size if nothing changed
-            if (entityHash == _cachedSizeHash)
-            {
-                return _cachedSize;
-            }
-
-            // Push font to calculate text size (same font used in rendering)
-            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
-            ImGui.AlignTextToFramePadding();
-            float frameHeight = ImGui.GetFrameHeight();
-            ImGui.PopFont();
-
             float maxWidth = 0;
             float maxHeight = 0;
 
@@ -998,13 +968,35 @@ namespace BPSR_ZDPS.Windows
             // Ensure minimum width
             float finalWidth = Math.Max(baseMinWidth, maxWidth);
 
-            Vector2 finalSize = new(finalWidth, maxHeight);
+            return new Vector2(finalWidth, maxHeight);
+        }
 
-            // Update cache
-            _cachedSizeHash = entityHash;
-            _cachedSize = finalSize;
+        /// <summary>
+        /// Gets the frame height for a given scale, using a cache to avoid calling ImGui functions before Begin.
+        /// Initializes the cache on first call or when scale changes.
+        /// </summary>
+        private float GetFrameHeightForScale(float scale)
+        {
+            if (_frameHeightCache.TryGetValue(scale, out var cachedHeight))
+            {
+                return cachedHeight;
+            }
 
-            return finalSize;
+            // Initialize font if not already loaded
+            if (!HelperMethods.Fonts.ContainsKey("Cascadia-Mono"))
+            {
+                // Font not loaded yet, return a reasonable default
+                return 20.0f * scale;
+            }
+
+            // Push font to calculate frame height (only called once per scale)
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+            ImGui.AlignTextToFramePadding();
+            float frameHeight = ImGui.GetFrameHeight();
+            ImGui.PopFont();
+
+            _frameHeightCache[scale] = frameHeight;
+            return frameHeight;
         }
 
         (float width, float height) CalculateSizeForMeterType(int meterType, Encounter currentEncounter, float scale, float frameHeight)
