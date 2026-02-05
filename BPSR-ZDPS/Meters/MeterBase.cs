@@ -14,7 +14,7 @@ namespace BPSR_ZDPS.Meters
     {
         public string Name = "";
 
-        protected Encounter? ActiveEncounter = null;
+        public Encounter? ActiveEncounter = null;
 
         // Cache for height calculation to avoid recalculating every frame
         private int _cachedEntryCount = -1;

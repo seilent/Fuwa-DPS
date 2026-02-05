@@ -720,7 +720,8 @@ namespace BPSR_ZDPS.Windows
 
         void DrawMergedDpsHealingView()
         {
-            var currentEncounter = EncounterManager.Current;
+            // Use the DPS meter's ActiveEncounter which respects "keep past encounter" setting
+            var currentEncounter = ((DpsMeter)Meters[0]).ActiveEncounter;
 
             // Get top 20 DPS entities first
             var topDpsEntities = currentEncounter?.Entities.Values
