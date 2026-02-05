@@ -43,6 +43,10 @@ namespace BPSR_ZDPS.Windows
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
+        // Cache for width calculation
+        private string _cachedWidthHash = "";
+        private float _cachedWidth = 0.0f;
+
         static ImGuiWindowClassPtr ContextMenuClass = ImGui.ImGuiWindowClass();
 
         public void Draw()
@@ -79,15 +83,22 @@ namespace BPSR_ZDPS.Windows
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
-            // Set size constraints: fixed width, max height to prevent infinite expansion
-            float constrainedWidth = windowSettings.WindowSize.X > 0 ? windowSettings.WindowSize.X : 500.0f;
-            float minWidth = !Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f;
-            constrainedWidth = Math.Max(minWidth, constrainedWidth);
+            // Calculate window width based on actual content
+            float scale = windowSettings.MeterBarScale;
+            float calculatedWidth = CalculateRequiredWidth(scale);
+            float minWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
 
-            // Set width constraints, max height cap to prevent infinite expansion
+            // Use calculated width, or saved width if within range
+            float targetWidth = calculatedWidth;
+            if (windowSettings.WindowSize.X > 0)
+            {
+                targetWidth = Math.Max(minWidth, Math.Min(calculatedWidth, windowSettings.WindowSize.X));
+            }
+            targetWidth = Math.Max(minWidth, targetWidth);
+
             ImGui.SetNextWindowSizeConstraints(
-                new Vector2(constrainedWidth, 0),
-                new Vector2(constrainedWidth, 800.0f)  // Max height 800px
+                new Vector2(targetWidth, 0),
+                new Vector2(targetWidth, 800.0f)
             );
 
             if (windowSettings.WindowPosition != new Vector2())
@@ -863,6 +874,220 @@ namespace BPSR_ZDPS.Windows
         public void SetDbWorkComplete()
         {
             ResumeFromDbWork = true;
+        }
+
+        float CalculateRequiredWidth(float scale)
+        {
+            float baseMinWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
+
+            var currentEncounter = EncounterManager.Current;
+            if (currentEncounter?.Entities == null || currentEncounter.Entities.Count == 0)
+            {
+                return baseMinWidth;
+            }
+
+            // Determine which meter(s) will be displayed and calculate for each
+            bool isMergeMode = Settings.Instance.MergeDpsAndHealTabs && Settings.Instance.ShowHealingTab;
+            bool showHealing = Settings.Instance.ShowHealingTab;
+            bool showTanking = Settings.Instance.ShowTankingTab;
+            bool showNpcTaken = Settings.Instance.ShowNpcTakenTab;
+
+            // Build list of meter types to check (0=DPS, 1=Healing, 2=Tanking, 3=NPC Taken)
+            List<int> meterTypesToCheck = new() { 0 }; // DPS is always shown
+            if (isMergeMode)
+            {
+                meterTypesToCheck.Add(1); // Healing in merged mode
+            }
+            else if (showHealing)
+            {
+                meterTypesToCheck.Add(1); // Healing tab
+            }
+            if (showTanking)
+            {
+                meterTypesToCheck.Add(2); // Tanking tab
+            }
+            if (showNpcTaken)
+            {
+                meterTypesToCheck.Add(3); // NPC Taken tab
+            }
+
+            // Create a hash of properties that affect width (exclude damage values that change every frame)
+            // Sort by UID to make hash order-independent (position swaps shouldn't recalculate width)
+            StringBuilder hashBuilder = new();
+            hashBuilder.Append($"merge:{isMergeMode};");
+            hashBuilder.Append($"showScore:{Settings.Instance.ShowAbilityScoreInMeters};");
+            hashBuilder.Append($"showProf:{Settings.Instance.ShowSubProfessionNameInMeters};");
+            hashBuilder.Append($"showIcon:{Settings.Instance.ShowClassIconsInMeters};");
+            hashBuilder.Append($"truePS:{Settings.Instance.DisplayTruePerSecondValuesInMeters};");
+            hashBuilder.Append($"onlyContrib:{Settings.Instance.OnlyShowDamageContributorsInMeters};");
+
+            // Only include entity properties that affect the displayed width
+            // Sort by UID to ensure hash is stable regardless of DPS order changes
+            foreach (var entity in currentEncounter.Entities.Values
+                .Where(x => x.EntityType == Zproto.EEntityType.EntChar)
+                .OrderBy(x => x.UID))
+            {
+                hashBuilder.Append($"{entity.UID}:{entity.Name}:{entity.AbilityScore}:{entity.SubProfession};");
+            }
+            string entityHash = hashBuilder.ToString();
+
+            // Return cached width if nothing changed
+            if (entityHash == _cachedWidthHash)
+            {
+                return _cachedWidth;
+            }
+
+            // Push font to calculate text size (same font used in SelectableWithHintImage)
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+            ImGui.AlignTextToFramePadding();
+            float texSize = ImGui.GetItemRectSize().Y;
+
+            float maxWidth = 0;
+
+            // Calculate width for each meter type and use the maximum
+            foreach (int meterType in meterTypesToCheck)
+            {
+                float meterWidth = CalculateWidthForMeterType(meterType, currentEncounter, scale, texSize);
+                maxWidth = Math.Max(maxWidth, meterWidth);
+            }
+
+            ImGui.PopFont();
+
+            // Ensure minimum width
+            float finalWidth = Math.Max(baseMinWidth, maxWidth);
+
+            Log.Debug("[CalculateRequiredWidth] meterTypes={MeterTypes}, scale={Scale:F2}, maxWidth={MaxWidth:F2}, finalWidth={FinalWidth:F2}",
+                string.Join(",", meterTypesToCheck), scale, maxWidth, finalWidth);
+
+            // Update cache
+            _cachedWidthHash = entityHash;
+            _cachedWidth = finalWidth;
+
+            return finalWidth;
+        }
+
+        float CalculateWidthForMeterType(int meterType, Encounter currentEncounter, float scale, float texSize)
+        {
+            // Determine sort key and filter based on meter type
+            Func<Entity, ulong> sortKey = meterType switch
+            {
+                0 => e => e.TotalDamage,
+                1 => e => e.TotalHealing,
+                2 => e => e.TotalTakenDamage,
+                3 => e => e.TotalTakenDamage,
+                _ => e => e.TotalDamage
+            };
+
+            Func<Entity, bool> filter = meterType switch
+            {
+                0 => e => Settings.Instance.OnlyShowDamageContributorsInMeters ? e.TotalDamage > 0 : true,
+                1 => e => Settings.Instance.OnlyShowDamageContributorsInMeters ? e.TotalHealing > 0 : true,
+                2 => e => true,
+                3 => e => Settings.Instance.OnlyShowDamageContributorsInMeters ? e.TotalTakenDamage > 0 : true,
+                _ => e => true
+            };
+
+            // For NPC Taken (meterType 3), we need to filter for monsters instead of chars
+            Zproto.EEntityType entityTypeFilter = meterType == 3
+                ? Zproto.EEntityType.EntMonster
+                : Zproto.EEntityType.EntChar;
+
+            bool filterHealersOnly = (meterType == 1 && Settings.Instance.MergeDpsAndHealTabs && Settings.Instance.ShowHealingTab);
+
+            var displayedEntities = currentEncounter.Entities.Values
+                .Where(x => x.EntityType == entityTypeFilter && filter(x))
+                .Where(x => !filterHealersOnly || (x.ProfessionId == 5 || x.ProfessionId == 13))
+                .OrderByDescending(sortKey)
+                .Take(20)
+                .ToList();
+
+            if (displayedEntities.Count == 0)
+                return 0.0f;
+
+            float maxNameWidth = 0;
+            float maxValueWidth = 0;
+            float maxRankWidth = 0;
+
+            for (int i = 0; i < displayedEntities.Count; i++)
+            {
+                var entity = displayedEntities[i];
+
+                // Rank number
+                string number = $" {(i + 1).ToString().PadLeft(displayedEntities.Count < 101 ? 2 : 3, '0')}.";
+                Vector2 rankSize = ImGui.CalcTextSize(number);
+                maxRankWidth = Math.Max(maxRankWidth, rankSize.X);
+
+                // Name text
+                string name = string.IsNullOrEmpty(entity.Name) ? $"[U:{entity.UID}]" : entity.Name;
+                string abilityScore = Settings.Instance.ShowAbilityScoreInMeters ? $" ({entity.AbilityScore})" : "";
+                string profession = Settings.Instance.ShowSubProfessionNameInMeters && !string.IsNullOrEmpty(entity.SubProfession)
+                    ? $"-{entity.SubProfession}" : "";
+                string nameText = $"{name}{profession}{abilityScore}";
+                Vector2 nameSize = ImGui.CalcTextSize(nameText);
+                maxNameWidth = Math.Max(maxNameWidth, nameSize.X);
+
+                // Value text based on meter type
+                ulong totalValue = sortKey(entity);
+                double valuePerSecond = meterType switch
+                {
+                    0 => entity.DamageStats.ValuePerSecond,
+                    1 => entity.HealingStats.ValuePerSecond,
+                    2 => 0.0, // Tanking doesn't show per-second
+                    3 => 0.0, // NPC Taken doesn't show per-second
+                    _ => 0.0
+                };
+                double trueValuePerSecond = meterType switch
+                {
+                    0 => entity.DamageStats.TrueValuePerSecond,
+                    1 => entity.HealingStats.TrueValuePerSecond,
+                    _ => 0.0
+                };
+
+                ulong encounterTotal = meterType switch
+                {
+                    0 => currentEncounter.TotalDamage,
+                    1 => currentEncounter.TotalHealing,
+                    2 => 0,
+                    3 => 0,
+                    _ => 0
+                };
+
+                string truePerSecond = (meterType <= 1 && Settings.Instance.DisplayTruePerSecondValuesInMeters)
+                    ? $"[{Utils.NumberToShorthand(trueValuePerSecond)}] " : "";
+                string totalStr = Utils.NumberToShorthand(totalValue);
+                string perSecondStr = valuePerSecond > 0 ? $"({Utils.NumberToShorthand(valuePerSecond)})" : "";
+
+                double contribution = 0.0;
+                if (encounterTotal != 0)
+                {
+                    contribution = Math.Round(((double)totalValue / (double)encounterTotal) * 100, 4);
+                }
+
+                string valueText = meterType <= 1
+                    ? $"{totalStr} {truePerSecond}{perSecondStr} {contribution.ToString("F0").PadLeft(3, ' ')}%"
+                    : totalStr;
+
+                Vector2 valueSize = ImGui.CalcTextSize(valueText);
+                maxValueWidth = Math.Max(maxValueWidth, valueSize.X);
+            }
+
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.X;
+            float windowPadding = ImGui.GetStyle().WindowPadding.X;
+
+            float rankOffset = maxRankWidth;
+            if (Settings.Instance.ShowClassIconsInMeters)
+            {
+                rankOffset += (itemSpacing * 2) + (texSize + 2);
+            }
+            else
+            {
+                rankOffset += itemSpacing;
+            }
+
+            float totalWidth = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2);
+            totalWidth += 10.0f * scale;
+
+            return totalWidth;
         }
     }
 
