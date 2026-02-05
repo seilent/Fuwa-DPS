@@ -24,6 +24,7 @@ namespace BPSR_ZDPS.Windows
         static bool RunOnce = true;
         static int RunOnceDelayed = 0;
         static int SettingsRunOnceDelayedPerOpen = 0;
+        static bool _isSettingsMenuOpen = false;
 
         static int SelectedTabIndex = 0;
 
@@ -459,37 +460,41 @@ namespace BPSR_ZDPS.Windows
 
                 // Action buttons - hide when window is not hovered (use alpha for smooth, glitch-free hiding)
                 bool isHovered = ImGui.IsWindowHovered(ImGuiHoveredFlags.RootWindow | ImGuiHoveredFlags.ChildWindows);
-                float buttonAlpha = isHovered ? 1.0f : 0.0f;
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
+                float buttonAlpha = (isHovered || _isSettingsMenuOpen) ? 1.0f : 0.0f;
 
                 if (Settings.Instance.AllowEncounterSavingPausingInOpenWorld && BattleStateMachine.DungeonStateHistory.Count > 0 && BattleStateMachine.DungeonStateHistory.LastOrDefault().Key == EDungeonState.DungeonStateNull)
                 {
                     ImGui.BeginDisabled(AppState.IsBenchmarkMode);
 
                     ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 5));
+                    ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                     ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                     Vector4 pauseColor = (AppState.IsEncounterSavingPaused ? Theme.GetWarningTextColor() : Theme.GetPrimaryTextColor());
-                    ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pauseColor.X, pauseColor.Y, pauseColor.Z, buttonAlpha));
+                    ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pauseColor.X, pauseColor.Y, pauseColor.Z, pauseColor.W * buttonAlpha));
                     if (ImGui.MenuItem($"{FASIcons.Pause}##PauseEncounterSavingBtn"))
                     {
                         AppState.IsEncounterSavingPaused = !AppState.IsEncounterSavingPaused;
                     }
                     ImGui.PopStyleColor();
                     ImGui.PopFont();
+                    ImGui.PopStyleColor();
                     ImGui.SetItemTooltip("Pause Encounter Saving While In Open World.");
 
                     ImGui.EndDisabled();
                 }
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 4));
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                 if (ImGui.MenuItem($"{FASIcons.WindowMinimize}##MinimizeBtn"))
                 {
                     Utils.MinimizeWindow();
                 }
                 ImGui.PopFont();
+                ImGui.PopStyleColor();
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 3));
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                 var pinColor = Theme.GetPrimaryTextColor();
                 ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, (windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f) * buttonAlpha));
@@ -520,26 +525,31 @@ namespace BPSR_ZDPS.Windows
                 }
                 ImGui.PopStyleColor();
                 ImGui.PopFont();
+                ImGui.PopStyleColor();
                 ImGui.SetItemTooltip("Pin Window As Top Most");
 
                 // Create new Encounter button
                 ImGui.BeginDisabled(AppState.IsEncounterSavingPaused);
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 2));
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                 if (ImGui.MenuItem($"{FASIcons.Rotate}##StartNewEncounterBtn"))
                 {
                     CreateNewEncounter();
                 }
                 ImGui.PopFont();
+                ImGui.PopStyleColor();
                 ImGui.SetItemTooltip("Start New Encounter");
 
                 ImGui.EndDisabled();
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - settingsWidth);
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                 if (ImGui.BeginMenu($"{FASIcons.Gear}##OptionsMenu"))
                 {
+                    _isSettingsMenuOpen = true;
                     if (SettingsRunOnceDelayedPerOpen == 0)
                     {
                         SettingsRunOnceDelayedPerOpen++;
@@ -563,6 +573,7 @@ namespace BPSR_ZDPS.Windows
                     }
 
                     ImGui.PopFont();
+                    ImGui.PopStyleColor();
 
                     if (ImGui.MenuItem("Encounter History"))
                     {
@@ -746,11 +757,11 @@ namespace BPSR_ZDPS.Windows
                 }
                 else
                 {
+                    _isSettingsMenuOpen = false;
                     SettingsRunOnceDelayedPerOpen = 0;
                     ImGui.PopFont();
+                    ImGui.PopStyleColor();
                 }
-
-                ImGui.PopStyleColor(); // Pop the button alpha style
 
                 settingsWidth = ImGui.GetItemRectSize().X;
 
