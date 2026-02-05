@@ -876,6 +876,20 @@ namespace BPSR_ZDPS.Windows
             ResumeFromDbWork = true;
         }
 
+        /// <summary>
+        /// Invalidates both width and height calculation caches, forcing recalculation on next frame.
+        /// Call this when settings change that affect the window size.
+        /// </summary>
+        public void InvalidateSizeCache()
+        {
+            _cachedWidthHash = "";
+            // Invalidate height cache for all meters
+            foreach (var meter in Meters)
+            {
+                meter.InvalidateHeightCache();
+            }
+        }
+
         float CalculateRequiredWidth(float scale)
         {
             float baseMinWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;

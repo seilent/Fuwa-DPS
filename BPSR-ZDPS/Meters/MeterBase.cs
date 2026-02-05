@@ -73,6 +73,15 @@ namespace BPSR_ZDPS.Meters
             return totalHeight;
         }
 
+        /// <summary>
+        /// Invalidates the height calculation cache, forcing recalculation on next frame.
+        /// Call this when settings change that affect the window height.
+        /// </summary>
+        public void InvalidateHeightCache()
+        {
+            _cachedEntryCount = -1;
+        }
+
         public static bool SelectableWithHintImage(string number, string name, string value, int profession)
         {
             var startPoint = ImGui.GetCursorPos();
