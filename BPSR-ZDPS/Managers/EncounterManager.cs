@@ -35,6 +35,9 @@ namespace BPSR_ZDPS
 
         public static CancellationTokenSource UpdateTruePerValuesCTS = new CancellationTokenSource();
 
+        // Tracks if we've logged the sampling mode activation (per encounter)
+        public static bool HasLoggedSamplingModeThisEncounter = false;
+
         static EncounterManager()
         {
             // Give a default encounter for now
@@ -179,6 +182,8 @@ namespace BPSR_ZDPS
             }
 
             // Reuse last sceneId as our current one (it may not always be right but hopefully is right enough)
+            // Reset sampling mode log flag for new encounters
+            HasLoggedSamplingModeThisEncounter = false;
             if (LevelMapId > 0)
             {
                 SetSceneId(LevelMapId);
@@ -1963,6 +1968,12 @@ namespace BPSR_ZDPS
 
         public List<SkillSnapshot> SkillSnapshots { get; private set; } = new();
 
+        // Sampling mode for long encounters (auto-enables after 1 hour to prevent memory issues)
+        private bool _isSamplingMode = false;
+        private DateTime _lastSnapshotTime = DateTime.MinValue;
+        private const double SAMPLING_INTERVAL_SECONDS = 1.0; // Store max 1 snapshot per second when in sampling mode
+        private const double SAMPLING_MODE_THRESHOLD_HOURS = 1.0; // Enable sampling after 1 hour
+
         public object Clone()
         {
             return this.MemberwiseClone();
@@ -2157,7 +2168,38 @@ namespace BPSR_ZDPS
                 snapshot.IsImmune = true;
             }
 
-            SkillSnapshots.Add(snapshot);
+            // Auto-sampling for long encounters: after 1 hour, only store 1 snapshot per second
+            // This prevents massive memory growth and serialization freezes during long encounters
+            if (StartTime != null)
+            {
+                var encounterDuration = timestamp - StartTime.Value;
+                if (encounterDuration.TotalHours >= SAMPLING_MODE_THRESHOLD_HOURS)
+                {
+                    if (!_isSamplingMode && !EncounterManager.HasLoggedSamplingModeThisEncounter)
+                    {
+                        EncounterManager.HasLoggedSamplingModeThisEncounter = true;
+                        Serilog.Log.Information("Sampling mode enabled for encounter (duration: {Duration:0.00} hours). Snapshots will be recorded at 1/second intervals instead of every hit. All damage/healing totals are still 100% accurate.", encounterDuration.TotalHours);
+                    }
+                    _isSamplingMode = true;
+                }
+            }
+
+            if (_isSamplingMode)
+            {
+                var timeSinceLastSnapshot = (timestamp - _lastSnapshotTime).TotalSeconds;
+                if (timeSinceLastSnapshot >= SAMPLING_INTERVAL_SECONDS)
+                {
+                    SkillSnapshots.Add(snapshot);
+                    _lastSnapshotTime = timestamp;
+                }
+                // Else: skip this snapshot to reduce data growth (all totals are still preserved)
+            }
+            else
+            {
+                // Normal mode: store every snapshot
+                SkillSnapshots.Add(snapshot);
+                _lastSnapshotTime = timestamp;
+            }
         }
 
         // Merges the data from another Combat Stats with this one, always uses the new Name and SkillType
