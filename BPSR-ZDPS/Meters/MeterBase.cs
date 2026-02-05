@@ -142,8 +142,15 @@ namespace BPSR_ZDPS.Meters
             }
 
             ImGui.SameLine();
+            // Right-align value by calculating position from window width
             float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + Math.Max(0.0f, ImGui.GetContentRegionAvail().X - ImGui.CalcTextSize(value).X - (5.0f * scale)));
+            float valueWidth = ImGui.CalcTextSize(value).X;
+            float windowWidth = ImGui.GetWindowWidth();
+            float padding = ImGui.GetStyle().WindowPadding.X;
+            float targetX = windowWidth - valueWidth - padding;
+            float currentX = ImGui.GetCursorPosX();
+            if (targetX > currentX)
+                ImGui.SetCursorPosX(targetX);
             ImGui.TextUnformatted(value);
 
             return ret;

@@ -39,7 +39,7 @@ namespace BPSR_ZDPS.Windows
         static int LastPinnedOpacity = 100;
         public Vector2 WindowPosition;
         public Vector2 NextWindowPosition = new();
-        public Vector2 DefaultWindowSize = new Vector2(550, 600);
+        public Vector2 DefaultWindowSize = new Vector2(400, 300);
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
@@ -85,38 +85,22 @@ namespace BPSR_ZDPS.Windows
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
-            // Calculate window size based on actual content
+            // Use cached size from previous frame's calculation (done inside window to avoid calling ImGui before Begin)
             float scale = windowSettings.MeterBarScale;
-            Vector2 calculatedSize = CalculateRequiredSize(scale);
             float minWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
 
             if (_bypassWidthConstraint)
             {
-                // Bypass width constraint - let the calculated size take effect
-                // Also clear the saved width so it doesn't re-constrain on next frame
+                // Bypass width constraint - clear saved width so it doesn't re-constrain on next frame
                 Settings.Instance.WindowSettings.MainWindow.WindowSize = new Vector2(0, Settings.Instance.WindowSettings.MainWindow.WindowSize.Y);
-                ImGui.SetNextWindowSizeConstraints(
-                    new Vector2(minWidth, 0),
-                    new Vector2(minWidth, ImGui.GETFLTMAX())
-                );
-                NextWindowSize = calculatedSize;
                 _bypassWidthConstraint = false;
             }
-            else
-            {
-                // Use calculated width, or saved width if within range
-                float targetWidth = calculatedSize.X;
-                if (windowSettings.WindowSize.X > 0)
-                {
-                    targetWidth = Math.Max(minWidth, Math.Min(calculatedSize.X, windowSettings.WindowSize.X));
-                }
-                targetWidth = Math.Max(minWidth, targetWidth);
 
-                ImGui.SetNextWindowSizeConstraints(
-                    new Vector2(targetWidth, 0),
-                    new Vector2(targetWidth, ImGui.GETFLTMAX())
-                );
-            }
+            // Set minimum width to prevent window becoming too small
+            ImGui.SetNextWindowSizeConstraints(
+                new Vector2(minWidth, 0),
+                new Vector2(ImGui.GETFLTMAX())
+            );
 
             if (windowSettings.WindowPosition != new Vector2())
             {
