@@ -47,6 +47,9 @@ namespace BPSR_ZDPS.Windows
         private string _cachedSizeHash = "";
         private Vector2 _cachedSize = new();
 
+        // Flag to bypass width constraint for one frame after resetting meters
+        private bool _bypassWidthConstraint = false;
+
         static ImGuiWindowClassPtr ContextMenuClass = ImGui.ImGuiWindowClass();
 
         public void Draw()
@@ -88,18 +91,33 @@ namespace BPSR_ZDPS.Windows
             Vector2 calculatedSize = CalculateRequiredSize(scale);
             float minWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
 
-            // Use calculated width, or saved width if within range
-            float targetWidth = calculatedSize.X;
-            if (windowSettings.WindowSize.X > 0)
+            if (_bypassWidthConstraint)
             {
-                targetWidth = Math.Max(minWidth, Math.Min(calculatedSize.X, windowSettings.WindowSize.X));
+                // Bypass width constraint - let the calculated size take effect
+                // Also clear the saved width so it doesn't re-constrain on next frame
+                Settings.Instance.WindowSettings.MainWindow.WindowSize = new Vector2(0, Settings.Instance.WindowSettings.MainWindow.WindowSize.Y);
+                ImGui.SetNextWindowSizeConstraints(
+                    new Vector2(minWidth, 0),
+                    new Vector2(ImGui.GETFLTMAX(), 800.0f)
+                );
+                NextWindowSize = calculatedSize;
+                _bypassWidthConstraint = false;
             }
-            targetWidth = Math.Max(minWidth, targetWidth);
+            else
+            {
+                // Use calculated width, or saved width if within range
+                float targetWidth = calculatedSize.X;
+                if (windowSettings.WindowSize.X > 0)
+                {
+                    targetWidth = Math.Max(minWidth, Math.Min(calculatedSize.X, windowSettings.WindowSize.X));
+                }
+                targetWidth = Math.Max(minWidth, targetWidth);
 
-            ImGui.SetNextWindowSizeConstraints(
-                new Vector2(targetWidth, 0),
-                new Vector2(targetWidth, 800.0f)
-            );
+                ImGui.SetNextWindowSizeConstraints(
+                    new Vector2(targetWidth, 0),
+                    new Vector2(targetWidth, 800.0f)
+                );
+            }
 
             if (windowSettings.WindowPosition != new Vector2())
             {
@@ -877,6 +895,23 @@ namespace BPSR_ZDPS.Windows
         }
 
         /// <summary>
+        /// Resets the meters list, causing a fresh visual rebuild as if the window was just launched.
+        /// This naturally recalculates window size and layout without losing encounter data.
+        /// Call this when settings change that affect the meter display.
+        /// </summary>
+        public void ResetMeters()
+        {
+            Meters.Clear();
+            Meters.Add(new DpsMeter());
+            Meters.Add(new HealingMeter());
+            Meters.Add(new TankingMeter());
+            Meters.Add(new TakenMeter());
+            // Clear the cache so recalculation happens with new settings
+            _cachedSizeHash = "";
+            _bypassWidthConstraint = true;
+        }
+
+        /// <summary>
         /// Invalidates both width and height calculation caches, forcing recalculation on next frame.
         /// Call this when settings change that affect the window size.
         /// </summary>
@@ -1106,7 +1141,7 @@ namespace BPSR_ZDPS.Windows
                 rankOffset += itemSpacingX;
             }
 
-            float width = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2) + (10.0f * scale);
+            float width = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2) + (15.0f * scale);
 
             return (width, height);
         }

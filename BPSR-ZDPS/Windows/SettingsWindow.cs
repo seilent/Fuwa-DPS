@@ -1674,8 +1674,8 @@ namespace BPSR_ZDPS.Windows
             // Write out the new settings to file now that they've been applied
             Settings.Save();
 
-            // Invalidate size cache so window recalculates with new settings
-            mainWindow?.InvalidateSizeCache();
+            // Reset meters to visually rebuild as if freshly launched (recalculates size naturally)
+            mainWindow?.ResetMeters();
 
             // Apply the new theme immediately
             Theme.ApplyTheme(Settings.Instance.Theme);

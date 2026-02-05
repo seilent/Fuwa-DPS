@@ -145,7 +145,8 @@ namespace BPSR_ZDPS.Meters
             }
 
             ImGui.SameLine();
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + Math.Max(0.0f, ImGui.GetContentRegionAvail().X - ImGui.CalcTextSize(value).X));
+            float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + Math.Max(0.0f, ImGui.GetContentRegionAvail().X - ImGui.CalcTextSize(value).X - (5.0f * scale)));
             ImGui.TextUnformatted(value);
 
             return ret;
