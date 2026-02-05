@@ -46,6 +46,9 @@ namespace BPSR_ZDPS.Windows
         // Cache frame height per scale value to avoid calling ImGui functions before Begin
         private Dictionary<float, float> _frameHeightCache = new();
 
+        // Cache for maximum profession name width (pre-computed once per scale)
+        private static float? _cachedMaxProfessionWidth = null;
+
         // Flag to bypass width constraint for one frame after resetting meters
         private bool _bypassWidthConstraint = false;
 
@@ -907,6 +910,8 @@ namespace BPSR_ZDPS.Windows
             // Size is recalculated every frame, no cache to invalidate
             // Clear frame height cache so it recalculates if scale changed
             _frameHeightCache.Clear();
+            // Clear profession width cache so it recalculates if scale changed
+            _cachedMaxProfessionWidth = null;
         }
 
         Vector2 CalculateRequiredSize(float scale)
@@ -1039,6 +1044,37 @@ namespace BPSR_ZDPS.Windows
         }
 
         /// <summary>
+        /// Gets the maximum profession name width for a given scale.
+        /// Caches the result to avoid re-computing on every frame.
+        /// </summary>
+        private static float GetMaxProfessionWidth(float scale)
+        {
+            if (_cachedMaxProfessionWidth.HasValue)
+                return _cachedMaxProfessionWidth.Value;
+
+            // List of all sub-profession names (longest variant)
+            // Format is "-ProfessionName" so we include the dash
+            string[] allProfessions = {
+                "Iaido", "Moonstrike", "Icicle", "Frostbeam",
+                "Vanguard", "Skyward", "Smite", "Lifebind",
+                "Earthfort", "Block", "Wildpack", "Falconry",
+                "Recovery", "Shield", "Dissonance", "Concerto"
+            };
+
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+            float maxWidth = 0;
+            foreach (var prof in allProfessions)
+            {
+                Vector2 size = ImGui.CalcTextSize($"-{prof}");
+                maxWidth = Math.Max(maxWidth, size.X);
+            }
+            ImGui.PopFont();
+
+            _cachedMaxProfessionWidth = maxWidth;
+            return maxWidth;
+        }
+
+        /// <summary>
         /// Calculates the maximum column widths for rank, name, and value text.
         /// This is used to determine the required window width for the meter.
         /// </summary>
@@ -1046,66 +1082,38 @@ namespace BPSR_ZDPS.Windows
             List<Entity> displayedEntities, Func<Entity, ulong> sortKey, int meterType, Encounter encounter, int entryCount, float scale)
         {
             ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+
+            // FIXED: Rank width - always " XX." format, calculate max (rank 20)
+            string number = $" {(20).ToString().PadLeft(entryCount < 101 ? 2 : 3, '0')}.";
+            float maxRankWidth = ImGui.CalcTextSize(number).X;
+
+            // VARIABLE: Find longest player name (the true variable)
             float maxNameWidth = 0;
-            float maxValueWidth = 0;
-            float maxRankWidth = 0;
-
-            for (int i = 0; i < displayedEntities.Count; i++)
+            foreach (var entity in displayedEntities)
             {
-                var entity = displayedEntities[i];
-
-                // Rank number
-                string number = $" {(i + 1).ToString().PadLeft(entryCount < 101 ? 2 : 3, '0')}.";
-                Vector2 rankSize = ImGui.CalcTextSize(number);
-                maxRankWidth = Math.Max(maxRankWidth, rankSize.X);
-
-                // Name text
                 string name = string.IsNullOrEmpty(entity.Name) ? $"[U:{entity.UID}]" : entity.Name;
-                string abilityScore = Settings.Instance.ShowAbilityScoreInMeters ? $" ({entity.AbilityScore})" : "";
-                string profession = Settings.Instance.ShowSubProfessionNameInMeters && !string.IsNullOrEmpty(entity.SubProfession)
-                    ? $"-{entity.SubProfession}" : "";
-                string nameText = $"{name}{profession}{abilityScore}";
+                // Use max ability score width (9999) since it's always 4 digits
+                string abilityScore = Settings.Instance.ShowAbilityScoreInMeters ? $" (9999)" : "";
+                string nameText = $"{name}{abilityScore}";
                 Vector2 nameSize = ImGui.CalcTextSize(nameText);
                 maxNameWidth = Math.Max(maxNameWidth, nameSize.X);
-
-                // Value text based on meter type
-                ulong totalValue = sortKey(entity);
-                double valuePerSecond = meterType switch
-                {
-                    0 => entity.DamageStats.ValuePerSecond,
-                    1 => entity.HealingStats.ValuePerSecond,
-                    2 => 0.0,
-                    3 => 0.0,
-                    _ => 0.0
-                };
-
-                string truePerSecond = (meterType <= 1 && Settings.Instance.DisplayTruePerSecondValuesInMeters)
-                    ? $"[{Utils.NumberToShorthand(entity.DamageStats.TrueValuePerSecond)}] " : "";
-                string totalStr = Utils.NumberToShorthand(totalValue);
-                string perSecondStr = valuePerSecond > 0 ? $"({Utils.NumberToShorthand(valuePerSecond)})" : "";
-
-                ulong encounterTotal = meterType switch
-                {
-                    0 => encounter.TotalDamage,
-                    1 => encounter.TotalHealing,
-                    2 => 0,
-                    3 => 0,
-                    _ => 0
-                };
-
-                double contribution = 0.0;
-                if (encounterTotal != 0)
-                {
-                    contribution = Math.Round(((double)totalValue / (double)encounterTotal) * 100, 4);
-                }
-
-                string valueText = meterType <= 1
-                    ? $"{totalStr} {truePerSecond}{perSecondStr} {contribution.ToString("F0").PadLeft(3, ' ')}%"
-                    : totalStr;
-
-                Vector2 valueSize = ImGui.CalcTextSize(valueText);
-                maxValueWidth = Math.Max(maxValueWidth, valueSize.X);
             }
+
+            // FIXED/COMPUTED: Max profession width (pre-computed once)
+            float maxProfessionWidth = Settings.Instance.ShowSubProfessionNameInMeters
+                ? GetMaxProfessionWidth(scale)
+                : 0;
+            maxNameWidth += maxProfessionWidth;
+
+            // FIXED: Value width - use a representative max value
+            // Format: "1.5B [999K] (9.9M) 100%" or similar shorthand
+            // Since values use shorthand (K/M/B), the width is bounded
+            bool showTruePerSecond = (meterType <= 1 && Settings.Instance.DisplayTruePerSecondValuesInMeters);
+            string truePerSecondPart = showTruePerSecond ? "[999K] " : "";
+            string maxValueText = meterType <= 1
+                ? $"1.5B {truePerSecondPart}(9.9M) 100%"
+                : "1.5B";
+            float maxValueWidth = ImGui.CalcTextSize(maxValueText).X;
 
             ImGui.PopFont();
 
