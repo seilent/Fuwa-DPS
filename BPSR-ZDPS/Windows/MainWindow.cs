@@ -400,8 +400,8 @@ namespace BPSR_ZDPS.Windows
                     duration = EncounterManager.Current.GetDuration().ToString("hh\\:mm\\:ss");
                 }
 
-                // Display: [Rank] Duration - AreaName - PlayerTotal (PlayerPerSecond)
-                ImGui.Text($"[{AppState.PlayerMeterPlacement}] {duration}");
+                // Display: Duration - AreaName
+                ImGui.Text(duration);
 
                 if (!string.IsNullOrEmpty(EncounterManager.Current.SceneName))
                 {
@@ -414,11 +414,6 @@ namespace BPSR_ZDPS.Windows
                     ImGui.TextUnformatted($"- {EncounterManager.Current.SceneName}{subName}");
                 }
 
-                // Player stats (Total DPS/HPS)
-                ImGui.SameLine();
-                string currentValuePerSecond = $"{Utils.NumberToShorthand(AppState.PlayerTotalMeterValue)} ({Utils.NumberToShorthand(AppState.PlayerMeterValuePerSecond)})";
-                ImGui.Text(currentValuePerSecond);
-
                 // Benchmark indicator
                 if (AppState.IsBenchmarkMode)
                 {
@@ -426,13 +421,19 @@ namespace BPSR_ZDPS.Windows
                     ImGui.TextUnformatted($"[BENCHMARK ({AppState.BenchmarkTime}s)]");
                 }
 
+                // Action buttons - hide when window is not hovered (use alpha for smooth, glitch-free hiding)
+                bool isHovered = ImGui.IsWindowHovered(ImGuiHoveredFlags.RootWindow | ImGuiHoveredFlags.ChildWindows);
+                float buttonAlpha = isHovered ? 1.0f : 0.0f;
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
+
                 if (Settings.Instance.AllowEncounterSavingPausingInOpenWorld && BattleStateMachine.DungeonStateHistory.Count > 0 && BattleStateMachine.DungeonStateHistory.LastOrDefault().Key == EDungeonState.DungeonStateNull)
                 {
                     ImGui.BeginDisabled(AppState.IsBenchmarkMode);
 
                     ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 5));
                     ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-                    ImGui.PushStyleColor(ImGuiCol.Text, (AppState.IsEncounterSavingPaused ? Theme.GetWarningTextColor() : Theme.GetPrimaryTextColor()));
+                    Vector4 pauseColor = (AppState.IsEncounterSavingPaused ? Theme.GetWarningTextColor() : Theme.GetPrimaryTextColor());
+                    ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pauseColor.X, pauseColor.Y, pauseColor.Z, buttonAlpha));
                     if (ImGui.MenuItem($"{FASIcons.Pause}##PauseEncounterSavingBtn"))
                     {
                         AppState.IsEncounterSavingPaused = !AppState.IsEncounterSavingPaused;
@@ -455,7 +456,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 3));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
                 var pinColor = Theme.GetPrimaryTextColor();
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f));
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.X, AppState.MousePassthrough ? 0.0f : pinColor.Y, (windowSettings.TopMost ? pinColor.W : pinColor.W * 0.5f) * buttonAlpha));
                 if (ImGui.MenuItem($"{FASIcons.Thumbtack}##TopMostBtn"))
                 {
                     if (!windowSettings.TopMost)
@@ -706,6 +707,8 @@ namespace BPSR_ZDPS.Windows
                     ImGui.PopFont();
                 }
 
+                ImGui.PopStyleColor(); // Pop the button alpha style
+
                 settingsWidth = ImGui.GetItemRectSize().X;
 
                 ImGui.EndMenuBar();
@@ -782,9 +785,15 @@ namespace BPSR_ZDPS.Windows
                     }
 
                     string profession = "";
+                    string professionColor = "";
                     if (!string.IsNullOrEmpty(entity.SubProfession))
                     {
                         profession = entity.SubProfession;
+                        professionColor = entity.SubProfession;
+                    }
+                    else if (!string.IsNullOrEmpty(entity.Profession))
+                    {
+                        professionColor = entity.Profession;
                     }
 
                     double contribution = 0.0;
@@ -816,7 +825,7 @@ namespace BPSR_ZDPS.Windows
 
                     ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * Settings.Instance.WindowSettings.MainWindow.MeterBarScale);
 
-                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, DataTypes.Professions.ProfessionColors(profession));
+                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, DataTypes.Professions.ProfessionColors(professionColor));
                     ImGui.ProgressBar((float)contributionProgressBar / 100.0f, new Vector2(-1, 0), $"##HpsEntryContribution_{i}");
                     ImGui.PopStyleColor();
 
@@ -983,9 +992,24 @@ namespace BPSR_ZDPS.Windows
             return frameHeight;
         }
 
-        (float width, float height) CalculateSizeForMeterType(int meterType, Encounter currentEncounter, float scale, float frameHeight)
+        /// <summary>
+        /// Calculates the list height based on entry count and frame height.
+        /// Uses the formula: (entryCount * frameHeight) + (itemSpacing * (entryCount - 1)) + listPadding
+        /// </summary>
+        private static float CalculateListHeight(int entryCount, float frameHeight)
         {
-            // Determine sort key and filter based on meter type
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
+            float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
+            return (entryCount * frameHeight) + (itemSpacing * Math.Max(0, entryCount - 1)) + listPadding;
+        }
+
+        /// <summary>
+        /// Gets the filtering criteria for a specific meter type.
+        /// Returns sort key function, filter function, and entity type filter.
+        /// </summary>
+        /// <param name="meterType">0=DPS, 1=Healing, 2=Tanking, 3=NPC Taken</param>
+        private (Func<Entity, ulong> sortKey, Func<Entity, bool> filter, Zproto.EEntityType entityType, bool filterHealersOnly) GetMeterTypeFilters(int meterType)
+        {
             Func<Entity, ulong> sortKey = meterType switch
             {
                 0 => e => e.TotalDamage,
@@ -1005,29 +1029,22 @@ namespace BPSR_ZDPS.Windows
             };
 
             // For NPC Taken (meterType 3), we need to filter for monsters instead of chars
-            Zproto.EEntityType entityTypeFilter = meterType == 3
+            Zproto.EEntityType entityType = meterType == 3
                 ? Zproto.EEntityType.EntMonster
                 : Zproto.EEntityType.EntChar;
 
             bool filterHealersOnly = (meterType == 1 && Settings.Instance.MergeDpsAndHealTabs && Settings.Instance.ShowHealingTab);
 
-            var displayedEntities = currentEncounter.Entities.Values
-                .Where(x => x.EntityType == entityTypeFilter && filter(x))
-                .Where(x => !filterHealersOnly || (x.ProfessionId == 5 || x.ProfessionId == 13))
-                .OrderByDescending(sortKey)
-                .Take(20)
-                .ToList();
+            return (sortKey, filter, entityType, filterHealersOnly);
+        }
 
-            int entryCount = displayedEntities.Count;
-            if (entryCount == 0)
-                return (0, 0);
-
-            // Calculate height using the same logic as GetListHeight
-            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
-            float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
-            float height = (entryCount * frameHeight) + (itemSpacing * Math.Max(0, entryCount - 1)) + listPadding;
-
-            // Calculate width
+        /// <summary>
+        /// Calculates the maximum column widths for rank, name, and value text.
+        /// This is used to determine the required window width for the meter.
+        /// </summary>
+        private (float maxRankWidth, float maxNameWidth, float maxValueWidth) CalculateMaxColumnWidths(
+            List<Entity> displayedEntities, Func<Entity, ulong> sortKey, int meterType, Encounter encounter, int entryCount, float scale)
+        {
             ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
             float maxNameWidth = 0;
             float maxValueWidth = 0;
@@ -1069,8 +1086,8 @@ namespace BPSR_ZDPS.Windows
 
                 ulong encounterTotal = meterType switch
                 {
-                    0 => currentEncounter.TotalDamage,
-                    1 => currentEncounter.TotalHealing,
+                    0 => encounter.TotalDamage,
+                    1 => encounter.TotalHealing,
                     2 => 0,
                     3 => 0,
                     _ => 0
@@ -1092,6 +1109,14 @@ namespace BPSR_ZDPS.Windows
 
             ImGui.PopFont();
 
+            return (maxRankWidth, maxNameWidth, maxValueWidth);
+        }
+
+        /// <summary>
+        /// Calculates the final window width based on column widths and icon settings.
+        /// </summary>
+        private static float CalculateWindowWidth(float maxRankWidth, float maxNameWidth, float maxValueWidth, float scale)
+        {
             float windowPadding = ImGui.GetStyle().WindowPadding.X;
             float itemSpacingX = ImGui.GetStyle().ItemSpacing.X;
 
@@ -1111,7 +1136,32 @@ namespace BPSR_ZDPS.Windows
                 rankOffset += itemSpacingX;
             }
 
-            float width = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2) + (15.0f * scale);
+            return rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2) + (15.0f * scale);
+        }
+
+        (float width, float height) CalculateSizeForMeterType(int meterType, Encounter currentEncounter, float scale, float frameHeight)
+        {
+            // Get filtering criteria for this meter type
+            var (sortKey, filter, entityType, filterHealersOnly) = GetMeterTypeFilters(meterType);
+
+            var displayedEntities = currentEncounter.Entities.Values
+                .Where(x => x.EntityType == entityType && filter(x))
+                .Where(x => !filterHealersOnly || (x.ProfessionId == 5 || x.ProfessionId == 13))
+                .OrderByDescending(sortKey)
+                .Take(20)
+                .ToList();
+
+            int entryCount = displayedEntities.Count;
+            if (entryCount == 0)
+                return (0, 0);
+
+            // Calculate height using unified helper
+            float height = CalculateListHeight(entryCount, frameHeight);
+
+            // Calculate width using unified helper
+            var (maxRankWidth, maxNameWidth, maxValueWidth) = CalculateMaxColumnWidths(
+                displayedEntities, sortKey, meterType, currentEncounter, entryCount, scale);
+            float width = CalculateWindowWidth(maxRankWidth, maxNameWidth, maxValueWidth, scale);
 
             return (width, height);
         }

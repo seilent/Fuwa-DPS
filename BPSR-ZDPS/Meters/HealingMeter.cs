@@ -113,9 +113,15 @@ namespace BPSR_ZDPS.Meters
                     }
 
                     string profession = "";
+                    string professionColor = "";
                     if (!string.IsNullOrEmpty(entity.SubProfession))
                     {
                         profession = entity.SubProfession;
+                        professionColor = entity.SubProfession;
+                    }
+                    else if (!string.IsNullOrEmpty(entity.Profession))
+                    {
+                        professionColor = entity.Profession;
                     }
 
                     double contribution = 0.0;
@@ -145,7 +151,7 @@ namespace BPSR_ZDPS.Meters
 
                     ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * Settings.Instance.WindowSettings.MainWindow.MeterBarScale);
 
-                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Professions.ProfessionColors(profession));
+                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Professions.ProfessionColors(professionColor));
                     ImGui.ProgressBar((float)contributionProgressBar / 100.0f, new Vector2(-1, 0), $"##HpsEntryContribution_{i}");
                     ImGui.PopStyleColor();
 
