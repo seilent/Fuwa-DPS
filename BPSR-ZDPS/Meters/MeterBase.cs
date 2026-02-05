@@ -1,7 +1,6 @@
 ﻿using BPSR_ZDPS.DataTypes;
 using BPSR_ZDPS.Windows;
 using Hexa.NET.ImGui;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
