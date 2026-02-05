@@ -68,8 +68,6 @@ namespace BPSR_ZDPS.Meters
             _cachedEntryCount = entryCount;
             _cachedHeight = totalHeight;
 
-            Log.Debug("[GetListHeight] entryCount={EntryCount}, scale={Scale:F2}, frameHeight={FrameHeight:F2}, entryHeight={EntryHeight:F2}, itemSpacing={ItemSpacing:F2}, listPadding={ListPadding:F2}, totalHeight={TotalHeight:F2}", entryCount, scale, frameHeight, entryHeight, itemSpacing, listPadding, totalHeight);
-
             return totalHeight;
         }
 

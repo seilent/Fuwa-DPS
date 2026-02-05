@@ -1000,9 +1000,6 @@ namespace BPSR_ZDPS.Windows
 
             Vector2 finalSize = new(finalWidth, maxHeight);
 
-            Log.Debug("[CalculateRequiredSize] meterTypes={MeterTypes}, scale={Scale:F2}, width={Width:F2}, height={Height:F2}",
-                string.Join(",", meterTypesToCheck), scale, finalWidth, maxHeight);
-
             // Update cache
             _cachedSizeHash = entityHash;
             _cachedSize = finalSize;
