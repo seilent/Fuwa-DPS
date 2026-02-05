@@ -43,9 +43,9 @@ namespace BPSR_ZDPS.Windows
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
-        // Cache for width calculation
-        private string _cachedWidthHash = "";
-        private float _cachedWidth = 0.0f;
+        // Cache for size calculation (width and height)
+        private string _cachedSizeHash = "";
+        private Vector2 _cachedSize = new();
 
         static ImGuiWindowClassPtr ContextMenuClass = ImGui.ImGuiWindowClass();
 
@@ -83,16 +83,16 @@ namespace BPSR_ZDPS.Windows
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
 
-            // Calculate window width based on actual content
+            // Calculate window size based on actual content
             float scale = windowSettings.MeterBarScale;
-            float calculatedWidth = CalculateRequiredWidth(scale);
+            Vector2 calculatedSize = CalculateRequiredSize(scale);
             float minWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
 
             // Use calculated width, or saved width if within range
-            float targetWidth = calculatedWidth;
+            float targetWidth = calculatedSize.X;
             if (windowSettings.WindowSize.X > 0)
             {
-                targetWidth = Math.Max(minWidth, Math.Min(calculatedWidth, windowSettings.WindowSize.X));
+                targetWidth = Math.Max(minWidth, Math.Min(calculatedSize.X, windowSettings.WindowSize.X));
             }
             targetWidth = Math.Max(minWidth, targetWidth);
 
@@ -882,22 +882,17 @@ namespace BPSR_ZDPS.Windows
         /// </summary>
         public void InvalidateSizeCache()
         {
-            _cachedWidthHash = "";
-            // Invalidate height cache for all meters
-            foreach (var meter in Meters)
-            {
-                meter.InvalidateHeightCache();
-            }
+            _cachedSizeHash = "";
         }
 
-        float CalculateRequiredWidth(float scale)
+        Vector2 CalculateRequiredSize(float scale)
         {
             float baseMinWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
 
             var currentEncounter = EncounterManager.Current;
             if (currentEncounter?.Entities == null || currentEncounter.Entities.Count == 0)
             {
-                return baseMinWidth;
+                return new Vector2(baseMinWidth, 0);
             }
 
             // Determine which meter(s) will be displayed and calculate for each
@@ -925,8 +920,8 @@ namespace BPSR_ZDPS.Windows
                 meterTypesToCheck.Add(3); // NPC Taken tab
             }
 
-            // Create a hash of properties that affect width (exclude damage values that change every frame)
-            // Sort by UID to make hash order-independent (position swaps shouldn't recalculate width)
+            // Create a hash of properties that affect size (exclude damage values that change every frame)
+            // Sort by UID to make hash order-independent (position swaps shouldn't recalculate size)
             StringBuilder hashBuilder = new();
             hashBuilder.Append($"merge:{isMergeMode};");
             hashBuilder.Append($"showScore:{Settings.Instance.ShowAbilityScoreInMeters};");
@@ -935,7 +930,7 @@ namespace BPSR_ZDPS.Windows
             hashBuilder.Append($"truePS:{Settings.Instance.DisplayTruePerSecondValuesInMeters};");
             hashBuilder.Append($"onlyContrib:{Settings.Instance.OnlyShowDamageContributorsInMeters};");
 
-            // Only include entity properties that affect the displayed width
+            // Only include entity properties that affect the displayed size
             // Sort by UID to ensure hash is stable regardless of DPS order changes
             foreach (var entity in currentEncounter.Entities.Values
                 .Where(x => x.EntityType == Zproto.EEntityType.EntChar)
@@ -945,42 +940,45 @@ namespace BPSR_ZDPS.Windows
             }
             string entityHash = hashBuilder.ToString();
 
-            // Return cached width if nothing changed
-            if (entityHash == _cachedWidthHash)
+            // Return cached size if nothing changed
+            if (entityHash == _cachedSizeHash)
             {
-                return _cachedWidth;
+                return _cachedSize;
             }
 
-            // Push font to calculate text size (same font used in SelectableWithHintImage)
+            // Push font to calculate text size (same font used in rendering)
             ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
             ImGui.AlignTextToFramePadding();
-            float texSize = ImGui.GetItemRectSize().Y;
+            float frameHeight = ImGui.GetFrameHeight();
+            ImGui.PopFont();
 
             float maxWidth = 0;
+            float maxHeight = 0;
 
-            // Calculate width for each meter type and use the maximum
+            // Calculate size for each meter type and use the maximum
             foreach (int meterType in meterTypesToCheck)
             {
-                float meterWidth = CalculateWidthForMeterType(meterType, currentEncounter, scale, texSize);
+                var (meterWidth, meterHeight) = CalculateSizeForMeterType(meterType, currentEncounter, scale, frameHeight);
                 maxWidth = Math.Max(maxWidth, meterWidth);
+                maxHeight = Math.Max(maxHeight, meterHeight);
             }
-
-            ImGui.PopFont();
 
             // Ensure minimum width
             float finalWidth = Math.Max(baseMinWidth, maxWidth);
 
-            Log.Debug("[CalculateRequiredWidth] meterTypes={MeterTypes}, scale={Scale:F2}, maxWidth={MaxWidth:F2}, finalWidth={FinalWidth:F2}",
-                string.Join(",", meterTypesToCheck), scale, maxWidth, finalWidth);
+            Vector2 finalSize = new(finalWidth, maxHeight);
+
+            Log.Debug("[CalculateRequiredSize] meterTypes={MeterTypes}, scale={Scale:F2}, width={Width:F2}, height={Height:F2}",
+                string.Join(",", meterTypesToCheck), scale, finalWidth, maxHeight);
 
             // Update cache
-            _cachedWidthHash = entityHash;
-            _cachedWidth = finalWidth;
+            _cachedSizeHash = entityHash;
+            _cachedSize = finalSize;
 
-            return finalWidth;
+            return finalSize;
         }
 
-        float CalculateWidthForMeterType(int meterType, Encounter currentEncounter, float scale, float texSize)
+        (float width, float height) CalculateSizeForMeterType(int meterType, Encounter currentEncounter, float scale, float frameHeight)
         {
             // Determine sort key and filter based on meter type
             Func<Entity, ulong> sortKey = meterType switch
@@ -1015,9 +1013,17 @@ namespace BPSR_ZDPS.Windows
                 .Take(20)
                 .ToList();
 
-            if (displayedEntities.Count == 0)
-                return 0.0f;
+            int entryCount = displayedEntities.Count;
+            if (entryCount == 0)
+                return (0, 0);
 
+            // Calculate height using the same logic as GetListHeight
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.Y;
+            float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
+            float height = (entryCount * frameHeight) + (itemSpacing * Math.Max(0, entryCount - 1)) + listPadding;
+
+            // Calculate width
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
             float maxNameWidth = 0;
             float maxValueWidth = 0;
             float maxRankWidth = 0;
@@ -1027,7 +1033,7 @@ namespace BPSR_ZDPS.Windows
                 var entity = displayedEntities[i];
 
                 // Rank number
-                string number = $" {(i + 1).ToString().PadLeft(displayedEntities.Count < 101 ? 2 : 3, '0')}.";
+                string number = $" {(i + 1).ToString().PadLeft(entryCount < 101 ? 2 : 3, '0')}.";
                 Vector2 rankSize = ImGui.CalcTextSize(number);
                 maxRankWidth = Math.Max(maxRankWidth, rankSize.X);
 
@@ -1046,16 +1052,15 @@ namespace BPSR_ZDPS.Windows
                 {
                     0 => entity.DamageStats.ValuePerSecond,
                     1 => entity.HealingStats.ValuePerSecond,
-                    2 => 0.0, // Tanking doesn't show per-second
-                    3 => 0.0, // NPC Taken doesn't show per-second
+                    2 => 0.0,
+                    3 => 0.0,
                     _ => 0.0
                 };
-                double trueValuePerSecond = meterType switch
-                {
-                    0 => entity.DamageStats.TrueValuePerSecond,
-                    1 => entity.HealingStats.TrueValuePerSecond,
-                    _ => 0.0
-                };
+
+                string truePerSecond = (meterType <= 1 && Settings.Instance.DisplayTruePerSecondValuesInMeters)
+                    ? $"[{Utils.NumberToShorthand(entity.DamageStats.TrueValuePerSecond)}] " : "";
+                string totalStr = Utils.NumberToShorthand(totalValue);
+                string perSecondStr = valuePerSecond > 0 ? $"({Utils.NumberToShorthand(valuePerSecond)})" : "";
 
                 ulong encounterTotal = meterType switch
                 {
@@ -1065,11 +1070,6 @@ namespace BPSR_ZDPS.Windows
                     3 => 0,
                     _ => 0
                 };
-
-                string truePerSecond = (meterType <= 1 && Settings.Instance.DisplayTruePerSecondValuesInMeters)
-                    ? $"[{Utils.NumberToShorthand(trueValuePerSecond)}] " : "";
-                string totalStr = Utils.NumberToShorthand(totalValue);
-                string perSecondStr = valuePerSecond > 0 ? $"({Utils.NumberToShorthand(valuePerSecond)})" : "";
 
                 double contribution = 0.0;
                 if (encounterTotal != 0)
@@ -1085,23 +1085,30 @@ namespace BPSR_ZDPS.Windows
                 maxValueWidth = Math.Max(maxValueWidth, valueSize.X);
             }
 
-            float itemSpacing = ImGui.GetStyle().ItemSpacing.X;
+            ImGui.PopFont();
+
             float windowPadding = ImGui.GetStyle().WindowPadding.X;
+            float itemSpacingX = ImGui.GetStyle().ItemSpacing.X;
+
+            // Calculate icon size for rank offset
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+            ImGui.AlignTextToFramePadding();
+            float texSize = ImGui.GetItemRectSize().Y;
+            ImGui.PopFont();
 
             float rankOffset = maxRankWidth;
             if (Settings.Instance.ShowClassIconsInMeters)
             {
-                rankOffset += (itemSpacing * 2) + (texSize + 2);
+                rankOffset += (itemSpacingX * 2) + (texSize + 2);
             }
             else
             {
-                rankOffset += itemSpacing;
+                rankOffset += itemSpacingX;
             }
 
-            float totalWidth = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2);
-            totalWidth += 10.0f * scale;
+            float width = rankOffset + maxNameWidth + maxValueWidth + (windowPadding * 2) + (10.0f * scale);
 
-            return totalWidth;
+            return (width, height);
         }
     }
 
