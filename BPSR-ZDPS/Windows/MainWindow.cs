@@ -484,14 +484,15 @@ namespace BPSR_ZDPS.Windows
                 }
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 4));
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
+                var primaryText = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(primaryText.X, primaryText.Y, primaryText.Z, primaryText.W * buttonAlpha));
                 if (ImGui.MenuItem($"{FASIcons.WindowMinimize}##MinimizeBtn"))
                 {
                     Utils.MinimizeWindow();
                 }
-                ImGui.PopFont();
                 ImGui.PopStyleColor();
+                ImGui.PopFont();
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 3));
                 ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
@@ -532,21 +533,23 @@ namespace BPSR_ZDPS.Windows
                 ImGui.BeginDisabled(AppState.IsEncounterSavingPaused);
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - (settingsWidth * 2));
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
+                primaryText = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(primaryText.X, primaryText.Y, primaryText.Z, primaryText.W * buttonAlpha));
                 if (ImGui.MenuItem($"{FASIcons.Rotate}##StartNewEncounterBtn"))
                 {
                     CreateNewEncounter();
                 }
-                ImGui.PopFont();
                 ImGui.PopStyleColor();
+                ImGui.PopFont();
                 ImGui.SetItemTooltip("Start New Encounter");
 
                 ImGui.EndDisabled();
 
                 ImGui.SetCursorPosX(MainMenuBarSize.X - settingsWidth);
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(1, 1, 1, buttonAlpha));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
+                primaryText = Theme.GetPrimaryTextColor();
+                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(primaryText.X, primaryText.Y, primaryText.Z, primaryText.W * buttonAlpha));
                 if (ImGui.BeginMenu($"{FASIcons.Gear}##OptionsMenu"))
                 {
                     _isSettingsMenuOpen = true;
@@ -759,8 +762,8 @@ namespace BPSR_ZDPS.Windows
                 {
                     _isSettingsMenuOpen = false;
                     SettingsRunOnceDelayedPerOpen = 0;
-                    ImGui.PopFont();
                     ImGui.PopStyleColor();
+                    ImGui.PopFont();
                 }
 
                 settingsWidth = ImGui.GetItemRectSize().X;

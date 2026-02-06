@@ -106,7 +106,7 @@ namespace BPSR_ZDPS.Windows
                     if (!string.IsNullOrEmpty(profession))
                     {
                         var color = Professions.ProfessionColors(profession);
-                        color = color - new Vector4(0, 0, 0, 0.50f);
+                        color = color - new Vector4(0, 0, 0, 0.25f);  // Less alpha reduction for better visibility
                         ImGui.PushStyleColor(ImGuiCol.Header, color);
                     }
 

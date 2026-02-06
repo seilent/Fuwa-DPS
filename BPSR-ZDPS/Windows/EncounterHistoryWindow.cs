@@ -438,7 +438,7 @@ namespace BPSR_ZDPS.Windows
                             if (!string.IsNullOrEmpty(profession))
                             {
                                 var color = Professions.ProfessionColors(profession);
-                                color = color - new Vector4(0, 0, 0, 0.50f); // Make the color extremely muted since we're going to have a lot of them
+                                color = color - new Vector4(0, 0, 0, 0.25f); // Reduce alpha less for better visibility
 
                                 ImGui.PushStyleColor(ImGuiCol.Header, color);
                                 //ImGui.PushStyleColor(ImGuiCol.TableRowBg, HelperMethods.ProfessionColors(profession));

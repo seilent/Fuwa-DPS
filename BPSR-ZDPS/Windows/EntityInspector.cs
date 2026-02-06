@@ -132,13 +132,13 @@ namespace BPSR_ZDPS.Windows
                             if (Settings.Instance.ColorClassIconsByRole)
                             {
                                 var roleColor = Professions.RoleTypeIconColors(Professions.GetRoleFromBaseProfessionId(LoadedEntity.ProfessionId), Settings.Instance.Theme);
-                                roleColor.W = roleColor.W * 0.75f;
+                                roleColor.W = 1.0f;  // Full visibility for better contrast
                                 ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), roleColor);
                             }
                             else
                             {
                                 //ImGui.Image((ImTextureRef)tex, new Vector2(texSize, texSize));
-                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), new Vector4(1, 1, 1, 0.50f));
+                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), new Vector4(1, 1, 1, 0.85f));  // Increased alpha for better visibility
                             }
                             
                             ImGui.SetCursorPos(cursorStart);
@@ -680,7 +680,7 @@ namespace BPSR_ZDPS.Windows
                             if (!string.IsNullOrEmpty(profession))
                             {
                                 var color = Professions.ProfessionColors(profession);
-                                color = color - new Vector4(0, 0, 0, 0.50f);
+                                color = color - new Vector4(0, 0, 0, 0.25f);  // Less alpha reduction for better visibility
 
                                 ImGui.PushStyleColor(ImGuiCol.Header, color);
                             }

@@ -107,7 +107,7 @@ namespace BPSR_ZDPS.Windows
 
         private static void InnerDraw(ChatWindowSettings windowSettings)
         {
-            ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(17 / 255.0f, 17 / 255.0f, 17 / 255.0f, 0.0f));
+            ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(17 / 255.0f, 17 / 255.0f, 17 / 255.0f, 0.95f));
             ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0);
             if (ImGui.Begin($"Chat##ChatWindow", ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoCollapse |
                                     ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.NoScrollbar))
@@ -142,7 +142,9 @@ namespace BPSR_ZDPS.Windows
                     User32.SetLayeredWindowAttributes((nint)ImGui.GetWindowViewport().PlatformHandleRaw, 0x00111111, (byte)(windowSettings.Opacity == 100 ? 255 : 210), User32.LWA_COLORKEY | User32.LWA_ALPHA);
                 }
 
-                ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0, 0, 0, windowSettings.Opacity * 0.01f));
+                // Ensure minimum visibility for child background (0.30 minimum alpha)
+                float childAlpha = Math.Max(windowSettings.Opacity * 0.01f, 0.30f);
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0, 0, 0, childAlpha));
                 if (ImGui.BeginChild("##ChatWindowChild", new Vector2(0, windowSettings.WindowSize.Y - 8), ImGuiChildFlags.AutoResizeY))
                 {
                     DrawChatTabs();

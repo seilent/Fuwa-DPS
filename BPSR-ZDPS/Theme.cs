@@ -193,13 +193,13 @@ namespace BPSR_ZDPS
         {
             Dictionary<ImGuiCol, Vector4> colors = new();
 
-            // Light background
-            Vector4 bgColor = new Vector4(245 / 255f, 245 / 255f, 245 / 255f, 1.0f);
-            Vector4 lightBgColor = new Vector4(230 / 255f, 230 / 255f, 230 / 255f, 1.0f);
-            Vector4 lightBgColor_fade = new Vector4(230 / 255f, 230 / 255f, 230 / 255f, 0.35f);
-            Vector4 veryLightBgColor = new Vector4(220 / 255f, 220 / 255f, 220 / 255f, 1.0f);
+            // Light background - fixed contrast: darker bg, lighter panels
+            Vector4 bgColor = new Vector4(235 / 255f, 235 / 255f, 235 / 255f, 1.0f);
+            Vector4 lightBgColor = new Vector4(220 / 255f, 220 / 255f, 220 / 255f, 1.0f);
+            Vector4 lightBgColor_fade = new Vector4(220 / 255f, 220 / 255f, 220 / 255f, 0.35f);
+            Vector4 veryLightBgColor = new Vector4(210 / 255f, 210 / 255f, 210 / 255f, 1.0f);
 
-            Vector4 panelColor = new Vector4(255 / 255f, 255 / 255f, 255 / 255f, 1.0f);
+            Vector4 panelColor = new Vector4(245 / 255f, 245 / 255f, 245 / 255f, 1.0f);
             Vector4 panelHoverColor = new Vector4(0 / 255f, 120 / 255f, 215 / 255f, 1.0f);
             Vector4 panelActiveColor = new Vector4(0 / 255f, 80 / 255f, 180 / 255f, 1.0f);
 
@@ -275,8 +275,8 @@ namespace BPSR_ZDPS
                     { ThemeColor.WarningText, new Vector4(0.8f, 0.0f, 0.0f, 0.75f) },
                     { ThemeColor.SuccessText, new Vector4(0.0f, 0.5f, 0.0f, 0.75f) },
 
-                    // Button colors
-                    { ThemeColor.SelectedButton, new Vector4(0.4f, 0.4f, 0.4f, 1.0f) },
+                    // Button colors - more distinct selected color for light theme
+                    { ThemeColor.SelectedButton, new Vector4(0.55f, 0.70f, 0.90f, 1.0f) },
                     { ThemeColor.DestructiveButton, new Vector4(0.9f, 0.3f, 0.3f, 1.0f) },
                     { ThemeColor.ButtonRed, new Vector4(0.8f, 0.2f, 0.2f, 1.0f) },
 
@@ -360,13 +360,22 @@ namespace BPSR_ZDPS
 
         /// <summary>
         /// Get a theme-aware semantic color by key.
-        /// This is the primary method for accessing theme colors.
+        /// Returns Dark theme colors as fallback if not yet initialized.
         /// </summary>
         public static Vector4 GetColor(ThemeColor colorKey)
         {
-            return _semanticColors.TryGetValue(colorKey, out var color)
-                ? color
-                : Vector4.One; // Fallback to white if not found
+            if (_semanticColors.TryGetValue(colorKey, out var color))
+            {
+                return color;
+            }
+            // Fallback to Dark theme colors if not yet loaded
+            return colorKey switch
+            {
+                ThemeColor.PrimaryText => new Vector4(1.0f, 1.0f, 1.0f, 1.0f),  // Dark theme white
+                ThemeColor.WarningText => Colors.Red_Transparent,
+                ThemeColor.SuccessText => Colors.Green_Transparent,
+                _ => Vector4.One
+            };
         }
 
         // ========================================================================
