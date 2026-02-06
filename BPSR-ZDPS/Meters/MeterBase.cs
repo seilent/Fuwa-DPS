@@ -15,9 +15,10 @@ namespace BPSR_ZDPS.Meters
     {
         // Width configuration constants - edit here to change meter widths across all meters
         public const float RightSideWidth = 100.0f;  // Right side width for damage/DPS/healing values (unscaled)
-        public const float ClassWidth = 35.0f;  // Class/sub-profession width (unscaled)
+        public const float ClassWidthEnglish = 50.0f;  // Class/sub-profession width for English (unscaled)
+        public const float ClassWidthWide = 35.0f;  // Class/sub-profession width for JP/CN (unscaled)
         public const float NameCharWidthRomaji = 20.0f;  // Per-character width for ASCII/romaji names (unscaled)
-        public const float NameCharWidthWide = 30.0f;  // Per-character width for CJK names (unscaled)
+        public const float NameCharWidthWide = 20.0f;  // Per-character width for CJK names (unscaled)
         public const float RankWidth = 40.0f;  // Rank number width (unscaled)
 
         public string Name = "";
@@ -169,9 +170,13 @@ namespace BPSR_ZDPS.Meters
                 maxNameWidth = NameCharWidthRomaji * scale;
             }
 
-            // Use fixed class width instead of measuring
+            // Use fixed class width based on language detection
             if (showSubProfession)
-                maxClassWidth = ClassWidth * scale;
+            {
+                // Check if any entity has non-English sub-profession (simple detection)
+                bool hasWideClass = entities.Any(e => !string.IsNullOrEmpty(e.SubProfession) && e.SubProfession.Any(c => c >= 128));
+                maxClassWidth = (hasWideClass ? ClassWidthWide : ClassWidthEnglish) * scale;
+            }
 
             // Add spacing between name and class
             float middleWidth = maxNameWidth + maxClassWidth;

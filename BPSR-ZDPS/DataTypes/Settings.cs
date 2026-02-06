@@ -18,7 +18,7 @@ public class Settings
     public bool ShowClassIconsInMeters { get; set; } = true;
     public bool ColorClassIconsByRole { get; set; } = true;
     public bool ShowSkillIconsInDetails { get; set; } = true;
-    public bool OnlyShowDamageContributorsInMeters { get; set; } = false;
+    public bool OnlyShowDamageContributorsInMeters { get; set; } = true;
     public bool OnlyShowPartyMembersInMeters { get; set; } = false;
     public bool ShowAbilityScoreInMeters { get; set; } = true;
     public bool ShowSeasonStrengthInMeters { get; set; } = false;
@@ -29,7 +29,7 @@ public class Settings
     public bool SplitEncountersOnNewPhases { get; set; } = true;
     public bool DisplayTruePerSecondValuesInMeters { get; set; } = false;
     public bool AllowGamepadNavigationInputInZDPS { get; set; } = false;
-    public bool KeepPastEncounterInMeterUntilNextDamage { get; set; } = false;
+    public bool KeepPastEncounterInMeterUntilNextDamage { get; set; } = true;
     public bool UseDatabaseForEncounterHistory { get; set; } = true;
     public int DatabaseRetentionPolicyDays { get; set; } = 0;
     public bool LimitEncounterBuffTrackingWithoutDatabase { get; set; } = false;
@@ -46,7 +46,7 @@ public class Settings
     public bool ShowNpcTakenTab { get; set; } = true;
 
     // Merge DPS and Healing into single view
-    public bool MergeDpsAndHealTabs { get; set; } = false;
+    public bool MergeDpsAndHealTabs { get; set; } = true;
 
     // Disable "On Top" when no entities are shown
     public bool DisableTopMostWhenNoEntities { get; set; } = false;
