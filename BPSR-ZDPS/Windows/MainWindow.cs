@@ -46,9 +46,6 @@ namespace BPSR_ZDPS.Windows
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
-        // Flag to bypass width constraint for one frame after resetting meters
-        private bool _bypassWidthConstraint = false;
-
         static ImGuiWindowClassPtr ContextMenuClass = ImGui.ImGuiWindowClass();
 
         public void Draw()
@@ -84,22 +81,6 @@ namespace BPSR_ZDPS.Windows
             ImGui.SetNextWindowSize(DefaultWindowSize, ImGuiCond.FirstUseEver);
 
             var windowSettings = Settings.Instance.WindowSettings.MainWindow;
-
-            float scale = windowSettings.MeterBarScale;
-            float minWidth = (!Settings.Instance.AllowEncounterSavingPausingInOpenWorld ? 375.0f : 400.0f) * scale;
-
-            if (_bypassWidthConstraint)
-            {
-                // Bypass width constraint - clear saved width so it doesn't re-constrain on next frame
-                Settings.Instance.WindowSettings.MainWindow.WindowSize = new Vector2(0, Settings.Instance.WindowSettings.MainWindow.WindowSize.Y);
-                _bypassWidthConstraint = false;
-            }
-
-            // Set minimum width to prevent window becoming too small
-            ImGui.SetNextWindowSizeConstraints(
-                new Vector2(minWidth, 0),
-                new Vector2(ImGui.GETFLTMAX())
-            );
 
             if (windowSettings.WindowPosition != new Vector2())
             {
@@ -946,7 +927,6 @@ namespace BPSR_ZDPS.Windows
             Meters.Add(new HealingMeter());
             Meters.Add(new TankingMeter());
             Meters.Add(new TakenMeter());
-            _bypassWidthConstraint = true;
         }
     }
 
