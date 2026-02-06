@@ -135,7 +135,7 @@ namespace BPSR_ZDPS
                 var shouldBlock = CheckAndDrawNoModulesBanner();
                 if (ModuleCalcTask?.Status == TaskStatus.Running)
                 {
-                    DrawBanner("Calculating best module combos!\nThis could take a while.", 0xFF005DD9, "Thinking.png", true);
+                    DrawBanner("Calculating best module combos!\nThis could take a while.", ImGui.ColorConvertFloat4ToU32(Theme.GetColor(ThemeColor.InfoBanner)), "Thinking.png", true);
                 }
 
                 ImGui.BeginDisabled(ShouldBlockMainUI || shouldBlock);
@@ -686,7 +686,7 @@ namespace BPSR_ZDPS
         {
             if (PlayerModData == null || PlayerModData.ModulesPackage?.Items == null || PlayerModData.Mod == null)
             {
-                DrawBanner("Please change line or teleport to load module inventory data.", 0xFFAD5E15, "Looking.png");
+                DrawBanner("Please change line or teleport to load module inventory data.", ImGui.ColorConvertFloat4ToU32(Theme.GetColor(ThemeColor.WarningBanner)), "Looking.png");
                 return true;
             }
 

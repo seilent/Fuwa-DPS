@@ -163,7 +163,8 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SetNextWindowSize(new Vector2(maxWindowWidth, RaidWarningMessages.Count * LineHeight));
 
-                ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(17 / 255.0f, 17 / 255.0f, 17 / 255.0f, 0.90f));
+                var windowBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.WindowBg];
+                ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(windowBgColor.X, windowBgColor.Y, windowBgColor.Z, 0.90f));
                 ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0);
                 if (ImGui.Begin($"RaidWarningMessagesWindow", ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoInputs | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
                 {
@@ -191,7 +192,8 @@ namespace BPSR_ZDPS.Windows
                         User32.SetLayeredWindowAttributes((nint)ImGui.GetWindowViewport().PlatformHandleRaw, 0x00111111, 200, User32.LWA_COLORKEY | User32.LWA_ALPHA);
                     }
 
-                    ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0, 0, 0, windowSettings.MessageBackgroundOpacity));
+                    var childBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.ChildBg];
+                    ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(childBgColor.X, childBgColor.Y, childBgColor.Z, windowSettings.MessageBackgroundOpacity));
                     if (ImGui.BeginChild("##WarningsListChild", ImGuiChildFlags.AutoResizeY, ImGuiWindowFlags.NoInputs))
                     {
                         ImGui.PushFont(null, 34.0f * (windowSettings.MessageTextScale * 0.01f));

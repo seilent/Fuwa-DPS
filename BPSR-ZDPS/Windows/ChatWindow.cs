@@ -107,7 +107,8 @@ namespace BPSR_ZDPS.Windows
 
         private static void InnerDraw(ChatWindowSettings windowSettings)
         {
-            ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(17 / 255.0f, 17 / 255.0f, 17 / 255.0f, 0.95f));
+            var windowBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.WindowBg];
+            ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(windowBgColor.X, windowBgColor.Y, windowBgColor.Z, 0.95f));
             ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0);
             if (ImGui.Begin($"Chat##ChatWindow", ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoCollapse |
                                     ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.NoScrollbar))
@@ -144,7 +145,8 @@ namespace BPSR_ZDPS.Windows
 
                 // Ensure minimum visibility for child background (0.30 minimum alpha)
                 float childAlpha = Math.Max(windowSettings.Opacity * 0.01f, 0.30f);
-                ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0, 0, 0, childAlpha));
+                var childBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.ChildBg];
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(childBgColor.X, childBgColor.Y, childBgColor.Z, childAlpha));
                 if (ImGui.BeginChild("##ChatWindowChild", new Vector2(0, windowSettings.WindowSize.Y - 8), ImGuiChildFlags.AutoResizeY))
                 {
                     DrawChatTabs();
@@ -664,7 +666,7 @@ namespace BPSR_ZDPS.Windows
         private static void DrawChatSenderName(ChatMessage msg)
         {
             ChatManager.Senders.TryGetValue(msg.SenderId, out var sender);
-            ImGui.PushStyleColor(ImGuiCol.TextLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f));
+            ImGui.PushStyleColor(ImGuiCol.TextLink, Theme.GetColor(ThemeColor.ChatLink));
             if (ImGui.TextLink($"[{sender.Info.Name}]##ChatMsgName_{msg.GetHashCode().ToString()}"))
             {
                 
@@ -702,7 +704,7 @@ namespace BPSR_ZDPS.Windows
                     Utils.FormatTimeAgo(msg.TimeStamp) :
                     msg.TimeStamp.ToString("HH:mm");
 
-                ImGui.PushStyleColor(ImGuiCol.Text, new Vector4(0.60f, 0.65f, 0.75f, 1.00f));
+                ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.ChatTimestamp));
                 ImGui.TextUnformatted(timeStr);
                 ImGui.PopStyleColor();
             }

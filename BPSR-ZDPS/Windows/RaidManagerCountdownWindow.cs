@@ -143,7 +143,8 @@ namespace BPSR_ZDPS.Windows
                         NewCountdownWindowLocation = null;
                     }
 
-                    ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(1 / 255.0f, 1 / 255.0f, 1 / 255.0f, 0.90f));
+                    var windowBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.WindowBg];
+                    ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(windowBgColor.X, windowBgColor.Y, windowBgColor.Z, 0.90f));
                     ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0);
                     if (ImGui.Begin("Countdown", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoInputs))
                     {
@@ -169,7 +170,8 @@ namespace BPSR_ZDPS.Windows
                             CountdownRunOnceDelayed++;
                         }
 
-                        ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0, 0, 0, 0.85f));
+                        var childBgColor = ImGui.GetStyle().Colors[(int)ImGuiCol.ChildBg];
+                        ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(childBgColor.X, childBgColor.Y, childBgColor.Z, 0.85f));
                         if (ImGui.BeginChild("##CountdownChild", new Vector2(0, 0), ImGuiChildFlags.None, ImGuiWindowFlags.NoInputs))
                         {
                             if (windowSettings.UseStylizedNumbers)

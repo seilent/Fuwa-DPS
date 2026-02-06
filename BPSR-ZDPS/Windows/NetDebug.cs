@@ -2,7 +2,9 @@
 using Hexa.NET.ImGui;
 using static BPSR_ZDPSLib.TcpReassembler;
 
-namespace BPSR_ZDPS.Windows;
+namespace BPSR_ZDPS.Windows
+{
+    using BPSR_ZDPS.DataTypes;
 
 public static class NetDebug
 {
@@ -86,7 +88,7 @@ public static class NetDebug
                         ImGui.Text($"{seenCon.Key.DstIP}:{seenCon.Key.DstPort}");
 
                         ImGui.TableNextColumn();
-                        ImGui.PushStyleColor(ImGuiCol.Text, seenCon.Value ? new Vector4(0.25f, 0.85f, 0.35f, 1.0f) : new Vector4(0.85f, 0.25f, 0.25f, 1.0f));
+                        ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(seenCon.Value ? ThemeColor.DebugSeen : ThemeColor.DebugUnseen));
                         ImGui.Text(seenCon.Value ? "Yes" : "No");
                         ImGui.PopStyleColor();
                     }
@@ -191,4 +193,5 @@ public static class NetDebug
         }
         return $"{len:0.##} {sizes[order]}";
     }
+}
 }

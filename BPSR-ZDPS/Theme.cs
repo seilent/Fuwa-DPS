@@ -288,7 +288,24 @@ namespace BPSR_ZDPS
 
                     // Status colors
                     { ThemeColor.ConnectionConnected, new Vector4(0.0f, 0.5f, 0.0f, 1.0f) },
-                    { ThemeColor.ConnectionDisconnected, new Vector4(0.8f, 0.0f, 0.0f, 1.0f) }
+                    { ThemeColor.ConnectionDisconnected, new Vector4(0.8f, 0.0f, 0.0f, 1.0f) },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.0f, 0.365f, 0.851f, 1.0f) },     // Blue (0xFF005DD9)
+                    { ThemeColor.WarningBanner, new Vector4(0.678f, 0.369f, 0.082f, 1.0f) },  // Brown (0xFFAD5E15)
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(28 / 255f, 180 / 255f, 84 / 255f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.25f, 0.85f, 0.35f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(0.85f, 0.25f, 0.25f, 1.0f) }
                 },
                 ETheme.Dark => new Dictionary<ThemeColor, Vector4>
                 {
@@ -310,7 +327,24 @@ namespace BPSR_ZDPS
 
                     // Status colors
                     { ThemeColor.ConnectionConnected, Colors.Green },
-                    { ThemeColor.ConnectionDisconnected, Colors.Red }
+                    { ThemeColor.ConnectionDisconnected, Colors.Red },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.0f, 0.365f, 0.851f, 1.0f) },     // Blue (0xFF005DD9)
+                    { ThemeColor.WarningBanner, new Vector4(0.678f, 0.369f, 0.082f, 1.0f) },  // Brown (0xFFAD5E15)
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(28 / 255f, 180 / 255f, 84 / 255f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.25f, 0.85f, 0.35f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(0.85f, 0.25f, 0.25f, 1.0f) }
                 },
                 ETheme.Black => new Dictionary<ThemeColor, Vector4>
                 {
@@ -332,7 +366,24 @@ namespace BPSR_ZDPS
 
                     // Status colors - same as Dark
                     { ThemeColor.ConnectionConnected, Colors.Green },
-                    { ThemeColor.ConnectionDisconnected, Colors.Red }
+                    { ThemeColor.ConnectionDisconnected, Colors.Red },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.0f, 0.365f, 0.851f, 1.0f) },     // Blue (0xFF005DD9)
+                    { ThemeColor.WarningBanner, new Vector4(0.678f, 0.369f, 0.082f, 1.0f) },  // Brown (0xFFAD5E15)
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(28 / 255f, 180 / 255f, 84 / 255f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.25f, 0.85f, 0.35f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(0.85f, 0.25f, 0.25f, 1.0f) }
                 }
             };
         }

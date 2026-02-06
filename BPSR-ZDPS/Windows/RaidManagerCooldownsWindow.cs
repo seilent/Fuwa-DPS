@@ -158,7 +158,7 @@ namespace BPSR_ZDPS.Windows
                 
                 ImGui.PushStyleVarX(ImGuiStyleVar.FramePadding, 4);
                 ImGui.PushStyleVarY(ImGuiStyleVar.FramePadding, 1);
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, ImGui.ColorConvertFloat4ToU32(new Vector4(37 / 255f, 37 / 255f, 38 / 255f, 1.0f)));
+                ImGui.PushStyleColor(ImGuiCol.FrameBg, ImGui.ColorConvertFloat4ToU32(ImGui.GetStyle().Colors[(int)ImGuiCol.FrameBg]));
                 ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 1);
                 //ImGui.BeginChild("ConditionListBoxChild", new Vector2(0, 140), ImGuiChildFlags.FrameStyle);
                 float listBoxHeight = ImGui.GetContentRegionAvail().Y - EntityFilterSectionHeight - SkillFilterSectionHeight - ImGui.GetStyle().ItemSpacing.Y;
@@ -293,7 +293,7 @@ namespace BPSR_ZDPS.Windows
                         }
                         ImGui.Unindent();
 
-                        ImGui.PushStyleColor(ImGuiCol.Separator, new Vector4(78 / 255f, 78 / 255f, 78 / 255f, 1.0f));
+                        ImGui.PushStyleColor(ImGuiCol.Separator, ImGui.GetStyle().Colors[(int)ImGuiCol.Separator]);
                         ImGui.Separator();
                         ImGui.PopStyleColor();
 

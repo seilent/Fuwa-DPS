@@ -183,7 +183,7 @@ namespace BPSR_ZDPS.Windows
                 {
                     ImGui.PushStyleVarX(ImGuiStyleVar.FramePadding, 4);
                     ImGui.PushStyleVarY(ImGuiStyleVar.FramePadding, 1);
-                    ImGui.PushStyleColor(ImGuiCol.FrameBg, ImGui.ColorConvertFloat4ToU32(new Vector4(37 / 255f, 37 / 255f, 38 / 255f, 1.0f)));
+                    ImGui.PushStyleColor(ImGuiCol.FrameBg, ImGui.ColorConvertFloat4ToU32(ImGui.GetStyle().Colors[(int)ImGuiCol.FrameBg]));
                     ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 1);
                     ImGui.TextUnformatted("Select Monsters To Track: ");
 
@@ -409,15 +409,15 @@ namespace BPSR_ZDPS.Windows
 
                                 if (pct < 0.30 || isDead)
                                 {
-                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f));
+                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Theme.GetColor(ThemeColor.HpBarCritical));
                                 }
                                 else if (pct < 0.60)
                                 {
-                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f));
+                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Theme.GetColor(ThemeColor.HpBarWarning));
                                 }
                                 else
                                 {
-                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, new Vector4(28 / 255f, 180 / 255f, 84 / 255f, 0.85f));
+                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Theme.GetColor(ThemeColor.HpBarHealthy));
                                 }
                                 ImGui.PushFont(HelperMethods.Fonts["Segoe"], lineHeight);
                                 ImGuiEx.TextAlignedProgressBar(pct, $"{status.ChannelNumber}", 0.5f, lineWidth, lineHeight);

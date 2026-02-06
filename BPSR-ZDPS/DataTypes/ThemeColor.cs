@@ -24,6 +24,23 @@ namespace BPSR_ZDPS.DataTypes
 
         // Status colors
         ConnectionConnected,
-        ConnectionDisconnected
+        ConnectionDisconnected,
+
+        // Banner colors (ModuleSolver)
+        InfoBanner,
+        WarningBanner,
+
+        // Chat colors
+        ChatLink,
+        ChatTimestamp,
+
+        // HP bar colors (SpawnTracker)
+        HpBarCritical,  // < 30% HP (red)
+        HpBarWarning,   // 30-60% HP (yellow)
+        HpBarHealthy,   // > 60% HP (green)
+
+        // Debug colors (NetDebug)
+        DebugSeen,
+        DebugUnseen
     }
 }
