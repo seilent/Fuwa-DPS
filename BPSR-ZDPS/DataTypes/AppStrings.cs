@@ -13,31 +13,22 @@ namespace BPSR_ZDPS.DataTypes
 
         public static Dictionary<string, Dictionary<string, string>> Strings = new();
 
-        public static string GetLocalized(string key, bool KeyIfEmptyValue = false)
+        public static string GetLocalized(string key)
         {
             Strings.TryGetValue(key, out var value);
-            if (value.TryGetValue(CurrentLocale, out var localizedString))
+            if (value != null && value.TryGetValue(CurrentLocale, out var localizedString))
             {
                 return localizedString;
             }
-            else
+
+            // Fallback to English if current locale not found
+            if (value != null && value.TryGetValue("en", out var enString))
             {
-                if (KeyIfEmptyValue)
-                {
-                    return key;
-                }
-                else
-                {
-                    if (value.TryGetValue(CurrentLocale, out var enString))
-                    {
-                        return enString;
-                    }
-                    else
-                    {
-                        return key; // This probably should be an empty string at this point, but we'll use the key for now
-                    }
-                }
+                return enString;
             }
+
+            // Return key if no translation found
+            return key;
         }
     }
 }

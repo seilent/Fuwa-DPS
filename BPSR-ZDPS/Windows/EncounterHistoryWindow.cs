@@ -154,7 +154,7 @@ namespace BPSR_ZDPS.Windows
                 {
                     ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                 }
-                if (ImGui.Button("View By Each Individual Encounter", new Vector2(tabButtonHalfWidth, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("EncounterHistory_ViewIndividual"), new Vector2(tabButtonHalfWidth, 0)))
                 {
                     SelectedViewMode = 0;
                     SelectedEncounterIndex = -1;
@@ -172,7 +172,7 @@ namespace BPSR_ZDPS.Windows
                 {
                     ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SelectedButton));
                 }
-                if (ImGui.Button("View By Each Grouped Battle", new Vector2(tabButtonHalfWidth, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("EncounterHistory_ViewGrouped"), new Vector2(tabButtonHalfWidth, 0)))
                 {
                     SelectedViewMode = 1;
                     SelectedEncounterIndex = -1;
@@ -190,7 +190,7 @@ namespace BPSR_ZDPS.Windows
 
                 if (IsLoadingFromDatabase)
                 {
-                    ImGui.Text("Please wait, loading encounter history...");
+                    ImGui.Text(AppStrings.GetLocalized("EncounterHistory_Loading"));
                     ImGui.End();
                     ImGui.PopID();
                     return;
@@ -295,7 +295,7 @@ namespace BPSR_ZDPS.Windows
                 }
                 if (SelectedEncounterIndex > -1 && ImGui.BeginPopup("##DebugReportPopup"))
                 {
-                    if (ImGui.Selectable("Send Debug Report"))
+                    if (ImGui.Selectable(AppStrings.GetLocalized("EncounterHistory_DebugReport")))
                     {
                         if (SelectedEncounterIndex != -1 && encounters[SelectedEncounterIndex] != null)
                         {
@@ -305,9 +305,9 @@ namespace BPSR_ZDPS.Windows
                         }
                     }
                     ImGui.SetItemTooltip("For Debug Purposes Only!\nForcefully sends the selected Encounter Report to the configured Discord URL Webhook.");
-                    if (ImGui.BeginMenu("Change Wipe Status"))
+                    if (ImGui.BeginMenu(AppStrings.GetLocalized("EncounterHistory_ChangeWipeStatus")))
                     {
-                        if (ImGui.MenuItem("Is Wipe", encounters[SelectedEncounterIndex].IsWipe))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterHistory_IsWipe"), encounters[SelectedEncounterIndex].IsWipe))
                         {
                             var wipeState = !encounters[SelectedEncounterIndex].IsWipe;
                             encounters[SelectedEncounterIndex].SetWipeState(wipeState);
@@ -320,7 +320,7 @@ namespace BPSR_ZDPS.Windows
                     if (SelectedViewMode == 0)
                     {
                         ImGui.BeginDisabled(!ImGui.IsKeyDown(ImGuiKey.LeftCtrl));
-                        if (ImGui.Selectable("Delete Encounter"))
+                        if (ImGui.Selectable(AppStrings.GetLocalized("EncounterHistory_Delete")))
                         {
                             DB.DeleteEncounter(encounters[SelectedEncounterIndex].EncounterId);
                             LoadFromDB();
@@ -566,27 +566,27 @@ namespace BPSR_ZDPS.Windows
 
                         if (SelectedEncounterIndex > -1 && ImGui.BeginPopupContextWindow("##ReportContextMenu"))
                         {
-                            if (ImGui.BeginMenu("Entity Filter"))
+                            if (ImGui.BeginMenu(AppStrings.GetLocalized("EncounterHistory_EntityFilter")))
                             {
-                                if (ImGui.MenuItem("All", EntityFilterMode == EEntityFilterMode.All))
+                                if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterFilter_All"), EntityFilterMode == EEntityFilterMode.All))
                                 {
                                     EntityFilterMode = EEntityFilterMode.All;
                                 }
-                                if (ImGui.MenuItem("Players Only", EntityFilterMode == EEntityFilterMode.PlayersOnly))
+                                if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterFilter_PlayersOnly"), EntityFilterMode == EEntityFilterMode.PlayersOnly))
                                 {
                                     EntityFilterMode = EEntityFilterMode.PlayersOnly;
                                 }
-                                if (ImGui.MenuItem("Monsters Only", EntityFilterMode == EEntityFilterMode.MonstersOnly))
+                                if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterFilter_MonstersOnly"), EntityFilterMode == EEntityFilterMode.MonstersOnly))
                                 {
                                     EntityFilterMode = EEntityFilterMode.MonstersOnly;
                                 }
-                                if (ImGui.MenuItem("Bosses Only", EntityFilterMode == EEntityFilterMode.BossesOnly))
+                                if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterFilter_BossesOnly"), EntityFilterMode == EEntityFilterMode.BossesOnly))
                                 {
                                     EntityFilterMode = EEntityFilterMode.BossesOnly;
                                 }
                                 ImGui.EndMenu();
                             }
-                            if (ImGui.MenuItem("Hide Entities With No Damage", HideEntitiesWithNoDamageDealt))
+                            if (ImGui.MenuItem(AppStrings.GetLocalized("EncounterFilter_HideNoDamage"), HideEntitiesWithNoDamageDealt))
                             {
                                 HideEntitiesWithNoDamageDealt = !HideEntitiesWithNoDamageDealt;
                             }

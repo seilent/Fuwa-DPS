@@ -206,7 +206,7 @@ namespace BPSR_ZDPS.Windows
 
             ImGui.SameLine();
             ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());
-            if (ImGui.Button("+"))
+            if (ImGui.Button(AppStrings.GetLocalized("Chat_AddButton")))
             {
                 EditingTab = new ChatTab(new ChatTabConfig()
                 {
@@ -219,7 +219,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.PopID();
             }
             ImGui.PopFont();
-            ImGui.SetItemTooltip("Add a new chat tab");
+            ImGui.SetItemTooltip(AppStrings.GetLocalized("Chat_Tooltip_AddTab"));
             ImGui.SameLine();
         }
 
@@ -238,7 +238,7 @@ namespace BPSR_ZDPS.Windows
 
             if (ImGui.BeginPopupContextItem())
             {
-                if (ImGui.MenuItem("Edit"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_Edit")))
                 {
                     ImGuiP.PushOverrideID(ImGuiP.ImHashStr(LAYER));
                     EditingTab = tab;
@@ -247,7 +247,7 @@ namespace BPSR_ZDPS.Windows
                     ImGui.PopID();
                 }
 
-                if (ImGui.MenuItem("Delete"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_Delete")))
                 {
                     ImGuiP.PushOverrideID(ImGuiP.ImHashStr(LAYER));
                     EditingTab = tab;
@@ -379,13 +379,13 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.Dummy(new Vector2(0, 5));
                 ImGui.Separator();
-                if (ImGui.Button("Manage Blocked Users", new Vector2(-1, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("Chat_ManageBlocked"), new Vector2(-1, 0)))
                 {
                     openBlockedUsersPopup = true;
                 }
 
                 ImGui.Separator();
-                if (ImGui.MenuItem("Close Chat Window"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_CloseWindow")))
                 {
                     chatWindowSettings.WindowPosition = ImGui.GetWindowPos();
                     chatWindowSettings.WindowSize = ImGui.GetWindowSize();
@@ -409,7 +409,7 @@ namespace BPSR_ZDPS.Windows
                 var height = windowViewport.Size.Y - 100;
                 if (ImGui.BeginChild("BlockedUserArea", new Vector2(500, height), ImGuiChildFlags.None, ImGuiWindowFlags.NoDecoration))
                 {
-                    if (ImGui.CollapsingHeader("Blocked Users", ImGuiTreeNodeFlags.DefaultOpen))
+                    if (ImGui.CollapsingHeader(AppStrings.GetLocalized("Chat_BlockedUsers"), ImGuiTreeNodeFlags.DefaultOpen))
                     {
                         if (ImGui.BeginTable("BlockedUserTable", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingStretchProp))
                         {
@@ -432,7 +432,7 @@ namespace BPSR_ZDPS.Windows
                                 ImGui.TextUnformatted($"{blockedUser.Name}");
 
                                 ImGui.TableNextColumn();
-                                if (ImGui.Button($"Unblock##{blockedUser.ID}", new Vector2(-1, 0)))
+                                if (ImGui.Button($"{AppStrings.GetLocalized("Chat_Unblock")}##{blockedUser.ID}", new Vector2(-1, 0)))
                                 {
                                     ChatManager.UnblockUser(blockedUser.ID);
                                 }
@@ -442,12 +442,12 @@ namespace BPSR_ZDPS.Windows
                         }
                     }
 
-                    if (ImGui.CollapsingHeader("Add Player Search"))
+                    if (ImGui.CollapsingHeader(AppStrings.GetLocalized("Chat_AddSearch")))
                     {
                         ImGui.TextUnformatted("Select Players from the list below to add them to the chat block list.");
 
                         ImGui.AlignTextToFramePadding();
-                        ImGui.Text("Entity Filter: ");
+                        ImGui.Text(AppStrings.GetLocalized("Chat_EntityFilter"));
                         ImGui.SameLine();
                         ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
 
@@ -537,7 +537,7 @@ namespace BPSR_ZDPS.Windows
                     if (IsEditingNewTab)
                     {
                         ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen_Transparent);
-                        if (ImGui.Button("Save", new Vector2(-1, 0)))
+                        if (ImGui.Button(AppStrings.GetLocalized("Common_Save"), new Vector2(-1, 0)))
                         {
                             ChatManager.AddChatTab(EditingTab.Config);
                             Settings.Instance.WindowSettings.ChatWindow.ChatTabs.Add(EditingTab.Config);
@@ -563,7 +563,7 @@ namespace BPSR_ZDPS.Windows
             {
                 var windowWidth = ImGui.GetContentRegionAvail().X - 10;
                 ImGui.TextUnformatted($"Are you sure you want to delete: {EditingTab.Config.Name}");
-                if (ImGui.Button("Yes", new Vector2(windowWidth / 2, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("Common_Yes"), new Vector2(windowWidth / 2, 0)))
                 {
                     if (EditingTab == SelectedChatTab)
                     {
@@ -578,7 +578,7 @@ namespace BPSR_ZDPS.Windows
 
                 ImGui.SameLine();
 
-                if (ImGui.Button("No", new Vector2(windowWidth / 2, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("Common_No"), new Vector2(windowWidth / 2, 0)))
                 {
                     ImGui.CloseCurrentPopup();
                 }
@@ -674,23 +674,23 @@ namespace BPSR_ZDPS.Windows
             ImGui.PopStyleColor();
             if (ImGui.BeginPopupContextItem(ImGuiPopupFlags.MouseButtonLeft))
             {
-                if (ImGui.MenuItem("Copy Name"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_CopyName")))
                 {
                     ImGui.SetClipboardText(sender.Info.Name);
                 }
-                ImGui.SetItemTooltip($"Copies [ {sender.Info.Name} ] to the clipboard.");
+                ImGui.SetItemTooltip(string.Format(AppStrings.GetLocalized("Chat_Tooltip_CopyName"), sender.Info.Name));
 
-                if (ImGui.MenuItem("Copy UID"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_CopyUID")))
                 {
                     ImGui.SetClipboardText(sender.Info.CharId.ToString());
                 }
-                ImGui.SetItemTooltip($"Copies [ {sender.Info.CharId} ] to the clipboard.");
+                ImGui.SetItemTooltip(string.Format(AppStrings.GetLocalized("Chat_Tooltip_CopyUID"), sender.Info.CharId));
 
-                if (ImGui.MenuItem("Block User"))
+                if (ImGui.MenuItem(AppStrings.GetLocalized("Chat_BlockUser")))
                 {
                     ChatManager.BlockUser(sender);
                 }
-                ImGui.SetItemTooltip($"Blocks this users ({sender.Info.Name}) messages from showing in your ZDPS chat.");
+                ImGui.SetItemTooltip(string.Format(AppStrings.GetLocalized("Chat_Tooltip_BlockUser"), sender.Info.Name));
 
                 ImGui.EndPopup();
             }
@@ -718,7 +718,7 @@ namespace BPSR_ZDPS.Windows
             ImGui.SameLine();
             ImGui.InputText("##Name", ref config.Name, 256);
 
-            ImGui.SeparatorText("Channels");
+            ImGui.SeparatorText(AppStrings.GetLocalized("Chat_Channels"));
 
             if (ImGui.BeginTable("ChannelTable", 9, ImGuiTableFlags.SizingFixedFit))
             {
@@ -737,7 +737,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.EndTable();
             }
 
-            ImGui.SeparatorText("Level");
+            ImGui.SeparatorText(AppStrings.GetLocalized("Chat_Level"));
             var minLevel = config.OverLevel;
             ImGui.AlignTextToFramePadding();
             ImGui.TextUnformatted("Min Level:");
@@ -745,7 +745,7 @@ namespace BPSR_ZDPS.Windows
             haveFiltersChanged |= ImGui.SliderInt("##MinLevel", ref minLevel, 1, 60);
             config.OverLevel = minLevel;
 
-            ImGui.SeparatorText("Regex Filters");
+            ImGui.SeparatorText(AppStrings.GetLocalized("Chat_RegexFilters"));
 
             var containsFilter = config.Contains;
             ImGui.AlignTextToFramePadding();

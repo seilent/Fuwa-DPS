@@ -1,6 +1,7 @@
 ﻿using BPSR_ZDPS.DataTypes;
 using BPSR_ZDPS.Windows;
 using Hexa.NET.ImGui;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,7 +99,9 @@ namespace BPSR_ZDPS.Meters
                     string name = !string.IsNullOrEmpty(entity.Name) ? entity.Name : $"[U:{entity.UID}]";
                     // Format: "Name [UID]"
                     string nameFormat = $"{name} [{entity.UID}]";
-                    maxNameWidth = Math.Max(maxNameWidth, ImGui.CalcTextSize(nameFormat).X);
+                    float nameWidth = ImGui.CalcTextSize(nameFormat).X;
+                    maxNameWidth = Math.Max(maxNameWidth, nameWidth);
+                    Log.Debug($"TakenMeter name: '{name}' | format: '{nameFormat}' | width: {nameWidth:F1}");
                 }
             }
             else

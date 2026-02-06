@@ -19,6 +19,7 @@ namespace BPSR_ZDPS.Meters
         public const float ClassWidthWide = 35.0f;  // Class/sub-profession width for JP/CN (unscaled)
         public const float NameCharWidthRomaji = 20.0f;  // Per-character width for ASCII/romaji names (unscaled)
         public const float NameCharWidthWide = 20.0f;  // Per-character width for CJK names (unscaled)
+        public const float UndefinedNameWidth = 80.0f;  // Total width for undefined names "[U:...]" (unscaled)
         public const float RankWidth = 40.0f;  // Rank number width (unscaled)
 
         public string Name = "";
@@ -159,15 +160,26 @@ namespace BPSR_ZDPS.Meters
             {
                 foreach (var entity in entities)
                 {
-                    string name = !string.IsNullOrEmpty(entity.Name) ? entity.Name : $"[U:{entity.UID}]";
-                    float nameWidth = CalculateNameWidth(name, scale);
+                    float nameWidth;
+                    string displayName;
+                    if (string.IsNullOrEmpty(entity.Name))
+                    {
+                        nameWidth = UndefinedNameWidth * scale;
+                        displayName = $"[U:{entity.UID}]";
+                    }
+                    else
+                    {
+                        nameWidth = CalculateNameWidth(entity.Name, scale);
+                        displayName = entity.Name;
+                    }
                     maxNameWidth = Math.Max(maxNameWidth, nameWidth);
+                    Log.Debug($"MeterBase name: '{displayName}' | width: {nameWidth:F1}");
                 }
             }
             else
             {
-                // Default placeholder for empty encounters (10 chars of "[U:12345678]")
-                maxNameWidth = NameCharWidthRomaji * scale;
+                // Default placeholder for empty encounters
+                maxNameWidth = UndefinedNameWidth * scale;
             }
 
             // Use fixed class width based on language detection

@@ -151,14 +151,14 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.SameLine();
                         ImGui.TextUnformatted($"(+{LoadedEntity.SeasonLevel})");
-                        ImGui.SetItemTooltip("Season Level");
+                        ImGui.SetItemTooltip(AppStrings.GetLocalized("EntityInspector_Tooltip_SeasonLevel"));
                     }
                     ImGui.TextUnformatted($"Ability Score: {LoadedEntity.AbilityScore}");
                     if (LoadedEntity.SeasonStrength > 0)
                     {
                         ImGui.SameLine();
                         ImGui.TextUnformatted($"(+{LoadedEntity.SeasonStrength})");
-                        ImGui.SetItemTooltip("Season Strength");
+                        ImGui.SetItemTooltip(AppStrings.GetLocalized("EntityInspector_Tooltip_SeasonStrength"));
                     }
                     ImGui.TextUnformatted($"Profession: {LoadedEntity.Profession}");
                     ImGui.TextUnformatted($"ProfessionSpec: {LoadedEntity.SubProfession}");
@@ -416,8 +416,8 @@ namespace BPSR_ZDPS.Windows
                 }
 
                 ImGui.SameLine();
-                ImGui.Checkbox("Persistent Tracking", ref PersistantTracking);
-                ImGui.SetItemTooltip("Enable this to track the current entity across new encounters instead of sticking to the one it was opened for.");
+                ImGui.Checkbox(AppStrings.GetLocalized("EntityInspector_PersistentTracking"), ref PersistantTracking);
+                ImGui.SetItemTooltip(AppStrings.GetLocalized("EntityInspector_Tooltip_PersistentTracking"));
 
                 if (TableFilterMode == ETableFilterMode.SkillsDamage || TableFilterMode == ETableFilterMode.SkillsHealing || TableFilterMode == ETableFilterMode.SkillsTaken)
                 {
@@ -764,7 +764,7 @@ namespace BPSR_ZDPS.Windows
 
                         if (ImGui.BeginPopupContextWindow())
                         {
-                            if (ImGui.MenuItem("Copy All Attributes"))
+                            if (ImGui.MenuItem(AppStrings.GetLocalized("EntityInspector_CopyAttributes")))
                             {
                                 StringBuilder format = new();
                                 int cidx = 0;
@@ -779,7 +779,7 @@ namespace BPSR_ZDPS.Windows
                                 }
                                 ImGui.SetClipboardText(format.ToString());
                             }
-                            ImGui.SetItemTooltip("Copies all attributes (ignoring the active filter) for the entity to the clipboard.");
+                            ImGui.SetItemTooltip(AppStrings.GetLocalized("EntityInspector_CopyAttributes"));
 
                             ImGui.EndPopup();
                         }

@@ -310,11 +310,11 @@ namespace BPSR_ZDPS.Windows
             {
                 ImGui.PushStyleColor(ImGuiCol.ChildBg, Colors.DarkRed_Transparent);
                 ImGui.BeginChild("##EncounterSavingPausedChild", ImGuiChildFlags.AutoResizeY);
-                ImGui.TextAligned(0.5f, -1, "Encounter Saving Is Paused");
-                ImGui.TextAligned(0.5f, -1, "Automatically resumes if you change maps.");
+                ImGui.TextAligned(0.5f, -1, AppStrings.GetLocalized("MainWindow_EncounterSavingPaused"));
+                ImGui.TextAligned(0.5f, -1, AppStrings.GetLocalized("MainWindow_AutoResume"));
                 ImGui.SetCursorPosX((ImGui.GetContentRegionAvail().X - 200) * 0.5f);
                 ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen);
-                if (ImGui.Button("RESUME SAVING NOW##ResumeEncounterSavingBtn", new Vector2(200, 0)))
+                if (ImGui.Button(AppStrings.GetLocalized("MainWindow_ResumeSavingNow") + "##ResumeEncounterSavingBtn", new Vector2(200, 0)))
                 {
                     AppState.IsEncounterSavingPaused = false;
                 }
@@ -561,12 +561,12 @@ namespace BPSR_ZDPS.Windows
                     ImGui.PopFont();
                     ImGui.PopStyleColor();
 
-                    if (ImGui.MenuItem("Encounter History"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_EncounterHistory")))
                     {
                         EncounterHistoryWindow.Open();
                     }
 
-                    if (ImGui.MenuItem("Database Manager"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_DatabaseManager")))
                     {
                         DatabaseManagerWindow.Open();
                     }
@@ -576,24 +576,24 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.SetNextWindowClass(ContextMenuClass);
                     }
-                    if (ImGui.BeginMenu("Raid Manager"))
+                    if (ImGui.BeginMenu(AppStrings.GetLocalized("MainWindow_Menu_RaidManager")))
                     {
-                        if (ImGui.MenuItem("Cooldown Priority Tracker"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_CooldownTracker")))
                         {
                             RaidManagerCooldownsWindow.Open();
                         }
 
-                        if (ImGui.MenuItem("Raid Warnings"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_RaidWarnings")))
                         {
                             RaidManagerRaidWarningWindow.Open();
                         }
 
-                        if (ImGui.MenuItem("Countdowns"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_Countdowns")))
                         {
                             RaidManagerCountdownWindow.Open();
                         }
 
-                        if (ImGui.MenuItem("Threat Meter"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_ThreatMeter")))
                         {
                             RaidManagerThreatWindow.Open();
                         }
@@ -605,7 +605,7 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.SetNextWindowClass(ContextMenuClass);
                     }
-                    if (ImGui.BeginMenu("Benchmark", !AppState.IsEncounterSavingPaused))
+                    if (ImGui.BeginMenu(AppStrings.GetLocalized("MainWindow_Menu_Benchmark"), !AppState.IsEncounterSavingPaused))
                     {
                         ImGui.TextUnformatted("Enter how many seconds you want to run a Benchmark session for:");
                         ImGui.SetNextItemWidth(-1);
@@ -627,7 +627,7 @@ namespace BPSR_ZDPS.Windows
 
                         bool benchmarkSingleTarget = AppState.BenchmarkSingleTarget;
                         ImGui.AlignTextToFramePadding();
-                        ImGui.Text("Only Track First Target Hit: ");
+                        ImGui.Text(AppStrings.GetLocalized("MainWindow_Benchmark_TrackFirstTarget"));
                         ImGui.SameLine();
                         ImGui.Checkbox("##BenchmarkSingleTarget", ref benchmarkSingleTarget);
                         AppState.BenchmarkSingleTarget = benchmarkSingleTarget;
@@ -637,7 +637,7 @@ namespace BPSR_ZDPS.Windows
                         ImGui.TextUnformatted("Note: The Benchmark time will start after the next attack.\nOnly data for your character will be processed.");
                         if (AppState.IsBenchmarkMode)
                         {
-                            if (ImGui.Button("Stop Benchmark Early", new Vector2(-1, 0)))
+                            if (ImGui.Button(AppStrings.GetLocalized("MainWindow_Benchmark_StopEarly"), new Vector2(-1, 0)))
                             {
                                 AppState.HasBenchmarkBegun = false;
                                 AppState.IsBenchmarkMode = false;
@@ -648,7 +648,7 @@ namespace BPSR_ZDPS.Windows
                         else
                         {
                             ImGui.BeginDisabled(AppState.BenchmarkTime < 5);
-                            if (ImGui.Button("Start Benchmark", new Vector2(-1, 0)))
+                            if (ImGui.Button(AppStrings.GetLocalized("MainWindow_Benchmark_Start"), new Vector2(-1, 0)))
                             {
                                 AppState.BenchmarkSingleTargetUUID = 0;
                                 AppState.IsBenchmarkMode = true;
@@ -668,20 +668,20 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.SetNextWindowClass(ContextMenuClass);
                     }
-                    if (ImGui.BeginMenu("Integrations"))
+                    if (ImGui.BeginMenu(AppStrings.GetLocalized("MainWindow_Menu_Integrations")))
                     {
                         bool isBPTimerEnabled = Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled;
                         if (windowSettings.TopMost)
                         {
                             ImGui.SetNextWindowClass(ContextMenuClass);
                         }
-                        if (ImGui.BeginMenu("BPTimer", isBPTimerEnabled))
+                        if (ImGui.BeginMenu(AppStrings.GetLocalized("MainWindow_Integrations_BPTimer"), isBPTimerEnabled))
                         {
                             if (windowSettings.TopMost)
                             {
                                 ImGui.SetNextWindowClass(ContextMenuClass);
                             }
-                            if (ImGui.MenuItem("Spawn Tracker"))
+                            if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_BPTimer_SpawnTracker")))
                             {
                                 SpawnTrackerWindow.Open();
                             }
@@ -695,19 +695,19 @@ namespace BPSR_ZDPS.Windows
                         ImGui.EndMenu();
                     }
 
-                    if (ImGui.MenuItem("Module Optimizer"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_ModuleOptimizer")))
                     {
                         ModuleSolver.Open();
                     }
                     ImGui.SetItemTooltip("Find the best module combos for your build.");
 
-                    if (ImGui.MenuItem("Chat"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_Chat")))
                     {
                         ChatWindow.Open();
                     }
 
                     ImGui.Separator();
-                    if (ImGui.MenuItem("Settings"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_Settings")))
                     {
                         SettingsWindow.Open();
                     }
@@ -716,24 +716,24 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.SetNextWindowClass(ContextMenuClass);
                     }
-                    if (ImGui.BeginMenu("Debug"))
+                    if (ImGui.BeginMenu(AppStrings.GetLocalized("MainWindow_Menu_Debug")))
                     {
-                        if (ImGui.MenuItem("Net Debug"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_NetDebug")))
                         {
                             NetDebug.Open();
                         }
-                        if (ImGui.MenuItem("Dungeon Tracker"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_DungeonTracker")))
                         {
                             DebugDungeonTracker.Open();
                         }
-                        if (ImGui.MenuItem("Entity Cache Viewer"))
+                        if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_EntityCacheViewer")))
                         {
                             EntityCacheViewerWindow.Open();
                         }
                         ImGui.EndMenu();
                     }
                     ImGui.Separator();
-                    if (ImGui.MenuItem("Exit"))
+                    if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_Exit")))
                     {
                         windowSettings.WindowPosition = WindowPosition;
                         windowSettings.WindowSize = WindowSize;

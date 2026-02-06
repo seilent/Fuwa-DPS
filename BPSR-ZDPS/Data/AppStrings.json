@@ -1,168 +1,2050 @@
 {
-    "Profession_Unknown":
-    {
+    "Profession_Unknown": {
         "en": "Unknown",
-        "zh": "未知",
         "ja": "未知"
     },
-    "Profession_Stormblade":
-    {
+    "Profession_Stormblade": {
         "en": "Stormblade",
-        "zh": "雷影剑士",
         "ja": "ストームブレイド"
     },
-    "Profession_FrostMage":
-    {
+    "Profession_FrostMage": {
         "en": "Frost Mage",
-        "zh": "冰魔导师",
         "ja": "フロストメイジ"
     },
-    "Profession_TwinStriker":
-    {
-        "en": "Twin Striker"
+    "Profession_TwinStriker": {
+        "en": "Twin Striker",
+        "ja": "ツインストライカー"
     },
-    "Profession_WindKnight":
-    {
+    "Profession_WindKnight": {
         "en": "Wind Knight",
-        "zh": "青岚骑士",
         "ja": "ゲイルランサー"
     },
-    "Profession_VerdantOracle":
-    {
+    "Profession_VerdantOracle": {
         "en": "Oracle",
-        "zh": "森语者",
         "ja": "ヴァーダントオラクル"
     },
-    "Profession_HeavyGuardian":
-    {
+    "Profession_HeavyGuardian": {
         "en": "Heavy Guardian",
-        "zh": "巨刃守护者",
         "ja": "ヘヴィガーディアン"
     },
-    "Profession_Marksman":
-    {
+    "Profession_Marksman": {
         "en": "Marksman",
-        "zh": "神射手",
         "ja": "ディバインアーチャー"
     },
-    "Profession_ShieldKnight":
-    {
+    "Profession_ShieldKnight": {
         "en": "Shield Knight",
-        "zh": "神盾骑士",
         "ja": "シールドファイター"
     },
-    "Profession_BeatPerformer":
-    {
+    "Profession_BeatPerformer": {
         "en": "Beat Performer",
-        "zh": "灵魂乐手",
         "ja": "ビートパフォーマー"
     },
-    "SubProfession_Unknown":
-    {
+    "SubProfession_Unknown": {
         "en": "Unknown",
-        "zh": "未知",
         "ja": "未知"
     },
-    "SubProfession_Skyward":
-    {
+    "SubProfession_Skyward": {
         "en": "Skyward",
-        "zh": "空枪",
         "ja": "乱風"
     },
-    "SubProfession_Block":
-    {
+    "SubProfession_Block": {
         "en": "Block",
-        "zh": "格挡",
         "ja": "剛守"
     },
-    "SubProfession_Concerto":
-    {
+    "SubProfession_Concerto": {
         "en": "Concerto",
-        "zh": "协奏",
         "ja": "響奏"
     },
-    "SubProfession_Falconry":
-    {
+    "SubProfession_Falconry": {
         "en": "Falconry",
-        "zh": "鹰弓",
         "ja": "鷹弓"
     },
-    "SubProfession_Iaido":
-    {
+    "SubProfession_Iaido": {
         "en": "Iaido",
-        "zh": "居合",
         "ja": "雷刃"
     },
-    "SubProfession_Frostbeam":
-    {
+    "SubProfession_Frostbeam": {
         "en": "Frostbeam",
-        "zh": "射线",
         "ja": "氷牙"
     },
-    "SubProfession_Icicle":
-    {
+    "SubProfession_Icicle": {
         "en": "Icicle",
-        "zh": "冰矛",
         "ja": "霜天"
     },
-    "SubProfession_Lifebind":
-    {
+    "SubProfession_Lifebind": {
         "en": "Lifebind",
-        "zh": "愈合",
         "ja": "森癒"
     },
-    "SubProfession_Shield":
-    {
+    "SubProfession_Shield": {
         "en": "Shield",
-        "zh": "光盾",
         "ja": "光砕"
     },
-    "SubProfession_Moonstrike":
-    {
+    "SubProfession_Moonstrike": {
         "en": "Moonstrike",
-        "zh": "月刃",
         "ja": "月影"
     },
-    "SubProfession_Vanguard":
-    {
+    "SubProfession_Vanguard": {
         "en": "Vanguard",
-        "zh": "重装",
         "ja": "烈風"
     },
-    "SubProfession_Recovery":
-    {
+    "SubProfession_Recovery": {
         "en": "Recovery",
-        "zh": "防盾",
         "ja": "光盾"
     },
-    "SubProfession_Dissonance":
-    {
+    "SubProfession_Dissonance": {
         "en": "Dissonance",
-        "zh": "狂音",
         "ja": "狂音"
     },
-    "SubProfession_Earthfort":
-    {
+    "SubProfession_Earthfort": {
         "en": "Earthfort",
-        "zh": "岩盾",
         "ja": "剛身"
     },
-    "SubProfession_Smite":
-    {
+    "SubProfession_Smite": {
         "en": "Smite",
-        "zh": "惩戒",
         "ja": "威咲"
     },
-    "SubProfession_Wildpack":
-    {
+    "SubProfession_Wildpack": {
         "en": "Wildpack",
-        "zh": "狼弓",
         "ja": "狼弓"
     },
-    "Header_Healing":
-    {
+    "Header_Healing": {
         "en": "Healing",
-        "zh": "治疗",
         "ja": "治癒"
+    },
+    "Settings_Title": {
+        "en": "Settings",
+        "ja": "設定"
+    },
+    "Settings_Tab_General": {
+        "en": "General",
+        "ja": "全般"
+    },
+    "Settings_Tab_Combat": {
+        "en": "Combat",
+        "ja": "戦闘"
+    },
+    "Settings_Tab_UserInterface": {
+        "en": "User Interface",
+        "ja": "ユーザーインターフェース"
+    },
+    "Settings_Tab_Matchmaking": {
+        "en": "Matchmaking",
+        "ja": "マッチメイキング"
+    },
+    "Settings_Tab_Integrations": {
+        "en": "Integrations",
+        "ja": "連携"
+    },
+    "Settings_Tab_Development": {
+        "en": "Development",
+        "ja": "開発"
+    },
+    "Settings_Network_Device": {
+        "en": "Network Device",
+        "ja": "ネットワークデバイス"
+    },
+    "Settings_Network_SelectDevice": {
+        "en": "Select the network device to read from:",
+        "ja": "パケットキャプチャに使用するネットワークデバイスを選択："
+    },
+    "Settings_Network_NoDeviceFound": {
+        "en": "<No Network Devices Found>",
+        "ja": "<ネットワークデバイスが見つかりません>"
+    },
+    "Settings_Network_GameCapturePreference": {
+        "en": "Game Capture Preference: ",
+        "ja": "ゲームキャプチャ設定："
+    },
+    "Settings_Network_Auto": {
+        "en": "Auto",
+        "ja": "自動"
+    },
+    "Settings_Network_Standalone": {
+        "en": "Standalone",
+        "ja": "スタンドアロン"
+    },
+    "Settings_Network_Steam": {
+        "en": "Steam",
+        "ja": "Steam"
+    },
+    "Settings_Network_Epic": {
+        "en": "Epic",
+        "ja": "Epic"
+    },
+    "Settings_Network_HaoPlaySEA": {
+        "en": "HaoPlay SEA",
+        "ja": "HaoPlay SEA"
+    },
+    "Settings_Network_XDG": {
+        "en": "XDG",
+        "ja": "XDG"
+    },
+    "Settings_Network_Custom": {
+        "en": "Custom",
+        "ja": "カスタム"
+    },
+    "Settings_Network_CustomExeName": {
+        "en": "Custom BPSR Executable Name: ",
+        "ja": "カスタム実行ファイル名："
+    },
+    "Settings_Network_Tooltip": {
+        "en": "Select which game version you want ZDPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
+        "ja": "ZDPSがキャプチャするゲームバージョンを選択してください。\n「自動」は、現在実行中のバージョンを自動的に検出して使用します。同時に2つのクライアントを実行すると、データの問題が発生する可能性があります。\n「Steam」および「スタンドアロン」はそれぞれのバージョンのデータのみをリッスンするため、両方を同時に実行してDPSを報告できます。"
+    },
+    "Settings_Network_CustomTooltip": {
+        "en": "Use this if your game version is not listed.\nNote: You will need to enter the name of the game executable for this to work.\nIt is located next to a file named 'GameAssembly.dll'.",
+        "ja": "ゲームバージョンがリストにない場合に使用します。\n注意：動作させるにはゲームの実行ファイル名を入力する必要があります。\n'GameAssembly.dll'というファイルの隣にあります。"
+    },
+    "Settings_Network_CustomExeTooltip": {
+        "en": "The executable file name of the game to listen to. Ex: BPSR_STEAM",
+        "ja": "リッスンするゲームの実行ファイル名。例：BPSR_STEAM"
+    },
+    "Settings_Keybinds_Title": {
+        "en": "Keybinds",
+        "ja": "キーバインド"
+    },
+    "Settings_Keybinds_ImportantNote": {
+        "en": "Important Note:",
+        "ja": "重要な注意事項："
+    },
+    "Settings_Keybinds_AdminNote": {
+        "en": "Keybinds only work while the game is in focus if ZDPS is being run as Administrator. This is a limitation imposed by the Game Devs.",
+        "ja": "キーバインドは、ZDPSが管理者権限で実行されている場合にのみ、ゲームがフォーカスされているときに機能します。これはゲーム開発者によって課せられた制限です。"
+    },
+    "Settings_Keybinds_Description": {
+        "en": "Below are global hotkey keybinds for the application. Click on the box and press a key to bind it. Modifier keys (Ctrl/Alt/Shift) are not supported.",
+        "ja": "以下はアプリケーションのグローバルホットキーバインドです。ボックスをクリックしてキーを押すとバインドできます。修飾キー（Ctrl/Alt/Shift）はサポートされていません。"
+    },
+    "Settings_Keybinds_Cancel": {
+        "en": "Press Escape to cancel the rebinding process.",
+        "ja": "Escapeキーを押すとバインドプロセスをキャンセルできます。"
+    },
+    "Settings_Keybinds_EncounterReset": {
+        "en": "Encounter Reset",
+        "ja": "エンカウンターリセット"
+    },
+    "Settings_Keybinds_EncounterResetWarning": {
+        "en": "[Split Encounters On New Phases] is Enabled. You likely do not need this keybind to manually reset an Encounter. ZDPS will handle Encounter separation for you.",
+        "ja": "[フェーズ変更時にエンカウンターを分割]が有効になっています。エンカウンターを手動でリセットするためにこのキーバインドを使用する必要はおそらくありません。ZDPSがエンカウンターの分割を自動的に処理します。"
+    },
+    "Settings_Keybinds_PinnedWindowClickthrough": {
+        "en": "Pinned Window Clickthrough",
+        "ja": "固定されたウィンドウのクリックスルー"
+    },
+    "Settings_Keybinds_ClickthroughTooltip": {
+        "en": "This allows your mouse input to go 'through' the pinned (Top Most) window, ignoring it, and interacting with whatever may be behind it such as the game or another application.",
+        "ja": "これにより、マウス入力が固定された（最前面の）ウィンドウを「通過」し、そのウィンドウを無視して、ゲームや別のアプリケーションなど、背後にあるものと対話できるようになります。"
+    },
+    "Settings_UpdateChecking_Title": {
+        "en": "ZDPS Update Checking",
+        "ja": "ZDPSアップデート確認"
+    },
+    "Settings_Update_CheckOnStartup": {
+        "en": "Check For ZDPS Updates On Startup: ",
+        "ja": "起動時にZDPSのアップデートを確認する："
+    },
+    "Settings_Update_CheckOnStartupTooltip": {
+        "en": "When enabled, ZDPS will check online for available updates when the application is launched.",
+        "ja": "有効にすると、アプリケーションの起動時にオンラインで利用可能なアップデートを確認します。"
+    },
+    "Settings_Update_VersionCheckURL": {
+        "en": "Latest ZDPS Version Check URL: ",
+        "ja": "最新のZDPSバージョン確認URL："
+    },
+    "Settings_Update_VersionCheckURLTooltip": {
+        "en": "The URL to check for ZDPS version updates at.",
+        "ja": "ZDPSのバージョンアップデートを確認するURL。"
+    },
+    "Settings_Database_Title": {
+        "en": "Database",
+        "ja": "データベース"
+    },
+    "Settings_Database_UseDatabase": {
+        "en": "Use Database For Encounter History: ",
+        "ja": "エンカウンターデータの保存にデータベースを使用する："
+    },
+    "Settings_Database_UseDatabaseTooltip": {
+        "en": "When enabled, all encounter data is saved into a local database file (ZDatabase.db) to reduce memory usage and allow viewing between ZDPS sessions. Applies after restarting ZDPS.",
+        "ja": "有効にすると、すべてのエンカウンターデータがローカルデータベースファイル（ZDatabase.db）に保存され、メモリ使用量を削減し、ZDPSセッション間で表示できるようになります。ZDPSを再起動後に適用されます。"
+    },
+    "Settings_Database_RetentionPolicy": {
+        "en": "Database Encounter History Retention Policy: ",
+        "ja": "エンカウンターデータの保持期間："
+    },
+    "Settings_Database_KeepForever": {
+        "en": "Keep Forever",
+        "ja": "永続保存"
+    },
+    "Settings_Database_Days": {
+        "en": "{0} Days",
+        "ja": "{0}日"
+    },
+    "Settings_Database_RetentionPolicyTooltip": {
+        "en": "How long to keep previous Encounter History data for. When not set to Keep Forever, expired data is automatically deleted on application close.",
+        "ja": "以前のエンカウンターデータを保持する期間。「永続保存」に設定されていない場合、アプリケーション終了時に期限切れのデータは自動的に削除されます。"
+    },
+    "Settings_Database_LimitBuffTracking": {
+        "en": "Limit Encounter Buff Tracking Without Database: ",
+        "ja": "データベースなしでバフ追跡を制限する："
+    },
+    "Settings_Database_LimitBuffTrackingTooltip": {
+        "en": "When enabled, buffs are limited to only the latest 100 per entity instead of being limitless. This only applies if the Database is disabled to allow reduced memory usage. This setting is not retroactive.",
+        "ja": "有効にすると、バフは無制限ではなく、エンティティごとに最新の100個に制限されます。これは、メモリ使用量を削減するためにデータベースが無効になっている場合にのみ適用されます。この設定は遡及的ではありません。"
+    },
+    "Settings_Database_AllowPausing": {
+        "en": "Allow Encounter Saving Pausing In Open World: ",
+        "ja": "オープンワールドでのエンカウンター保存一時停止を許可する："
+    },
+    "Settings_Database_AllowPausingTooltip": {
+        "en": "When enabled, a button is added to the top of the Main Window that allows the current Encounter to not be saved to the Database.\nThis is only available while in the Open World and will automatically disable when map changing. Benchmarking and Manual New Encounter creation will be disabled while Paused.\nNote: At least one map change is required before the button will appear after starting ZDPS.",
+        "ja": "有効にすると、メインウィンドウの上部にボタンが追加され、現在のエンカウンターをデータベースに保存しないようにできます。\nこれはオープンワールドにいる場合にのみ利用可能で、マップ変更時に自動的に無効になります。一時停止中はベンチマークと手動エンカウンター作成は無効になります。\n注：ボタンが表示されるには、ZDPSを開始した後に少なくとも1回のマップ変更が必要です。"
+    },
+    "Settings_Combat_Title": {
+        "en": "Combat",
+        "ja": "戦闘"
+    },
+    "Settings_Combat_NormalizeBars": {
+        "en": "Normalize Meter Contribution Bars: ",
+        "ja": "メーターのコントリビューションバーを正規化する："
+    },
+    "Settings_Combat_NormalizeBarsTooltip": {
+        "en": "When enabled, the bars for each player in a meter will be based on the top player, not the overall contribution.\nThis means the top player is always considered the '100%%' amount.",
+        "ja": "有効にすると、メーター内の各プレイヤーのバーは全体のコントリビューションではなく、トッププレイヤーに基づいて表示されます。\nこれは、トッププレイヤーが常に「100%%」として扱われることを意味します。"
+    },
+    "Settings_Combat_ShortWidthNumber": {
+        "en": "Use Short Width Number Formatting: ",
+        "ja": "短い数値フォーマットを使用する："
+    },
+    "Settings_Combat_ShortWidthNumberTooltip": {
+        "en": "When enabled, uses shorter width number formats when values over 1000 would otherwise be shown.",
+        "ja": "有効にすると、1000を超える値が表示される場合に短い幅の数値フォーマットを使用します。"
+    },
+    "Settings_Combat_AutoWipeDetection": {
+        "en": "Use Automatic Wipe Detection: ",
+        "ja": "自動ワイプ検出を使用する："
+    },
+    "Settings_Combat_AutoWipeDetectionTooltip": {
+        "en": "When enabled, ZDPS will attempt to detect party wipes against bosses and start a new encounter automatically.",
+        "ja": "有効にすると、ZDPSはボスに対するパーティの全滅を検出し、自動的に新しいエンカウンターを開始しようとします。"
+    },
+    "Settings_Combat_SkipTeleportCheck": {
+        "en": "Skip Teleport State Check In Automatic Wipe Detection: ",
+        "ja": "自動ワイプ検出でテレポート状態チェックをスキップする："
+    },
+    "Settings_Combat_SkipTeleportCheckTooltip": {
+        "en": "When enabled, the 'Teleport' Player State requirement in Automatic Wipe Detection is not performed. You probably want this Disabled.",
+        "ja": "有効にすると、自動ワイプ検出の「テレポート」プレイヤー状態要件が実行されません。おそらく無効にすることをお勧めします。"
+    },
+    "Settings_Combat_DisableWipeRecalc": {
+        "en": "Disable Wipe Recalculation Overwriting: ",
+        "ja": "ワイプ再計算の上書きを無効にする："
+    },
+    "Settings_Combat_DisableWipeRecalcTooltip": {
+        "en": "When enabled, the new Wipe Recalcuation logic will be Disabled and the original method will be used (if 'Use Automatic Wipe Detection' if still Enabled).",
+        "ja": "有効にすると、新しいワイプ再計算ロジックが無効になり、元の方法が使用されます（「自動ワイプ検出を使用する」が有効な場合）。"
+    },
+    "Settings_Combat_SplitPhases": {
+        "en": "Split Encounters On New Phases: ",
+        "ja": "フェーズ変更時にエンカウンターを分割する："
+    },
+    "Settings_Combat_SplitPhasesTooltip": {
+        "en": "When enabled, encounters are automatically split across phase changes. This allows bosses to be split from the rest of a dungeon. It also splits raid boss phases. This probably should be enabled.",
+        "ja": "有効にすると、エンカウンターがフェーズ変更時に自動的に分割されます。これにより、ボスをダンジョンの残りの部分から分割できます。また、レイドボスのフェーズも分割されます。おそらく有効にすることをお勧めします。"
+    },
+    "Settings_Combat_TruePerSecond": {
+        "en": "Display True Per Second Values In Meters: ",
+        "ja": "メーターに真の秒あたりの値を表示する："
+    },
+    "Settings_Combat_TruePerSecondTooltip": {
+        "en": "When enabled, the Damage, Healing, and Taken Per Second value shown in the Meters will have the 'true' Per Second value, shown in square brackets, in addition to the normal 'Active Per Second' value. This means it is recalculated every second instead of only using the time the entity was actively participating in combat pressing buttons.\nNote: Both values are accurate, they are just two different metrics.\nThis only works starting from the Next Encounter. It is not retroactive and this value currently only will be shown in the Meters UI.",
+        "ja": "有効にすると、メーターに表示されるダメージ、ヒール、被ダメージの秒あたりの値に、通常の「アクティブ秒」の値に加えて、「真の秒」の値が角括弧で表示されます。これは、エンティティがアクティブに戦闘に参加してボタンを押していた時間だけを使用するのではなく、毎秒再計算されることを意味します。\n注：両方の値は正確ですが、単に2つの異なる指標です。\nこれは次のエンカウンターからのみ機能します。遡及的ではなく、この値は現在メーターUIにのみ表示されます。"
+    },
+    "Settings_UI_Title": {
+        "en": "User Interface",
+        "ja": "ユーザーインターフェース"
+    },
+    "Settings_UI_ShowClassIcons": {
+        "en": "Show Class Icons In Meters: ",
+        "ja": "メーターにクラスアイコンを表示する："
+    },
+    "Settings_UI_ShowClassIconsTooltip": {
+        "en": "When enabled, class icons will be shown next to players in the meters.",
+        "ja": "有効にすると、メーター内のプレイヤーの横にクラスアイコンが表示されます。"
+    },
+    "Settings_UI_ColorIconsByRole": {
+        "en": "Color Class Icons By Role Type: ",
+        "ja": "クラスアイコンをロールタイプで色分けする："
+    },
+    "Settings_UI_ColorIconsByRoleTooltip": {
+        "en": "When enabled, class icons shown in meters will be colored by their role instead of all being white.",
+        "ja": "有効にすると、メーターに表示されるクラスアイコンがすべて白ではなく、ロールに応じて色分けされます。"
+    },
+    "Settings_UI_ShowSkillIcons": {
+        "en": "Show Skill Icons In Details: ",
+        "ja": "詳細にスキルアイコンを表示する："
+    },
+    "Settings_UI_ShowSkillIconsTooltip": {
+        "en": "When enabled, skill icons will be displayed, when possible, in the details panel next to skill names.",
+        "ja": "有効にすると、可能な場合、詳細パネルのスキル名の横にスキルアイコンが表示されます。"
+    },
+    "Settings_UI_OnlyShowContributors": {
+        "en": "Only Show Damage Contributors In Meters: ",
+        "ja": "メーターにダメージ貢献者のみを表示する："
+    },
+    "Settings_UI_OnlyShowContributorsTooltip": {
+        "en": "When enabled, only players who have dealt damage will show in the DPS meter.",
+        "ja": "有効にすると、ダメージを与えたプレイヤーのみがDPSメーターに表示されます。"
+    },
+    "Settings_UI_OnlyShowPartyMembers": {
+        "en": "Only Show Party Members In Meters: ",
+        "ja": "メーターにパーティメンバーのみを表示する："
+    },
+    "Settings_UI_OnlyShowPartyMembersTooltip": {
+        "en": "When enabled, only players who are in the current party will show in the DPS meter.",
+        "ja": "有効にすると、現在のパーティにいるプレイヤーのみがDPSメーターに表示されます。"
+    },
+    "Settings_UI_ShowAbilityScore": {
+        "en": "Show Ability Score In Meters: ",
+        "ja": "メーターにアビリティスコアを表示する："
+    },
+    "Settings_UI_ShowAbilityScoreTooltip": {
+        "en": "When enabled, the Ability Score for players will be shown in the meters.",
+        "ja": "有効にすると、プレイヤーのアビリティスコアがメーターに表示されます。"
+    },
+    "Settings_UI_ShowSeasonStrength": {
+        "en": "Show Season Strength In Meters: ",
+        "ja": "メーターにシーズン戦力を表示する："
+    },
+    "Settings_UI_ShowSeasonStrengthTooltip": {
+        "en": "When enabled, the Season Strength for players will be shown in the meters.",
+        "ja": "有効にすると、プレイヤーのシーズン戦力がメーターに表示されます。"
+    },
+    "Settings_UI_ShowSubProfession": {
+        "en": "Show Sub Profession Name In Meters: ",
+        "ja": "メーターにサブ職業名を表示する："
+    },
+    "Settings_UI_ShowSubProfessionTooltip": {
+        "en": "When enabled, allows showing the detected Sub Profession name in the meters. If no Sub Profession is detected, just the base class name is shown. If no base class is found, 'Unknown' is shown.",
+        "ja": "有効にすると、検出されたサブ職業名をメーターに表示できます。サブ職業が検出されない場合は、基本クラス名のみが表示されます。基本クラスが見つからない場合は「未知」が表示されます。"
+    },
+    "Settings_UI_GamepadNavigation": {
+        "en": "Allow Gamepad Navigation Input In ZDPS: ",
+        "ja": "ZDPSでゲームパッドナビゲーションを許可する："
+    },
+    "Settings_UI_GamepadNavigationTooltip": {
+        "en": "When enabled, gamepad input can navigate and control the ZDPS windows.\nNote: Gamepad input may control the windows even without them specifically in focus.",
+        "ja": "有効にすると、ゲームパッド入力でZDPSウィンドウをナビゲートおよび制御できます。\n注：ゲームパッド入力は、ウィンドウがフォーカスされていない場合でも制御できる可能性があります。"
+    },
+    "Settings_UI_KeepPastEncounter": {
+        "en": "Keep Past Encounter In Meter UI Until Next Damage: ",
+        "ja": "メーターUIに過去のエンカウンターを次のダメージまで保持する："
+    },
+    "Settings_UI_KeepPastEncounterTooltip": {
+        "en": "When enabled, the previous Encounter will remain in the Meter UI until damage has been dealt in the current Encounter.\nThe Meter UI will still swap to the current Encounter on Battle change events (these are generally Map changes).",
+        "ja": "有効にすると、現在のエンカウンターでダメージが与えられるまで、前のエンカウンターがメーターUIに残ります。\nメーターUIは、バトル変更イベント（通常はマップ変更）で現在のエンカウンターに切り替わります。"
+    },
+    "Settings_UI_PinnedWindowOpacities": {
+        "en": "Pinned (Top Most) Window Opacities",
+        "ja": "固定（最前面）ウィンドウの不透明度"
+    },
+    "Settings_UI_MainWindowOpacity": {
+        "en": "Main Window: ",
+        "ja": "メインウィンドウ："
+    },
+    "Settings_UI_MainWindowOpacityTooltip": {
+        "en": "How transparent the Main Window is while pinned.",
+        "ja": "固定されているときのメインウィンドウの透明度。"
+    },
+    "Settings_UI_DisableTopMost": {
+        "en": "Disable 'On Top' when no entities",
+        "ja": "エンティティなし時に「最前面」を無効にする"
+    },
+    "Settings_UI_DisableTopMostTooltip": {
+        "en": "When enabled, the window will stop being 'On Top' when there are no entities to show. The pin button will remain in the 'on' state and the window will automatically return to 'On Top' when entities appear.",
+        "ja": "有効にすると、表示するエンティティがない場合、ウィンドウの「最前面」が停止します。ピンボタンは「オン」の状態のままで、エンティティが表示されると自動的に「最前面」に戻ります。"
+    },
+    "Settings_UI_CooldownTrackerOpacity": {
+        "en": "Cooldown Priority Tracker Window: ",
+        "ja": "クールダウン優先トラッカーウィンドウ："
+    },
+    "Settings_UI_CooldownTrackerOpacityTooltip": {
+        "en": "How transparent the Cooldown Priority Tracker Window is while pinned.",
+        "ja": "固定されているときのクールダウン優先トラッカーウィンドウの透明度。"
+    },
+    "Settings_UI_EntityCacheViewerOpacity": {
+        "en": "Entity Cache Viewer Window: ",
+        "ja": "エンティティキャッシュビューウィンドウ："
+    },
+    "Settings_UI_EntityCacheViewerOpacityTooltip": {
+        "en": "How transparent the Entity Cache Viewer Window is while pinned.",
+        "ja": "固定されているときのエンティティキャッシュビューウィンドウの透明度。"
+    },
+    "Settings_UI_Integrations": {
+        "en": "Integrations",
+        "ja": "連携"
+    },
+    "Settings_UI_BPTimer": {
+        "en": "BPTimer",
+        "ja": "BPTimer"
+    },
+    "Settings_UI_SpawnTrackerOpacity": {
+        "en": "Spawn Tracker Window: ",
+        "ja": "スポーントラッカーウィンドウ："
+    },
+    "Settings_UI_SpawnTrackerOpacityTooltip": {
+        "en": "How transparent the Spawn Tracker Window is while pinned.",
+        "ja": "固定されているときのスポーントラッカーウィンドウの透明度。"
+    },
+    "Settings_UI_WindowScales": {
+        "en": "Window Scales",
+        "ja": "ウィンドウスケール"
+    },
+    "Settings_UI_MeterBarScale": {
+        "en": "Meter Bar Scale: ",
+        "ja": "メーターバースケール："
+    },
+    "Settings_UI_MeterBarScaleTooltip": {
+        "en": "Scaling for how large the bars in the meter windows should be. 100%% is the default scale.",
+        "ja": "メーターウィンドウのバーのサイズのスケーリング。100%%がデフォルトのスケールです。"
+    },
+    "Settings_UI_SpawnTrackerTextScale": {
+        "en": "Spawn Tracker Text Scale: ",
+        "ja": "スポーントラッカーテキストスケール："
+    },
+    "Settings_UI_SpawnTrackerTextScaleTooltip": {
+        "en": "Scaling for how the text in the Spawn Tracker window should be. 100%% is the default scale.",
+        "ja": "スポーントラッカーウィンドウのテキストのスケーリング。100%%がデフォルトのスケールです。"
+    },
+    "Settings_UI_SpawnTrackerLineScale": {
+        "en": "Spawn Tracker Line Scale: ",
+        "ja": "スポーントラッカーラインスケール："
+    },
+    "Settings_UI_SpawnTrackerLineScaleTooltip": {
+        "en": "Scaling for how large the Line (channel) bars in the Spawn Tracker window should be. 100%% is the default scale.",
+        "ja": "スポーントラッカーウィンドウのライン（チャネル）バーのサイズのスケーリング。100%%がデフォルトのスケールです。"
+    },
+    "Settings_UI_MeterSettings": {
+        "en": "Meter Settings",
+        "ja": "メーター設定"
+    },
+    "Settings_UI_TabVisibility": {
+        "en": "Tab Visibility",
+        "ja": "タブの表示"
+    },
+    "Settings_UI_ShowHealingTab": {
+        "en": "Show Healing Tab",
+        "ja": "ヒールタブを表示"
+    },
+    "Settings_UI_ShowTankingTab": {
+        "en": "Show Tanking Tab",
+        "ja": "タンクタブを表示"
+    },
+    "Settings_UI_ShowNpcTakenTab": {
+        "en": "Show NPC Taken Tab",
+        "ja": "被ダメージタブを表示"
+    },
+    "Settings_UI_Layout": {
+        "en": "Layout",
+        "ja": "レイアウト"
+    },
+    "Settings_UI_MergeDpsHealTabs": {
+        "en": "Merge DPS and Healing Tabs",
+        "ja": "DPSとヒールタブをマージする"
+    },
+    "Settings_UI_MergeDpsHealTabsTooltip": {
+        "en": "When enabled, combines DPS and Healing into a single split view. Tanking and NPC Taken tabs will be hidden.",
+        "ja": "有効にすると、DPSとヒールが1つの分割ビューに結合されます。タンクと被ダメージタブは非表示になります。"
+    },
+    "Settings_UI_Tanking": {
+        "en": "Tanking",
+        "ja": "タンク"
+    },
+    "Settings_UI_ShowDeaths": {
+        "en": "Show Deaths: ",
+        "ja": "死亡回数を表示："
+    },
+    "Settings_UI_ShowDeathsTooltip": {
+        "en": "When enabled, shows a Death counter for each entry in the Tanking Meter.",
+        "ja": "有効にすると、タンクメーターの各エントリーの死亡回数が表示されます。"
+    },
+    "Settings_UI_NpcTaken": {
+        "en": "NPC Taken",
+        "ja": "被ダメージ"
+    },
+    "Settings_UI_ShowHpData": {
+        "en": "Show HP Data: ",
+        "ja": "HPデータを表示："
+    },
+    "Settings_UI_ShowHpDataTooltip": {
+        "en": "When enabled, adds Current HP, Max HP, and HP Percent to each entry in the NPC Taken Meter.",
+        "ja": "有効にすると、被ダメージメーターの各エントリーに現在HP、最大HP、HPパーセントが追加されます。"
+    },
+    "Settings_UI_HideMaxHp": {
+        "en": "Hide Max HP: ",
+        "ja": "最大HPを非表示："
+    },
+    "Settings_UI_HideMaxHpTooltip": {
+        "en": "When enabled, removes the Max HP value shown.",
+        "ja": "有効にすると、表示される最大HP値が削除されます。"
+    },
+    "Settings_UI_ShowHpPercentBar": {
+        "en": "Show HP Percent Bar: ",
+        "ja": "HPパーセントバーを表示："
+    },
+    "Settings_UI_ShowHpPercentBarTooltip": {
+        "en": "When enabled, shows the current HP Percentage as a Red Bar instead of the Blue Bar that would normally show how much total damage the NPC has taken.",
+        "ja": "有効にすると、NPCが受けた総ダメージを通常表示する青いバーの代わりに、現在のHPパーセンテージが赤いバーとして表示されます。"
+    },
+    "Settings_UI_WindowPropertyResets": {
+        "en": "Window Property Resets",
+        "ja": "ウィンドウプロパティのリセット"
+    },
+    "Settings_UI_ResetMainWindowPos": {
+        "en": "Reset Main Window Position",
+        "ja": "メインウィンドウの位置をリセット"
+    },
+    "Settings_UI_ResetMainWindowPosTooltip": {
+        "en": "Resets the Main Window back to the original default center screen position on your primary monitor.",
+        "ja": "メインウィンドウをプライマリモニターの元のデフォルトの中央画面位置にリセットします。"
+    },
+    "Settings_UI_ResetMainWindowSize": {
+        "en": "Reset Main Window Size",
+        "ja": "メインウィンドウのサイズをリセット"
+    },
+    "Settings_UI_ResetMainWindowSizeTooltip": {
+        "en": "Resets the Main Window back to the original size.",
+        "ja": "メインウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetCooldownTrackerSize": {
+        "en": "Reset Raid Manager Cooldown Tracker Size",
+        "ja": "レイドマネージャークールダウントラッカーのサイズをリセット"
+    },
+    "Settings_UI_ResetCooldownTrackerSizeTooltip": {
+        "en": "Resets the Raid Manager Cooldown Tracker window back to the original size.",
+        "ja": "レイドマネージャークールダウントラッカーウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetEntityCacheViewerSize": {
+        "en": "Reset Entity Cache Viewer Size",
+        "ja": "エンティティキャッシュビューアのサイズをリセット"
+    },
+    "Settings_UI_ResetEntityCacheViewerSizeTooltip": {
+        "en": "Resets the Entity Cache Viewer window back to the original size.",
+        "ja": "エンティティキャッシュビューアウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetSpawnTrackerSize": {
+        "en": "Reset BPTimer Spawn Tracker Size",
+        "ja": "BPTimerスポーントラッカーのサイズをリセット"
+    },
+    "Settings_UI_ResetSpawnTrackerSizeTooltip": {
+        "en": "Resets the BPTimer Spawn Tracker window back to the original size.",
+        "ja": "BPTimerスポーントラッカーウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_LowPerformanceMode": {
+        "en": "Low Performance Mode: ",
+        "ja": "低パフォーマンスモード："
+    },
+    "Settings_UI_LowPerformanceModeTooltip": {
+        "en": "When enabled, will force ZDPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from ZDPS.",
+        "ja": "有効にすると、ZDPSが低いレートで実行され、ウィンドウの移動時にUIが stuttering する可能性があります。ZDPSのCPU使用率が非常に高い場合のみ有効にしてください。"
+    },
+    "Settings_UI_Appearance": {
+        "en": "Appearance",
+        "ja": "外観"
+    },
+    "Settings_UI_Theme": {
+        "en": "Theme: ",
+        "ja": "テーマ："
+    },
+    "Settings_UI_ThemeDark": {
+        "en": "Dark (VS Dark)",
+        "ja": "ダーク（VS Dark）"
+    },
+    "Settings_UI_ThemeDarkTooltip": {
+        "en": "The default dark theme with VS Dark color scheme.",
+        "ja": "VS Darkカラースキームのデフォルトのダークテーマ。"
+    },
+    "Settings_UI_ThemeBlack": {
+        "en": "Black",
+        "ja": "ブラック"
+    },
+    "Settings_UI_ThemeBlackTooltip": {
+        "en": "A darker theme with pure black backgrounds for reduced eye strain in low-light environments.",
+        "ja": "薄暗い環境での目の負担を軽減するための純粋な黒い背景を持つダarkerテーマ。"
+    },
+    "Settings_UI_ThemeLight": {
+        "en": "Light",
+        "ja": "ライト"
+    },
+    "Settings_UI_ThemeLightTooltip": {
+        "en": "A light theme optimized for daytime use and well-lit environments.",
+        "ja": "日中の使用や明るい環境に最適化されたライトテーマ。"
+    },
+    "Settings_UI_ThemeTooltip": {
+        "en": "Select the visual theme for the ZDPS interface. Takes effect immediately after saving.",
+        "ja": "ZDPSインターフェースのビジュアルテーマを選択します。保存後にすぐに有効になります。"
+    },
+    "Settings_UI_Language": {
+        "en": "Language: ",
+        "ja": "言語："
+    },
+    "Settings_UI_English": {
+        "en": "English",
+        "ja": "English"
+    },
+    "Settings_UI_Japanese": {
+        "en": "日本語",
+        "ja": "日本語"
+    },
+    "Settings_UI_LanguageTooltip": {
+        "en": "Select the language for profession names and other localized text. Requires ZDPS restart to take full effect.",
+        "ja": "職業名とその他のローカライズされたテキストの言語を選択します。完全に有効にするにはZDPSの再起動が必要です。"
+    },
+    "Settings_Matchmaking_Title": {
+        "en": "Matchmaking",
+        "ja": "マッチメイキング"
+    },
+    "Settings_Matchmaking_PlaySound": {
+        "en": "Play Notification Sound On Matchmake: ",
+        "ja": "マッチメイキング時に通知音を再生する："
+    },
+    "Settings_Matchmaking_PlaySoundTooltip": {
+        "en": "When enabled, play a notification sound alert when the matchmaker finds players and is waiting for you to accept.",
+        "ja": "有効にすると、マッチメイカーがプレイヤーを見つけて承認を待っているときに通知音を再生します。"
+    },
+    "Settings_Matchmaking_SoundPath": {
+        "en": "Matchmake Notification Sound Path: ",
+        "ja": "マッチメイキング通知音のパス："
+    },
+    "Settings_Matchmaking_SoundPathTooltip": {
+        "en": "File path to a custom sound file to play when the matchmake notification occurs.\nA default sound will be used if none is set or the file is invalid.\nNote: Only MP3 and WAV are supported formats.",
+        "ja": "マッチメイキング通知時に再生するカスタムサウンドファイルのファイルパス。\n設定されていない場合やファイルが無効な場合は、デフォルトのサウンドが使用されます。\n注：MP3とWAVのみサポートされている形式です。"
+    },
+    "Settings_Matchmaking_Browse": {
+        "en": "Browse...",
+        "ja": "参照..."
+    },
+    "Settings_Matchmaking_LoopSound": {
+        "en": "Loop Notification Sound On Matchmake: ",
+        "ja": "マッチメイキング時に通知音をループする："
+    },
+    "Settings_Matchmaking_LoopSoundTooltip": {
+        "en": "When enabled, the notification sound will loop until you accept the queue pop or it is canceled.",
+        "ja": "有効にすると、キューポップを受け入れるまで、またはキャンセルされるまで通知音がループします。"
+    },
+    "Settings_Matchmaking_Volume": {
+        "en": "Matchmake Notification Volume Level: ",
+        "ja": "マッチメイキング通知音量レベル："
+    },
+    "Settings_Matchmaking_VolumeTooltip": {
+        "en": "Volume scale of the played back notification sound. 100%% is the normal sound level of the audio file. Values above 100%% may not always appear louder. If you need a louder sound, please edit your file in an external program to increase loudness.",
+        "ja": "再生される通知音の音量スケール。100%%はオーディオファイルの通常の音量レベルです。100%%を超える値は常に大きくなるわけではありません。より大きな音量が必要な場合は、外部プログラムでファイルを編集してラウドネスを上げてください。"
+    },
+    "Settings_Matchmaking_PlayReadyCheckSound": {
+        "en": "Play Notification Sound On Ready Check: ",
+        "ja": "レディチェック時に通知音を再生する："
+    },
+    "Settings_Matchmaking_PlayReadyCheckSoundTooltip": {
+        "en": "When enabled, play a notification sound alert when a party ready check is performed and is waiting for you to accept.",
+        "ja": "有効にすると、パーティのレディチェックが実行され、承認を待っているときに通知音を再生します。"
+    },
+    "Settings_Matchmaking_ReadyCheckSoundPath": {
+        "en": "Ready Check Notification Sound Path: ",
+        "ja": "レディチェック通知音のパス："
+    },
+    "Settings_Matchmaking_ReadyCheckSoundPathTooltip": {
+        "en": "File path to a custom sound file to play when the ready check notification occurs.\nA default sound will be used if none is set or the file is invalid.\nNote: Only MP3 and WAV are supported formats.",
+        "ja": "レディチェック通知時に再生するカスタムサウンドファイルのファイルパス。\n設定されていない場合やファイルが無効な場合は、デフォルトのサウンドが使用されます。\n注：MP3とWAVのみサポートされている形式です。"
+    },
+    "Settings_Matchmaking_LoopReadyCheckSound": {
+        "en": "Loop Notification Sound On Ready Check: ",
+        "ja": "レディチェック時に通知音をループする："
+    },
+    "Settings_Matchmaking_LoopReadyCheckSoundTooltip": {
+        "en": "When enabled, the notification sound will loop until you respond to the ready check.",
+        "ja": "有効にすると、レディチェックに応答するまで通知音がループします。"
+    },
+    "Settings_Matchmaking_ReadyCheckVolume": {
+        "en": "Ready Check Notification Volume Level: ",
+        "ja": "レディチェック通知音量レベル："
+    },
+    "Settings_Matchmaking_ReadyCheckVolumeTooltip": {
+        "en": "Volume scale of the played back notification sound.",
+        "ja": "再生される通知音の音量スケール。"
+    },
+    "Settings_Integrations_Title": {
+        "en": "Integrations",
+        "ja": "連携"
+    },
+    "Settings_Integrations_AutoWipeDisabledWarning": {
+        "en": "[Use Automatic Wipe Detection] is currently Disabled. Reports may be incorrect until it is Enabled again.",
+        "ja": "[自動ワイプ検出を使用する]が現在無効になっています。再有効にするまでレポートが不正確になる可能性があります。"
+    },
+    "Settings_Integrations_SkipTeleportWarning": {
+        "en": "[Skip Teleport State Check In Automatic Wipe Detection] is currently Enabled. Reports may be incorrect until it is Disabled again.",
+        "ja": "[自動ワイプ検出でテレポート状態チェックをスキップする]が現在有効になっています。再度無効にするまでレポートが不正確になる可能性があります。"
+    },
+    "Settings_Integrations_SplitPhasesWarning": {
+        "en": "[Split Encounters On New Phases] is currently Disabled. Reports may be incorrect until it is Enabled again.",
+        "ja": "[フェーズ変更時にエンカウンターを分割する]が現在無効になっています。再有効にするまでレポートが不正確になる可能性があります。"
+    },
+    "Settings_Integrations_SaveReport": {
+        "en": "Save Encounter Report To File: ",
+        "ja": "エンカウンターレポートをファイルに保存する："
+    },
+    "Settings_Integrations_SaveReportTooltip": {
+        "en": "When enabled, writes a report file to the Reports folder located next to ZDPS.",
+        "ja": "有効にすると、ZDPSの横にあるReportsフォルダにレポートファイルを書き込みます。"
+    },
+    "Settings_Integrations_ReportRetentionPolicy": {
+        "en": "Report File Retention Policy: ",
+        "ja": "レポートファイル保持期間："
+    },
+    "Settings_Integrations_ReportRetentionPolicyTooltip": {
+        "en": "How long to keep locally saved Report files for. When not set to Keep Forever, expired data is automatically deleted on application close.",
+        "ja": "ローカルに保存されたレポートファイルを保持する期間。「永続保存」に設定されていない場合、アプリケーション終了時に期限切れのデータは自動的に削除されます。"
+    },
+    "Settings_Integrations_MinPlayers": {
+        "en": "Minimum Player Count To Create Report: ",
+        "ja": "レポート作成の最小プレイヤー数："
+    },
+    "Settings_Integrations_MinPlayersTooltip": {
+        "en": "The number of players required in an Encounter to create a report for. This applies to both local saving and Webhook sending.",
+        "ja": "レポートを作成するために必要なエンカウンター内のプレイヤー数。これはローカル保存とWebhook送信の両方に適用されます。"
+    },
+    "Settings_Integrations_Any": {
+        "en": "Any",
+        "ja": "任意"
+    },
+    "Settings_Integrations_Players": {
+        "en": "{0} Players",
+        "ja": "{0}人"
+    },
+    "Settings_Integrations_AlwaysCreateReport": {
+        "en": "Always Create Report At Dungeon End: ",
+        "ja": "ダンジョン終了時に常にレポートを作成する："
+    },
+    "Settings_Integrations_AlwaysCreateReportTooltip": {
+        "en": "When enabled, Reports are created at the end of a Dungeon if one was not created already.\nIf this is disabled Reports may not be created if a Dungeon did not end with a boss fight.",
+        "ja": "有効にすると、ダンジョンの終了時にまだ作成されていない場合にレポートが作成されます。\nこれが無効になっている場合、ボス戦で終了しなかったダンジョンではレポートが作成されない場合があります。"
+    },
+    "Settings_Integrations_WebhookMode": {
+        "en": "Webhook Mode: ",
+        "ja": "Webhookモード："
+    },
+    "Settings_Integrations_DiscordDedup": {
+        "en": "Discord Deduplication",
+        "ja": "Discord重複排除"
+    },
+    "Settings_Integrations_DiscordDedupTooltip": {
+        "en": "Send to a Discord Webhook after using an External Server to check if the same report was sent already within a short timeframe.",
+        "ja": "外部サーバーを使用して同じレポートが短期間にすでに送信されているかを確認した後、Discord Webhookに送信します。"
+    },
+    "Settings_Integrations_DiscordWebhook": {
+        "en": "Discord Webhook",
+        "ja": "Discord Webhook"
+    },
+    "Settings_Integrations_DiscordWebhookTooltip": {
+        "en": "Send directly to a Discord Webhook.",
+        "ja": "Discord Webhookに直接送信します。"
+    },
+    "Settings_Integrations_CustomUrl": {
+        "en": "Custom URL",
+        "ja": "カスタムURL"
+    },
+    "Settings_Integrations_CustomUrlTooltip": {
+        "en": "Send directly to a custom URL of your choice.",
+        "ja": "選択したカスタムURLに直接送信します。"
+    },
+    "Settings_Integrations_FallbackDedup": {
+        "en": "Fallback Discord Deduplication",
+        "ja": "フォールバックDiscord重複排除"
+    },
+    "Settings_Integrations_FallbackDedupTooltip": {
+        "en": "Have an External Server forward to a Discord Webhook after using the External Server to check if the same report was sent already within a short timeframe.",
+        "ja": "外部サーバーを使用して同じレポートが短期間にすでに送信されているかを確認した後、外部サーバーがDiscord Webhookに転送します。"
+    },
+    "Settings_Integrations_WebhookModeTooltip": {
+        "en": "Select the type of Webhook Mode you want to use for sending ZDPS Reports.\n'Discord Deduplication' is recommended if other users may be sending the same Encounter Report to the same Discord Channel at the same time to avoid duplicate messages.",
+        "ja": "ZDPSレポートの送信に使用するWebhookモードのタイプを選択します。\n同じDiscordチャンネルに同時に同じエンカウンターレポートを送信する可能性のある他のユーザーがいる場合は、重複メッセージを避けるために「Discord重複排除」をお勧めします。"
+    },
+    "Settings_Integrations_WebhookSendTo": {
+        "en": "Send Encounter Reports To {0}: ",
+        "ja": "エンカウンターレポートを{0}に送信する："
+    },
+    "Settings_Integrations_WebhookSendToTooltip": {
+        "en": "When enabled, sends an Encounter Report to the given {0} server.",
+        "ja": "有効にすると、指定された{0}サーバーにエンカウンターレポートを送信します。"
+    },
+    "Settings_Integrations_DedupServerUrl": {
+        "en": "Deduplication Server URL: ",
+        "ja": "重複排除サーバーURL："
+    },
+    "Settings_Integrations_DedupServerUrlTooltip": {
+        "en": "The Discord Deduplication Server URL to prevent duplicate reports with.",
+        "ja": "重複レポートを防ぐためのDiscord重複排除サーバーURL。"
+    },
+    "Settings_Integrations_FallbackNote": {
+        "en": "Note: The server must have Fallback support Enabled for this to work as expected since it will handle sending the Discord request for you.",
+        "ja": "注：サーバーは、Discordリクエストの送信を処理するため、フォールバックサポートが有効になっている必要があります。"
+    },
+    "Settings_Integrations_WebhookUrl": {
+        "en": "Webhook URL: ",
+        "ja": "Webhook URL："
+    },
+    "Settings_Integrations_WebhookUrlTooltip": {
+        "en": "The Discord Webhook URL to send reports to.",
+        "ja": "レポートを送信するDiscord Webhook URL。"
+    },
+    "Settings_Integrations_CustomUrlInputTooltip": {
+        "en": "The Custom URL to send reports to.",
+        "ja": "レポートを送信するカスタムURL。"
+    },
+    "Settings_Integrations_InvalidUrl": {
+        "en": "The entered URL appears invalid.",
+        "ja": "入力されたURLは無効のようです。"
+    },
+    "Settings_BPTimer_Enabled": {
+        "en": "BPTimer Enabled: ",
+        "ja": "BPTimer有効："
+    },
+    "Settings_BPTimer_EnabledTooltip": {
+        "en": "When enabled, allows sending reports back to BPTimer.com.",
+        "ja": "有効にすると、BPTimer.comにレポートを送信できます。"
+    },
+    "Settings_BPTimer_EnableReportsNote": {
+        "en": "Note: This setting alone does not enable reports. They must be enabled individually below.",
+        "ja": "注：この設定 aloneではレポートを有効にしません。以下で個別に有効にする必要があります。"
+    },
+    "Settings_BPTimer_DataCollection": {
+        "en": "Data Collection",
+        "ja": "データ収集"
+    },
+    "Settings_BPTimer_CollectsData": {
+        "en": "BPTimer collects the following data:",
+        "ja": "BPTimerは以下のデータを収集します："
+    },
+    "Settings_BPTimer_BossIdHpPosition": {
+        "en": "Boss ID/HP/Position",
+        "ja": "ボスID/HP/位置"
+    },
+    "Settings_BPTimer_CharacterLineNumber": {
+        "en": "Character Line Number",
+        "ja": "キャラクターライン番号"
+    },
+    "Settings_BPTimer_AccountId": {
+        "en": "Account ID",
+        "ja": "アカウントID"
+    },
+    "Settings_BPTimer_CharacterUid": {
+        "en": "Character UID (if you opt-in below)",
+        "ja": "キャラクターUID（以下でオプトインした場合）"
+    },
+    "Settings_BPTimer_IpAddress": {
+        "en": "Your IP Address",
+        "ja": "あなたのIPアドレス"
+    },
+    "Settings_BPTimer_AccountIdTooltip": {
+        "en": "This is being used to determine what game region is being played on.",
+        "ja": "これは、どのゲームリージョンでプレイされているかを判断するために使用されています。"
+    },
+    "Settings_BPTimer_IncludeCharacterData": {
+        "en": "Include Own Character Data In Report: ",
+        "ja": "レポートに自分のキャラクターデータを含める："
+    },
+    "Settings_BPTimer_IncludeCharacterDataTooltip": {
+        "en": "When enabled, your Character UID will be included in the reported data.",
+        "ja": "有効にすると、レポートデータにキャラクターUIDが含まれます。"
+    },
+    "Settings_BPTimer_FieldBossHpReports": {
+        "en": "BPTimer Field Boss HP Reports: ",
+        "ja": "BPTimerフィールドボスHPレポート："
+    },
+    "Settings_BPTimer_FieldBossHpReportsTooltip": {
+        "en": "When enabled, reports Field Boss (and Magical Creature) HP data back to BPTimer.com.",
+        "ja": "有効にすると、フィールドボス（および魔法生物）のHPデータをBPTimer.comにレポートします。"
+    },
+    "Settings_Development_Title": {
+        "en": "Development",
+        "ja": "開発"
+    },
+    "Settings_Development_Note": {
+        "en": "NOTE: This version of ZDPS is designed only for BPSR Season 1.",
+        "ja": "注：このバージョンのZDPSはBPSRシーズン1専用に設計されています。"
+    },
+    "Settings_Development_ReloadDataTables": {
+        "en": "Reload DataTables",
+        "ja": "データテーブルを再読み込み"
+    },
+    "Settings_Development_ReloadDataTablesTooltip": {
+        "en": "Does not update most existing values - mainly works for data set in new Encounters.",
+        "ja": "既存の大部分の値は更新されません - 主に新しいエンカウンターで設定されたデータに対して機能します。"
+    },
+    "Settings_Development_RestartCapture": {
+        "en": "Restart Capture",
+        "ja": "キャプチャを再起動"
+    },
+    "Settings_Development_RestartCaptureTooltip": {
+        "en": "Turns the MessageManager off and on to resolve issues of stalled data.",
+        "ja": "MessageManagerをオンおよびオフにして、データの停滞問題を解決します。"
+    },
+    "Settings_Development_ReloadModuleSave": {
+        "en": "Reload Module Save",
+        "ja": "モジュール保存データを再読み込み"
+    },
+    "Settings_Development_ReloadModuleSaveTooltip": {
+        "en": "Reloads your module inventory from the 'ModulesSaveData.json' file.",
+        "ja": "'ModulesSaveData.json'ファイルからモジュールインベントリを再読み込みします。"
+    },
+    "Settings_Development_LogToFile": {
+        "en": "Write Debug Log To File: ",
+        "ja": "デバッグログをファイルに書き込む："
+    },
+    "Settings_Development_LogToFileTooltip": {
+        "en": "When enabled, writes a debug log for ZDPS (ZDPS_log.txt). Applies after restarting ZDPS.",
+        "ja": "有効にすると、ZDPSのデバッグログ（ZDPS_log.txt）を書き込みます。ZDPSを再起動後に適用されます。"
+    },
+    "Settings_Development_OpenGitHub": {
+        "en": "Open GitHub Project Page",
+        "ja": "GitHubプロジェクトページを開く"
+    },
+    "Settings_Development_OpenGitHubTooltip": {
+        "en": "Open a web page to the GitHub Project located at\n{0}",
+        "ja": "{0}\nにあるGitHubプロジェクトのWebページを開く"
+    },
+    "Settings_Button_Save": {
+        "en": "Save",
+        "ja": "保存"
+    },
+    "Settings_Button_Close": {
+        "en": "Close",
+        "ja": "閉じる"
+    },
+    "Settings_RestartRequired": {
+        "en": "Restart Required",
+        "ja": "再起動が必要"
+    },
+    "MainWindow_Menu_EncounterHistory": {
+        "en": "Encounter History",
+        "ja": "エンカウンター履歴"
+    },
+    "MainWindow_Menu_DatabaseManager": {
+        "en": "Database Manager",
+        "ja": "データベースマネージャー"
+    },
+    "MainWindow_Menu_RaidManager": {
+        "en": "Raid Manager",
+        "ja": "レイドマネージャー"
+    },
+    "MainWindow_Menu_CooldownTracker": {
+        "en": "Cooldown Priority Tracker",
+        "ja": "クールダウン優先トラッカー"
+    },
+    "MainWindow_Menu_RaidWarnings": {
+        "en": "Raid Warnings",
+        "ja": "レイド警告"
+    },
+    "MainWindow_Menu_Countdowns": {
+        "en": "Countdowns",
+        "ja": "カウントダウン"
+    },
+    "MainWindow_Menu_ThreatMeter": {
+        "en": "Threat Meter",
+        "ja": "スレットメーター"
+    },
+    "MainWindow_Menu_SpawnTracker": {
+        "en": "Spawn Tracker",
+        "ja": "スポーントラッカー"
+    },
+    "MainWindow_Menu_ModuleOptimizer": {
+        "en": "Module Optimizer",
+        "ja": "モジュールオプティマイザー"
+    },
+    "MainWindow_Menu_Chat": {
+        "en": "Chat",
+        "ja": "チャット"
+    },
+    "MainWindow_Menu_Settings": {
+        "en": "Settings",
+        "ja": "設定"
+    },
+    "MainWindow_Menu_NetDebug": {
+        "en": "Net Debug",
+        "ja": "ネットデバッグ"
+    },
+    "MainWindow_Menu_DungeonTracker": {
+        "en": "Dungeon Tracker",
+        "ja": "ダンジョントラッカー"
+    },
+    "MainWindow_Menu_EntityCacheViewer": {
+        "en": "Entity Cache Viewer",
+        "ja": "エンティティキャッシュビューア"
+    },
+    "MainWindow_Menu_Exit": {
+        "en": "Exit",
+        "ja": "終了"
+    },
+    "MainWindow_MeterTab_DPS": {
+        "en": "DPS",
+        "ja": "DPS"
+    },
+    "MainWindow_MeterTab_Healing": {
+        "en": "Healing",
+        "ja": "ヒール"
+    },
+    "MainWindow_MeterTab_Tanking": {
+        "en": "Tanking",
+        "ja": "タンク"
+    },
+    "MainWindow_MeterTab_NPCTaken": {
+        "en": "NPC Taken",
+        "ja": "被ダメージ"
+    },
+    "MainWindow_EncounterSavingPaused": {
+        "en": "Encounter Saving Is Paused",
+        "ja": "エンカウンター保存が一時停止されています"
+    },
+    "MainWindow_AutoResume": {
+        "en": "Automatically resumes if you change maps.",
+        "ja": "マップを変更すると自動的に再開されます。"
+    },
+    "MainWindow_ResumeSavingNow": {
+        "en": "RESUME SAVING NOW",
+        "ja": "今すぐ保存を再開"
+    },
+    "MainWindow_NewEncounter": {
+        "en": "New Encounter",
+        "ja": "新しいエンカウンター"
+    },
+    "MainWindow_PauseSaving": {
+        "en": "Pause Saving",
+        "ja": "保存を一時停止"
+    },
+    "MainWindow_ResumeSaving": {
+        "en": "Resume Saving",
+        "ja": "保存を再開"
+    },
+    "MainWindow_Minimize": {
+        "en": "Minimize",
+        "ja": "最小化"
+    },
+    "MainWindow_Pin": {
+        "en": "Pin",
+        "ja": "固定"
+    },
+    "MainWindow_Unpin": {
+        "en": "Unpin",
+        "ja": "固定解除"
+    },
+    "History_Title": {
+        "en": "Encounter History",
+        "ja": "エンカウンター履歴"
+    },
+    "History_ViewIndividual": {
+        "en": "View By Each Individual Encounter",
+        "ja": "各エンカウンターごとに表示"
+    },
+    "History_ViewGrouped": {
+        "en": "View By Each Grouped Battle",
+        "ja": "グループ化されたバトルごとに表示"
+    },
+    "History_Loading": {
+        "en": "Please wait, loading encounter history...",
+        "ja": "お待ちください、エンカウンター履歴を読み込んでいます..."
+    },
+    "History_DebugReport": {
+        "en": "Send Debug Report",
+        "ja": "デバッグレポートを送信"
+    },
+    "History_DeleteEncounter": {
+        "en": "Delete Encounter",
+        "ja": "エンカウンターを削除"
+    },
+    "History_IsWipe": {
+        "en": "Is Wipe",
+        "ja": "ワイプ"
+    },
+    "History_All": {
+        "en": "All",
+        "ja": "すべて"
+    },
+    "History_PlayersOnly": {
+        "en": "Players Only",
+        "ja": "プレイヤーのみ"
+    },
+    "History_MonstersOnly": {
+        "en": "Monsters Only",
+        "ja": "モンスターのみ"
+    },
+    "History_BossesOnly": {
+        "en": "Bosses Only",
+        "ja": "ボスのみ"
+    },
+    "History_HideNoDamage": {
+        "en": "Hide Entities With No Damage",
+        "ja": "ダメージがないエンティティを非表示"
+    },
+    "Chat_Title": {
+        "en": "Chat",
+        "ja": "チャット"
+    },
+    "Chat_ManageBlocked": {
+        "en": "Manage Blocked Users",
+        "ja": "ブロックしたユーザーを管理"
+    },
+    "Chat_EntityFilter": {
+        "en": "Entity Filter: ",
+        "ja": "エンティティフィルター："
+    },
+    "Chat_BlockedUsers": {
+        "en": "Blocked Users",
+        "ja": "ブロックしたユーザー"
+    },
+    "Chat_AddSearch": {
+        "en": "Add Player Search",
+        "ja": "プレイヤー検索を追加"
+    },
+    "Chat_Edit": {
+        "en": "Edit",
+        "ja": "編集"
+    },
+    "Chat_Delete": {
+        "en": "Delete",
+        "ja": "削除"
+    },
+    "Chat_CloseWindow": {
+        "en": "Close Chat Window",
+        "ja": "チャットウィンドウを閉じる"
+    },
+    "Chat_CopyName": {
+        "en": "Copy Name",
+        "ja": "名前をコピー"
+    },
+    "Chat_CopyUid": {
+        "en": "Copy UID",
+        "ja": "UIDをコピー"
+    },
+    "Chat_BlockUser": {
+        "en": "Block User",
+        "ja": "ユーザーをブロック"
+    },
+    "Raid_CooldownTracker": {
+        "en": "Cooldown Priority Tracker",
+        "ja": "クールダウン優先トラッカー"
+    },
+    "Raid_RaidWarnings": {
+        "en": "Raid Warnings",
+        "ja": "レイド警告"
+    },
+    "Raid_Countdowns": {
+        "en": "Countdowns",
+        "ja": "カウントダウン"
+    },
+    "Raid_ThreatMeter": {
+        "en": "Threat Meter",
+        "ja": "スレットメーター"
+    },
+    "Raid_DisplayCooldownSeconds": {
+        "en": "Display Cooldown Remaining As Seconds",
+        "ja": "クールダウン残り時間を秒で表示"
+    },
+    "Raid_PlayerBlacklist": {
+        "en": "Player Blacklist",
+        "ja": "プレイヤーブラックリスト"
+    },
+    "Raid_AddTrackedEntity": {
+        "en": "Add Tracked Entity",
+        "ja": "追跡エンティティを追加"
+    },
+    "Raid_AddTrackedSkill": {
+        "en": "Add Tracked Skill",
+        "ja": "追跡スキルを追加"
+    },
+    "Raid_SkillCastFilter": {
+        "en": "Skill Cast Filter:",
+        "ja": "スキル発射フィルター："
+    },
+    "Raid_CooldownTime": {
+        "en": "Cooldown Time:",
+        "ja": "クールダウン時間："
+    },
+    "Raid_AddSkillToTracker": {
+        "en": "Add Skill To Tracker",
+        "ja": "トラッカーにスキルを追加"
+    },
+    "Raid_ToggleDeadLine": {
+        "en": "Toggle Dead Line Visibility",
+        "ja": "デッドライン表示の切り替え"
+    },
+    "Raid_ToggleExpiredLine": {
+        "en": "Toggle Expired Line Visibility",
+        "ja": "期限切れライン表示の切り替え"
+    },
+    "SpawnTracker_Title": {
+        "en": "Spawn Tracker",
+        "ja": "スポーントラッカー"
+    },
+    "SpawnTracker_SelectAll": {
+        "en": "Select All",
+        "ja": "すべて選択"
+    },
+    "SpawnTracker_SelectNone": {
+        "en": "Select None",
+        "ja": "すべて選択解除"
+    },
+    "Module_Title": {
+        "en": "Module Optimizer",
+        "ja": "モジュールオプティマイザー"
+    },
+    "Module_Apply": {
+        "en": "Apply",
+        "ja": "適用"
+    },
+    "Module_Copy": {
+        "en": "Copy",
+        "ja": "コピー"
+    },
+    "Module_ResetDefaults": {
+        "en": "Reset to Defaults",
+        "ja": "デフォルトにリセット"
+    },
+    "Module_Add": {
+        "en": "Add",
+        "ja": "追加"
+    },
+    "Module_Calculate": {
+        "en": "Calculate",
+        "ja": "計算"
+    },
+    "Module_LinkLevelBoosts": {
+        "en": "Link Level Boosts",
+        "ja": "リンクレベルブースト"
+    },
+    "EntityCacheViewer_Title": {
+        "en": "Entity Cache Viewer",
+        "ja": "エンティティキャッシュビューア"
+    },
+    "EntityCacheViewer_Filter": {
+        "en": "Entity Filter: ",
+        "ja": "エンティティフィルター："
+    },
+    "DatabaseManager_Title": {
+        "en": "Database Manager",
+        "ja": "データベースマネージャー"
+    },
+    "DatabaseManager_OlderThan1Day": {
+        "en": "Older than 1 day",
+        "ja": "1日より古い"
+    },
+    "DatabaseManager_OlderThan5Days": {
+        "en": "Older than 5 days",
+        "ja": "5日より古い"
+    },
+    "DatabaseManager_AllTime": {
+        "en": "All Time",
+        "ja": "すべての期間"
+    },
+    "Common_Yes": {
+        "en": "Yes",
+        "ja": "はい"
+    },
+    "Common_No": {
+        "en": "No",
+        "ja": "いいえ"
+    },
+    "Common_Save": {
+        "en": "Save",
+        "ja": "保存"
+    },
+    "Common_Cancel": {
+        "en": "Cancel",
+        "ja": "キャンセル"
+    },
+    "Common_Delete": {
+        "en": "Delete",
+        "ja": "削除"
+    },
+    "Common_Close": {
+        "en": "Close",
+        "ja": "閉じる"
+    },
+    "Common_Reset": {
+        "en": "Reset",
+        "ja": "リセット"
+    },
+    "Common_Edit": {
+        "en": "Edit",
+        "ja": "編集"
+    },
+    "Common_Browse": {
+        "en": "Browse...",
+        "ja": "参照..."
+    },
+    "Settings_Network_GameCapturePreferenceTooltip": {
+        "en": "Use this if your game version is not listed.\nNote: You will need to enter the name of the game executable for this to work.\nIt is located next to a file named 'GameAssembly.dll'.",
+        "ja": "対象のゲームバージョンがリストにない場合に使用します。\n注：機能させるには、ゲーム実行ファイルの名前を入力する必要があります。\nこれは「GameAssembly.dll」というファイルの隣にあります。"
+    },
+    "Settings_Network_CustomExeNameTooltip": {
+        "en": "The executable file name of the game to listen to. Ex: BPSR_STEAM",
+        "ja": "対象とするゲームの実行ファイル名。例：BPSR_STEAM"
+    },
+    "Settings_UI_OpacityHeader": {
+        "en": "Pinned (Top Most) Window Opacities",
+        "ja": "固定（最前面）ウィンドウの不透明度"
+    },
+    "Settings_UI_OpacityMainWindow": {
+        "en": "Main Window: ",
+        "ja": "メインウィンドウ："
+    },
+    "Settings_UI_OpacityMainWindowTooltip": {
+        "en": "How transparent the Main Window is while pinned.",
+        "ja": "固定されているときのメインウィンドウの透明度。"
+    },
+    "Settings_UI_OpacityDisableTopMost": {
+        "en": "Disable 'On Top' when no entities",
+        "ja": "エンティティがないときは「最前面」を無効にする"
+    },
+    "Settings_UI_OpacityDisableTopMostTooltip": {
+        "en": "When enabled, the window will stop being 'On Top' when there are no entities to show. The pin button will remain in the 'on' state and the window will automatically return to 'On Top' when entities appear.",
+        "ja": "有効にすると、表示するエンティティがないときにウィンドウの「最前面」表示が停止されます。ピンボタンは「オン」の状態のままで、エンティティが表示されると自動的に「最前面」に戻ります。"
+    },
+    "Settings_UI_OpacityCooldownTracker": {
+        "en": "Cooldown Priority Tracker Window: ",
+        "ja": "クールダウン優先トラッカーウィンドウ："
+    },
+    "Settings_UI_OpacityCooldownTrackerTooltip": {
+        "en": "How transparent the Cooldown Priority Tracker Window is while pinned.",
+        "ja": "固定されているときのクールダウン優先トラッカーウィンドウの透明度。"
+    },
+    "Settings_UI_OpacityEntityCacheViewer": {
+        "en": "Entity Cache Viewer Window: ",
+        "ja": "エンティティキャッシュビューアウィンドウ："
+    },
+    "Settings_UI_OpacityEntityCacheViewerTooltip": {
+        "en": "How transparent the Entity Cache Viewer Window is while pinned.",
+        "ja": "固定されているときのエンティティキャッシュビューアウィンドウの透明度。"
+    },
+    "Settings_UI_OpacityIntegrations": {
+        "en": "Integrations",
+        "ja": "連携"
+    },
+    "Settings_UI_OpacityBPTimerHeader": {
+        "en": "BPTimer",
+        "ja": "BPTimer"
+    },
+    "Settings_UI_OpacitySpawnTracker": {
+        "en": "Spawn Tracker Window: ",
+        "ja": "スポーントラッカーウィンドウ："
+    },
+    "Settings_UI_OpacitySpawnTrackerTooltip": {
+        "en": "How transparent the Spawn Tracker Window is while pinned.",
+        "ja": "固定されているときのスポーントラッカーウィンドウの透明度。"
+    },
+    "Settings_UI_ScaleHeader": {
+        "en": "Window Scales",
+        "ja": "ウィンドウスケール"
+    },
+    "Settings_UI_ScaleMeterBar": {
+        "en": "Meter Bar Scale: ",
+        "ja": "メーターバースケール："
+    },
+    "Settings_UI_ScaleMeterBarTooltip": {
+        "en": "Scaling for how large the bars in the meter windows should be. 100% is the default scale.",
+        "ja": "メーターウィンドウ内のバーのサイズスケール。100%がデフォルトスケールです。"
+    },
+    "Settings_UI_ScaleSpawnTrackerText": {
+        "en": "Spawn Tracker Text Scale: ",
+        "ja": "スポーントラッカーテキストスケール："
+    },
+    "Settings_UI_ScaleSpawnTrackerTextTooltip": {
+        "en": "Scaling for how the text in the Spawn Tracker window should be. 100% is the default scale.",
+        "ja": "スポーントラッカーウィンドウ内のテキストサイズスケール。100%がデフォルトスケールです。"
+    },
+    "Settings_UI_ScaleSpawnTrackerLine": {
+        "en": "Spawn Tracker Line Scale: ",
+        "ja": "スポーントラッカーラインスケール："
+    },
+    "Settings_UI_ScaleSpawnTrackerLineTooltip": {
+        "en": "Scaling for how large the Line (channel) bars in the Spawn Tracker window should be. 100% is the default scale.",
+        "ja": "スポーントラッカーウィンドウ内のライン（チャンネル）バーのサイズスケール。100%がデフォルトスケールです。"
+    },
+    "Settings_UI_MeterHeader": {
+        "en": "Meter Settings",
+        "ja": "メーター設定"
+    },
+    "Settings_UI_MeterTabVisibility": {
+        "en": "Tab Visibility",
+        "ja": "タブの表示"
+    },
+    "Settings_UI_MeterShowHealing": {
+        "en": "Show Healing Tab",
+        "ja": "ヒールタブを表示"
+    },
+    "Settings_UI_MeterShowTanking": {
+        "en": "Show Tanking Tab",
+        "ja": "タンクタブを表示"
+    },
+    "Settings_UI_MeterShowNpcTaken": {
+        "en": "Show NPC Taken Tab",
+        "ja": "被ダメージタブを表示"
+    },
+    "Settings_UI_MeterLayout": {
+        "en": "Layout",
+        "ja": "レイアウト"
+    },
+    "Settings_UI_MeterMergeDpsHeal": {
+        "en": "Merge DPS and Healing Tabs",
+        "ja": "DPSとヒールタブを結合"
+    },
+    "Settings_UI_MeterMergeDpsHealTooltip": {
+        "en": "When enabled, combines DPS and Healing into a single split view. Tanking and NPC Taken tabs will be hidden.",
+        "ja": "有効にすると、DPSとヒールを単一の分割ビューに結合します。タンクと被ダメージタブは非表示になります。"
+    },
+    "Settings_UI_MeterTanking": {
+        "en": "Tanking",
+        "ja": "タンク"
+    },
+    "Settings_UI_MeterShowDeaths": {
+        "en": "Show Deaths: ",
+        "ja": "死亡数を表示："
+    },
+    "Settings_UI_MeterShowDeathsTooltip": {
+        "en": "When enabled, shows a Death counter for each entry in the Tanking Meter.",
+        "ja": "有効にすると、タンクメーターの各エントリに死亡カウンターを表示します。"
+    },
+    "Settings_UI_MeterNpcTaken": {
+        "en": "NPC Taken",
+        "ja": "被ダメージ"
+    },
+    "Settings_UI_MeterShowHpData": {
+        "en": "Show HP Data: ",
+        "ja": "HPデータを表示："
+    },
+    "Settings_UI_MeterShowHpDataTooltip": {
+        "en": "When enabled, adds Current HP, Max HP, and HP Percent to each entry in the NPC Taken Meter.",
+        "ja": "有効にすると、被ダメージメーターの各エントリに現在のHP、最大HP、HP割合を追加します。"
+    },
+    "Settings_UI_MeterHideMaxHp": {
+        "en": "Hide Max HP: ",
+        "ja": "最大HPを非表示："
+    },
+    "Settings_UI_MeterHideMaxHpTooltip": {
+        "en": "When enabled, removes the Max HP value shown.",
+        "ja": "有効にすると、表示されている最大HP値を非表示にします。"
+    },
+    "Settings_UI_MeterShowHpPercentBar": {
+        "en": "Show HP Percent Bar: ",
+        "ja": "HP割合バーを表示："
+    },
+    "Settings_UI_MeterShowHpPercentBarTooltip": {
+        "en": "When enabled, shows the current HP Percentage as a Red Bar instead of the Blue Bar that would normally show how much total damage the NPC has taken.",
+        "ja": "有効にすると、通常はNPCが受けた合計ダメージ量を表示する青いバーの代わりに、現在のHP割合を赤いバーで表示します。"
+    },
+    "Settings_UI_ResetHeader": {
+        "en": "Window Property Resets",
+        "ja": "ウィンドウプロパティのリセット"
+    },
+    "Settings_UI_ResetMainWindowPos": {
+        "en": "Reset Main Window Position",
+        "ja": "メインウィンドウの位置をリセット"
+    },
+    "Settings_UI_ResetMainWindowPosTooltip": {
+        "en": "Resets the Main Window back to the original default center screen position on your primary monitor.",
+        "ja": "メインウィンドウをプライマリモニターの元のデフォルト中央画面位置にリセットします。"
+    },
+    "Settings_UI_ResetMainWindowSize": {
+        "en": "Reset Main Window Size",
+        "ja": "メインウィンドウのサイズをリセット"
+    },
+    "Settings_UI_ResetMainWindowSizeTooltip": {
+        "en": "Resets the Main Window back to the original size.",
+        "ja": "メインウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetCooldownTrackerSize": {
+        "en": "Reset Raid Manager Cooldown Tracker Size",
+        "ja": "レイドマネージャークールダウントラッカーのサイズをリセット"
+    },
+    "Settings_UI_ResetCooldownTrackerSizeTooltip": {
+        "en": "Resets the Raid Manager Cooldown Tracker window back to the original size.",
+        "ja": "レイドマネージャークールダウントラッカーウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetEntityCacheViewerSize": {
+        "en": "Reset Entity Cache Viewer Size",
+        "ja": "エンティティキャッシュビューアのサイズをリセット"
+    },
+    "Settings_UI_ResetEntityCacheViewerSizeTooltip": {
+        "en": "Resets the Entity Cache Viewer window back to the original size.",
+        "ja": "エンティティキャッシュビューアウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_ResetSpawnTrackerSize": {
+        "en": "Reset BPTimer Spawn Tracker Size",
+        "ja": "BPTimerスポーントラッカーのサイズをリセット"
+    },
+    "Settings_UI_ResetSpawnTrackerSizeTooltip": {
+        "en": "Resets the BPTimer Spawn Tracker window back to the original size.",
+        "ja": "BPTimerスポーントラッカーウィンドウを元のサイズにリセットします。"
+    },
+    "Settings_UI_LowPerfHeader": {
+        "en": "Low Performance Mode",
+        "ja": "低パフォーマンスモード"
+    },
+    "Settings_UI_LowPerfLabel": {
+        "en": "Low Performance Mode: ",
+        "ja": "低パフォーマンスモード："
+    },
+    "Settings_UI_LowPerfTooltip": {
+        "en": "When enabled, will force ZDPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from ZDPS.",
+        "ja": "有効にすると、ZDPSが低いレートで実行され、ウィンドウを移動するときにUIがカクつく可能性があります。ZDPSのCPU使用率が非常に高い場合のみ有効にしてください。"
+    },
+    "Settings_Matchmaking_Header": {
+        "en": "Matchmaking",
+        "ja": "マッチメイキング"
+    },
+    "Settings_Matchmaking_PlaySound": {
+        "en": "Play Notification Sound On Matchmake: ",
+        "ja": "マッチメイク時に通知音を再生："
+    },
+    "Settings_Matchmaking_PlaySoundTooltip": {
+        "en": "When enabled, play a notification sound alert when the matchmaker finds players and is waiting for you to accept.",
+        "ja": "有効にすると、マッチメイカーがプレイヤーを見つけて承認を待っているときに通知音を再生します。"
+    },
+    "Settings_Matchmaking_SoundPath": {
+        "en": "Matchmake Notification Sound Path: ",
+        "ja": "マッチメイク通知音パス："
+    },
+    "Settings_Matchmaking_SoundPathTooltip": {
+        "en": "File path to a custom sound file to play when the matchmake notification occurs.\nA default sound will be used if none is set or the file is invalid.\nNote: Only MP3 and WAV are supported formats.",
+        "ja": "マッチメイク通知時に再生するカスタムサウンドファイルのファイルパス。\n設定されていない場合やファイルが無効な場合は、デフォルトのサウンドが使用されます。\n注：MP3とWAVのみサポートされているフォーマットです。"
+    },
+    "Settings_Matchmaking_LoopSound": {
+        "en": "Loop Notification Sound On Matchmake: ",
+        "ja": "マッチメイク時に通知音をループ："
+    },
+    "Settings_Matchmaking_LoopSoundTooltip": {
+        "en": "When enabled, the notification sound will loop until you accept the queue pop or it is canceled.",
+        "ja": "有効にすると、キューがポップして承認するかキャンセルされるまで、通知音がループします。"
+    },
+    "Settings_Matchmaking_Volume": {
+        "en": "Matchmake Notification Volume Level: ",
+        "ja": "マッチメイク通知音量レベル："
+    },
+    "Settings_Matchmaking_VolumeTooltip": {
+        "en": "Volume scale of the played back notification sound. 100% is the normal sound level of the audio file. Values above 100% may not always appear louder. If you need a louder sound, please edit your file in an external program to increase loudness.",
+        "ja": "再生される通知音の音量スケール。100%がオーディオファイルの通常の音量レベルです。100%を超える値は必ずしも大きく聞こえるとは限りません。より大きな音量が必要な場合は、外部プログラムでファイルを編集して音量を上げてください。"
+    },
+    "Settings_Matchmaking_ReadyCheckPlaySound": {
+        "en": "Play Notification Sound On Ready Check: ",
+        "ja": "レディチェック時に通知音を再生："
+    },
+    "Settings_Matchmaking_ReadyCheckPlaySoundTooltip": {
+        "en": "When enabled, play a notification sound alert when a party ready check is performed and is waiting for you to accept.",
+        "ja": "有効にすると、パーティのレディチェックが実行され、承認を待っているときに通知音を再生します。"
+    },
+    "Settings_Matchmaking_ReadyCheckSoundPath": {
+        "en": "Ready Check Notification Sound Path: ",
+        "ja": "レディチェック通知音パス："
+    },
+    "Settings_Matchmaking_ReadyCheckSoundPathTooltip": {
+        "en": "File path to a custom sound file to play when the ready check notification occurs.\nA default sound will be used if none is set or the file is invalid.\nNote: Only MP3 and WAV are supported formats.",
+        "ja": "レディチェック通知時に再生するカスタムサウンドファイルのファイルパス。\n設定されていない場合やファイルが無効な場合は、デフォルトのサウンドが使用されます。\n注：MP3とWAVのみサポートされているフォーマットです。"
+    },
+    "Settings_Matchmaking_ReadyCheckLoopSound": {
+        "en": "Loop Notification Sound On Ready Check: ",
+        "ja": "レディチェック時に通知音をループ："
+    },
+    "Settings_Matchmaking_ReadyCheckLoopSoundTooltip": {
+        "en": "When enabled, the notification sound will loop until you respond to the ready check.",
+        "ja": "有効にすると、レディチェックに応答するまで通知音がループします。"
+    },
+    "Settings_Matchmaking_ReadyCheckVolume": {
+        "en": "Ready Check Notification Volume Level: ",
+        "ja": "レディチェック通知音量レベル："
+    },
+    "Settings_Matchmaking_ReadyCheckVolumeTooltip": {
+        "en": "Volume scale of the played back notification sound.",
+        "ja": "再生される通知音の音量スケール。"
+    },
+    "Settings_Common_ImportantNote": {
+        "en": "Important Note:",
+        "ja": "重要な注意点："
+    },
+    "Settings_Common_RestartRequired": {
+        "en": "Changing the [{0}] setting requires restarting ZDPS to take effect.",
+        "ja": "[{0}]設定を変更するには、ZDPSを再起動する必要があります。"
+    },
+    "Settings_Common_ClearKeybinding": {
+        "en": "Clear Keybinding.",
+        "ja": "キーバインドをクリア。"
+    },
+    "Settings_RebindKey_Cancel": {
+        "en": "Press ESC to cancel keybinding.",
+        "ja": "ESCキーを押してキーバインドをキャンセル。"
+    },
+    "Settings_Network_Tooltip": {
+        "en": "Select which game version you want ZDPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
+        "ja": "ZDPSがキャプチャするゲームバージョンを選択します。\n自動は現在実行中のバージョンを自動的に検出して使用します。自動では、同時に2つのクライアントを実行するとデータの問題が発生します。\nSteamとスタンドアロンはそれぞれのバージョンからのデータのみをリッスンし、両方を同時に実行して1つのDPSのみをレポートできるようにします。"
+    },
+    "Common_Yes": {
+        "en": "Yes",
+        "ja": "はい"
+    },
+    "Common_No": {
+        "en": "No",
+        "ja": "いいえ"
+    },
+    "MainWindow_Menu_RaidManager": {
+        "en": "Raid Manager",
+        "ja": "レイドマネージャー"
+    },
+    "MainWindow_Menu_Benchmark": {
+        "en": "Benchmark",
+        "ja": "ベンチマーク"
+    },
+    "MainWindow_Benchmark_TrackFirstTarget": {
+        "en": "Only Track First Target Hit: ",
+        "ja": "最初のターゲットヒットのみを追跡："
+    },
+    "MainWindow_Benchmark_StopEarly": {
+        "en": "Stop Benchmark Early",
+        "ja": "ベンチマークを早期停止"
+    },
+    "MainWindow_Benchmark_Start": {
+        "en": "Start Benchmark",
+        "ja": "ベンチマーク開始"
+    },
+    "MainWindow_Menu_Integrations": {
+        "en": "Integrations",
+        "ja": "連携"
+    },
+    "MainWindow_Integrations_BPTimer": {
+        "en": "BPTimer",
+        "ja": "BPTimer"
+    },
+    "MainWindow_BPTimer_SpawnTracker": {
+        "en": "Spawn Tracker",
+        "ja": "スポーントラッカー"
+    },
+    "MainWindow_Menu_Debug": {
+        "en": "Debug",
+        "ja": "デバッグ"
+    },
+    "DatabaseManager_Stats": {
+        "en": "ZDatabase.db Stats",
+        "ja": "ZDatabase.dbの統計"
+    },
+    "DatabaseManager_DeleteHistory": {
+        "en": "Delete Encounter History",
+        "ja": "エンカウンターヒストリーを削除"
+    },
+    "DatabaseManager_Older_1Day": {
+        "en": "Older than 1 day",
+        "ja": "1日以上前"
+    },
+    "DatabaseManager_Older_5Days": {
+        "en": "Older than 5 days",
+        "ja": "5日以上前"
+    },
+    "DatabaseManager_AllTime": {
+        "en": "All Time",
+        "ja": "すべて"
+    },
+    "DatabaseManager_DeleteConfirm": {
+        "en": "Delete Confirmation",
+        "ja": "削除の確認"
+    },
+    "Common_ExitZDPS": {
+        "en": "Exit ZDPS",
+        "ja": "ZDPSを終了"
+    },
+    "Chat_AddButton": {
+        "en": "+",
+        "ja": "+"
+    },
+    "Chat_AddPlayerSearch": {
+        "en": "Add Player Search",
+        "ja": "プレイヤー検索を追加"
+    },
+    "Chat_Channels": {
+        "en": "Channels",
+        "ja": "チャンネル"
+    },
+    "Chat_Level": {
+        "en": "Level",
+        "ja": "レベル"
+    },
+    "Chat_RegexFilters": {
+        "en": "Regex Filters",
+        "ja": "正規表現フィルター"
+    },
+    "Chat_Tooltip_AddTab": {
+        "en": "Add a new chat tab",
+        "ja": "新しいチャットタブを追加"
+    },
+    "Chat_Tooltip_CopyName": {
+        "en": "Copies [ {0} ] to the clipboard.",
+        "ja": "[ {0} ] をクリップボードにコピーします。"
+    },
+    "Chat_Tooltip_CopyUID": {
+        "en": "Copies [ {0} ] to the clipboard.",
+        "ja": "[ {0} ] をクリップボードにコピーします。"
+    },
+    "Chat_Tooltip_BlockUser": {
+        "en": "Blocks this users ({0}) messages from showing in your ZDPS chat.",
+        "ja": "このユーザー（{0}）のメッセージがZDPSチャットに表示されないようにブロックします。"
+    },
+    "Chat_Unblock": {
+        "en": "Unblock",
+        "ja": "ブロック解除"
+    },
+    "EntityCache_Tooltip_PinTop": {
+        "en": "Pin Window As Top Most",
+        "ja": "ウィンドウを最前面に固定"
+    },
+    "EntityCache_Tooltip_Expand": {
+        "en": "Expand To Full Options",
+        "ja": "フルオプションに展開"
+    },
+    "EntityCache_Tooltip_Collapse": {
+        "en": "Collapse To Content Only",
+        "ja": "コンテンツのみに折りたたむ"
+    },
+    "EntityInspector_PersistentTracking": {
+        "en": "Persistent Tracking",
+        "ja": "永続的追跡"
+    },
+    "EntityInspector_CopyAttributes": {
+        "en": "Copy All Attributes",
+        "ja": "すべての属性をコピー"
+    },
+    "EntityInspector_Tooltip_SeasonLevel": {
+        "en": "Season Level",
+        "ja": "シーズンレベル"
+    },
+    "EntityInspector_Tooltip_SeasonStrength": {
+        "en": "Season Strength",
+        "ja": "シーズン強度"
+    },
+    "EntityInspector_TotalHealing": {
+        "en": "Total Healing:",
+        "ja": "合計ヒール量："
+    },
+    "EntityInspector_TotalOverheal": {
+        "en": "Total Overheal:",
+        "ja": "合計オーバーヒール："
+    },
+    "EntityInspector_TotalHPS": {
+        "en": "Total HPS:",
+        "ja": "合計HPS："
+    },
+    "EntityInspector_TotalTaken": {
+        "en": "Total Taken:",
+        "ja": "合計被ダメージ："
+    },
+    "EntityInspector_TotalShield": {
+        "en": "Total Shield:",
+        "ja": "合計シールド："
+    },
+    "EntityInspector_TotalDPS_1": {
+        "en": "Total DPS:",
+        "ja": "合計DPS："
+    },
+    "EntityInspector_TotalDamage": {
+        "en": "Total Damage:",
+        "ja": "合計ダメージ："
+    },
+    "EntityInspector_TotalShieldBreak": {
+        "en": "Total Shield Break:",
+        "ja": "合計シールドブレイク："
+    },
+    "EntityInspector_Tooltip_PersistentTracking": {
+        "en": "Enable this to track the current entity across new encounters instead of sticking to the one it was opened for.",
+        "ja": "有効にすると、現在のエンティティを開かれたエンカウンターに固定せず、新しいエンカウンターでも追跡します。"
+    },
+    "ModuleSolver_Tab_Optimizer": {
+        "en": "Optimizer",
+        "ja": "オプティマイザー"
+    },
+    "ModuleSolver_Tab_Inventory": {
+        "en": "Module Inventory",
+        "ja": "モジュールインベントリー"
+    },
+    "ModuleSolver_Tab_Settings": {
+        "en": "Settings",
+        "ja": "設定"
+    },
+    "ModuleSolver_LinkLevelBoostDesc": {
+        "en": "Link Level Boost Description",
+        "ja": "リンクレベルブーストの説明"
+    },
+    "ModuleSolver_Quality": {
+        "en": "Quality",
+        "ja": "品質"
+    },
+    "ModuleSolver_StatPriority": {
+        "en": "Stat Priority",
+        "ja": "ステ優先順位"
+    },
+    "EncounterHistory_ViewIndividual": {
+        "en": "View By Each Individual Encounter",
+        "ja": "各エンカウンターごとに表示"
+    },
+    "EncounterHistory_ViewGrouped": {
+        "en": "View By Each Grouped Battle",
+        "ja": "各グループ化されたバトルごとに表示"
+    },
+    "EncounterHistory_Loading": {
+        "en": "Please wait, loading encounter history...",
+        "ja": "お待ちください、エンカウンターヒストリーを読み込んでいます..."
+    },
+    "EncounterHistory_DebugReport": {
+        "en": "Send Debug Report",
+        "ja": "デバッグレポートを送信"
+    },
+    "EncounterHistory_ChangeWipeStatus": {
+        "en": "Change Wipe Status",
+        "ja": "ワイプステータスを変更"
+    },
+    "EncounterHistory_IsWipe": {
+        "en": "Is Wipe",
+        "ja": "ワイプ"
+    },
+    "EncounterHistory_Delete": {
+        "en": "Delete Encounter",
+        "ja": "エンカウンターを削除"
+    },
+    "EncounterHistory_EntityFilter": {
+        "en": "Entity Filter",
+        "ja": "エンティティフィルター"
+    },
+    "EncounterFilter_All": {
+        "en": "All",
+        "ja": "すべて"
+    },
+    "EncounterFilter_PlayersOnly": {
+        "en": "Players Only",
+        "ja": "プレイヤーのみ"
+    },
+    "EncounterFilter_MonstersOnly": {
+        "en": "Monsters Only",
+        "ja": "モンスターのみ"
+    },
+    "EncounterFilter_BossesOnly": {
+        "en": "Bosses Only",
+        "ja": "ボスのみ"
+    },
+    "EncounterFilter_HideNoDamage": {
+        "en": "Hide Entities With No Damage",
+        "ja": "ダメージのないエンティティを非表示"
+    },
+    "NetDebug_ConnectionFilters": {
+        "en": "Connection Filters",
+        "ja": "接続フィルター"
+    },
+    "NetDebug_ActiveStreams": {
+        "en": "Active TCP Streams",
+        "ja": "アクティブなTCPストリーム"
+    },
+    "NetDebug_ImportantLogs": {
+        "en": "Important Logs",
+        "ja": "重要なログ"
+    },
+    "RaidWarning_Description": {
+        "en": "Raid Warnings are messages sent in-game, prefixed with '/rw', that appear in a defined section of your screen as large bold orange text.",
+        "ja": "レイド警告は'/rw'で始まるゲーム内メッセージで、画面の定義されたセクションに大きな太字のオレンジ色のテキストとして表示されます。"
+    },
+    "RaidWarning_AllowDesc": {
+        "en": "When enabled, allows Raid Warnings to be processed and displayed.",
+        "ja": "有効にすると、レイド警告の処理と表示を許可します。"
+    },
+    "RaidWarning_SoundAlertDesc": {
+        "en": "When enabled, a sound alert will be played each time a new Raid Warning appears.",
+        "ja": "有効にすると、新しいレイド警告が表示されるたびにサウンドアラートが再生されます。"
+    },
+    "RaidWarning_SoundPath": {
+        "en": "Raid Warning Notification Sound Path: ",
+        "ja": "レイド警告通知音パス："
+    },
+    "RaidWarning_SoundPathDesc": {
+        "en": "File path to a custom sound file to play when the Raid Warning message occurs.\nA default sound will be used if none is set or the file is invalid.\nNote: Only MP3 and WAV are supported formats.",
+        "ja": "レイド警告メッセージ時に再生するカスタムサウンドファイルのファイルパス。\n設定されていない場合やファイルが無効な場合は、デフォルトのサウンドが使用されます。\n注：MP3とWAVのみサポートされているフォーマットです。"
+    },
+    "RaidWarning_TextScale": {
+        "en": "Message Text Scale: ",
+        "ja": "メッセージテキストスケール："
+    },
+    "RaidWarning_TextScaleDesc": {
+        "en": "Scaling for how large the Raid Warning message text should be. 100% is the default scale.",
+        "ja": "レイド警告メッセージテキストのサイズスケール。100%がデフォルトスケールです。"
+    },
+    "RaidWarning_BGOpacity": {
+        "en": "Message Background Opacity: ",
+        "ja": "メッセージ背景不透明度："
+    },
+    "RaidWarning_BGOpacityDesc": {
+        "en": "Opacity for the background of Raid Warning notification messages.",
+        "ja": "レイド警告通知メッセージの背景の不透明度。"
+    },
+    "RaidWarning_SetDefaultLocation": {
+        "en": "Set To Default Location",
+        "ja": "デフォルトの場所に設定"
+    },
+    "RaidWarning_SetDefaultSize": {
+        "en": "Set To Default Size",
+        "ja": "デフォルトサイズに設定"
+    },
+    "RaidWarning_TestMessage": {
+        "en": "Display Raid Warning Test Message",
+        "ja": "レイド警告テストメッセージを表示"
+    },
+    "RaidWarning_PositionTitle": {
+        "en": "Raid Warning - Default Message Position",
+        "ja": "レイド警告 - デフォルトメッセージ位置"
+    },
+    "Countdown_Description": {
+        "en": "Countdowns are numeric countdown timers displayed in a defined section of the screen. These are triggered by a message sent with '/countdown' or '/ct'. Countdowns can be between 3 and 30 seconds long.",
+        "ja": "カウントダウンは画面の定義されたセクションに表示される数値のカウントダウンタイマーです。これらは'/countdown'または'/ct'で送信されたメッセージによってトリガーされます。カウントダウンは3〜30秒の長さに設定できます。"
+    },
+    "Countdown_AllowDesc": {
+        "en": "When enabled, allows Countdowns to be processed and displayed.",
+        "ja": "有効にすると、カウントダウンの処理と表示を許可します。"
+    },
+    "Countdown_StylizedDesc": {
+        "en": "When enabled, the numbers for the Countdown time will be stylized images instead of plain text.",
+        "ja": "有効にすると、カウントダウン時間の数字がプレーンテキストではなくスタイライズされた画像になります。"
+    },
+    "Countdown_Center": {
+        "en": "Center Countdown Timer",
+        "ja": "カウントダウンタイマーを中央に配置"
+    },
+    "Countdown_Test10": {
+        "en": "Test 10 Second Countdown",
+        "ja": "10秒カウントダウンテスト"
+    },
+    "Countdown_Test30": {
+        "en": "Test 30 Second Countdown",
+        "ja": "30秒カウントダウンテスト"
+    },
+    "Update_GoToWebsite": {
+        "en": "Go To Update Website",
+        "ja": "更新ウェブサイトを開く"
+    },
+    "Update_RemindLater": {
+        "en": "Remind Me Later",
+        "ja": "後で通知する"
+    },
+    "UpdateCheck_Description": {
+        "en": "ZDPS is able to check for updates on startup so you never miss when a new ZDPS version is released. It is recommended to enable this setting.",
+        "ja": "ZDPSは起動時に更新を確認できるため、新しいZDPSバージョンのリリースを見逃すことはありません。この設定を有効にすることをお勧めします。"
+    },
+    "UpdateCheck_EnableNow": {
+        "en": "Enable Now",
+        "ja": "今すぐ有効にする"
+    },
+    "UpdateCheck_KeepDisabled": {
+        "en": "Keep Disabled",
+        "ja": "無効のままにする"
+    },
+    "Debug_ClearTrackers": {
+        "en": "Clear Trackers",
+        "ja": "トラッカーをクリア"
     }
 }

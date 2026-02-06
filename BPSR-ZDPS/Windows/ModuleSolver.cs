@@ -142,19 +142,19 @@ namespace BPSR_ZDPS
 
                 if (ImGui.BeginTabBar("MainTabBar", ImGuiTabBarFlags.None))
                 {
-                    if (ImGui.BeginTabItem("Optimizer"))
+                    if (ImGui.BeginTabItem(AppStrings.GetLocalized("ModuleSolver_Tab_Optimizer")))
                     {
                         DrawSolverTab(ImGui.GetContentRegionAvail(), leftWidth);
                         ImGui.EndTabItem();
                     }
 
-                    if (ImGui.BeginTabItem("Module Inventory"))
+                    if (ImGui.BeginTabItem(AppStrings.GetLocalized("ModuleSolver_Tab_Inventory")))
                     {
                         DrawModuleInv();
                         ImGui.EndTabItem();
                     }
 
-                    if (ImGui.BeginTabItem("Settings"))
+                    if (ImGui.BeginTabItem(AppStrings.GetLocalized("ModuleSolver_Tab_Settings")))
                     {
                         if (ImGui.BeginTable("settings_table", 2, ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.PadOuterX | ImGuiTableFlags.BordersInnerH))
                         {
@@ -168,7 +168,7 @@ namespace BPSR_ZDPS
 
                                 }
                                 ImGui.SameLine();
-                                if (ImGui.Button("Apply"))
+                                if (ImGui.Button(AppStrings.GetLocalized("Module_Apply")))
                                 {
                                     var solverConfig = new SolverConfig();
                                     solverConfig.FromString(CurrentPresetString);
@@ -178,7 +178,7 @@ namespace BPSR_ZDPS
                                     }
                                 }
                                 ImGui.SameLine();
-                                if (ImGui.Button("Copy"))
+                                if (ImGui.Button(AppStrings.GetLocalized("Module_Copy")))
                                 {
                                     ImGui.SetClipboardText(CurrentPresetString);
                                 }
@@ -206,7 +206,7 @@ namespace BPSR_ZDPS
                             ImGui.EndTable();
                         }
 
-                        if (ImGui.CollapsingHeader("Link Level Boosts"))
+                        if (ImGui.CollapsingHeader(AppStrings.GetLocalized("Module_LinkLevelBoosts")))
                         {
                             var linkLevelSettingsWidth = 300;
                             //ImGui.PushClipRect(ImGui.GetCursorScreenPos(), ImGui.GetCursorScreenPos() + new Vector2(linkLevelSettingsWidth, 100000), false);
@@ -241,13 +241,13 @@ namespace BPSR_ZDPS
 
                                     ImGui.EndTable();
 
-                                    if (ImGui.Button("Reset to Defaults", new Vector2(-1, 0)))
+                                    if (ImGui.Button(AppStrings.GetLocalized("Module_ResetDefaults"), new Vector2(-1, 0)))
                                     {
                                         Settings.Instance.WindowSettings.ModuleWindow.LastUsedPreset.Config.LinkLevelBonus = SolverConfig.DefaultLinkLevels;
                                     }
                                 }
                                 ImGui.TableNextColumn();
-                                ImGui.SeparatorText("Link Level Boost Description");
+                                ImGui.SeparatorText(AppStrings.GetLocalized("ModuleSolver_LinkLevelBoostDesc"));
                                 ImGui.TextWrapped("Set the bonus points awarded to a module combination when its Link Level matches or exceeds the given value.\n" +
                                     $"Ex: A module combination that has 'Crit Focus' at +16 would have a Link Level of '5' and get a points boost of {Settings.Instance.WindowSettings.ModuleWindow.LastUsedPreset.Config.LinkLevelBonus[4]}.");
 
@@ -321,7 +321,7 @@ namespace BPSR_ZDPS
 
             var configChanged = false;
             ImGui.BeginChild("LeftSection", new Vector2(leftWidth, contentRegion.Y - 55), ImGuiChildFlags.Borders);
-            ImGui.SeparatorText("Quality");
+            ImGui.SeparatorText(AppStrings.GetLocalized("ModuleSolver_Quality"));
 
             bool basicQuality = SolverConfig.QualitiesV2.TryGetValue(2, out var temp) ? temp : false;
             ImGui.AlignTextToFramePadding();
@@ -361,7 +361,7 @@ namespace BPSR_ZDPS
             }
             ImGui.Spacing();
 
-            ImGui.SeparatorText("Stat Priority");
+            ImGui.SeparatorText(AppStrings.GetLocalized("ModuleSolver_StatPriority"));
             ImGui.Spacing();
 
             int idToRemove = -1;
@@ -412,7 +412,7 @@ namespace BPSR_ZDPS
             ImGui.SetCursorPos(pos + new Vector2(leftWidth - 50, 0));
             var isAlreadyAdded = SolverConfig.StatPriorities.Any(x => x.Id == PendingStatToAdd.StatId);
             ImGui.BeginDisabled(isAlreadyAdded || SolverConfig.StatPriorities.Count >= 12);
-            if (ImGui.Button("Add", new Vector2(50, 0)))
+            if (ImGui.Button(AppStrings.GetLocalized("Module_Add"), new Vector2(50, 0)))
             {
                 SolverConfig.StatPriorities.Add(new StatPrio()
                 {
@@ -506,7 +506,7 @@ namespace BPSR_ZDPS
 
             ImGui.EndChild();
             ImGui.SetCursorPosX(leftWidth + 8);
-            if (ImGui.Button("Calculate", new Vector2(contentRegion.X - leftWidth, 0)))
+            if (ImGui.Button(AppStrings.GetLocalized("Module_Calculate"), new Vector2(contentRegion.X - leftWidth, 0)))
             {
                 ModuleCalcTask = Task.Factory.StartNew(() =>
                 {
