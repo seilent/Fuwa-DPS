@@ -43,9 +43,10 @@ namespace BPSR_ZDPS.Meters
                 }
             }
 
-            return ActiveEncounter?.Entities.AsValueEnumerable()
+            int count = ActiveEncounter?.Entities.AsValueEnumerable()
                 .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && x.Value.TotalHealing > 0)
                 .Count() ?? 0;
+            return Math.Min(count, 20); // Hard limit of 20 entries for display
         }
 
         /// <summary>
@@ -54,8 +55,11 @@ namespace BPSR_ZDPS.Meters
         protected float GetMinMeterWidth()
         {
             // Get the same entities that will be displayed in Draw()
+            // Order by healing and take top 20 to match the display cap
             var entities = ActiveEncounter?.Entities.AsValueEnumerable()
                 .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && x.Value.TotalHealing > 0)
+                .OrderByDescending(x => x.Value.TotalHealing)
+                .Take(20)
                 .Select(x => x.Value)
                 .ToList() ?? new List<Entity>();
 
@@ -103,7 +107,7 @@ namespace BPSR_ZDPS.Meters
 
                 ulong topTotalValue = 0;
 
-                for (int i = 0; i < playerList?.Count(); i++)
+                for (int i = 0; i < Math.Min(playerList?.Count() ?? 0, 20); i++)
                 {
                     var entity = playerList[i].Value;
 

@@ -56,8 +56,11 @@ namespace BPSR_ZDPS.Meters
         protected float GetMinMeterWidth()
         {
             // Get the same entities that will be displayed in Draw()
+            // Order by damage and take top 20 to match the display cap
             var entities = ActiveEncounter?.Entities.AsValueEnumerable()
                 .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && (Settings.Instance.OnlyShowDamageContributorsInMeters ? x.Value.TotalDamage > 0 : true))
+                .OrderByDescending(x => x.Value.TotalDamage)
+                .Take(20)
                 .Select(x => x.Value)
                 .ToList() ?? new List<Entity>();
 
