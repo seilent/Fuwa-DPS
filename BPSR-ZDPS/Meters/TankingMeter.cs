@@ -48,14 +48,30 @@ namespace BPSR_ZDPS.Meters
                 .Count() ?? 0;
         }
 
+        /// <summary>
+        /// Calculate minimum width based on actual entities that will be displayed.
+        /// </summary>
+        protected float GetMinMeterWidth()
+        {
+            // Get the same entities that will be displayed in Draw()
+            var entities = ActiveEncounter?.Entities.AsValueEnumerable()
+                .Where(x => x.Value.EntityType == Zproto.EEntityType.EntChar && (x.Value.TotalTakenDamage > 0 || x.Value.TotalDeaths > 0))
+                .Select(x => x.Value)
+                .ToList() ?? new List<Entity>();
+
+            return base.GetMinMeterWidth(entities);
+        }
+
         public override void Draw(MainWindow mainWindow)
         {
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, new Vector2(2, ImGui.GetStyle().FramePadding.Y));
 
             // Calculate exact height based on entry count
             float listHeight = GetListHeight(GetEntryCount());
+            // Calculate minimum width to prevent window collapse
+            float minWidth = GetMinMeterWidth();
 
-            if (ImGui.BeginListBox("##TankingMeterList", new Vector2(-1, listHeight)))
+            if (ImGui.BeginListBox("##TankingMeterList", new Vector2(minWidth, listHeight)))
             {
                 ImGui.PopStyleVar();
 

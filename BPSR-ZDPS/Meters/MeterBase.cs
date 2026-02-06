@@ -1,6 +1,7 @@
 ﻿using BPSR_ZDPS.DataTypes;
 using BPSR_ZDPS.Windows;
 using Hexa.NET.ImGui;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace BPSR_ZDPS.Meters
 {
     public class MeterBase
     {
+        // Width configuration constants - edit here to change meter widths across all meters
+        public const float RightSideWidth = 100.0f;  // Right side width for damage/DPS/healing values (unscaled)
+        public const float ClassWidth = 35.0f;  // Class/sub-profession width (unscaled)
+        public const float NameCharWidthRomaji = 20.0f;  // Per-character width for ASCII/romaji names (unscaled)
+        public const float NameCharWidthWide = 30.0f;  // Per-character width for CJK names (unscaled)
+        public const float RankWidth = 40.0f;  // Rank number width (unscaled)
+
         public string Name = "";
 
         public Encounter? ActiveEncounter = null;
@@ -19,6 +27,16 @@ namespace BPSR_ZDPS.Meters
         // Cache for height calculation to avoid recalculating every frame
         private int _cachedEntryCount = -1;
         private float _cachedHeight = 0.0f;
+
+        // Cache for width calculation to avoid recalculating every frame
+        private int _cachedWidthEntityCount = -1;
+        private float _cachedWidthScale = -1.0f;
+        private bool _cachedWidthShowIcons = false;
+        private bool _cachedWidthShowSubProfession = false;
+        private bool _cachedWidthShowAbilityScore = false;
+        private bool _cachedWidthShowSeasonStrength = false;
+        private bool _cachedWidthShowTruePerSecond = false;
+        private float _cachedWidth = 0.0f;
 
         public virtual void Draw(MainWindow mainWindow) { }
 
@@ -77,6 +95,153 @@ namespace BPSR_ZDPS.Meters
         public void InvalidateHeightCache()
         {
             _cachedEntryCount = -1;
+        }
+
+        /// <summary>
+        /// Invalidates the width calculation cache, forcing recalculation on next frame.
+        /// Call this when settings change that affect the window width.
+        /// </summary>
+        public void InvalidateWidthCache()
+        {
+            _cachedWidthEntityCount = -1;
+            _cachedWidthScale = -1.0f;
+        }
+
+        /// <summary>
+        /// Calculates minimum meter width based on entity data and current settings.
+        /// This is a shared static method that can be called from anywhere (including MainWindow).
+        /// Does NOT use caching - callers should handle their own caching if needed.
+        /// </summary>
+        /// <summary>
+        /// Calculate name width based on character count and type (romaji vs wide/CJK).
+        /// ASCII characters use NameCharWidthRomaji, others use NameCharWidthWide.
+        /// </summary>
+        static float CalculateNameWidth(string name, float scale)
+        {
+            float width = 0.0f;
+            foreach (char c in name)
+            {
+                // ASCII (romaji/English) = narrow, CJK = wide
+                if (c < 128)
+                    width += NameCharWidthRomaji;
+                else
+                    width += NameCharWidthWide;
+            }
+            return width * scale;
+        }
+
+        public static float CalculateMinMeterWidth(List<Entity> entities)
+        {
+            float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+            bool showIcons = Settings.Instance.ShowClassIconsInMeters;
+            bool showSubProfession = Settings.Instance.ShowSubProfessionNameInMeters;
+            bool showAbilityScore = Settings.Instance.ShowAbilityScoreInMeters;
+            bool showSeasonStrength = Settings.Instance.ShowSeasonStrengthInMeters;
+
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+
+            // Left side: rank + icon + spacing
+            float leftWidth = RankWidth * scale;
+            if (showIcons)
+                leftWidth += ImGui.GetFrameHeight() + ImGui.GetStyle().ItemSpacing.X * 2;
+            else
+                leftWidth += ImGui.GetStyle().ItemSpacing.X;
+
+            // Right side: fixed width for damage/DPS/percentage values
+            float rightWidth = RightSideWidth * scale;
+
+            // Middle: find the longest actual name in the encounter (character-based)
+            float maxNameWidth = 0.0f;
+            float maxClassWidth = 0.0f;
+
+            if (entities.Count > 0)
+            {
+                foreach (var entity in entities)
+                {
+                    string name = !string.IsNullOrEmpty(entity.Name) ? entity.Name : $"[U:{entity.UID}]";
+                    float nameWidth = CalculateNameWidth(name, scale);
+                    maxNameWidth = Math.Max(maxNameWidth, nameWidth);
+                }
+            }
+            else
+            {
+                // Default placeholder for empty encounters (10 chars of "[U:12345678]")
+                maxNameWidth = NameCharWidthRomaji * scale;
+            }
+
+            // Use fixed class width instead of measuring
+            if (showSubProfession)
+                maxClassWidth = ClassWidth * scale;
+
+            // Add spacing between name and class
+            float middleWidth = maxNameWidth + maxClassWidth;
+
+            // Ability score width like " (12345)"
+            if (showAbilityScore)
+            {
+                middleWidth += ImGui.CalcTextSize(" (99999)").X;
+            }
+            else if (showSeasonStrength)
+            {
+                middleWidth += ImGui.CalcTextSize(" (99999)").X;
+            }
+
+            // Add padding
+            float padding = ImGui.GetStyle().WindowPadding.X * 2;
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.X;
+
+            ImGui.PopFont();
+
+            float totalWidth = leftWidth + middleWidth + rightWidth + padding + itemSpacing;
+
+            // Debug: Log width breakdown
+            Log.Debug($"Width[STATIC]: scale={scale:F2} | left={leftWidth:F1} | middle={middleWidth:F1} (name={maxNameWidth:F1}, class={maxClassWidth:F1}) | right={rightWidth:F1} | padding={padding:F1} | spacing={itemSpacing:F1} | TOTAL={totalWidth:F1}");
+
+            return totalWidth;
+        }
+
+        /// <summary>
+        /// Calculates minimum meter width with caching for meter instances.
+        /// This prevents the window from collapsing when there's little content.
+        /// Uses caching to avoid recalculating when data just reorders.
+        /// </summary>
+        protected float GetMinMeterWidth(List<Entity> entities)
+        {
+            float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+
+            // Check if cache is valid
+            bool showIcons = Settings.Instance.ShowClassIconsInMeters;
+            bool showSubProfession = Settings.Instance.ShowSubProfessionNameInMeters;
+            bool showAbilityScore = Settings.Instance.ShowAbilityScoreInMeters;
+            bool showSeasonStrength = Settings.Instance.ShowSeasonStrengthInMeters;
+            bool showTruePerSecond = Settings.Instance.DisplayTruePerSecondValuesInMeters;
+
+            if (_cachedWidthEntityCount == entities.Count &&
+                _cachedWidthScale == scale &&
+                _cachedWidthShowIcons == showIcons &&
+                _cachedWidthShowSubProfession == showSubProfession &&
+                _cachedWidthShowAbilityScore == showAbilityScore &&
+                _cachedWidthShowSeasonStrength == showSeasonStrength &&
+                _cachedWidthShowTruePerSecond == showTruePerSecond)
+            {
+                // Cache hit - return cached width
+                return _cachedWidth;
+            }
+
+            // Cache miss - use static calculation
+            float totalWidth = CalculateMinMeterWidth(entities);
+
+            // Update cache
+            _cachedWidthEntityCount = entities.Count;
+            _cachedWidthScale = scale;
+            _cachedWidthShowIcons = showIcons;
+            _cachedWidthShowSubProfession = showSubProfession;
+            _cachedWidthShowAbilityScore = showAbilityScore;
+            _cachedWidthShowSeasonStrength = showSeasonStrength;
+            _cachedWidthShowTruePerSecond = showTruePerSecond;
+            _cachedWidth = totalWidth;
+
+            return totalWidth;
         }
 
         public static bool SelectableWithHintImage(string number, string name, string value, int profession)
@@ -147,7 +312,7 @@ namespace BPSR_ZDPS.Meters
             float valueWidth = ImGui.CalcTextSize(value).X;
             float windowWidth = ImGui.GetWindowWidth();
             float padding = ImGui.GetStyle().WindowPadding.X;
-            float targetX = windowWidth - valueWidth - padding;
+            float targetX = windowWidth - valueWidth - padding - 5.0f;  // Nudge 5px left
             float currentX = ImGui.GetCursorPosX();
             if (targetX > currentX)
                 ImGui.SetCursorPosX(targetX);

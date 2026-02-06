@@ -13,6 +13,12 @@ namespace BPSR_ZDPS.Meters
 {
     public class TakenMeter : MeterBase
     {
+        // Cache for width calculation specific to NPC Taken meter
+        private int _cachedWidthEntityCount = -1;
+        private float _cachedWidthScale = -1.0f;
+        private bool _cachedWidthShowTruePerSecond = false;
+        private float _cachedWidth = 0.0f;
+
         public TakenMeter()
         {
             Name = "NPC Taken";
@@ -57,12 +63,78 @@ namespace BPSR_ZDPS.Meters
                 .Count() ?? 0;
         }
 
+        /// <summary>
+        /// Calculate minimum width for NPC Taken meter.
+        /// This meter shows monster names (no class icons or professions) with HP data and damage taken.
+        /// Uses caching to avoid recalculating when data just reorders.
+        /// </summary>
+        protected float GetMinMeterWidth()
+        {
+            float scale = DataTypes.Settings.Instance.WindowSettings.MainWindow.MeterBarScale;
+            bool showTruePerSecond = Settings.Instance.DisplayTruePerSecondValuesInMeters;
+
+            var entities = ActiveEncounter?.Entities.AsValueEnumerable()
+                .Where(x => x.Value.EntityType == Zproto.EEntityType.EntMonster)
+                .Select(x => x.Value)
+                .ToList() ?? new List<Entity>();
+
+            // Check cache
+            if (_cachedWidthEntityCount == entities.Count &&
+                _cachedWidthScale == scale &&
+                _cachedWidthShowTruePerSecond == showTruePerSecond)
+            {
+                return _cachedWidth;
+            }
+
+            // Cache miss - recalculate
+            ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
+
+            // Find the longest entity name
+            float maxNameWidth = 0.0f;
+            if (entities.Count > 0)
+            {
+                foreach (var entity in entities)
+                {
+                    string name = !string.IsNullOrEmpty(entity.Name) ? entity.Name : $"[U:{entity.UID}]";
+                    // Format: "Name [UID]"
+                    string nameFormat = $"{name} [{entity.UID}]";
+                    maxNameWidth = Math.Max(maxNameWidth, ImGui.CalcTextSize(nameFormat).X);
+                }
+            }
+            else
+            {
+                // Default placeholder for empty encounters
+                maxNameWidth = ImGui.CalcTextSize("Unknown Monster [12345678]").X;
+            }
+
+            // Right side: fixed width for HP data + damage values
+            float rightWidth = RightSideWidth * scale;
+
+            // Add padding
+            float padding = ImGui.GetStyle().WindowPadding.X * 2;
+            float itemSpacing = ImGui.GetStyle().ItemSpacing.X;
+
+            ImGui.PopFont();
+
+            float totalWidth = maxNameWidth + rightWidth + padding + itemSpacing;
+
+            // Update cache
+            _cachedWidthEntityCount = entities.Count;
+            _cachedWidthScale = scale;
+            _cachedWidthShowTruePerSecond = showTruePerSecond;
+            _cachedWidth = totalWidth;
+
+            return totalWidth;
+        }
+
         public override void Draw(MainWindow mainWindow)
         {
             // Calculate exact height based on entry count
             float listHeight = GetListHeight(GetEntryCount());
+            // Calculate minimum width to prevent window collapse
+            float minWidth = GetMinMeterWidth();
 
-            if (ImGui.BeginListBox("##TakenMeterList", new Vector2(-1, listHeight)))
+            if (ImGui.BeginListBox("##TakenMeterList", new Vector2(minWidth, listHeight)))
             {
                 if (Settings.Instance.KeepPastEncounterInMeterUntilNextDamage)
                 {

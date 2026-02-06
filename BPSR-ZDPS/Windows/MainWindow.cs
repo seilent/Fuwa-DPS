@@ -48,6 +48,15 @@ namespace BPSR_ZDPS.Windows
 
         static ImGuiWindowClassPtr ContextMenuClass = ImGui.ImGuiWindowClass();
 
+        // Cache for merged view width calculation to avoid recalculating every frame
+        static int _cachedMergedWidthEntityCount = -1;
+        static float _cachedMergedWidthScale = -1.0f;
+        static bool _cachedMergedWidthShowIcons = false;
+        static bool _cachedMergedWidthShowSubProfession = false;
+        static bool _cachedMergedWidthShowAbilityScore = false;
+        static bool _cachedMergedWidthShowSeasonStrength = false;
+        static float _cachedMergedWidth = 0.0f;
+
         public void Draw()
         {
             DrawContent();
@@ -786,12 +795,37 @@ namespace BPSR_ZDPS.Windows
                 ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono"], 14.0f * scale);
                 float frameHeight = ImGui.GetFrameHeight();
                 ImGui.PopFont();
+
+                // Calculate minimum width using cached value to avoid recalculating every frame
+                int entityCount = topDpsEntities.Count;
+                bool showIcons = Settings.Instance.ShowClassIconsInMeters;
+                bool showSubProfession = Settings.Instance.ShowSubProfessionNameInMeters;
+                bool showAbilityScore = Settings.Instance.ShowAbilityScoreInMeters;
+                bool showSeasonStrength = Settings.Instance.ShowSeasonStrengthInMeters;
+
+                if (_cachedMergedWidthEntityCount != entityCount ||
+                    _cachedMergedWidthScale != scale ||
+                    _cachedMergedWidthShowIcons != showIcons ||
+                    _cachedMergedWidthShowSubProfession != showSubProfession ||
+                    _cachedMergedWidthShowAbilityScore != showAbilityScore ||
+                    _cachedMergedWidthShowSeasonStrength != showSeasonStrength)
+                {
+                    _cachedMergedWidth = MeterBase.CalculateMinMeterWidth(topDpsEntities.ToList());
+                    _cachedMergedWidthEntityCount = entityCount;
+                    _cachedMergedWidthScale = scale;
+                    _cachedMergedWidthShowIcons = showIcons;
+                    _cachedMergedWidthShowSubProfession = showSubProfession;
+                    _cachedMergedWidthShowAbilityScore = showAbilityScore;
+                    _cachedMergedWidthShowSeasonStrength = showSeasonStrength;
+                }
+                float healingWidth = _cachedMergedWidth;
+
                 float entryHeight = frameHeight;
                 float listPadding = ImGui.GetStyle().WindowPadding.Y * 2;
-                float itemSpacing = ImGui.GetStyle().ItemSpacing.Y * Math.Max(0, healerList.Length - 1);
-                float healingHeight = (healerList.Length * entryHeight) + itemSpacing + listPadding;
+                float listItemSpacing = ImGui.GetStyle().ItemSpacing.Y * Math.Max(0, healerList.Length - 1);
+                float healingHeight = (healerList.Length * entryHeight) + listItemSpacing + listPadding;
 
-                if (ImGui.BeginListBox("##HealingSection", new Vector2(-1, healingHeight)))
+                if (ImGui.BeginListBox("##HealingSection", new Vector2(healingWidth, healingHeight)))
                 {
                     ImGui.PopStyleVar();
 
@@ -922,6 +956,14 @@ namespace BPSR_ZDPS.Windows
         /// </summary>
         public void ResetMeters()
         {
+            // Invalidate merged view width cache
+            _cachedMergedWidthEntityCount = -1;
+            _cachedMergedWidthScale = -1.0f;
+            _cachedMergedWidthShowIcons = false;
+            _cachedMergedWidthShowSubProfession = false;
+            _cachedMergedWidthShowAbilityScore = false;
+            _cachedMergedWidthShowSeasonStrength = false;
+
             Meters.Clear();
             Meters.Add(new DpsMeter());
             Meters.Add(new HealingMeter());
