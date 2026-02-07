@@ -74,7 +74,8 @@ namespace BPSR_ZDPS.Meters
             // Calculate exact height based on entry count
             float listHeight = GetListHeight(GetEntryCount());
             // Calculate minimum width to prevent window collapse
-            float minWidth = GetMinMeterWidth();
+            // Only use calculated width if there are entities; otherwise use default width
+            float minWidth = (ActiveEncounter != null && GetEntryCount() > 0) ? GetMinMeterWidth() : mainWindow.DefaultWindowSize.X;
 
             if (ImGui.BeginListBox("##DPSMeterList", new Vector2(minWidth, listHeight)))
             {

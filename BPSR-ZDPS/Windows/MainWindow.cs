@@ -40,9 +40,11 @@ namespace BPSR_ZDPS.Windows
         static bool IsTemporarilyNotTopMost = false;
         static int LastPinnedOpacity = 100;
         static int _autoDisableTopMostFrameCounter = 0;
+        // Track the actual topmost state to detect when we need to apply changes
+        static bool _lastKnownTopMostState = false;
         public Vector2 WindowPosition;
         public Vector2 NextWindowPosition = new();
-        public Vector2 DefaultWindowSize = new Vector2(400, 300);
+        public Vector2 DefaultWindowSize = new Vector2(300, 150);
         public Vector2 WindowSize;
         public Vector2 NextWindowSize = new();
 
@@ -205,6 +207,8 @@ namespace BPSR_ZDPS.Windows
                     Utils.SetWindowTopmost();
                     Utils.SetWindowOpacity(windowSettings.Opacity * 0.01f);
                     LastPinnedOpacity = windowSettings.Opacity;
+                    // Initialize state tracker
+                    _lastKnownTopMostState = true;
                 }
 
                 if (Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled)
@@ -260,19 +264,24 @@ namespace BPSR_ZDPS.Windows
 
                         bool shouldBeOnTop = hasDpsDamage;
 
-                        if (shouldBeOnTop && IsTemporarilyNotTopMost)
+                        // Check if the actual OS window state differs from what we want
+                        if (shouldBeOnTop != _lastKnownTopMostState)
                         {
-                            // In active combat with damage, re-enable topmost
-                            Utils.SetWindowTopmost();
-                            Utils.SetWindowOpacity(LastPinnedOpacity * 0.01f);
-                            IsTemporarilyNotTopMost = false;
-                        }
-                        else if (!shouldBeOnTop && !IsTemporarilyNotTopMost && IsPinned)
-                        {
-                            // No DPS damage, send window to back and temporarily disable topmost
-                            Utils.SendWindowToBack();
-                            Utils.SetWindowOpacity(1.0f);
-                            IsTemporarilyNotTopMost = true;
+                            if (shouldBeOnTop)
+                            {
+                                // In active combat with damage, re-enable topmost
+                                Utils.SetWindowTopmost();
+                                Utils.SetWindowOpacity(LastPinnedOpacity * 0.01f);
+                                IsTemporarilyNotTopMost = false;
+                            }
+                            else if (IsPinned)
+                            {
+                                // No DPS damage, send window to back and temporarily disable topmost
+                                Utils.SendWindowToBack();
+                                Utils.SetWindowOpacity(1.0f);
+                                IsTemporarilyNotTopMost = true;
+                            }
+                            _lastKnownTopMostState = shouldBeOnTop;
                         }
                     }
                 }
@@ -497,6 +506,8 @@ namespace BPSR_ZDPS.Windows
                         LastPinnedOpacity = windowSettings.Opacity;
                         windowSettings.TopMost = true;
                         IsPinned = true;
+                        // Reset state tracker since we just set topmost
+                        _lastKnownTopMostState = true;
                     }
                     else
                     {
@@ -505,6 +516,8 @@ namespace BPSR_ZDPS.Windows
                         windowSettings.TopMost = false;
                         IsPinned = false;
                         IsTemporarilyNotTopMost = false;
+                        // Reset state tracker since we just unset topmost
+                        _lastKnownTopMostState = false;
                     }
                 }
                 ImGui.PopStyleColor();
