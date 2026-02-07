@@ -49,7 +49,7 @@ public class Settings
     public bool MergeDpsAndHealTabs { get; set; } = true;
 
     // Disable "On Top" when no entities are shown
-    public bool DisableTopMostWhenNoEntities { get; set; } = false;
+    public bool DisableTopMostWhenNoEntities { get; set; } = true;
 
     public bool LogToFile { get; set; } = true;
     public EGameCapturePreference GameCapturePreference { get; set; } = EGameCapturePreference.Auto;
