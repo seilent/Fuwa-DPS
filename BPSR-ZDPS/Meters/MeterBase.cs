@@ -14,8 +14,8 @@ namespace BPSR_ZDPS.Meters
     public class MeterBase
     {
         // Width configuration constants - edit here to change meter widths across all meters
-        public const float RightSideWidth = 110.0f;  // Right side width for damage/DPS/healing values (unscaled)
-        public const float ClassWidthEnglish = 50.0f;  // Class/sub-profession width for English (unscaled)
+        public const float RightSideWidth = 130.0f;  // Right side width for damage/DPS/healing values (unscaled)
+        public const float ClassWidthEnglish = 60.0f;  // Class/sub-profession width for English (unscaled)
         public const float ClassWidthWide = 35.0f;  // Class/sub-profession width for JP/CN (unscaled)
         public const float NameCharWidthRomaji = 10.0f;  // Per-character width for ASCII/romaji names (unscaled)
         public const float NameCharWidthWide = 20.0f;  // Per-character width for CJK names (unscaled)

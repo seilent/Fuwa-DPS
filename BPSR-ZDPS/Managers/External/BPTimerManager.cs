@@ -15,7 +15,7 @@ namespace BPSR_ZDPS.Managers.External
     {
         const int REPORT_HP_INTERVAL = 5;
         const string HOST = "http://127.0.0.1:8090";
-        static string API_KEY = "ftryin02h4wf0h12stnhzumey8fmene9jdyglur0kdq9yhgpd1";
+        static string API_KEY = "mp05wca8j89fcliz0jgudcpzg060ovwzxqz5fffavks4htried";
 
         static BPTimerHpReport? LastSentRequest = null;
 
