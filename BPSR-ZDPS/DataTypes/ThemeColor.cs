@@ -34,6 +34,17 @@ namespace BPSR_ZDPS.DataTypes
         ChatLink,
         ChatTimestamp,
 
+        // Chat channel colors
+        ChatChannel_Null,        // Gray
+        ChatChannel_World,       // Blue
+        ChatChannel_Scene,       // Green
+        ChatChannel_Team,        // Pink
+        ChatChannel_Union,       // Yellow
+        ChatChannel_Private,     // Magenta
+        ChatChannel_Group,       // Light Blue
+        ChatChannel_TopNotice,   // Orange
+        ChatChannel_System,      // Red
+
         // HP bar colors (SpawnTracker)
         HpBarCritical,  // < 30% HP (red)
         HpBarWarning,   // 30-60% HP (yellow)

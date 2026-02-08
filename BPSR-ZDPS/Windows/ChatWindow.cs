@@ -809,21 +809,20 @@ namespace BPSR_ZDPS.Windows
 
         private static Vector4 GetChannelColor(ChitChatChannelType chan)
         {
-            var color = chan switch
+            var themeColor = chan switch
             {
-                ChitChatChannelType.ChannelNull => new Vector4(0.50f, 0.50f, 0.50f, 1.0f),
-                ChitChatChannelType.ChannelWorld => new Vector4(0.39f, 0.78f, 1.00f, 1.0f),
-                ChitChatChannelType.ChannelScene => new Vector4(0.56f, 0.93f, 0.56f, 1.0f),
-                ChitChatChannelType.ChannelTeam => new Vector4(1.00f, 0.71f, 0.76f, 1.0f),
-                ChitChatChannelType.ChannelUnion => new Vector4(1.00f, 0.84f, 0.00f, 1.0f),
-                ChitChatChannelType.ChannelPrivate => new Vector4(1.00f, 0.63f, 1.00f, 1.0f),
-                ChitChatChannelType.ChannelGroup => new Vector4(0.68f, 0.85f, 0.90f, 1.0f),
-                ChitChatChannelType.ChannelTopNotice => new Vector4(1.00f, 0.55f, 0.00f, 1.0f),
-                ChitChatChannelType.ChannelSystem => new Vector4(1.00f, 0.39f, 0.28f, 1.0f),
-                _ => new Vector4(0.78f, 0.78f, 0.78f, 1.0f)
+                ChitChatChannelType.ChannelNull => DataTypes.ThemeColor.ChatChannel_Null,
+                ChitChatChannelType.ChannelWorld => DataTypes.ThemeColor.ChatChannel_World,
+                ChitChatChannelType.ChannelScene => DataTypes.ThemeColor.ChatChannel_Scene,
+                ChitChatChannelType.ChannelTeam => DataTypes.ThemeColor.ChatChannel_Team,
+                ChitChatChannelType.ChannelUnion => DataTypes.ThemeColor.ChatChannel_Union,
+                ChitChatChannelType.ChannelPrivate => DataTypes.ThemeColor.ChatChannel_Private,
+                ChitChatChannelType.ChannelGroup => DataTypes.ThemeColor.ChatChannel_Group,
+                ChitChatChannelType.ChannelTopNotice => DataTypes.ThemeColor.ChatChannel_TopNotice,
+                ChitChatChannelType.ChannelSystem => DataTypes.ThemeColor.ChatChannel_System,
+                _ => DataTypes.ThemeColor.ChatChannel_Null
             };
-
-            return color;
+            return Theme.GetColor(themeColor);
         }
     }
 

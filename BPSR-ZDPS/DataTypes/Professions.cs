@@ -244,19 +244,39 @@ namespace BPSR_ZDPS.DataTypes
 
         public static Vector4 RoleTypeColors(ERoleType roleType)
         {
-            switch (roleType)
+            return RoleTypeColors(roleType, Settings.Instance.Theme);
+        }
+
+        public static Vector4 RoleTypeColors(ERoleType roleType, ETheme theme)
+        {
+            if (theme == ETheme.Light)
             {
-                case ERoleType.DPS:
-                    //return new Vector4(230 / 255f, 0, 0, 0.50f);
-                    return new Vector4(227 / 255f, 60 / 255f, 60 / 255f, 0.70f);
-                case ERoleType.Tank:
-                    //return new Vector4(51 / 255f, 102 / 255f, 255 / 255f, 0.50f);
-                    //return new Vector4(69 / 255f, 174 / 255f, 240 / 255f, 0.50f);
-                    return new Vector4(40 / 255f, 160 / 255f, 220 / 255f, 0.70f);
-                case ERoleType.Healer:
-                    return new Vector4(40 / 255f, 220 / 255f, 40 / 255f, 0.70f);
-                default:
-                    return new Vector4(1, 1, 1, 1);
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(1.0f, 100 / 255f, 100 / 255f, 0.70f);    // Light Red
+                    case ERoleType.Tank:
+                        return new Vector4(100 / 255f, 200 / 255f, 1.0f, 0.70f);    // Light Blue
+                    case ERoleType.Healer:
+                        return new Vector4(100 / 255f, 1.0f, 100 / 255f, 0.70f);    // Light Green
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
+            else
+            {
+                // Standard colors for dark/black themes
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(227 / 255f, 60 / 255f, 60 / 255f, 0.70f);
+                    case ERoleType.Tank:
+                        return new Vector4(40 / 255f, 160 / 255f, 220 / 255f, 0.70f);
+                    case ERoleType.Healer:
+                        return new Vector4(40 / 255f, 220 / 255f, 40 / 255f, 0.70f);
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
             }
         }
 

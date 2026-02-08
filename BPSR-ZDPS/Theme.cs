@@ -582,6 +582,17 @@ namespace BPSR_ZDPS
                     { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
                     { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
 
+                    // Chat channel colors - brighter for light theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.60f, 0.60f, 0.60f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.20f, 0.60f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.30f, 0.80f, 0.30f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.50f, 0.60f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.70f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.40f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.40f, 0.70f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.40f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.20f, 0.10f, 1.0f) },
+
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
                     { ThemeColor.HpBarWarning, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f) },
@@ -644,6 +655,17 @@ namespace BPSR_ZDPS
                     // Chat colors
                     { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
                     { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
+
+                    // Chat channel colors
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.50f, 0.50f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.39f, 0.78f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.56f, 0.93f, 0.56f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.71f, 0.76f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.84f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.63f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.68f, 0.85f, 0.90f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.55f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.39f, 0.28f, 1.0f) },
 
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
@@ -708,6 +730,17 @@ namespace BPSR_ZDPS
                     { ThemeColor.ChatLink, new Vector4(0.40f, 0.70f, 1.00f, 1.00f) },
                     { ThemeColor.ChatTimestamp, new Vector4(0.60f, 0.65f, 0.75f, 1.00f) },
 
+                    // Chat channel colors
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.50f, 0.50f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.39f, 0.78f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.56f, 0.93f, 0.56f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.71f, 0.76f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.84f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.63f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.68f, 0.85f, 0.90f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.55f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.39f, 0.28f, 1.0f) },
+
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
                     { ThemeColor.HpBarWarning, new Vector4(223 / 255f, 171 / 255f, 8 / 255f, 0.85f) },
@@ -770,6 +803,17 @@ namespace BPSR_ZDPS
                     // Chat colors
                     { ThemeColor.ChatLink, new Vector4(0.60f, 0.50f, 1.00f, 1.00f) },
                     { ThemeColor.ChatTimestamp, new Vector4(0.65f, 0.55f, 0.85f, 1.00f) },
+
+                    // Chat channel colors - purple tinted
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.50f, 0.50f, 0.55f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.50f, 0.70f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.50f, 0.90f, 0.60f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.65f, 0.75f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.80f, 0.20f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.55f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.60f, 0.80f, 0.90f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.60f, 0.10f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.45f, 0.40f, 1.0f) },
 
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(224 / 255f, 64 / 255f, 64 / 255f, 0.85f) },
@@ -834,6 +878,17 @@ namespace BPSR_ZDPS
                     { ThemeColor.ChatLink, new Vector4(0.00f, 1.00f, 1.00f, 1.00f) },  // Bright cyan
                     { ThemeColor.ChatTimestamp, new Vector4(0.40f, 0.60f, 0.80f, 1.00f) },
 
+                    // Chat channel colors - neon cyberpunk
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.40f, 0.40f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.00f, 0.90f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.00f, 1.00f, 0.70f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.60f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.90f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.40f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.40f, 0.80f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.70f, 0.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.20f, 0.50f, 1.0f) },
+
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(1.0f, 0.0f, 0.6f, 0.85f) },  // Neon pink
                     { ThemeColor.HpBarWarning, new Vector4(1.0f, 0.8f, 0.0f, 0.85f) },  // Yellow
@@ -897,6 +952,17 @@ namespace BPSR_ZDPS
                     { ThemeColor.ChatLink, new Vector4(38/255f, 139/255f, 210/255f, 1.00f) },
                     { ThemeColor.ChatTimestamp, new Vector4(101/255f, 123/255f, 131/255f, 1.00f) },
 
+                    // Chat channel colors - Solarized palette
+                    { ThemeColor.ChatChannel_Null, new Vector4(88/255f, 110/255f, 117/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(38/255f, 139/255f, 210/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(133/255f, 153/255f, 0/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(211/255f, 54/255f, 130/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(181/255f, 137/255f, 0/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(108/255f, 113/255f, 196/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(42/255f, 161/255f, 152/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(203/255f, 75/255f, 22/255f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(220/255f, 50/255f, 47/255f, 1.0f) },
+
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(220 / 255f, 50 / 255f, 47 / 255f, 0.85f) },
                     { ThemeColor.HpBarWarning, new Vector4(181 / 255f, 137 / 255f, 0 / 255f, 0.85f) },
@@ -959,6 +1025,17 @@ namespace BPSR_ZDPS
                     // Chat colors
                     { ThemeColor.ChatLink, new Vector4(0.30f, 0.90f, 0.60f, 1.00f) },  // Light green
                     { ThemeColor.ChatTimestamp, new Vector4(0.50f, 0.80f, 0.60f, 1.00f) },
+
+                    // Chat channel colors - forest nature theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.45f, 0.50f, 0.45f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.30f, 0.70f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.35f, 0.80f, 0.40f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.65f, 0.65f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.80f, 0.30f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(0.90f, 0.50f, 0.90f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.40f, 0.70f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.60f, 0.20f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.35f, 0.20f, 1.0f) },
 
                     // HP bar colors (SpawnTracker)
                     { ThemeColor.HpBarCritical, new Vector4(1.0f, 0.3f, 0.2f, 0.85f) },  // Orange-red
