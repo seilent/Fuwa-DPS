@@ -281,7 +281,14 @@ namespace BPSR_ZDPS.Meters
             ImGui.SetCursorPosX(offset);
 
             // Add semi-transparent background for better text contrast against colored progress bar
-            Vector4 bgColor = Settings.Instance.Theme == ETheme.Light
+            // Seasonal themes (Spring, Summer, Autumn, Winter) are light-themed
+            bool isLightTheme = Settings.Instance.Theme == ETheme.Light
+                || Settings.Instance.Theme == ETheme.Spring
+                || Settings.Instance.Theme == ETheme.Summer
+                || Settings.Instance.Theme == ETheme.Autumn
+                || Settings.Instance.Theme == ETheme.Winter;
+
+            Vector4 bgColor = isLightTheme
                 ? new Vector4(1, 1, 1, 0.7f)  // Light theme: white with opacity
                 : new Vector4(0, 0, 0, 0.5f); // Dark/Black theme: black with opacity
             ImGui.PushStyleColor(ImGuiCol.Header, bgColor);

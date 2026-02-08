@@ -146,7 +146,12 @@ namespace BPSR_ZDPS.DataTypes
         {
             // Light theme uses lighter colors for better text contrast
             // Dark/Black themes use darker colors like GitHub repo
-            bool isLightTheme = (theme == ETheme.Light);
+            // Seasonal themes (Spring, Summer, Autumn, Winter) are light-themed
+            bool isLightTheme = (theme == ETheme.Light)
+                || (theme == ETheme.Spring)
+                || (theme == ETheme.Summer)
+                || (theme == ETheme.Autumn)
+                || (theme == ETheme.Winter);
 
             if (professionName == AppStrings.GetLocalized("Profession_Unknown"))
             {
@@ -283,7 +288,8 @@ namespace BPSR_ZDPS.DataTypes
         public static Vector4 RoleTypeIconColors(ERoleType roleType, ETheme theme)
         {
             // Light theme uses brighter role colors for icons
-            // Dark/Black themes use standard role colors
+            // Seasonal themes use muted colors that harmonize with each season's palette
+            // Dark/Black/Purple/Solarized/Forest themes use standard role colors
             if (theme == ETheme.Light)
             {
                 switch (roleType)
@@ -298,9 +304,69 @@ namespace BPSR_ZDPS.DataTypes
                         return new Vector4(1, 1, 1, 1);
                 }
             }
+            else if (theme == ETheme.Spring)
+            {
+                // Soft, fresh pastel tones
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(0.70f, 0.40f, 0.45f, 0.70f);    // Dusty rose
+                    case ERoleType.Tank:
+                        return new Vector4(0.50f, 0.65f, 0.75f, 0.70f);    // Soft sky blue
+                    case ERoleType.Healer:
+                        return new Vector4(0.50f, 0.70f, 0.55f, 0.70f);    // Sage green
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
+            else if (theme == ETheme.Summer)
+            {
+                // Warm, vibrant but not harsh
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(0.75f, 0.35f, 0.30f, 0.70f);    // Terra cotta
+                    case ERoleType.Tank:
+                        return new Vector4(0.35f, 0.55f, 0.70f, 0.70f);    // Ocean blue
+                    case ERoleType.Healer:
+                        return new Vector4(0.40f, 0.65f, 0.40f, 0.70f);    // Lush green
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
+            else if (theme == ETheme.Autumn)
+            {
+                // Warm, earthy tones
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(0.70f, 0.30f, 0.25f, 0.70f);    // Rust/brick
+                    case ERoleType.Tank:
+                        return new Vector4(0.40f, 0.45f, 0.60f, 0.70f);    // Slate blue
+                    case ERoleType.Healer:
+                        return new Vector4(0.50f, 0.55f, 0.35f, 0.70f);    // Olive/bronze
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
+            else if (theme == ETheme.Winter)
+            {
+                // Cool, icy tones - muted to reduce eye strain
+                switch (roleType)
+                {
+                    case ERoleType.DPS:
+                        return new Vector4(0.60f, 0.25f, 0.30f, 0.70f);    // Burgundy
+                    case ERoleType.Tank:
+                        return new Vector4(0.35f, 0.50f, 0.60f, 0.70f);    // Steel/ice blue
+                    case ERoleType.Healer:
+                        return new Vector4(0.30f, 0.55f, 0.45f, 0.70f);    // Teal/cool green (harmonizes with icy theme)
+                    default:
+                        return new Vector4(1, 1, 1, 1);
+                }
+            }
             else
             {
-                // Use standard role colors for dark/black themes
+                // Use standard (dark) role colors for Dark/Black/Purple/Solarized/Forest themes
                 return RoleTypeColors(roleType);
             }
         }
