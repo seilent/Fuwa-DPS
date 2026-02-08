@@ -337,76 +337,6 @@ namespace BPSR_ZDPS
             return colors;
         }
 
-        private static Dictionary<ImGuiCol, Vector4> GetCyberpunkThemeColors()
-        {
-            Dictionary<ImGuiCol, Vector4> colors = new();
-
-            // Nearly black with neon cyan/pink accents
-            Vector4 bgColor = new Vector4(10 / 255f, 10 / 255f, 15 / 255f, 1.0f);
-            Vector4 lightBgColor = new Vector4(20 / 255f, 20 / 255f, 30 / 255f, 1.0f);
-            Vector4 lightBgColor_fade = new Vector4(20 / 255f, 20 / 255f, 30 / 255f, 0.35f);
-            Vector4 veryLightBgColor = new Vector4(30 / 255f, 30 / 255f, 40 / 255f, 1.0f);
-
-            Vector4 panelColor = new Vector4(20 / 255f, 20 / 255f, 30 / 255f, 1.0f);
-            Vector4 panelHoverColor = new Vector4(0 / 255f, 255 / 255f, 255 / 255f, 1.0f);  // Cyan neon
-            Vector4 panelActiveColor = new Vector4(255 / 255f, 0 / 255f, 128 / 255f, 1.0f);  // Magenta neon
-
-            Vector4 textColor = new Vector4(0 / 255f, 255 / 255f, 255 / 255f, 1.0f);  // Cyan text
-            Vector4 textDisabledColor = new Vector4(80 / 255f, 80 / 255f, 120 / 255f, 1.0f);
-            Vector4 borderColor = new Vector4(60 / 255f, 100 / 255f, 140 / 255f, 1.0f);  // Brighter for visibility
-            Vector4 separatorColor = new Vector4(80 / 255f, 130 / 255f, 180 / 255f, 1.0f);  // Brighter for visibility
-
-            colors[ImGuiCol.Text] = textColor;
-            colors[ImGuiCol.TextDisabled] = textDisabledColor;
-            colors[ImGuiCol.TextSelectedBg] = panelActiveColor;
-            colors[ImGuiCol.WindowBg] = bgColor;
-            colors[ImGuiCol.ChildBg] = bgColor;
-            colors[ImGuiCol.PopupBg] = bgColor;
-            colors[ImGuiCol.Border] = borderColor;
-            colors[ImGuiCol.BorderShadow] = borderColor;
-            colors[ImGuiCol.FrameBg] = panelColor;
-            colors[ImGuiCol.FrameBgHovered] = panelHoverColor;
-            colors[ImGuiCol.FrameBgActive] = panelActiveColor;
-            colors[ImGuiCol.TitleBg] = lightBgColor;
-            colors[ImGuiCol.TitleBgActive] = bgColor;
-            colors[ImGuiCol.TitleBgCollapsed] = bgColor;
-            colors[ImGuiCol.MenuBarBg] = panelColor;
-            colors[ImGuiCol.ScrollbarBg] = panelColor;
-            colors[ImGuiCol.ScrollbarGrab] = lightBgColor;
-            colors[ImGuiCol.ScrollbarGrabHovered] = veryLightBgColor;
-            colors[ImGuiCol.ScrollbarGrabActive] = veryLightBgColor;
-            colors[ImGuiCol.CheckMark] = panelActiveColor;
-            colors[ImGuiCol.SliderGrab] = panelHoverColor;
-            colors[ImGuiCol.SliderGrabActive] = panelActiveColor;
-            colors[ImGuiCol.Button] = panelColor;
-            colors[ImGuiCol.ButtonHovered] = panelHoverColor;
-            colors[ImGuiCol.ButtonActive] = panelHoverColor;
-            colors[ImGuiCol.Header] = panelColor;
-            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
-            colors[ImGuiCol.HeaderActive] = panelActiveColor;
-            colors[ImGuiCol.Separator] = separatorColor;
-            colors[ImGuiCol.SeparatorHovered] = separatorColor;
-            colors[ImGuiCol.SeparatorActive] = separatorColor;
-            colors[ImGuiCol.ResizeGrip] = bgColor;
-            colors[ImGuiCol.ResizeGripHovered] = panelColor;
-            colors[ImGuiCol.ResizeGripActive] = lightBgColor;
-            colors[ImGuiCol.PlotLines] = panelActiveColor;
-            colors[ImGuiCol.PlotLinesHovered] = panelHoverColor;
-            colors[ImGuiCol.PlotHistogram] = panelActiveColor;
-            colors[ImGuiCol.PlotHistogramHovered] = panelHoverColor;
-            colors[ImGuiCol.ModalWindowDimBg] = lightBgColor_fade;
-            colors[ImGuiCol.DragDropTarget] = bgColor;
-            colors[ImGuiCol.NavCursor] = bgColor;
-            colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.00f, 1.00f, 1.00f, 0.70f);
-            colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.10f, 0.10f, 0.15f, 0.20f);
-            colors[ImGuiCol.Tab] = bgColor;
-            colors[ImGuiCol.TabHovered] = panelHoverColor;
-            colors[ImGuiCol.TabSelected] = panelActiveColor;
-            colors[ImGuiCol.TabDimmed] = bgColor;
-            colors[ImGuiCol.TabDimmedSelected] = panelActiveColor;
-
-            return colors;
-        }
 
         private static Dictionary<ImGuiCol, Vector4> GetSolarizedThemeColors()
         {
@@ -541,6 +471,290 @@ namespace BPSR_ZDPS
             colors[ImGuiCol.NavCursor] = bgColor;
             colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.70f, 0.95f, 0.70f, 0.70f);
             colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.20f, 0.35f, 0.25f, 0.20f);
+            colors[ImGuiCol.Tab] = bgColor;
+            colors[ImGuiCol.TabHovered] = panelHoverColor;
+            colors[ImGuiCol.TabSelected] = panelActiveColor;
+            colors[ImGuiCol.TabDimmed] = bgColor;
+            colors[ImGuiCol.TabDimmedSelected] = panelActiveColor;
+
+            return colors;
+        }
+
+        private static Dictionary<ImGuiCol, Vector4> GetSpringThemeColors()
+        {
+            Dictionary<ImGuiCol, Vector4> colors = new();
+
+            // Fresh spring theme - soft pinks and greens, inspired by cherry blossoms and new growth
+            Vector4 bgColor = new Vector4(240 / 255f, 248 / 255f, 245 / 255f, 1.0f);    // Pale green-white
+            Vector4 lightBgColor = new Vector4(230 / 255f, 240 / 255f, 235 / 255f, 1.0f);  // Soft sage
+            Vector4 lightBgColor_fade = new Vector4(230 / 255f, 240 / 255f, 235 / 255f, 0.35f);
+            Vector4 veryLightBgColor = new Vector4(220 / 255f, 235 / 255f, 228 / 255f, 1.0f);
+
+            Vector4 panelColor = new Vector4(255 / 255f, 250 / 255f, 252 / 255f, 1.0f);   // Cherry blossom white
+            Vector4 panelHoverColor = new Vector4(183 / 255f, 220 / 255f, 170 / 255f, 1.0f);  // Fresh leaf green
+            Vector4 panelActiveColor = new Vector4(255 / 255f, 183 / 255f, 197 / 255f, 1.0f);  // Cherry blossom pink
+
+            Vector4 textColor = new Vector4(26 / 255f, 58 / 255f, 26 / 255f, 1.0f);      // Dark forest green
+            Vector4 textDisabledColor = new Vector4(120 / 255f, 140 / 255f, 120 / 255f, 1.0f);
+            Vector4 borderColor = new Vector4(180 / 255f, 210 / 255f, 185 / 255f, 1.0f);
+            Vector4 separatorColor = new Vector4(160 / 255f, 200 / 255f, 170 / 255f, 1.0f);
+
+            colors[ImGuiCol.Text] = textColor;
+            colors[ImGuiCol.TextDisabled] = textDisabledColor;
+            colors[ImGuiCol.TextSelectedBg] = panelActiveColor;
+            colors[ImGuiCol.WindowBg] = bgColor;
+            colors[ImGuiCol.ChildBg] = bgColor;
+            colors[ImGuiCol.PopupBg] = bgColor;
+            colors[ImGuiCol.Border] = borderColor;
+            colors[ImGuiCol.BorderShadow] = borderColor;
+            colors[ImGuiCol.FrameBg] = panelColor;
+            colors[ImGuiCol.FrameBgHovered] = panelHoverColor;
+            colors[ImGuiCol.FrameBgActive] = panelActiveColor;
+            colors[ImGuiCol.TitleBg] = lightBgColor;
+            colors[ImGuiCol.TitleBgActive] = bgColor;
+            colors[ImGuiCol.TitleBgCollapsed] = bgColor;
+            colors[ImGuiCol.MenuBarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarGrab] = lightBgColor;
+            colors[ImGuiCol.ScrollbarGrabHovered] = veryLightBgColor;
+            colors[ImGuiCol.ScrollbarGrabActive] = veryLightBgColor;
+            colors[ImGuiCol.CheckMark] = panelActiveColor;
+            colors[ImGuiCol.SliderGrab] = panelHoverColor;
+            colors[ImGuiCol.SliderGrabActive] = panelActiveColor;
+            colors[ImGuiCol.Button] = panelColor;
+            colors[ImGuiCol.ButtonHovered] = panelHoverColor;
+            colors[ImGuiCol.ButtonActive] = panelHoverColor;
+            colors[ImGuiCol.Header] = panelColor;
+            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
+            colors[ImGuiCol.HeaderActive] = panelActiveColor;
+            colors[ImGuiCol.Separator] = separatorColor;
+            colors[ImGuiCol.SeparatorHovered] = separatorColor;
+            colors[ImGuiCol.SeparatorActive] = separatorColor;
+            colors[ImGuiCol.ResizeGrip] = bgColor;
+            colors[ImGuiCol.ResizeGripHovered] = panelColor;
+            colors[ImGuiCol.ResizeGripActive] = lightBgColor;
+            colors[ImGuiCol.PlotLines] = panelActiveColor;
+            colors[ImGuiCol.PlotLinesHovered] = panelHoverColor;
+            colors[ImGuiCol.PlotHistogram] = panelActiveColor;
+            colors[ImGuiCol.PlotHistogramHovered] = panelHoverColor;
+            colors[ImGuiCol.ModalWindowDimBg] = lightBgColor_fade;
+            colors[ImGuiCol.DragDropTarget] = bgColor;
+            colors[ImGuiCol.NavCursor] = bgColor;
+            colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.70f, 0.95f, 0.75f, 0.70f);
+            colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.85f, 0.95f, 0.88f, 0.20f);
+            colors[ImGuiCol.Tab] = bgColor;
+            colors[ImGuiCol.TabHovered] = panelHoverColor;
+            colors[ImGuiCol.TabSelected] = panelActiveColor;
+            colors[ImGuiCol.TabDimmed] = bgColor;
+            colors[ImGuiCol.TabDimmedSelected] = panelActiveColor;
+
+            return colors;
+        }
+
+        private static Dictionary<ImGuiCol, Vector4> GetSummerThemeColors()
+        {
+            Dictionary<ImGuiCol, Vector4> colors = new();
+
+            // Vibrant summer theme - warm yellows and bright blues, sunshine and ocean
+            Vector4 bgColor = new Vector4(232 / 255f, 244 / 255f, 248 / 255f, 1.0f);    // Sky blue tint
+            Vector4 lightBgColor = new Vector4(218 / 255f, 235 / 255f, 243 / 255f, 1.0f);  // Deeper sky
+            Vector4 lightBgColor_fade = new Vector4(218 / 255f, 235 / 255f, 243 / 255f, 0.35f);
+            Vector4 veryLightBgColor = new Vector4(200 / 255f, 225 / 255f, 238 / 255f, 1.0f);
+
+            Vector4 panelColor = new Vector4(255 / 255f, 252 / 255f, 232 / 255f, 1.0f);   // Warm cream
+            Vector4 panelHoverColor = new Vector4(0 / 255f, 191 / 255f, 255 / 255f, 1.0f);  // Ocean blue
+            Vector4 panelActiveColor = new Vector4(255 / 255f, 215 / 255f, 0 / 255f, 1.0f);  // Sun yellow
+
+            Vector4 textColor = new Vector4(26 / 255f, 77 / 255f, 26 / 255f, 1.0f);      // Deep forest green
+            Vector4 textDisabledColor = new Vector4(110 / 255f, 140 / 255f, 130 / 255f, 1.0f);
+            Vector4 borderColor = new Vector4(170 / 255f, 210 / 255f, 230 / 255f, 1.0f);
+            Vector4 separatorColor = new Vector4(140 / 255f, 190 / 255f, 220 / 255f, 1.0f);
+
+            colors[ImGuiCol.Text] = textColor;
+            colors[ImGuiCol.TextDisabled] = textDisabledColor;
+            colors[ImGuiCol.TextSelectedBg] = panelActiveColor;
+            colors[ImGuiCol.WindowBg] = bgColor;
+            colors[ImGuiCol.ChildBg] = bgColor;
+            colors[ImGuiCol.PopupBg] = bgColor;
+            colors[ImGuiCol.Border] = borderColor;
+            colors[ImGuiCol.BorderShadow] = borderColor;
+            colors[ImGuiCol.FrameBg] = panelColor;
+            colors[ImGuiCol.FrameBgHovered] = panelHoverColor;
+            colors[ImGuiCol.FrameBgActive] = panelActiveColor;
+            colors[ImGuiCol.TitleBg] = lightBgColor;
+            colors[ImGuiCol.TitleBgActive] = bgColor;
+            colors[ImGuiCol.TitleBgCollapsed] = bgColor;
+            colors[ImGuiCol.MenuBarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarGrab] = lightBgColor;
+            colors[ImGuiCol.ScrollbarGrabHovered] = veryLightBgColor;
+            colors[ImGuiCol.ScrollbarGrabActive] = veryLightBgColor;
+            colors[ImGuiCol.CheckMark] = panelActiveColor;
+            colors[ImGuiCol.SliderGrab] = panelHoverColor;
+            colors[ImGuiCol.SliderGrabActive] = panelActiveColor;
+            colors[ImGuiCol.Button] = panelColor;
+            colors[ImGuiCol.ButtonHovered] = panelHoverColor;
+            colors[ImGuiCol.ButtonActive] = panelHoverColor;
+            colors[ImGuiCol.Header] = panelColor;
+            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
+            colors[ImGuiCol.HeaderActive] = panelActiveColor;
+            colors[ImGuiCol.Separator] = separatorColor;
+            colors[ImGuiCol.SeparatorHovered] = separatorColor;
+            colors[ImGuiCol.SeparatorActive] = separatorColor;
+            colors[ImGuiCol.ResizeGrip] = bgColor;
+            colors[ImGuiCol.ResizeGripHovered] = panelColor;
+            colors[ImGuiCol.ResizeGripActive] = lightBgColor;
+            colors[ImGuiCol.PlotLines] = panelActiveColor;
+            colors[ImGuiCol.PlotLinesHovered] = panelHoverColor;
+            colors[ImGuiCol.PlotHistogram] = panelActiveColor;
+            colors[ImGuiCol.PlotHistogramHovered] = panelHoverColor;
+            colors[ImGuiCol.ModalWindowDimBg] = lightBgColor_fade;
+            colors[ImGuiCol.DragDropTarget] = bgColor;
+            colors[ImGuiCol.NavCursor] = bgColor;
+            colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.80f, 0.95f, 0.60f, 0.70f);
+            colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.75f, 0.88f, 0.93f, 0.20f);
+            colors[ImGuiCol.Tab] = bgColor;
+            colors[ImGuiCol.TabHovered] = panelHoverColor;
+            colors[ImGuiCol.TabSelected] = panelActiveColor;
+            colors[ImGuiCol.TabDimmed] = bgColor;
+            colors[ImGuiCol.TabDimmedSelected] = panelActiveColor;
+
+            return colors;
+        }
+
+        private static Dictionary<ImGuiCol, Vector4> GetAutumnThemeColors()
+        {
+            Dictionary<ImGuiCol, Vector4> colors = new();
+
+            // Warm autumn theme - oranges, reds, and golds, falling leaves and harvest
+            Vector4 bgColor = new Vector4(245 / 255f, 237 / 255f, 224 / 255f, 1.0f);    // Warm cream
+            Vector4 lightBgColor = new Vector4(235 / 255f, 225 / 255f, 210 / 255f, 1.0f);  // Warm beige
+            Vector4 lightBgColor_fade = new Vector4(235 / 255f, 225 / 255f, 210 / 255f, 0.35f);
+            Vector4 veryLightBgColor = new Vector4(220 / 255f, 210 / 255f, 195 / 255f, 1.0f);
+
+            Vector4 panelColor = new Vector4(255 / 255f, 245 / 255f, 230 / 255f, 1.0f);   // Soft orange-white
+            Vector4 panelHoverColor = new Vector4(210 / 255f, 105 / 255f, 30 / 255f, 1.0f);  // Golden brown
+            Vector4 panelActiveColor = new Vector4(210 / 255f, 105 / 255f, 30 / 255f, 1.0f);  // Maple red
+
+            Vector4 textColor = new Vector4(61 / 255f, 41 / 255f, 20 / 255f, 1.0f);      // Dark brown
+            Vector4 textDisabledColor = new Vector4(130 / 255f, 110 / 255f, 90 / 255f, 1.0f);
+            Vector4 borderColor = new Vector4(200 / 255f, 175 / 255f, 150 / 255f, 1.0f);
+            Vector4 separatorColor = new Vector4(180 / 255f, 150 / 255f, 120 / 255f, 1.0f);
+
+            colors[ImGuiCol.Text] = textColor;
+            colors[ImGuiCol.TextDisabled] = textDisabledColor;
+            colors[ImGuiCol.TextSelectedBg] = panelActiveColor;
+            colors[ImGuiCol.WindowBg] = bgColor;
+            colors[ImGuiCol.ChildBg] = bgColor;
+            colors[ImGuiCol.PopupBg] = bgColor;
+            colors[ImGuiCol.Border] = borderColor;
+            colors[ImGuiCol.BorderShadow] = borderColor;
+            colors[ImGuiCol.FrameBg] = panelColor;
+            colors[ImGuiCol.FrameBgHovered] = panelHoverColor;
+            colors[ImGuiCol.FrameBgActive] = panelActiveColor;
+            colors[ImGuiCol.TitleBg] = lightBgColor;
+            colors[ImGuiCol.TitleBgActive] = bgColor;
+            colors[ImGuiCol.TitleBgCollapsed] = bgColor;
+            colors[ImGuiCol.MenuBarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarGrab] = lightBgColor;
+            colors[ImGuiCol.ScrollbarGrabHovered] = veryLightBgColor;
+            colors[ImGuiCol.ScrollbarGrabActive] = veryLightBgColor;
+            colors[ImGuiCol.CheckMark] = panelActiveColor;
+            colors[ImGuiCol.SliderGrab] = panelHoverColor;
+            colors[ImGuiCol.SliderGrabActive] = panelActiveColor;
+            colors[ImGuiCol.Button] = panelColor;
+            colors[ImGuiCol.ButtonHovered] = panelHoverColor;
+            colors[ImGuiCol.ButtonActive] = panelHoverColor;
+            colors[ImGuiCol.Header] = panelColor;
+            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
+            colors[ImGuiCol.HeaderActive] = panelActiveColor;
+            colors[ImGuiCol.Separator] = separatorColor;
+            colors[ImGuiCol.SeparatorHovered] = separatorColor;
+            colors[ImGuiCol.SeparatorActive] = separatorColor;
+            colors[ImGuiCol.ResizeGrip] = bgColor;
+            colors[ImGuiCol.ResizeGripHovered] = panelColor;
+            colors[ImGuiCol.ResizeGripActive] = lightBgColor;
+            colors[ImGuiCol.PlotLines] = panelActiveColor;
+            colors[ImGuiCol.PlotLinesHovered] = panelHoverColor;
+            colors[ImGuiCol.PlotHistogram] = panelActiveColor;
+            colors[ImGuiCol.PlotHistogramHovered] = panelHoverColor;
+            colors[ImGuiCol.ModalWindowDimBg] = lightBgColor_fade;
+            colors[ImGuiCol.DragDropTarget] = bgColor;
+            colors[ImGuiCol.NavCursor] = bgColor;
+            colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.95f, 0.75f, 0.40f, 0.70f);
+            colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.90f, 0.85f, 0.75f, 0.20f);
+            colors[ImGuiCol.Tab] = bgColor;
+            colors[ImGuiCol.TabHovered] = panelHoverColor;
+            colors[ImGuiCol.TabSelected] = panelActiveColor;
+            colors[ImGuiCol.TabDimmed] = bgColor;
+            colors[ImGuiCol.TabDimmedSelected] = panelActiveColor;
+
+            return colors;
+        }
+
+        private static Dictionary<ImGuiCol, Vector4> GetWinterThemeColors()
+        {
+            Dictionary<ImGuiCol, Vector4> colors = new();
+
+            // Cool winter theme - icy blues and frosted whites, peaceful snow landscapes
+            Vector4 bgColor = new Vector4(232 / 255f, 239 / 255f, 245 / 255f, 1.0f);    // Icy blue-gray
+            Vector4 lightBgColor = new Vector4(220 / 255f, 230 / 255f, 238 / 255f, 1.0f);  // Frost gray
+            Vector4 lightBgColor_fade = new Vector4(220 / 255f, 230 / 255f, 238 / 255f, 0.35f);
+            Vector4 veryLightBgColor = new Vector4(210 / 255f, 222 / 255f, 232 / 255f, 1.0f);
+
+            Vector4 panelColor = new Vector4(248 / 255f, 251 / 255f, 255 / 255f, 1.0f);   // Frost white
+            Vector4 panelHoverColor = new Vector4(135 / 255f, 206 / 255f, 235 / 255f, 1.0f);  // Ice blue
+            Vector4 panelActiveColor = new Vector4(100 / 255f, 160 / 255f, 200 / 255f, 1.0f);  // Deep ice blue
+
+            Vector4 textColor = new Vector4(26 / 255f, 42 / 255f, 58 / 255f, 1.0f);      // Deep navy
+            Vector4 textDisabledColor = new Vector4(110 / 255f, 130 / 255f, 150 / 255f, 1.0f);
+            Vector4 borderColor = new Vector4(175 / 255f, 195 / 255f, 215 / 255f, 1.0f);
+            Vector4 separatorColor = new Vector4(155 / 255f, 180 / 255f, 205 / 255f, 1.0f);
+
+            colors[ImGuiCol.Text] = textColor;
+            colors[ImGuiCol.TextDisabled] = textDisabledColor;
+            colors[ImGuiCol.TextSelectedBg] = panelActiveColor;
+            colors[ImGuiCol.WindowBg] = bgColor;
+            colors[ImGuiCol.ChildBg] = bgColor;
+            colors[ImGuiCol.PopupBg] = bgColor;
+            colors[ImGuiCol.Border] = borderColor;
+            colors[ImGuiCol.BorderShadow] = borderColor;
+            colors[ImGuiCol.FrameBg] = panelColor;
+            colors[ImGuiCol.FrameBgHovered] = panelHoverColor;
+            colors[ImGuiCol.FrameBgActive] = panelActiveColor;
+            colors[ImGuiCol.TitleBg] = lightBgColor;
+            colors[ImGuiCol.TitleBgActive] = bgColor;
+            colors[ImGuiCol.TitleBgCollapsed] = bgColor;
+            colors[ImGuiCol.MenuBarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarBg] = panelColor;
+            colors[ImGuiCol.ScrollbarGrab] = lightBgColor;
+            colors[ImGuiCol.ScrollbarGrabHovered] = veryLightBgColor;
+            colors[ImGuiCol.ScrollbarGrabActive] = veryLightBgColor;
+            colors[ImGuiCol.CheckMark] = panelActiveColor;
+            colors[ImGuiCol.SliderGrab] = panelHoverColor;
+            colors[ImGuiCol.SliderGrabActive] = panelActiveColor;
+            colors[ImGuiCol.Button] = panelColor;
+            colors[ImGuiCol.ButtonHovered] = panelHoverColor;
+            colors[ImGuiCol.ButtonActive] = panelHoverColor;
+            colors[ImGuiCol.Header] = panelColor;
+            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
+            colors[ImGuiCol.HeaderActive] = panelActiveColor;
+            colors[ImGuiCol.Separator] = separatorColor;
+            colors[ImGuiCol.SeparatorHovered] = separatorColor;
+            colors[ImGuiCol.SeparatorActive] = separatorColor;
+            colors[ImGuiCol.ResizeGrip] = bgColor;
+            colors[ImGuiCol.ResizeGripHovered] = panelColor;
+            colors[ImGuiCol.ResizeGripActive] = lightBgColor;
+            colors[ImGuiCol.PlotLines] = panelActiveColor;
+            colors[ImGuiCol.PlotLinesHovered] = panelHoverColor;
+            colors[ImGuiCol.PlotHistogram] = panelActiveColor;
+            colors[ImGuiCol.PlotHistogramHovered] = panelHoverColor;
+            colors[ImGuiCol.ModalWindowDimBg] = lightBgColor_fade;
+            colors[ImGuiCol.DragDropTarget] = bgColor;
+            colors[ImGuiCol.NavCursor] = bgColor;
+            colors[ImGuiCol.NavWindowingHighlight] = new Vector4(0.65f, 0.85f, 0.95f, 0.70f);
+            colors[ImGuiCol.NavWindowingDimBg] = new Vector4(0.80f, 0.88f, 0.93f, 0.20f);
             colors[ImGuiCol.Tab] = bgColor;
             colors[ImGuiCol.TabHovered] = panelHoverColor;
             colors[ImGuiCol.TabSelected] = panelActiveColor;
@@ -865,82 +1079,313 @@ namespace BPSR_ZDPS
                     { ThemeColor.BorderSubtle, new Vector4(60 / 255f, 40 / 255f, 80 / 255f, 0.5f) },
                     { ThemeColor.BorderStrong, new Vector4(100 / 255f, 70 / 255f, 130 / 255f, 1.0f) }
                 },
-                ETheme.Cyberpunk => new Dictionary<ThemeColor, Vector4>
+                ETheme.Spring => new Dictionary<ThemeColor, Vector4>
                 {
-                    // Text colors - cyan for cyberpunk
-                    { ThemeColor.PrimaryText, new Vector4(0/255f, 255/255f, 255/255f, 1.0f) },
-                    { ThemeColor.WarningText, new Vector4(1.0f, 0.2f, 0.5f, 0.75f) },  // Pink warning
-                    { ThemeColor.SuccessText, new Vector4(0.0f, 1.0f, 0.8f, 0.75f) },  // Cyan-green success
+                    // Text colors - spring greens and pinks
+                    { ThemeColor.PrimaryText, new Vector4(26/255f, 58/255f, 26/255f, 1.0f) },
+                    { ThemeColor.WarningText, new Vector4(1.0f, 0.4f, 0.3f, 0.75f) },  // Soft red
+                    { ThemeColor.SuccessText, new Vector4(0.3f, 0.7f, 0.3f, 0.75f) },  // Fresh green
 
                     // Button colors
-                    { ThemeColor.SelectedButton, new Vector4(30/255f, 30/255f, 50/255f, 1.0f) },
-                    { ThemeColor.DestructiveButton, new Vector4(1.0f, 0.0f, 0.5f, 1.0f) },  // Neon pink
-                    { ThemeColor.ButtonRed, new Vector4(1.0f, 0.0f, 0.6f, 1.0f) },  // Hot pink
+                    { ThemeColor.SelectedButton, new Vector4(183/255f, 220/255f, 170/255f, 1.0f) },
+                    { ThemeColor.DestructiveButton, new Vector4(1.0f, 0.5f, 0.4f, 1.0f) },
+                    { ThemeColor.ButtonRed, new Vector4(0.9f, 0.4f, 0.3f, 1.0f) },
 
                     // Buff header colors
-                    { ThemeColor.BuffHeader_Default, new Vector4(20/255f, 20/255f, 40/255f, 1.0f) },
-                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.3f, 0.6f, 0.75f) },
-                    { ThemeColor.BuffHeader_Buff, new Vector4(0.3f, 1.0f, 0.8f, 0.75f) },
-                    { ThemeColor.BuffHeader_Unknown, new Vector4(1.0f, 0.8f, 0.0f, 0.75f) },
+                    { ThemeColor.BuffHeader_Default, new Vector4(200/255f, 220/255f, 200/255f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.6f, 0.6f, 0.75f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.6f, 0.9f, 0.6f, 0.75f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(1.0f, 0.85f, 0.5f, 0.75f) },
 
                     // Status colors
-                    { ThemeColor.ConnectionConnected, new Vector4(0.0f, 1.0f, 0.8f, 1.0f) },  // Cyan-green
-                    { ThemeColor.ConnectionDisconnected, new Vector4(1.0f, 0.0f, 0.5f, 1.0f) },  // Neon pink
+                    { ThemeColor.ConnectionConnected, new Vector4(0.4f, 0.8f, 0.4f, 1.0f) },
+                    { ThemeColor.ConnectionDisconnected, new Vector4(1.0f, 0.5f, 0.4f, 1.0f) },
 
                     // Banner colors (ModuleSolver)
-                    { ThemeColor.InfoBanner, new Vector4(0.0f, 0.8f, 1.0f, 1.0f) },  // Cyan
-                    { ThemeColor.WarningBanner, new Vector4(1.0f, 0.5f, 0.0f, 1.0f) },  // Orange
+                    { ThemeColor.InfoBanner, new Vector4(0.5f, 0.8f, 0.6f, 1.0f) },
+                    { ThemeColor.WarningBanner, new Vector4(0.9f, 0.6f, 0.3f, 1.0f) },
 
                     // Chat colors
-                    { ThemeColor.ChatLink, new Vector4(0.00f, 1.00f, 1.00f, 1.00f) },  // Bright cyan
-                    { ThemeColor.ChatTimestamp, new Vector4(0.40f, 0.60f, 0.80f, 1.00f) },
+                    { ThemeColor.ChatLink, new Vector4(0.50f, 0.70f, 0.40f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.55f, 0.65f, 0.55f, 1.00f) },
 
-                    // Chat channel colors - neon cyberpunk
-                    { ThemeColor.ChatChannel_Null, new Vector4(0.40f, 0.40f, 0.50f, 1.0f) },
-                    { ThemeColor.ChatChannel_World, new Vector4(0.00f, 0.90f, 1.00f, 1.0f) },
-                    { ThemeColor.ChatChannel_Scene, new Vector4(0.00f, 1.00f, 0.70f, 1.0f) },
-                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.60f, 0.80f, 1.0f) },
-                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.90f, 0.00f, 1.0f) },
-                    { ThemeColor.ChatChannel_Private, new Vector4(1.00f, 0.40f, 1.00f, 1.0f) },
-                    { ThemeColor.ChatChannel_Group, new Vector4(0.40f, 0.80f, 1.00f, 1.0f) },
-                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.70f, 0.00f, 1.0f) },
-                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.20f, 0.50f, 1.0f) },
+                    // Chat channel colors - spring nature theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.50f, 0.55f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.40f, 0.70f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.45f, 0.75f, 0.40f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.70f, 0.70f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.80f, 0.40f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(0.90f, 0.55f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.50f, 0.70f, 0.75f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.70f, 0.30f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.45f, 0.35f, 1.0f) },
 
                     // HP bar colors (SpawnTracker)
-                    { ThemeColor.HpBarCritical, new Vector4(1.0f, 0.0f, 0.6f, 0.85f) },  // Neon pink
-                    { ThemeColor.HpBarWarning, new Vector4(1.0f, 0.8f, 0.0f, 0.85f) },  // Yellow
-                    { ThemeColor.HpBarHealthy, new Vector4(0.0f, 1.0f, 0.8f, 0.85f) },  // Cyan-green
+                    { ThemeColor.HpBarCritical, new Vector4(1.0f, 0.4f, 0.3f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(1.0f, 0.75f, 0.3f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(0.4f, 0.8f, 0.4f, 0.85f) },
 
                     // Debug colors (NetDebug)
-                    { ThemeColor.DebugSeen, new Vector4(0.0f, 1.0f, 0.5f, 1.0f) },  // Neon green
-                    { ThemeColor.DebugUnseen, new Vector4(1.0f, 0.2f, 0.5f, 1.0f) },  // Neon pink
+                    { ThemeColor.DebugSeen, new Vector4(0.4f, 0.8f, 0.4f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(1.0f, 0.5f, 0.4f, 1.0f) },
 
                     // Status/state colors
-                    { ThemeColor.EncounterPausedBackground, new Vector4(1.0f, 0.0f, 0.5f, 0.75f) },  // Neon pink transparent
-                    { ThemeColor.EncounterPausedText, new Vector4(0/255f, 255/255f, 255/255f, 1.0f) },  // Cyan
-                    { ThemeColor.EncounterResumedButton, new Vector4(0.0f, 1.0f, 0.8f, 1.0f) },  // Cyan-green
+                    { ThemeColor.EncounterPausedBackground, new Vector4(1.0f, 0.5f, 0.4f, 0.75f) },
+                    { ThemeColor.EncounterPausedText, new Vector4(26/255f, 58/255f, 26/255f, 1.0f) },
+                    { ThemeColor.EncounterResumedButton, new Vector4(0.4f, 0.8f, 0.4f, 1.0f) },
 
                     // Window state colors
-                    { ThemeColor.WindowPinned, new Vector4(1.0f, 1.0f, 0.0f, 1.0f) },  // Neon yellow
-                    { ThemeColor.WindowUnpinned, new Vector4(0.3f, 0.3f, 0.4f, 1.0f) },  // Dark gray
-                    { ThemeColor.WindowCollapsed, new Vector4(0.0f, 1.0f, 1.0f, 1.0f) },  // Cyan
-                    { ThemeColor.WindowExpanded, new Vector4(0.25f, 0.25f, 0.35f, 1.0f) },  // Dim gray
+                    { ThemeColor.WindowPinned, new Vector4(1.0f, 0.85f, 0.3f, 1.0f) },
+                    { ThemeColor.WindowUnpinned, new Vector4(0.4f, 0.55f, 0.45f, 1.0f) },
+                    { ThemeColor.WindowCollapsed, new Vector4(0.5f, 0.75f, 0.5f, 1.0f) },
+                    { ThemeColor.WindowExpanded, new Vector4(0.45f, 0.55f, 0.48f, 1.0f) },
 
                     // Common UI colors
-                    { ThemeColor.QualityBasic, new Vector4(0.4f, 0.7f, 1.0f, 1.0f) },  // Cyan-blue
-                    { ThemeColor.QualityAdvanced, new Vector4(0.8f, 0.4f, 1.0f, 1.0f) },  // Purple
-                    { ThemeColor.QualityExcellent, new Vector4(1.0f, 0.9f, 0.2f, 1.0f) },  // Gold
+                    { ThemeColor.QualityBasic, new Vector4(0.5f, 0.7f, 0.5f, 1.0f) },
+                    { ThemeColor.QualityAdvanced, new Vector4(0.7f, 0.55f, 0.75f, 1.0f) },
+                    { ThemeColor.QualityExcellent, new Vector4(1.0f, 0.85f, 0.4f, 1.0f) },
 
                     // Alpha helper colors
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
 
-                    // Icon/image backgrounds - bright cyan-white for cyberpunk theme
-                    { ThemeColor.IconBackground, new Vector4(0.7f, 1.0f, 1.0f, 0.85f) },
+                    // Icon/image backgrounds - light pink-white for spring theme
+                    { ThemeColor.IconBackground, new Vector4(1.0f, 0.98f, 0.98f, 0.85f) },
 
                     // Border/separator colors
-                    { ThemeColor.BorderSubtle, new Vector4(30 / 255f, 30 / 255f, 50 / 255f, 0.5f) },
-                    { ThemeColor.BorderStrong, new Vector4(0 / 255f, 255 / 255f, 255 / 255f, 0.8f) }  // Cyan
+                    { ThemeColor.BorderSubtle, new Vector4(180 / 255f, 210 / 255f, 185 / 255f, 0.5f) },
+                    { ThemeColor.BorderStrong, new Vector4(150 / 255f, 190 / 255f, 160 / 255f, 1.0f) }
+                },
+                ETheme.Summer => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors - vibrant summer greens
+                    { ThemeColor.PrimaryText, new Vector4(26/255f, 77/255f, 26/255f, 1.0f) },
+                    { ThemeColor.WarningText, new Vector4(1.0f, 0.5f, 0.0f, 0.75f) },  // Orange
+                    { ThemeColor.SuccessText, new Vector4(0.0f, 0.7f, 0.3f, 0.75f) },  // Vibrant green
+
+                    // Button colors
+                    { ThemeColor.SelectedButton, new Vector4(0/255f, 191/255f, 255/255f, 1.0f) },
+                    { ThemeColor.DestructiveButton, new Vector4(1.0f, 0.5f, 0.0f, 1.0f) },
+                    { ThemeColor.ButtonRed, new Vector4(1.0f, 0.4f, 0.2f, 1.0f) },
+
+                    // Buff header colors
+                    { ThemeColor.BuffHeader_Default, new Vector4(230/255f, 240/255f, 220/255f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.6f, 0.4f, 0.75f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.4f, 0.9f, 0.4f, 0.75f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(1.0f, 0.9f, 0.3f, 0.75f) },
+
+                    // Status colors
+                    { ThemeColor.ConnectionConnected, new Vector4(0.0f, 0.7f, 0.3f, 1.0f) },
+                    { ThemeColor.ConnectionDisconnected, new Vector4(1.0f, 0.5f, 0.0f, 1.0f) },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.0f, 0.6f, 0.9f, 1.0f) },
+                    { ThemeColor.WarningBanner, new Vector4(1.0f, 0.6f, 0.0f, 1.0f) },
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.00f, 0.80f, 1.00f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.50f, 0.60f, 0.70f, 1.00f) },
+
+                    // Chat channel colors - vibrant summer theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.45f, 0.50f, 0.45f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.00f, 0.75f, 1.00f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.00f, 0.85f, 0.40f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(1.00f, 0.65f, 0.65f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.85f, 0.20f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(0.85f, 0.40f, 0.90f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.30f, 0.70f, 0.85f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.70f, 0.10f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(1.00f, 0.35f, 0.15f, 1.0f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(1.0f, 0.4f, 0.2f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(1.0f, 0.8f, 0.0f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(0.0f, 0.7f, 0.3f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.0f, 0.7f, 0.3f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(1.0f, 0.5f, 0.0f, 1.0f) },
+
+                    // Status/state colors
+                    { ThemeColor.EncounterPausedBackground, new Vector4(1.0f, 0.5f, 0.0f, 0.75f) },
+                    { ThemeColor.EncounterPausedText, new Vector4(26/255f, 77/255f, 26/255f, 1.0f) },
+                    { ThemeColor.EncounterResumedButton, new Vector4(0.0f, 0.7f, 0.3f, 1.0f) },
+
+                    // Window state colors
+                    { ThemeColor.WindowPinned, new Vector4(1.0f, 0.9f, 0.2f, 1.0f) },
+                    { ThemeColor.WindowUnpinned, new Vector4(0.4f, 0.5f, 0.55f, 1.0f) },
+                    { ThemeColor.WindowCollapsed, new Vector4(0.0f, 0.75f, 1.0f, 1.0f) },
+                    { ThemeColor.WindowExpanded, new Vector4(0.35f, 0.45f, 0.5f, 1.0f) },
+
+                    // Common UI colors
+                    { ThemeColor.QualityBasic, new Vector4(0.3f, 0.7f, 0.9f, 1.0f) },
+                    { ThemeColor.QualityAdvanced, new Vector4(0.75f, 0.45f, 0.85f, 1.0f) },
+                    { ThemeColor.QualityExcellent, new Vector4(1.0f, 0.9f, 0.2f, 1.0f) },
+
+                    // Alpha helper colors
+                    { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
+                    { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - sky blue-white for summer theme
+                    { ThemeColor.IconBackground, new Vector4(0.95f, 1.0f, 1.0f, 0.85f) },
+
+                    // Border/separator colors
+                    { ThemeColor.BorderSubtle, new Vector4(170 / 255f, 210 / 255f, 230 / 255f, 0.5f) },
+                    { ThemeColor.BorderStrong, new Vector4(100 / 255f, 170 / 255f, 210 / 255f, 1.0f) }
+                },
+                ETheme.Autumn => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors - warm autumn browns
+                    { ThemeColor.PrimaryText, new Vector4(61/255f, 41/255f, 20/255f, 1.0f) },
+                    { ThemeColor.WarningText, new Vector4(0.9f, 0.3f, 0.1f, 0.75f) },  // Deep orange
+                    { ThemeColor.SuccessText, new Vector4(0.6f, 0.5f, 0.2f, 0.75f) },  // Golden brown
+
+                    // Button colors
+                    { ThemeColor.SelectedButton, new Vector4(210/255f, 150/255f, 80/255f, 1.0f) },
+                    { ThemeColor.DestructiveButton, new Vector4(0.9f, 0.3f, 0.1f, 1.0f) },
+                    { ThemeColor.ButtonRed, new Vector4(0.8f, 0.25f, 0.15f, 1.0f) },
+
+                    // Buff header colors
+                    { ThemeColor.BuffHeader_Default, new Vector4(200/255f, 180/255f, 160/255f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(0.9f, 0.4f, 0.3f, 0.75f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.7f, 0.6f, 0.3f, 0.75f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(1.0f, 0.75f, 0.2f, 0.75f) },
+
+                    // Status colors
+                    { ThemeColor.ConnectionConnected, new Vector4(0.6f, 0.5f, 0.2f, 1.0f) },
+                    { ThemeColor.ConnectionDisconnected, new Vector4(0.9f, 0.3f, 0.1f, 1.0f) },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.7f, 0.5f, 0.2f, 1.0f) },
+                    { ThemeColor.WarningBanner, new Vector4(0.85f, 0.4f, 0.15f, 1.0f) },
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.70f, 0.40f, 0.20f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.55f, 0.50f, 0.45f, 1.00f) },
+
+                    // Chat channel colors - autumn harvest theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.45f, 0.42f, 0.38f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.40f, 0.55f, 0.70f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.50f, 0.60f, 0.30f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(0.95f, 0.55f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(1.00f, 0.70f, 0.25f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(0.75f, 0.40f, 0.65f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.45f, 0.55f, 0.65f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(1.00f, 0.65f, 0.20f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(0.95f, 0.30f, 0.20f, 1.0f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(0.9f, 0.3f, 0.15f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(1.0f, 0.7f, 0.2f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(0.6f, 0.5f, 0.2f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.6f, 0.5f, 0.2f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(0.9f, 0.3f, 0.15f, 1.0f) },
+
+                    // Status/state colors
+                    { ThemeColor.EncounterPausedBackground, new Vector4(0.9f, 0.3f, 0.15f, 0.75f) },
+                    { ThemeColor.EncounterPausedText, new Vector4(61/255f, 41/255f, 20/255f, 1.0f) },
+                    { ThemeColor.EncounterResumedButton, new Vector4(0.6f, 0.5f, 0.2f, 1.0f) },
+
+                    // Window state colors
+                    { ThemeColor.WindowPinned, new Vector4(1.0f, 0.75f, 0.15f, 1.0f) },
+                    { ThemeColor.WindowUnpinned, new Vector4(0.45f, 0.45f, 0.40f, 1.0f) },
+                    { ThemeColor.WindowCollapsed, new Vector4(0.65f, 0.45f, 0.2f, 1.0f) },
+                    { ThemeColor.WindowExpanded, new Vector4(0.4f, 0.4f, 0.38f, 1.0f) },
+
+                    // Common UI colors
+                    { ThemeColor.QualityBasic, new Vector4(0.55f, 0.6f, 0.45f, 1.0f) },
+                    { ThemeColor.QualityAdvanced, new Vector4(0.65f, 0.45f, 0.6f, 1.0f) },
+                    { ThemeColor.QualityExcellent, new Vector4(1.0f, 0.75f, 0.2f, 1.0f) },
+
+                    // Alpha helper colors
+                    { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
+                    { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - warm cream for autumn theme
+                    { ThemeColor.IconBackground, new Vector4(1.0f, 0.97f, 0.92f, 0.85f) },
+
+                    // Border/separator colors
+                    { ThemeColor.BorderSubtle, new Vector4(190 / 255f, 170 / 255f, 150 / 255f, 0.5f) },
+                    { ThemeColor.BorderStrong, new Vector4(160 / 255f, 140 / 255f, 120 / 255f, 1.0f) }
+                },
+                ETheme.Winter => new Dictionary<ThemeColor, Vector4>
+                {
+                    // Text colors - cool winter blues
+                    { ThemeColor.PrimaryText, new Vector4(26/255f, 42/255f, 58/255f, 1.0f) },
+                    { ThemeColor.WarningText, new Vector4(0.9f, 0.35f, 0.2f, 0.75f) },  // Cool red
+                    { ThemeColor.SuccessText, new Vector4(0.3f, 0.6f, 0.8f, 0.75f) },  // Icy blue
+
+                    // Button colors
+                    { ThemeColor.SelectedButton, new Vector4(150/255f, 190/255f, 220/255f, 1.0f) },
+                    { ThemeColor.DestructiveButton, new Vector4(0.9f, 0.35f, 0.2f, 1.0f) },
+                    { ThemeColor.ButtonRed, new Vector4(0.8f, 0.25f, 0.2f, 1.0f) },
+
+                    // Buff header colors
+                    { ThemeColor.BuffHeader_Default, new Vector4(210/255f, 220/255f, 235/255f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(0.9f, 0.45f, 0.4f, 0.75f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.4f, 0.7f, 0.9f, 0.75f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(0.9f, 0.8f, 0.4f, 0.75f) },
+
+                    // Status colors
+                    { ThemeColor.ConnectionConnected, new Vector4(0.3f, 0.6f, 0.8f, 1.0f) },
+                    { ThemeColor.ConnectionDisconnected, new Vector4(0.9f, 0.35f, 0.2f, 1.0f) },
+
+                    // Banner colors (ModuleSolver)
+                    { ThemeColor.InfoBanner, new Vector4(0.3f, 0.6f, 0.8f, 1.0f) },
+                    { ThemeColor.WarningBanner, new Vector4(0.75f, 0.4f, 0.2f, 1.0f) },
+
+                    // Chat colors
+                    { ThemeColor.ChatLink, new Vector4(0.30f, 0.60f, 0.85f, 1.00f) },
+                    { ThemeColor.ChatTimestamp, new Vector4(0.50f, 0.58f, 0.65f, 1.00f) },
+
+                    // Chat channel colors - icy winter theme
+                    { ThemeColor.ChatChannel_Null, new Vector4(0.45f, 0.50f, 0.55f, 1.0f) },
+                    { ThemeColor.ChatChannel_World, new Vector4(0.30f, 0.65f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_Scene, new Vector4(0.35f, 0.65f, 0.50f, 1.0f) },
+                    { ThemeColor.ChatChannel_Team, new Vector4(0.90f, 0.55f, 0.60f, 1.0f) },
+                    { ThemeColor.ChatChannel_Union, new Vector4(0.90f, 0.75f, 0.30f, 1.0f) },
+                    { ThemeColor.ChatChannel_Private, new Vector4(0.70f, 0.45f, 0.80f, 1.0f) },
+                    { ThemeColor.ChatChannel_Group, new Vector4(0.40f, 0.60f, 0.75f, 1.0f) },
+                    { ThemeColor.ChatChannel_TopNotice, new Vector4(0.95f, 0.65f, 0.25f, 1.0f) },
+                    { ThemeColor.ChatChannel_System, new Vector4(0.90f, 0.35f, 0.25f, 1.0f) },
+
+                    // HP bar colors (SpawnTracker)
+                    { ThemeColor.HpBarCritical, new Vector4(0.9f, 0.3f, 0.2f, 0.85f) },
+                    { ThemeColor.HpBarWarning, new Vector4(0.9f, 0.7f, 0.25f, 0.85f) },
+                    { ThemeColor.HpBarHealthy, new Vector4(0.3f, 0.6f, 0.8f, 0.85f) },
+
+                    // Debug colors (NetDebug)
+                    { ThemeColor.DebugSeen, new Vector4(0.3f, 0.6f, 0.8f, 1.0f) },
+                    { ThemeColor.DebugUnseen, new Vector4(0.9f, 0.35f, 0.25f, 1.0f) },
+
+                    // Status/state colors
+                    { ThemeColor.EncounterPausedBackground, new Vector4(0.9f, 0.35f, 0.25f, 0.75f) },
+                    { ThemeColor.EncounterPausedText, new Vector4(26/255f, 42/255f, 58/255f, 1.0f) },
+                    { ThemeColor.EncounterResumedButton, new Vector4(0.3f, 0.6f, 0.8f, 1.0f) },
+
+                    // Window state colors
+                    { ThemeColor.WindowPinned, new Vector4(0.9f, 0.8f, 0.25f, 1.0f) },
+                    { ThemeColor.WindowUnpinned, new Vector4(0.4f, 0.48f, 0.55f, 1.0f) },
+                    { ThemeColor.WindowCollapsed, new Vector4(0.4f, 0.65f, 0.8f, 1.0f) },
+                    { ThemeColor.WindowExpanded, new Vector4(0.38f, 0.45f, 0.52f, 1.0f) },
+
+                    // Common UI colors
+                    { ThemeColor.QualityBasic, new Vector4(0.45f, 0.65f, 0.8f, 1.0f) },
+                    { ThemeColor.QualityAdvanced, new Vector4(0.6f, 0.5f, 0.75f, 1.0f) },
+                    { ThemeColor.QualityExcellent, new Vector4(0.9f, 0.8f, 0.25f, 1.0f) },
+
+                    // Alpha helper colors
+                    { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
+                    { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - frost white for winter theme
+                    { ThemeColor.IconBackground, new Vector4(0.98f, 0.99f, 1.0f, 0.85f) },
+
+                    // Border/separator colors
+                    { ThemeColor.BorderSubtle, new Vector4(175 / 255f, 195 / 255f, 215 / 255f, 0.5f) },
+                    { ThemeColor.BorderStrong, new Vector4(140 / 255f, 170 / 255f, 200 / 255f, 1.0f) }
                 },
                 ETheme.Solarized => new Dictionary<ThemeColor, Vector4>
                 {
@@ -1107,7 +1552,10 @@ namespace BPSR_ZDPS
                 ETheme.Black => GetBlackThemeColors(),
                 ETheme.Light => GetLightThemeColors(),
                 ETheme.Purple => GetPurpleThemeColors(),
-                ETheme.Cyberpunk => GetCyberpunkThemeColors(),
+                ETheme.Spring => GetSpringThemeColors(),
+                ETheme.Summer => GetSummerThemeColors(),
+                ETheme.Autumn => GetAutumnThemeColors(),
+                ETheme.Winter => GetWinterThemeColors(),
                 ETheme.Solarized => GetSolarizedThemeColors(),
                 ETheme.Forest => GetForestThemeColors(),
                 _ => GetDarkThemeColors() // Default fallback

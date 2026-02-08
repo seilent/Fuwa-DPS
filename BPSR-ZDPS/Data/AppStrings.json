@@ -691,13 +691,37 @@
         "en": "A dark purple theme with violet accents for a mystical aesthetic.",
         "ja": "神秘的な美学のためのバイオレットのアクセントを持つダークパープルテーマ。"
     },
-    "Settings_UI_ThemeCyberpunk": {
-        "en": "Cyberpunk",
-        "ja": "サイバーパンク"
+    "Settings_UI_ThemeSpring": {
+        "en": "Spring",
+        "ja": "春"
     },
-    "Settings_UI_ThemeCyberpunkTooltip": {
-        "en": "A futuristic theme with neon cyan and pink accents on a dark background.",
-        "ja": "ダーク背景にネオンシアンとピンクのアクセントを持つ未来的なテーマ。"
+    "Settings_UI_ThemeSpringTooltip": {
+        "en": "A fresh theme with soft pinks and greens, inspired by new growth and blossoms.",
+        "ja": "新芽と花に触発された、ソフトピンクとグリーンのフレッシュテーマ。"
+    },
+    "Settings_UI_ThemeSummer": {
+        "en": "Summer",
+        "ja": "夏"
+    },
+    "Settings_UI_ThemeSummerTooltip": {
+        "en": "A vibrant theme with warm yellows and bright blues, capturing the energy of summer days.",
+        "ja": "夏の日のエネルギーを捉えた、温かいイエローと明るいブルーのバイブラントテーマ。"
+    },
+    "Settings_UI_ThemeAutumn": {
+        "en": "Autumn",
+        "ja": "秋"
+    },
+    "Settings_UI_ThemeAutumnTooltip": {
+        "en": "A warm theme with oranges, reds, and golds, inspired by falling leaves and harvest time.",
+        "ja": "落ち葉と収穫の時期に触発された、オレンジ、レッド、ゴールドのウォームテーマ。"
+    },
+    "Settings_UI_ThemeWinter": {
+        "en": "Winter",
+        "ja": "冬"
+    },
+    "Settings_UI_ThemeWinterTooltip": {
+        "en": "A cool theme with icy blues and frosted whites, evoking peaceful winter landscapes.",
+        "ja": "穏やかな冬の景色を思い起こさせる、アイシーブルーとフロストホワイトのクールテーマ。"
     },
     "Settings_UI_ThemeSolarized": {
         "en": "Solarized",

@@ -164,7 +164,10 @@ public enum ETheme
     Black,       // Pure black theme
     Light,       // Light theme
     Purple,      // Dark purple with violet accents
-    Cyberpunk,   // Nearly black with neon cyan/pink
+    Spring,      // Fresh greens and pinks, new growth
+    Summer,      // Vibrant greens, warm yellows, bright blues
+    Autumn,      // Warm oranges, reds, browns, golds
+    Winter,      // Cool blues, whites, icy grays
     Solarized,   // Solarized Dark palette
     Forest,      // Dark green nature theme
 }
