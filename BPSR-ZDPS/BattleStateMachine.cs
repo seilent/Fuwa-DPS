@@ -104,7 +104,7 @@ namespace BPSR_ZDPS
                         Log.Information($"{DateTime.Now} - BattleStateMachine.DungeonTargetDataHistoryAdd: RestartCheckHit!");
                         // Our first map entry objective is the same as the newest one we were just given
                         // This is likely some form of reset such as killing one of the Raid bosses but others have not been beat yet
-                        EncounterManager.StopEncounter();
+                        EncounterManager.StopEncounter(isKnownFinal: true, reason: EncounterStartReason.Restart);
                         EncounterManager.StartEncounter(false, EncounterStartReason.Restart);
                         return;
                     }

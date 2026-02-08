@@ -130,9 +130,14 @@ namespace BPSR_ZDPS
 
                 CheckTimeOutStatus(reason);
 
-                // This is safe to call to ensure we're sending a proper End Final before a new Encounter is made no matter what
-                BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.Subtract(new TimeSpan(0, 0, 1)), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
-                BattleStateMachine.CheckDeferredCalls();
+                // Only force immediate end if there's no deferred end already scheduled
+                // If a deferred end exists (e.g., 5-second dragon buffer), respect that timing
+                if (BattleStateMachine.DeferredEncounterEndFinalData == null ||
+                    BattleStateMachine.DeferredEncounterEndFinalData.EncounterId != Current.EncounterId)
+                {
+                    BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.Subtract(new TimeSpan(0, 0, 1)), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
+                    BattleStateMachine.CheckDeferredCalls();
+                }
             }
 
             int currentDifficulty = 0;
