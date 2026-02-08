@@ -98,8 +98,7 @@ namespace BPSR_ZDPS
                 if ((reason == EncounterStartReason.NewObjective) && hasStatsBeenRecorded)
                 {
                     // Check if we should skip splitting for dragon bosses
-                    if (Settings.Instance.ExcludeDragonsFromPhaseSplit &&
-                        DragonBossIds.Contains((int)Current.BossAttrId))
+                    if (Settings.Instance.ExcludeDragonsFromPhaseSplit && Current.IsDragonEncounter)
                     {
                         // Don't split - continue the same encounter for dragon raids
                         return;
@@ -243,17 +242,14 @@ namespace BPSR_ZDPS
 
             if (isKnownFinal)
             {
-                // Check if this is a dragon raid
-                bool isDragonRaid = DragonBossIds.Contains((int)Current.BossAttrId);
-
                 // Dragon raids get 5-second buffer to catch delayed damage, non-dragon gets 2-second buffer
-                double delaySeconds = isDragonRaid ? 5.0 : 2.0;
+                double delaySeconds = Current.IsDragonEncounter ? 5.0 : 2.0;
 
                 // We don't actually want to end instantly because some packets are going to be delayed and come in _after_ this and they are typically the most important ones to not miss
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
                     DateTime.Now.AddSeconds(delaySeconds),
                     new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
-                    allowRefresh: isDragonRaid  // Allow refreshing buffer for dragon raids when activity occurs
+                    allowRefresh: Current.IsDragonEncounter  // Allow refreshing buffer for dragon raids when activity occurs
                 );
             }
             else
@@ -463,6 +459,12 @@ namespace BPSR_ZDPS
         public ulong TotalDeaths { get; set; } = 0;
         public ulong TotalNpcDeaths { get; set; } = 0;
         public bool IsWipe { get; set; } = false;
+
+        /// <summary>
+        /// Indicates whether this encounter is a dragon raid (affects buffer time and phase splitting behavior).
+        /// Set once when boss is assigned, cleared on wipe or when a new encounter is created.
+        /// </summary>
+        public bool IsDragonEncounter { get; private set; } = false;
 
         public delegate void SkillActivatedEventHandler(object sender, SkillActivatedEventArgs e);
         public event SkillActivatedEventHandler SkillActivated;
@@ -744,6 +746,9 @@ namespace BPSR_ZDPS
                     BossUUID = entity.UUID;
                     BossName = entity.Name;
                     BossAttrId = (long)attr_id;
+
+                    // Set dragon encounter flag when boss is assigned
+                    IsDragonEncounter = EncounterManager.DragonBossIds.Contains(attr_id);
                 }
             }
         }
@@ -931,7 +936,7 @@ namespace BPSR_ZDPS
                 BattleStateMachine.DeferredEncounterEndFinalData != null &&
                 EncounterManager.Current != null &&
                 EncounterManager.Current.EncounterId == BattleStateMachine.DeferredEncounterEndFinalData.EncounterId &&
-                EncounterManager.DragonBossIds.Contains((int)EncounterManager.Current.BossAttrId))
+                EncounterManager.Current.IsDragonEncounter)
             {
                 // Refresh the 5-second buffer
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
@@ -982,6 +987,9 @@ namespace BPSR_ZDPS
                     BossUUID = entity.UUID;
                     BossName = entity.Name;
                     BossAttrId = attrId;
+
+                    // Update dragon encounter flag when boss is updated
+                    IsDragonEncounter = attrId > 0 && EncounterManager.DragonBossIds.Contains((int)attrId);
                     /*var attr_id = entity.GetAttrKV("AttrId");
                     if (attr_id != null)
                     {
