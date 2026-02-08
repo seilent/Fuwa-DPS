@@ -42,6 +42,10 @@ namespace BPSR_ZDPS.Windows
         static int _autoDisableTopMostFrameCounter = 0;
         // Track the actual topmost state to detect when we need to apply changes
         static bool _lastKnownTopMostState = false;
+        // Track when the app started for the auto-topmost grace period
+        static DateTime _appStartTime = DateTime.Now;
+        // Grace period in seconds after app startup before auto-disable takes effect
+        const double STARTUP_GRACE_PERIOD_SECONDS = 15.0;
         public Vector2 WindowPosition;
         public Vector2 NextWindowPosition = new();
         public Vector2 DefaultWindowSize = new Vector2(300, 150);
@@ -210,6 +214,11 @@ namespace BPSR_ZDPS.Windows
                     // Initialize state tracker
                     _lastKnownTopMostState = true;
                 }
+                // Also initialize state tracker if TopMost is true but IsPinned was already set
+                else if (windowSettings.TopMost && IsPinned)
+                {
+                    _lastKnownTopMostState = true;
+                }
 
                 if (Settings.Instance.External.BPTimerSettings.ExternalBPTimerEnabled)
                 {
@@ -264,14 +273,27 @@ namespace BPSR_ZDPS.Windows
 
                         // Check if there's been recent activity (within 15 seconds)
                         bool hasRecentActivity = false;
+                        double timeSinceActivity = 0.0;
                         if (EncounterManager.Current != null)
                         {
-                            var timeSinceLastUpdate = DateTime.Now.Subtract(EncounterManager.Current.LastUpdate).TotalSeconds;
-                            hasRecentActivity = timeSinceLastUpdate < 15.0;
+                            // Handle case where LastUpdate is not initialized (DateTime.MinValue)
+                            if (EncounterManager.Current.LastUpdate != DateTime.MinValue)
+                            {
+                                timeSinceActivity = DateTime.Now.Subtract(EncounterManager.Current.LastUpdate).TotalSeconds;
+                                hasRecentActivity = timeSinceActivity < 15.0;
+                            }
+                            // If LastUpdate is MinValue, treat as no recent activity
                         }
 
-                        // Window stays on top if there's damage OR recent activity
-                        bool shouldBeOnTop = hasDpsDamage || hasRecentActivity;
+                        // Check if we're still in the startup grace period
+                        var timeSinceStartup = DateTime.Now.Subtract(_appStartTime).TotalSeconds;
+                        bool inStartupGracePeriod = timeSinceStartup < STARTUP_GRACE_PERIOD_SECONDS;
+
+                        // Window stays on top if there's damage OR recent activity OR we're in startup grace period
+                        bool shouldBeOnTop = hasDpsDamage || hasRecentActivity || inStartupGracePeriod;
+
+                        // Debug logging for troubleshooting
+                        System.Diagnostics.Debug.WriteLine($"[AutoTop] State: Damage={hasDpsDamage}, RecentActivity={timeSinceActivity:F1}s ago, StartupGrace={inStartupGracePeriod} ({timeSinceStartup:F1}s/{STARTUP_GRACE_PERIOD_SECONDS}s), ShouldBeOnTop={shouldBeOnTop}, CurrentState={_lastKnownTopMostState}");
 
                         // Check if the actual OS window state differs from what we want
                         if (shouldBeOnTop != _lastKnownTopMostState)
