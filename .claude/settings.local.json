@@ -5,7 +5,10 @@
       "Bash(findstr:*)",
       "Bash(dotnet build:*)",
       "Bash(git checkout:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(for:*)",
+      "Bash(do echo:*)",
+      "Bash(done)"
     ]
   }
 }

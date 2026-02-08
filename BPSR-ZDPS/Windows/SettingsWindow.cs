@@ -31,6 +31,7 @@ namespace BPSR_ZDPS.Windows
         static bool skipTeleportStateCheckInAutomaticWipeDetection;
         static bool disableWipeRecalculationOverwriting;
         static bool splitEncountersOnNewPhases;
+        static bool excludeDragonsFromPhaseSplit;
         static bool displayTruePerSecondValuesInMeters;
         static bool allowGamepadNavigationInputInZDPS;
         static bool keepPastEncounterInMeterUntilNextDamage;
@@ -495,6 +496,11 @@ namespace BPSR_ZDPS.Windows
                         ImGui.TextWrapped(AppStrings.GetLocalized("Settings_Combat_SplitPhasesTooltip"));
                         ImGui.EndDisabled();
                         ImGui.Unindent();
+
+                        ImGui.AlignTextToFramePadding();
+                        ImGui.Text(AppStrings.GetLocalized("Settings_Combat_ExcludeDragonsFromSplit"));
+                        ImGui.SameLine();
+                        ImGui.Checkbox("##ExcludeDragonsFromPhaseSplit", ref excludeDragonsFromPhaseSplit);
 
                         ImGui.AlignTextToFramePadding();
                         ImGui.Text(AppStrings.GetLocalized("Settings_Combat_TruePerSecond"));
@@ -1585,6 +1591,7 @@ namespace BPSR_ZDPS.Windows
             skipTeleportStateCheckInAutomaticWipeDetection = Settings.Instance.SkipTeleportStateCheckInAutomaticWipeDetection;
             disableWipeRecalculationOverwriting = Settings.Instance.DisableWipeRecalculationOverwriting;
             splitEncountersOnNewPhases = Settings.Instance.SplitEncountersOnNewPhases;
+            excludeDragonsFromPhaseSplit = Settings.Instance.ExcludeDragonsFromPhaseSplit;
             displayTruePerSecondValuesInMeters = Settings.Instance.DisplayTruePerSecondValuesInMeters;
             allowGamepadNavigationInputInZDPS = Settings.Instance.AllowGamepadNavigationInputInZDPS;
             keepPastEncounterInMeterUntilNextDamage = Settings.Instance.KeepPastEncounterInMeterUntilNextDamage;
@@ -1693,6 +1700,7 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.SkipTeleportStateCheckInAutomaticWipeDetection = skipTeleportStateCheckInAutomaticWipeDetection;
             Settings.Instance.DisableWipeRecalculationOverwriting = disableWipeRecalculationOverwriting;
             Settings.Instance.SplitEncountersOnNewPhases = splitEncountersOnNewPhases;
+            Settings.Instance.ExcludeDragonsFromPhaseSplit = excludeDragonsFromPhaseSplit;
             Settings.Instance.DisplayTruePerSecondValuesInMeters = displayTruePerSecondValuesInMeters;
             Settings.Instance.AllowGamepadNavigationInputInZDPS = allowGamepadNavigationInputInZDPS;
             Settings.Instance.KeepPastEncounterInMeterUntilNextDamage = keepPastEncounterInMeterUntilNextDamage;

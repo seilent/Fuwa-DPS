@@ -38,6 +38,9 @@ namespace BPSR_ZDPS
         // Tracks if we've logged the sampling mode activation (per encounter)
         public static bool HasLoggedSamplingModeThisEncounter = false;
 
+        // Dragon boss IDs that should not be split into separate phases when ExcludeDragonsFromPhaseSplit is enabled
+        private static readonly HashSet<int> DragonBossIds = new() { 102101, 102401, 102701 };
+
         static EncounterManager()
         {
             // Give a default encounter for now
@@ -94,6 +97,14 @@ namespace BPSR_ZDPS
 
                 if ((reason == EncounterStartReason.NewObjective) && hasStatsBeenRecorded)
                 {
+                    // Check if we should skip splitting for dragon bosses
+                    if (Settings.Instance.ExcludeDragonsFromPhaseSplit &&
+                        DragonBossIds.Contains((int)Current.BossAttrId))
+                    {
+                        // Don't split - continue the same encounter for dragon raids
+                        return;
+                    }
+
                     // We're likely entering a new phase (either raid boss phase or dungeon phase going into boss)
                     priorBossName = Current.BossName;
 

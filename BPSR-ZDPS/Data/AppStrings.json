@@ -351,6 +351,10 @@
         "en": "When enabled, encounters are automatically split across phase changes. This allows bosses to be split from the rest of a dungeon. It also splits raid boss phases. This probably should be enabled.",
         "ja": "有効にすると、エンカウンターがフェーズ変更時に自動的に分割されます。これにより、ボスをダンジョンの残りの部分から分割できます。また、レイドボスのフェーズも分割されます。おそらく有効にすることをお勧めします。"
     },
+    "Settings_Combat_ExcludeDragonsFromSplit": {
+        "en": "    Exclude Dragon Raids from Splitting",
+        "ja": "    ドラゴンレイドの分割を除外する"
+    },
     "Settings_Combat_TruePerSecond": {
         "en": "Display True Per Second Values In Meters: ",
         "ja": "メーターに真の秒あたりの値を表示する："
