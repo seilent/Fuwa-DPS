@@ -74,6 +74,9 @@ namespace BPSR_ZDPS.DataTypes
         TransparentWhite,
         TransparentBlack,
 
+        // Icon/image backgrounds
+        IconBackground,                 // Background for non-colored icons (dark themes)
+
         // Border/separator colors
         BorderSubtle,
         BorderStrong

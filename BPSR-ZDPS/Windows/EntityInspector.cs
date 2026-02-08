@@ -133,12 +133,13 @@ namespace BPSR_ZDPS.Windows
                             {
                                 var roleColor = Professions.RoleTypeIconColors(Professions.GetRoleFromBaseProfessionId(LoadedEntity.ProfessionId), Settings.Instance.Theme);
                                 roleColor.W = 1.0f;  // Full visibility for better contrast
-                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), roleColor);
+                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), Theme.GetColor(ThemeColor.TransparentBlack), roleColor);
                             }
                             else
                             {
                                 //ImGui.Image((ImTextureRef)tex, new Vector2(texSize, texSize));
-                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), new Vector4(1, 1, 1, 0.85f));  // Increased alpha for better visibility
+                                var iconBg = Theme.GetColor(ThemeColor.IconBackground);
+                                ImGui.ImageWithBg((ImTextureRef)tex, new Vector2(texSize, texSize), new Vector2(0, 0), new Vector2(1, 1), Theme.GetColor(ThemeColor.TransparentBlack), iconBg);  // Theme-aware background
                             }
                             
                             ImGui.SetCursorPos(cursorStart);

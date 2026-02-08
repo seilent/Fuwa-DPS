@@ -402,8 +402,8 @@ namespace BPSR_ZDPS.Windows
 
                                 if (isCriticalHp)
                                 {
-                                    ImGui.PushStyleColor(ImGuiCol.Border, Colors.Red);
-                                    ImGui.PushStyleColor(ImGuiCol.BorderShadow, Colors.Red_Transparent);
+                                    ImGui.PushStyleColor(ImGuiCol.Border, Theme.GetColor(ThemeColor.WarningText));
+                                    ImGui.PushStyleColor(ImGuiCol.BorderShadow, Theme.GetColor(ThemeColor.WarningText, 0.5f));
                                     ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 1);
                                 }
 

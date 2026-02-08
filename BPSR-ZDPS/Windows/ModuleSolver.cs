@@ -325,7 +325,7 @@ namespace BPSR_ZDPS
 
             bool basicQuality = SolverConfig.QualitiesV2.TryGetValue(2, out var temp) ? temp : false;
             ImGui.AlignTextToFramePadding();
-            ImGui.PushStyleColor(ImGuiCol.Text, Colors.QualityBasic);
+            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.QualityBasic));
             ImGui.TextUnformatted("Basic"u8);
             ImGui.PopStyleColor();
             ImGui.SameLine();
@@ -338,7 +338,7 @@ namespace BPSR_ZDPS
 
             bool advancedQuality = SolverConfig.QualitiesV2.TryGetValue(3, out var temp2) ? temp2 : false;
             ImGui.AlignTextToFramePadding();
-            ImGui.PushStyleColor(ImGuiCol.Text, Colors.QualityAdvanced);
+            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.QualityAdvanced));
             ImGui.TextUnformatted("Advanced"u8);
             ImGui.PopStyleColor();
             ImGui.SameLine();
@@ -351,7 +351,7 @@ namespace BPSR_ZDPS
 
             bool excellentQuality = SolverConfig.QualitiesV2.TryGetValue(4, out var temp3) ? temp3 : false;
             ImGui.AlignTextToFramePadding();
-            ImGui.PushStyleColor(ImGuiCol.Text, Colors.QualityExcellent);
+            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.QualityExcellent));
             ImGui.TextUnformatted("Excellent"u8);
             ImGui.PopStyleColor();
             ImGui.SameLine();

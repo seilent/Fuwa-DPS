@@ -309,7 +309,7 @@ namespace BPSR_ZDPS.Windows
 
                         if (IsElevated == false)
                         {
-                            ImGui.PushStyleColor(ImGuiCol.ChildBg, Colors.Red_Transparent);
+                            ImGui.PushStyleColor(ImGuiCol.ChildBg, Theme.GetColor(ThemeColor.WarningText, 0.3f));
                             ImGui.BeginChild("##KeybindsNotice", new Vector2(0, 0), ImGuiChildFlags.AutoResizeY | ImGuiChildFlags.Borders);
                             ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], ImGui.GetFontSize());
                             ImGui.TextWrapped(AppStrings.GetLocalized("Settings_Keybinds_ImportantNote"));
@@ -328,7 +328,7 @@ namespace BPSR_ZDPS.Windows
                         if (splitEncountersOnNewPhases)
                         {
                             ImGui.Indent();
-                            ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red_Transparent);
+                            ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText, 0.7f));
                             ImGui.TextWrapped(AppStrings.GetLocalized("Settings_Keybinds_EncounterResetWarning"));
                             ImGui.PopStyleColor();
                             ImGui.Unindent();
@@ -1351,7 +1351,7 @@ namespace BPSR_ZDPS.Windows
                                 {
                                     ImGui.Indent();
                                     ImGui.BeginDisabled(true);
-                                    ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red);
+                                    ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                                     ImGui.TextWrapped(AppStrings.GetLocalized("Settings_Integrations_InvalidUrl"));
                                     ImGui.PopStyleColor();
                                     ImGui.EndDisabled();
@@ -1393,11 +1393,11 @@ namespace BPSR_ZDPS.Windows
                             bool hasBPTimerReports = externalBPTimerFieldBossHpReportsEnabled;
                             if (!hasBPTimerReports)
                             {
-                                ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red);
+                                ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                             }
                             else
                             {
-                                ImGui.PushStyleColor(ImGuiCol.Text, Colors.Green);
+                                ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.SuccessText));
                             }
                             ImGui.TextWrapped("Note: This setting alone does not enable reports. They must be enabled individually below.");
                             ImGui.PopStyleColor();
@@ -1774,7 +1774,7 @@ namespace BPSR_ZDPS.Windows
         {
             if (showCondition)
             {
-                ImGui.PushStyleColor(ImGuiCol.ChildBg, Colors.Red_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, Theme.GetColor(ThemeColor.WarningText, 0.3f));
                 ImGui.BeginChild($"##RestartRequiredNotice_{settingName}", new Vector2(0, 0), ImGuiChildFlags.AutoResizeY | ImGuiChildFlags.Borders);
                 ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], ImGui.GetFontSize());
                 ImGui.TextUnformatted("Important Note:");
@@ -1789,7 +1789,7 @@ namespace BPSR_ZDPS.Windows
         {
             if (showCondition)
             {
-                ImGui.PushStyleColor(ImGuiCol.ChildBg, Colors.Red_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, Theme.GetColor(ThemeColor.WarningText, 0.3f));
                 ImGui.BeginChild($"##GenericImportantNotice_{uniqueName}", new Vector2(0, 0), ImGuiChildFlags.AutoResizeY | ImGuiChildFlags.Borders);
                 ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], ImGui.GetFontSize());
                 ImGui.TextUnformatted("Important Note:");

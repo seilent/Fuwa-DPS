@@ -281,13 +281,13 @@ namespace BPSR_ZDPS.Windows
                         ImGui.SameLine();
                         ImGui.TextUnformatted(encounterTuple.Item1);
                         ImGui.SameLine();
-                        ImGui.TextColored(Colors.Wheat, $"({encounterTuple.Item2})");
+                        ImGui.TextColored(Theme.GetColor(ThemeColor.ChatTimestamp), $"({encounterTuple.Item2})");
                         ImGui.SameLine();
-                        ImGui.TextColored(Colors.LightBlue, $"{encounterTuple.Item3}");
+                        ImGui.TextColored(Theme.GetColor(ThemeColor.ChatTimestamp), $"{encounterTuple.Item3}");
                         if (encounters[i].IsWipe)
                         {
                             ImGui.SameLine();
-                            ImGui.TextColored(Colors.LightRed, $"(Wipe)");
+                            ImGui.TextColored(Theme.GetColor(ThemeColor.WarningText), $"(Wipe)");
                         }
                     }
 
@@ -441,7 +441,7 @@ namespace BPSR_ZDPS.Windows
                                 // Only apply alpha reduction for non-light themes (light theme needs full alpha for contrast)
                                 if (Settings.Instance.Theme != ETheme.Light)
                                 {
-                                    color = color - new Vector4(0, 0, 0, 0.25f);
+                                    color = Theme.WithAlpha(color, color.W - 0.25f);
                                 }
 
                                 ImGui.PushStyleColor(ImGuiCol.Header, color);

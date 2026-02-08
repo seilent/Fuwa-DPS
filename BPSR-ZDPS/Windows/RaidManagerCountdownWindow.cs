@@ -190,7 +190,7 @@ namespace BPSR_ZDPS.Windows
                                         {
                                             ImGui.SameLine();
                                         }
-                                        ImGui.ImageWithBg(tex.Value, new Vector2(70 * 1.75f, 110 * 1.75f), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), Colors.OrangeRed);
+                                        ImGui.ImageWithBg(tex.Value, new Vector2(70 * 1.75f, 110 * 1.75f), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), Theme.GetColor(ThemeColor.ButtonRed));
                                     }
                                 }
                                 ImGui.EndGroup();
@@ -199,7 +199,7 @@ namespace BPSR_ZDPS.Windows
                             else
                             {
                                 ImGui.PushFont(null, 250);
-                                ImGui.PushStyleColor(ImGuiCol.Text, Colors.OrangeRed);
+                                ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.ButtonRed));
                                 ImGui.TextAligned(0.5f, -1, $"{(int)Math.Ceiling(countdownRemaining.TotalSeconds)}");
                                 ImGui.PopStyleColor();
                                 ImGui.PopFont();
@@ -425,7 +425,7 @@ namespace BPSR_ZDPS.Windows
                                 {
                                     ImGui.SameLine();
                                 }
-                                ImGui.ImageWithBg(tex.Value, new Vector2(70 * 1.75f, 110 * 1.75f), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), Colors.OrangeRed);
+                                ImGui.ImageWithBg(tex.Value, new Vector2(70 * 1.75f, 110 * 1.75f), new Vector2(0, 0), new Vector2(1, 1), new Vector4(0, 0, 0, 0), Theme.GetColor(ThemeColor.ButtonRed));
                             }
                         }
                         ImGui.EndGroup();
@@ -434,7 +434,7 @@ namespace BPSR_ZDPS.Windows
                     else
                     {
                         ImGui.PushFont(null, 250);
-                        ImGui.PushStyleColor(ImGuiCol.Text, Colors.OrangeRed_Transparent);
+                        ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.ButtonRed, 0.7f));
                         ImGui.TextAligned(0.5f, -1, $"{remaining}");
                         ImGui.PopStyleColor();
                         ImGui.PopFont();

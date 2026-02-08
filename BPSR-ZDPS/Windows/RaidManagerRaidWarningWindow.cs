@@ -198,7 +198,7 @@ namespace BPSR_ZDPS.Windows
                     {
                         ImGui.PushFont(null, 34.0f * (windowSettings.MessageTextScale * 0.01f));
                         LineHeight = ImGui.CalcTextSize("0WM0").Y + ImGui.GetStyle().ItemSpacing.Y + ImGui.GetStyle().FramePadding.Y;
-                        ImGui.PushStyleColor(ImGuiCol.Text, Colors.OrangeRed);
+                        ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.ButtonRed));
 
                         float width = ImGui.GetContentRegionAvail().X;
                         List<ulong> MessagesToRemove = new();

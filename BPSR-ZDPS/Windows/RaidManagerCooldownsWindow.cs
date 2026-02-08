@@ -282,7 +282,7 @@ namespace BPSR_ZDPS.Windows
                                         totalCooldown = trackedSkill.CooldownReduced.Value;
                                     }
                                     float remainingPct = (float)Math.Round(remainingTime.TotalSeconds / totalCooldown, 4);
-                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Colors.DarkRed);
+                                    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Theme.GetColor(ThemeColor.DestructiveButton));
                                     ImGui.ProgressBar(remainingPct, new Vector2(progressBarWidth, 18), "");
                                     ImGui.PopStyleColor();
                                     ImGui.SetCursorPos(new Vector2(labelX, cursorPos.Y + (ImGui.GetItemRectSize().Y - textSize.Y) * textAlignment));

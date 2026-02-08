@@ -1,4 +1,5 @@
-﻿using Hexa.NET.ImGui;
+﻿using BPSR_ZDPS.DataTypes;
+using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,7 +89,7 @@ namespace BPSR_ZDPS.Windows
 
                 if (DB.MigrationStatus.State == Database.Migrations.MigrationStatusState.Error)
                 {
-                    ImGui.PushStyleColor(ImGuiCol.Text, Colors.Red);
+                    ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                     ImGui.TextWrapped(DB.MigrationStatus.ErrorMsg);
                     ImGui.PopStyleColor();
 

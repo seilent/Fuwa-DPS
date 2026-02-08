@@ -168,7 +168,7 @@ namespace BPSR_ZDPS.Windows
                         {
                             ImGui.Indent();
                             float indentOffset = ImGui.GetCursorPosX();
-                            ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Colors.DarkRed);
+                            ImGui.PushStyleColor(ImGuiCol.PlotHistogram, Theme.GetColor(ThemeColor.DestructiveButton));
                             string threatName = "";
                             if (EntityCache.Instance.Cache.Lines.TryGetValue(threat.EntityUuid, out var cached))
                             {

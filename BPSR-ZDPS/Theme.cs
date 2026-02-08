@@ -627,6 +627,9 @@ namespace BPSR_ZDPS
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
 
+                    // Icon/image backgrounds - darker gray for light theme contrast
+                    { ThemeColor.IconBackground, new Vector4(0.5f, 0.5f, 0.5f, 0.85f) },
+
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(180 / 255f, 180 / 255f, 180 / 255f, 0.5f) },
                     { ThemeColor.BorderStrong, new Vector4(140 / 255f, 140 / 255f, 140 / 255f, 1.0f) }
@@ -700,6 +703,9 @@ namespace BPSR_ZDPS
                     // Alpha helper colors
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - white for dark theme contrast
+                    { ThemeColor.IconBackground, new Vector4(1.0f, 1.0f, 1.0f, 0.85f) },
 
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(78 / 255f, 78 / 255f, 78 / 255f, 0.5f) },
@@ -775,6 +781,9 @@ namespace BPSR_ZDPS
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
 
+                    // Icon/image backgrounds - white for black theme contrast
+                    { ThemeColor.IconBackground, new Vector4(1.0f, 1.0f, 1.0f, 0.85f) },
+
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(50 / 255f, 50 / 255f, 50 / 255f, 0.5f) },
                     { ThemeColor.BorderStrong, new Vector4(80 / 255f, 80 / 255f, 80 / 255f, 1.0f) }
@@ -848,6 +857,9 @@ namespace BPSR_ZDPS
                     // Alpha helper colors
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - light purple-white for purple theme
+                    { ThemeColor.IconBackground, new Vector4(0.95f, 0.93f, 1.0f, 0.85f) },
 
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(60 / 255f, 40 / 255f, 80 / 255f, 0.5f) },
@@ -923,6 +935,9 @@ namespace BPSR_ZDPS
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
 
+                    // Icon/image backgrounds - bright cyan-white for cyberpunk theme
+                    { ThemeColor.IconBackground, new Vector4(0.7f, 1.0f, 1.0f, 0.85f) },
+
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(30 / 255f, 30 / 255f, 50 / 255f, 0.5f) },
                     { ThemeColor.BorderStrong, new Vector4(0 / 255f, 255 / 255f, 255 / 255f, 0.8f) }  // Cyan
@@ -997,6 +1012,9 @@ namespace BPSR_ZDPS
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
 
+                    // Icon/image backgrounds - solarized base2 for readability
+                    { ThemeColor.IconBackground, new Vector4(238/255f, 232/255f, 213/255f, 0.85f) },  // #EEE8D5
+
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(7 / 255f, 54 / 255f, 66 / 255f, 0.5f) },
                     { ThemeColor.BorderStrong, new Vector4(101/255f, 123/255f, 131/255f, 1.0f) }
@@ -1070,6 +1088,9 @@ namespace BPSR_ZDPS
                     // Alpha helper colors
                     { ThemeColor.TransparentWhite, new Vector4(1.0f, 1.0f, 1.0f, 0.0f) },
                     { ThemeColor.TransparentBlack, new Vector4(0.0f, 0.0f, 0.0f, 0.0f) },
+
+                    // Icon/image backgrounds - light green-white for forest theme
+                    { ThemeColor.IconBackground, new Vector4(0.85f, 0.95f, 0.85f, 0.85f) },
 
                     // Border/separator colors
                     { ThemeColor.BorderSubtle, new Vector4(35 / 255f, 60 / 255f, 40 / 255f, 0.5f) },
