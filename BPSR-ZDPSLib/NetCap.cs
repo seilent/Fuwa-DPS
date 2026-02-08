@@ -152,6 +152,8 @@ public class NetCap
 
     private void OnNewConnection(TcpReassembler.TcpConnection conn)
     {
+        // DEBUG: Log new game connection detected
+        System.Diagnostics.Debug.WriteLine($"[Connection] New: {conn.EndPoint} -> {conn.DestEndPoint}");
         var task = Task.Factory.StartNew(async () =>
         {
             NumConnectionReaders++;
@@ -327,8 +329,8 @@ public class NetCap
             (x.RemoteAddress == ip.DestinationAddress.ToString() && x.RemotePort == tcp.DestinationPort)));
 
         sw.Stop();
-        Log.Logger.Debug($"Checking {ip.SourceAddress}:{tcp.SourcePort} > {ip.DestinationAddress}:{tcp.DestinationPort} is game connection: {isGameConnection}, took {sw.ElapsedMilliseconds}ms");
-        
+        // Log.Logger.Debug($"Checking {ip.SourceAddress}:{tcp.SourcePort} > {ip.DestinationAddress}:{tcp.DestinationPort} is game connection: {isGameConnection}, took {sw.ElapsedMilliseconds}ms");
+
         return isGameConnection;
     }
 

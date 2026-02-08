@@ -118,7 +118,7 @@ public class TcpReassembler
                     (BinaryPrimitives.ReadInt16BigEndian(tcpPacket.PayloadData.AsSpan()[4..]) & 0x7FFF) <= 9)
                 {
                     IsSynced = true;
-                    Log.Information($"Connection {EndPoint} is synced");
+                    // Log.Information($"Connection {EndPoint} is synced");
                 }
                 else {
                     return;

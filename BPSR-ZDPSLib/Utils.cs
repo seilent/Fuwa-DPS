@@ -43,7 +43,7 @@ public class Utils
             }
         }
         sw.Stop();
-        Log.Information("GetProcesses took: {time}ms", sw.ElapsedMilliseconds);
+        // Log.Information("GetProcesses took: {time}ms", sw.ElapsedMilliseconds);
 
         var tcpConnections = TcpHelper.GetExtendedTcpTable();
         foreach (var conn in tcpConnections) {

@@ -262,7 +262,16 @@ namespace BPSR_ZDPS.Windows
                         // (healing alone doesn't count since merged mode only shows damage dealers)
                         bool hasDpsDamage = EncounterManager.Current?.TotalDamage > 0;
 
-                        bool shouldBeOnTop = hasDpsDamage;
+                        // Check if there's been recent activity (within 15 seconds)
+                        bool hasRecentActivity = false;
+                        if (EncounterManager.Current != null)
+                        {
+                            var timeSinceLastUpdate = DateTime.Now.Subtract(EncounterManager.Current.LastUpdate).TotalSeconds;
+                            hasRecentActivity = timeSinceLastUpdate < 15.0;
+                        }
+
+                        // Window stays on top if there's damage OR recent activity
+                        bool shouldBeOnTop = hasDpsDamage || hasRecentActivity;
 
                         // Check if the actual OS window state differs from what we want
                         if (shouldBeOnTop != _lastKnownTopMostState)
@@ -270,6 +279,7 @@ namespace BPSR_ZDPS.Windows
                             if (shouldBeOnTop)
                             {
                                 // In active combat with damage, re-enable topmost
+                                System.Diagnostics.Debug.WriteLine($"[AutoTop] Re-enabling topmost (opacity: {LastPinnedOpacity}%)");
                                 Utils.SetWindowTopmost();
                                 Utils.SetWindowOpacity(LastPinnedOpacity * 0.01f);
                                 IsTemporarilyNotTopMost = false;
@@ -277,6 +287,7 @@ namespace BPSR_ZDPS.Windows
                             else if (IsPinned)
                             {
                                 // No DPS damage, send window to back and temporarily disable topmost
+                                System.Diagnostics.Debug.WriteLine("[AutoTop] Sending window to back (inactivity timeout)");
                                 Utils.SendWindowToBack();
                                 Utils.SetWindowOpacity(1.0f);
                                 IsTemporarilyNotTopMost = true;
@@ -749,7 +760,8 @@ namespace BPSR_ZDPS.Windows
                     if (ImGui.MenuItem(AppStrings.GetLocalized("MainWindow_Menu_Exit")))
                     {
                         windowSettings.WindowPosition = WindowPosition;
-                        windowSettings.WindowSize = WindowSize;
+                        // Don't save WindowSize - AlwaysAutoResize means it's calculated automatically
+                        Settings.Save();
                         p_open = false;
                     }
                     ImGui.EndMenu();

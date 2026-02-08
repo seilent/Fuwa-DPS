@@ -209,6 +209,9 @@ namespace BPSR_ZDPS
             }
 
             OnEncounterStart(new EventArgs());
+
+            // DEBUG: Log encounter start
+            System.Diagnostics.Debug.WriteLine($"[Encounter] Started: EncounterId={Current?.EncounterId}, Boss={Current?.BossName}, Reason={reason}, Phase={Current?.SceneSubName}");
         }
 
         public static void StopEncounter(bool isKnownFinal = false, EncounterStartReason reason = EncounterStartReason.None)
@@ -223,6 +226,9 @@ namespace BPSR_ZDPS
             CheckTimeOutStatus(reason);
 
             OnEncounterEnd(new EventArgs());
+
+            // DEBUG: Log encounter end
+            System.Diagnostics.Debug.WriteLine($"[Encounter] Ended: EncounterId={Current?.EncounterId}, Boss={Current?.BossName}, Final={isKnownFinal}, Reason={reason}");
 
             if (isKnownFinal)
             {
@@ -276,6 +282,8 @@ namespace BPSR_ZDPS
 
         public static void SignalEncounterEndFinal(EncounterEndFinalData data)
         {
+            // DEBUG: Log encounter final save
+            System.Diagnostics.Debug.WriteLine($"[Encounter] Final save: EncounterId={data.EncounterId}, Reason={data.Reason}, BattleId={data.BattleId}");
             OnEncounterEndFinal(data);
             if (Current != null)
             {
@@ -292,8 +300,10 @@ namespace BPSR_ZDPS
             if (Current != null && DateTime.Now.Subtract(Current.LastUpdate).TotalSeconds > combatTimeout)
             {
                 // It has been too long since the last encounter update, we're probably in a new encounter now
+                // DEBUG: Log timeout-triggered encounter start
+                System.Diagnostics.Debug.WriteLine($"[Encounter] Timeout triggered: {DateTime.Now.Subtract(Current.LastUpdate).TotalSeconds:F1}s since last update");
                 StartEncounter();
-            }    
+            }
         }
 
         public static void StartNewBattle()
@@ -309,6 +319,8 @@ namespace BPSR_ZDPS
             var battleId = DB.StartBattle(LevelMapId, SceneName);
             CurrentBattleId = battleId;
 
+            // DEBUG: Log battle start (new instance/dungeon)
+            System.Diagnostics.Debug.WriteLine($"[Battle] Started: BattleId={battleId}, MapId={LevelMapId}, Scene={SceneName}");
             OnBattleStart(new EventArgs());
         }
 
@@ -335,6 +347,9 @@ namespace BPSR_ZDPS
             Current.SceneId = LevelMapId;
             Current.SceneName = SceneName;
             DB.UpdateBattleInfo(CurrentBattleId, LevelMapId, SceneName);
+
+            // DEBUG: Log scene/area change
+            System.Diagnostics.Debug.WriteLine($"[Area] Changed: MapId={LevelMapId}, Scene={SceneName}");
         }
 
         public static async void UpdateTruePerValues(CancellationTokenSource cancellationTokenSource)
