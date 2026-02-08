@@ -41,6 +41,30 @@ namespace BPSR_ZDPS.DataTypes
 
         // Debug colors (NetDebug)
         DebugSeen,
-        DebugUnseen
+        DebugUnseen,
+
+        // Status/state colors
+        EncounterPausedBackground,    // For encounter saving paused state
+        EncounterPausedText,
+        EncounterResumedButton,        // For resume button in paused state
+
+        // Window state colors
+        WindowPinned,                  // Pin icon color when window is topmost
+        WindowUnpinned,                // Pin icon color when window is not topmost
+        WindowCollapsed,               // Collapse button when collapsed
+        WindowExpanded,                // Collapse button when expanded
+
+        // Common UI colors
+        QualityBasic,                  // Item quality: Basic (blue)
+        QualityAdvanced,               // Item quality: Advanced (purple)
+        QualityExcellent,              // Item quality: Excellent (gold)
+
+        // Alpha helper colors (transparent variants)
+        TransparentWhite,
+        TransparentBlack,
+
+        // Border/separator colors
+        BorderSubtle,
+        BorderStrong
     }
 }

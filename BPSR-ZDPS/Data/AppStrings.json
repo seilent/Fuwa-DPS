@@ -679,6 +679,38 @@
         "en": "A light theme optimized for daytime use and well-lit environments.",
         "ja": "日中の使用や明るい環境に最適化されたライトテーマ。"
     },
+    "Settings_UI_ThemePurple": {
+        "en": "Purple",
+        "ja": "パープル"
+    },
+    "Settings_UI_ThemePurpleTooltip": {
+        "en": "A dark purple theme with violet accents for a mystical aesthetic.",
+        "ja": "神秘的な美学のためのバイオレットのアクセントを持つダークパープルテーマ。"
+    },
+    "Settings_UI_ThemeCyberpunk": {
+        "en": "Cyberpunk",
+        "ja": "サイバーパンク"
+    },
+    "Settings_UI_ThemeCyberpunkTooltip": {
+        "en": "A futuristic theme with neon cyan and pink accents on a dark background.",
+        "ja": "ダーク背景にネオンシアンとピンクのアクセントを持つ未来的なテーマ。"
+    },
+    "Settings_UI_ThemeSolarized": {
+        "en": "Solarized",
+        "ja": "ソラライズド"
+    },
+    "Settings_UI_ThemeSolarizedTooltip": {
+        "en": "A precision color scheme designed for both light and dark environments, based on the Solarized palette.",
+        "ja": "明るい環境と暗い環境の両方に対応するように設計された精密なカラースキームで、Solarizedパレットに基づいています。"
+    },
+    "Settings_UI_ThemeForest": {
+        "en": "Forest",
+        "ja": "フォレスト"
+    },
+    "Settings_UI_ThemeForestTooltip": {
+        "en": "A calming dark green theme inspired by nature and forest environments.",
+        "ja": "自然と森林環境に触発された落ち着くダークグリーンテーマ。"
+    },
     "Settings_UI_ThemeTooltip": {
         "en": "Select the visual theme for the ZDPS interface. Takes effect immediately after saving.",
         "ja": "ZDPSインターフェースのビジュアルテーマを選択します。保存後にすぐに有効になります。"

@@ -940,6 +940,10 @@ namespace BPSR_ZDPS.Windows
                             ETheme.Dark => AppStrings.GetLocalized("Settings_UI_ThemeDark"),
                             ETheme.Black => AppStrings.GetLocalized("Settings_UI_ThemeBlack"),
                             ETheme.Light => AppStrings.GetLocalized("Settings_UI_ThemeLight"),
+                            ETheme.Purple => AppStrings.GetLocalized("Settings_UI_ThemePurple"),
+                            ETheme.Cyberpunk => AppStrings.GetLocalized("Settings_UI_ThemeCyberpunk"),
+                            ETheme.Solarized => AppStrings.GetLocalized("Settings_UI_ThemeSolarized"),
+                            ETheme.Forest => AppStrings.GetLocalized("Settings_UI_ThemeForest"),
                             _ => AppStrings.GetLocalized("Settings_UI_ThemeDark")
                         };
 
@@ -963,6 +967,32 @@ namespace BPSR_ZDPS.Windows
                                 theme = ETheme.Light;
                             }
                             ImGui.SetItemTooltip(AppStrings.GetLocalized("Settings_UI_ThemeLightTooltip"));
+
+                            ImGui.Separator();
+
+                            if (ImGui.Selectable(AppStrings.GetLocalized("Settings_UI_ThemePurple")))
+                            {
+                                theme = ETheme.Purple;
+                            }
+                            ImGui.SetItemTooltip(AppStrings.GetLocalized("Settings_UI_ThemePurpleTooltip"));
+
+                            if (ImGui.Selectable(AppStrings.GetLocalized("Settings_UI_ThemeCyberpunk")))
+                            {
+                                theme = ETheme.Cyberpunk;
+                            }
+                            ImGui.SetItemTooltip(AppStrings.GetLocalized("Settings_UI_ThemeCyberpunkTooltip"));
+
+                            if (ImGui.Selectable(AppStrings.GetLocalized("Settings_UI_ThemeSolarized")))
+                            {
+                                theme = ETheme.Solarized;
+                            }
+                            ImGui.SetItemTooltip(AppStrings.GetLocalized("Settings_UI_ThemeSolarizedTooltip"));
+
+                            if (ImGui.Selectable(AppStrings.GetLocalized("Settings_UI_ThemeForest")))
+                            {
+                                theme = ETheme.Forest;
+                            }
+                            ImGui.SetItemTooltip(AppStrings.GetLocalized("Settings_UI_ThemeForestTooltip"));
 
                             ImGui.EndCombo();
                         }

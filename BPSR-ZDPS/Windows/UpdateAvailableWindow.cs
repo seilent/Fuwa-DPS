@@ -42,7 +42,7 @@ namespace BPSR_ZDPS
 
             ImGuiP.PushOverrideID(ImGuiP.ImHashStr(LAYER));
 
-            ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Colors.DarkGreen);
+            ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Theme.GetColor(ThemeColor.SuccessText));
 
             if (ImGui.BeginPopupModal($"ZDPS Update Available###{TITLE_ID}", ref IsOpened, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking))
             {
@@ -67,7 +67,7 @@ namespace BPSR_ZDPS
                     ImGui.TextUnformatted("There is a new update available for ZDPS!");
                     ImGui.TextUnformatted("It is strongly recommended to always update to the latest version available.");
 
-                    ImGui.PushStyleColor(ImGuiCol.Text, Colors.OrangeRed);
+                    ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
                     ImGui.TextUnformatted("Reminder: This is the Season 1 version of ZDPS when downloading updates!");
                     ImGui.PopStyleColor();
 
@@ -77,7 +77,7 @@ namespace BPSR_ZDPS
                 ImGui.Separator();
                 ImGui.NewLine();
 
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SuccessText));
                 if (ImGui.Button("Go To Update Website", new Vector2(250, 0)))
                 {
                     try

@@ -42,7 +42,7 @@ namespace BPSR_ZDPS
 
             ImGuiP.PushOverrideID(ImGuiP.ImHashStr(LAYER));
 
-            ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Colors.DarkGreen);
+            ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Theme.GetColor(ThemeColor.SuccessText));
 
             if (ImGui.BeginPopupModal($"ZDPS Enable Update Checking###{TITLE_ID}", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.AlwaysAutoResize))
             {
@@ -72,7 +72,7 @@ namespace BPSR_ZDPS
                 ImGui.Separator();
                 ImGui.NewLine();
 
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SuccessText));
                 if (ImGui.Button("Enable Now", new Vector2(250, 0)))
                 {
                     Settings.Instance.CheckForZDPSUpdatesOnStartup = true;

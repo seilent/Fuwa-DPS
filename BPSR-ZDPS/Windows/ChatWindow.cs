@@ -536,7 +536,7 @@ namespace BPSR_ZDPS.Windows
 
                     if (IsEditingNewTab)
                     {
-                        ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen_Transparent);
+                        ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SuccessText));
                         if (ImGui.Button(AppStrings.GetLocalized("Common_Save"), new Vector2(-1, 0)))
                         {
                             ChatManager.AddChatTab(EditingTab.Config);

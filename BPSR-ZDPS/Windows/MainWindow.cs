@@ -328,12 +328,12 @@ namespace BPSR_ZDPS.Windows
 
             if (AppState.IsEncounterSavingPaused)
             {
-                ImGui.PushStyleColor(ImGuiCol.ChildBg, Colors.DarkRed_Transparent);
+                ImGui.PushStyleColor(ImGuiCol.ChildBg, Theme.GetColor(ThemeColor.EncounterPausedBackground));
                 ImGui.BeginChild("##EncounterSavingPausedChild", ImGuiChildFlags.AutoResizeY);
                 ImGui.TextAligned(0.5f, -1, AppStrings.GetLocalized("MainWindow_EncounterSavingPaused"));
                 ImGui.TextAligned(0.5f, -1, AppStrings.GetLocalized("MainWindow_AutoResume"));
                 ImGui.SetCursorPosX((ImGui.GetContentRegionAvail().X - 200) * 0.5f);
-                ImGui.PushStyleColor(ImGuiCol.Button, Colors.DarkGreen);
+                ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.EncounterResumedButton));
                 if (ImGui.Button(AppStrings.GetLocalized("MainWindow_ResumeSavingNow") + "##ResumeEncounterSavingBtn", new Vector2(200, 0)))
                 {
                     AppState.IsEncounterSavingPaused = false;

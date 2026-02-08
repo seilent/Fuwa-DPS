@@ -159,9 +159,13 @@ public enum EWebhookReportsMode
 
 public enum ETheme
 {
-    Dark,
-    Black,
-    Light,
+    Dark,        // Original dark gray theme
+    Black,       // Pure black theme
+    Light,       // Light theme
+    Purple,      // Dark purple with violet accents
+    Cyberpunk,   // Nearly black with neon cyan/pink
+    Solarized,   // Solarized Dark palette
+    Forest,      // Dark green nature theme
 }
 
 public class SettingsExternal
