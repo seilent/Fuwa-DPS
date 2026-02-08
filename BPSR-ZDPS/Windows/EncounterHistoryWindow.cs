@@ -438,7 +438,11 @@ namespace BPSR_ZDPS.Windows
                             if (!string.IsNullOrEmpty(profession))
                             {
                                 var color = Professions.ProfessionColors(profession);
-                                color = color - new Vector4(0, 0, 0, 0.25f); // Reduce alpha less for better visibility
+                                // Only apply alpha reduction for non-light themes (light theme needs full alpha for contrast)
+                                if (Settings.Instance.Theme != ETheme.Light)
+                                {
+                                    color = color - new Vector4(0, 0, 0, 0.25f);
+                                }
 
                                 ImGui.PushStyleColor(ImGuiCol.Header, color);
                                 //ImGui.PushStyleColor(ImGuiCol.TableRowBg, HelperMethods.ProfessionColors(profession));

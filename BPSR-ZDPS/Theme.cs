@@ -203,6 +203,11 @@ namespace BPSR_ZDPS
             Vector4 panelHoverColor = new Vector4(0 / 255f, 120 / 255f, 215 / 255f, 1.0f);
             Vector4 panelActiveColor = new Vector4(0 / 255f, 80 / 255f, 180 / 255f, 1.0f);
 
+            // Header colors - darker than panel for better contrast on light theme
+            Vector4 headerColor = new Vector4(200 / 255f, 200 / 255f, 200 / 255f, 1.0f);
+            Vector4 headerHoveredColor = new Vector4(180 / 255f, 180 / 255f, 180 / 255f, 1.0f);
+            Vector4 headerActiveColor = new Vector4(160 / 255f, 160 / 255f, 160 / 255f, 1.0f);
+
             Vector4 textColor = new Vector4(20 / 255f, 20 / 255f, 20 / 255f, 1.0f);
             Vector4 textDisabledColor = new Vector4(140 / 255f, 140 / 255f, 140 / 255f, 1.0f);
             Vector4 borderColor = new Vector4(180 / 255f, 180 / 255f, 180 / 255f, 1.0f);
@@ -233,9 +238,9 @@ namespace BPSR_ZDPS
             colors[ImGuiCol.Button] = panelColor;
             colors[ImGuiCol.ButtonHovered] = panelHoverColor;
             colors[ImGuiCol.ButtonActive] = panelHoverColor;
-            colors[ImGuiCol.Header] = panelColor;
-            colors[ImGuiCol.HeaderHovered] = panelHoverColor;
-            colors[ImGuiCol.HeaderActive] = panelActiveColor;
+            colors[ImGuiCol.Header] = headerColor;
+            colors[ImGuiCol.HeaderHovered] = headerHoveredColor;
+            colors[ImGuiCol.HeaderActive] = headerActiveColor;
             colors[ImGuiCol.Separator] = separatorColor;
             colors[ImGuiCol.SeparatorHovered] = separatorColor;
             colors[ImGuiCol.SeparatorActive] = separatorColor;
@@ -348,8 +353,8 @@ namespace BPSR_ZDPS
 
             Vector4 textColor = new Vector4(0 / 255f, 255 / 255f, 255 / 255f, 1.0f);  // Cyan text
             Vector4 textDisabledColor = new Vector4(80 / 255f, 80 / 255f, 120 / 255f, 1.0f);
-            Vector4 borderColor = new Vector4(40 / 255f, 40 / 255f, 60 / 255f, 1.0f);
-            Vector4 separatorColor = new Vector4(60 / 255f, 60 / 255f, 100 / 255f, 1.0f);
+            Vector4 borderColor = new Vector4(60 / 255f, 100 / 255f, 140 / 255f, 1.0f);  // Brighter for visibility
+            Vector4 separatorColor = new Vector4(80 / 255f, 130 / 255f, 180 / 255f, 1.0f);  // Brighter for visibility
 
             colors[ImGuiCol.Text] = textColor;
             colors[ImGuiCol.TextDisabled] = textDisabledColor;
@@ -417,8 +422,8 @@ namespace BPSR_ZDPS
             Vector4 panelHoverColor = new Vector4(38 / 255f, 139 / 255f, 210 / 255f, 1.0f);  // #268bd2 blue
             Vector4 panelActiveColor = new Vector4(133 / 255f, 153 / 255f, 0 / 255f, 1.0f);   // #859900 green
 
-            Vector4 textColor = new Vector4(147 / 255f, 161 / 255f, 161 / 255f, 1.0f);  // #93a1a1 base0
-            Vector4 textDisabledColor = new Vector4(88 / 255f, 110 / 255f, 117 / 255f, 1.0f);  // #586e75 base01
+            Vector4 textColor = new Vector4(238 / 255f, 232 / 255f, 213 / 255f, 1.0f);  // #EEE8D5 base2 - better contrast
+            Vector4 textDisabledColor = new Vector4(147 / 255f, 161 / 255f, 161 / 255f, 1.0f);  // #93a1a1 base0
             Vector4 borderColor = new Vector4(7 / 255f, 54 / 255f, 66 / 255f, 1.0f);     // #073642
             Vector4 separatorColor = new Vector4(101 / 255f, 123 / 255f, 131 / 255f, 1.0f);  // #657b83 base1
 
@@ -564,11 +569,11 @@ namespace BPSR_ZDPS
                     { ThemeColor.DestructiveButton, new Vector4(0.9f, 0.3f, 0.3f, 1.0f) },
                     { ThemeColor.ButtonRed, new Vector4(0.8f, 0.2f, 0.2f, 1.0f) },
 
-                    // Buff header colors
-                    { ThemeColor.BuffHeader_Default, new Vector4(0.7f, 0.7f, 0.7f, 1.0f) },
-                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.6f, 0.6f, 0.75f) },
-                    { ThemeColor.BuffHeader_Buff, new Vector4(0.6f, 0.9f, 0.6f, 0.75f) },
-                    { ThemeColor.BuffHeader_Unknown, new Vector4(0.9f, 0.8f, 0.4f, 0.75f) },
+                    // Buff header colors - darker with full alpha for better contrast on light theme
+                    { ThemeColor.BuffHeader_Default, new Vector4(0.6f, 0.6f, 0.6f, 1.0f) },
+                    { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.5f, 0.5f, 1.0f) },
+                    { ThemeColor.BuffHeader_Buff, new Vector4(0.5f, 0.8f, 0.5f, 1.0f) },
+                    { ThemeColor.BuffHeader_Unknown, new Vector4(0.85f, 0.7f, 0.3f, 1.0f) },
 
                     // Status colors
                     { ThemeColor.ConnectionConnected, new Vector4(0.0f, 0.5f, 0.0f, 1.0f) },
@@ -707,8 +712,8 @@ namespace BPSR_ZDPS
                     { ThemeColor.WarningText, Colors.Red_Transparent },
                     { ThemeColor.SuccessText, Colors.Green_Transparent },
 
-                    // Button colors - same as Dark
-                    { ThemeColor.SelectedButton, Colors.DimGray },
+                    // Button colors - same as Dark but lighter selected button for contrast
+                    { ThemeColor.SelectedButton, new Vector4(0.5f, 0.5f, 0.5f, 1.0f) },  // Slightly lighter than DimGray
                     { ThemeColor.DestructiveButton, Colors.Red },
                     { ThemeColor.ButtonRed, Colors.DarkRed },
 
@@ -782,7 +787,7 @@ namespace BPSR_ZDPS
                     { ThemeColor.SuccessText, new Vector4(0.5f, 1.0f, 0.7f, 0.75f) },
 
                     // Button colors
-                    { ThemeColor.SelectedButton, new Vector4(80/255f, 50/255f, 120/255f, 1.0f) },
+                    { ThemeColor.SelectedButton, new Vector4(110/255f, 70/255f, 160/255f, 1.0f) },  // Lighter for contrast
                     { ThemeColor.DestructiveButton, new Vector4(1.0f, 0.4f, 0.4f, 1.0f) },
                     { ThemeColor.ButtonRed, new Vector4(0.8f, 0.3f, 0.3f, 1.0f) },
 
@@ -1009,7 +1014,7 @@ namespace BPSR_ZDPS
                     { ThemeColor.ButtonRed, new Vector4(0.9f, 0.3f, 0.2f, 1.0f) },
 
                     // Buff header colors
-                    { ThemeColor.BuffHeader_Default, new Vector4(35/255f, 60/255f, 40/255f, 1.0f) },
+                    { ThemeColor.BuffHeader_Default, new Vector4(50/255f, 100/255f, 60/255f, 1.0f) },  // Lighter for contrast
                     { ThemeColor.BuffHeader_Debuff, new Vector4(1.0f, 0.5f, 0.3f, 0.75f) },  // Orange-red
                     { ThemeColor.BuffHeader_Buff, new Vector4(0.4f, 0.9f, 0.5f, 0.75f) },  // Green
                     { ThemeColor.BuffHeader_Unknown, new Vector4(1.0f, 0.85f, 0.3f, 0.75f) },  // Gold
