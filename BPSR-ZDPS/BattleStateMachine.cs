@@ -148,7 +148,7 @@ namespace BPSR_ZDPS
             }
         }
 
-        public static void SetDeferredEncounterEndFinalData(DateTime dateTime, EncounterEndFinalData data)
+        public static void SetDeferredEncounterEndFinalData(DateTime dateTime, EncounterEndFinalData data, bool allowRefresh = false)
         {
             if (DeferredEncounterEndFinalData != null && DeferredEncounterEndFinalData.EncounterId == data.EncounterId)
             {
@@ -160,9 +160,10 @@ namespace BPSR_ZDPS
                     Log.Debug("SetDeferredEncounterEndFinalData - Encounter has already signaled the final end");
                     return;
                 }
-                else if (dateTime.CompareTo(DeferredEncounterEndFinalTime) >= 0)
+                // For dragon raids, allow refreshing the buffer (updating to a later time)
+                else if (!allowRefresh && dateTime.CompareTo(DeferredEncounterEndFinalTime) >= 0)
                 {
-                    // We'll only allow updating the time to be sooner, not later
+                    // We'll only allow updating the time to be sooner, not later (unless allowRefresh is true)
                     Log.Debug("SetDeferredEncounterEndFinalData - New time is not sooner than already set callback");
                     return;
                 }

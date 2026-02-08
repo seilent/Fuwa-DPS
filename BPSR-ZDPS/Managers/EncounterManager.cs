@@ -39,7 +39,7 @@ namespace BPSR_ZDPS
         public static bool HasLoggedSamplingModeThisEncounter = false;
 
         // Dragon boss IDs that should not be split into separate phases when ExcludeDragonsFromPhaseSplit is enabled
-        private static readonly HashSet<int> DragonBossIds = new() { 102101, 102401, 102701 };
+        internal static readonly HashSet<int> DragonBossIds = new() { 102101, 102401, 102701 };
 
         static EncounterManager()
         {
@@ -243,8 +243,18 @@ namespace BPSR_ZDPS
 
             if (isKnownFinal)
             {
+                // Check if this is a dragon raid
+                bool isDragonRaid = DragonBossIds.Contains((int)Current.BossAttrId);
+
+                // Dragon raids get 5-second buffer to catch delayed damage, non-dragon gets 2-second buffer
+                double delaySeconds = isDragonRaid ? 5.0 : 2.0;
+
                 // We don't actually want to end instantly because some packets are going to be delayed and come in _after_ this and they are typically the most important ones to not miss
-                BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.AddSeconds(2), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
+                BattleStateMachine.SetDeferredEncounterEndFinalData(
+                    DateTime.Now.AddSeconds(delaySeconds),
+                    new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
+                    allowRefresh: isDragonRaid  // Allow refreshing buffer for dragon raids when activity occurs
+                );
             }
             else
             {
@@ -823,6 +833,9 @@ namespace BPSR_ZDPS
             }
 
             GetOrCreateEntity(attackerUuid).AddDamage(targetUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
+
+            // Refresh dragon raid buffer if active
+            RefreshDragonRaidBufferIfActive(extraPacketData);
         }
 
         public void AddHealing(
@@ -871,6 +884,9 @@ namespace BPSR_ZDPS
             }
             
             entity.AddHealing(targetUuid, skillId, skillLevel, damage, overhealing, effectiveHealing, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
+
+            // Refresh dragon raid buffer if active
+            RefreshDragonRaidBufferIfActive(extraPacketData);
         }
 
         public void AddTakenDamage(
@@ -897,12 +913,34 @@ namespace BPSR_ZDPS
             }
 
             GetOrCreateEntity(targetUuid).AddTakenDamage(attackerUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
+
+            // Refresh dragon raid buffer if active
+            RefreshDragonRaidBufferIfActive(extraPacketData);
         }
 
         public void AddShieldGained(long entityUuid, long shieldBuffUuid, long value, long initialValue, long maxValue = 0)
         {
             // Check to make sure the shieldBuffUuid is not already in the shieldGain list, otherwise this is just an update for an existing shield and we're only tracking total gain for now
             //GetOrCreateEntity(entityUuid).AddBuffEventAttribute(shieldBuffUuid, "AttrShieldList", 0);
+        }
+
+        private static void RefreshDragonRaidBufferIfActive(ExtraPacketData extraPacketData)
+        {
+            // If we have a deferred end for a dragon raid and activity occurs, refresh the buffer
+            if (BattleStateMachine.DeferredEncounterEndFinalTime != null &&
+                BattleStateMachine.DeferredEncounterEndFinalData != null &&
+                EncounterManager.Current != null &&
+                EncounterManager.Current.EncounterId == BattleStateMachine.DeferredEncounterEndFinalData.EncounterId &&
+                EncounterManager.DragonBossIds.Contains((int)EncounterManager.Current.BossAttrId))
+            {
+                // Refresh the 5-second buffer
+                BattleStateMachine.SetDeferredEncounterEndFinalData(
+                    extraPacketData.ArrivalTime.AddSeconds(5),
+                    BattleStateMachine.DeferredEncounterEndFinalData,
+                    allowRefresh: true
+                );
+                System.Diagnostics.Debug.WriteLine($"[Encounter] Refreshed dragon raid buffer: EncounterId={EncounterManager.Current.EncounterId}");
+            }
         }
 
         public void NotifyBuffEvent(long entityUuid, EBuffEventType buffEventType, int buffUuid, int baseId, int level, long fireUuid, int layer, int duration, int sourceConfigId, ExtraPacketData extraPacketData)
