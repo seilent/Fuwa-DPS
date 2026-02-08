@@ -76,8 +76,8 @@ public class Settings
     public string WebhookReportsCustomUrl { get; set; } = "";
 
     public bool CheckForZDPSUpdatesOnStartup { get; set; } = false;
-    public string LatestZDPSVersionCheckURL { get; set; } = "https://raw.githubusercontent.com/Blue-Protocol-Source/BPSR-ZDPS-Metadata/master/LatestVersion.txt";
-    public string ZDPSWebsiteURL { get; set; } = "https://github.com/Blue-Protocol-Source/BPSR-ZDPS";
+    public string LatestZDPSVersionCheckURL { get; set; } = "https://bpsr.gacha.boo/dps/version.txt";
+    public string ZDPSWebsiteURL { get; set; } = "https://bpsr.gacha.boo/dps/fuwadpslatest.zip";
     public bool HasPromptedEnableUpdateChecks { get; set; } = false;
 
     // Settings specific to External components

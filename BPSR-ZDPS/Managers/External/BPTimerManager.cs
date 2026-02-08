@@ -14,7 +14,7 @@ namespace BPSR_ZDPS.Managers.External
     public static partial class BPTimerManager
     {
         const int REPORT_HP_INTERVAL = 5;
-        const string HOST = "http://127.0.0.1:8090";
+        const string HOST = "https://bptimerapi.gacha.boo";
         static string API_KEY = "mp05wca8j89fcliz0jgudcpzg060ovwzxqz5fffavks4htried";
 
         static BPTimerHpReport? LastSentRequest = null;

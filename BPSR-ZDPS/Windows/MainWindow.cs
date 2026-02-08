@@ -265,7 +265,8 @@ namespace BPSR_ZDPS.Windows
                 if (windowSettings.TopMost && Settings.Instance.DisableTopMostWhenNoEntities)
                 {
                     _autoDisableTopMostFrameCounter++;
-                    if (_autoDisableTopMostFrameCounter % 10 == 0)
+                    // Check approximately once per second (assuming ~60fps)
+                    if (_autoDisableTopMostFrameCounter % 60 == 0)
                     {
                         // Check if the current encounter has any recorded DPS damage
                         // (healing alone doesn't count since merged mode only shows damage dealers)
@@ -308,9 +309,9 @@ namespace BPSR_ZDPS.Windows
                             }
                             else if (IsPinned)
                             {
-                                // No DPS damage, send window to back and temporarily disable topmost
-                                System.Diagnostics.Debug.WriteLine("[AutoTop] Sending window to back (inactivity timeout)");
-                                Utils.SendWindowToBack();
+                                // No DPS damage, temporarily disable topmost
+                                System.Diagnostics.Debug.WriteLine("[AutoTop] Disabling topmost (inactivity timeout)");
+                                Utils.UnsetWindowTopmost();
                                 Utils.SetWindowOpacity(1.0f);
                                 IsTemporarilyNotTopMost = true;
                             }

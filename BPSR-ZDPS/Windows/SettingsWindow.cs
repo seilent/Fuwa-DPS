@@ -364,7 +364,7 @@ namespace BPSR_ZDPS.Windows
                             // If the value was empty, revert back to the default URL
                             if (string.IsNullOrEmpty(latestZDPSVersionCheckURL))
                             {
-                                latestZDPSVersionCheckURL = "https://raw.githubusercontent.com/Blue-Protocol-Source/BPSR-ZDPS-Metadata/master/LatestVersion.txt";
+                                latestZDPSVersionCheckURL = "https://bpsr.gacha.boo/dps/version.txt";
                             }
                         }
                         ImGui.Indent();
