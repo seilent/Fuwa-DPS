@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.Windows;
 using Hexa.NET.GLFW;
 using Hexa.NET.ImGui;
 using Hexa.NET.ImGui.Backends.D3D11;
@@ -11,11 +11,11 @@ using SixLabors.ImageSharp.PixelFormats;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using BPSR_ZDPS.DataTypes;
+using BPSR_FDPS.DataTypes;
 using GLFWwindowPtr = Hexa.NET.GLFW.GLFWwindowPtr;
 using Hexa.NET.ImPlot;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     internal class Program
     {
@@ -36,19 +36,19 @@ namespace BPSR_ZDPS
 
             if (Settings.Instance.LogToFile)
             {
-                if (File.Exists("ZDPS_log.txt"))
+                if (File.Exists("FuwaDPS_log.txt"))
                 {
-                    File.Copy("ZDPS_log.txt", "ZDPS_log_last_run.txt", true);
-                    File.Delete("ZDPS_log.txt");
+                    File.Copy("FuwaDPS_log.txt", "FuwaDPS_log_last_run.txt", true);
+                    File.Delete("FuwaDPS_log.txt");
                 }
 
-                logBuilder = logBuilder.WriteTo.File("ZDPS_log.txt");
+                logBuilder = logBuilder.WriteTo.File("FuwaDPS_log.txt");
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             }
 
             Log.Logger = logBuilder.CreateLogger();
 
-            Log.Information($"Starting ZDPS v{Utils.AppVersion}");
+            Log.Information($"Starting Fuwa DPS v{Utils.AppVersion}");
 
             DB.Init();
 
@@ -65,7 +65,7 @@ namespace BPSR_ZDPS
             int windowWidth = 800;
             int windowHeight = 600;
 
-            window = GLFW.CreateWindow(800, 600, "ZDPS", null, null);
+            window = GLFW.CreateWindow(800, 600, "Fuwa DPS", null, null);
             if (window.IsNull)
             {
                 Console.WriteLine("Failed to create GLFW window.");
@@ -74,7 +74,7 @@ namespace BPSR_ZDPS
             }
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string iconAssemblyPath = "BPSR_ZDPS.Resources.MainWindowIcon.png";
+            string iconAssemblyPath = "BPSR_FDPS.Resources.MainWindowIcon.png";
             using (var iconStream = assembly.GetManifestResourceStream(iconAssemblyPath))
             {
                 if (iconStream != null)
@@ -118,7 +118,7 @@ namespace BPSR_ZDPS
             }
 
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard;     // Enable Keyboard Controls
-            if (Settings.Instance.AllowGamepadNavigationInputInZDPS)
+            if (Settings.Instance.AllowGamepadNavigationInputInFuwaDPS)
             {
                 io.ConfigFlags |= ImGuiConfigFlags.NavEnableGamepad;  // Enable Gamepad Controls
             }
@@ -229,7 +229,7 @@ namespace BPSR_ZDPS
                 }
             }
 
-            Log.Information("ZDPS is beginning exit process.");
+            Log.Information("Fuwa DPS is beginning exit process.");
 
             // Stop capturing new data to allow our current states to be their final states
             MessageManager.StopCapturing();
@@ -273,7 +273,7 @@ namespace BPSR_ZDPS
             GLFW.DestroyWindow(window);
             GLFW.Terminate();
 
-            Log.Information("ZDPS has successfully terminated all contexts. Performing final retention policy checks.");
+            Log.Information("Fuwa DPS has successfully terminated all contexts. Performing final retention policy checks.");
 
             if (Settings.Instance.UseDatabaseForEncounterHistory && Settings.Instance.DatabaseRetentionPolicyDays > 0)
             {
@@ -328,7 +328,7 @@ namespace BPSR_ZDPS
                 }
             }
 
-            Log.Information("ZDPS has cleanly exited.");
+            Log.Information("Fuwa DPS has cleanly exited.");
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -351,18 +351,18 @@ namespace BPSR_ZDPS
             // Merging additional fonts into Segoe for multi-language support
 
             // Japanese character supporting font (this is a bit heavy to load into memory - 5MB)
-            //ff = new FontFile("BPSR_ZDPS.Fonts.fot-seuratpron-m.otf");
-            var ff = new FontFile("BPSR_ZDPS.Fonts.fot-seuratpron-m.otf", new GlyphRange(0x3000, 0x303F));
+            //ff = new FontFile("BPSR_FDPS.Fonts.fot-seuratpron-m.otf");
+            var ff = new FontFile("BPSR_FDPS.Fonts.fot-seuratpron-m.otf", new GlyphRange(0x3000, 0x303F));
             var res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese character supporting font (this is very heavy to load into memory - 16MB)
-            ff = new FontFile("BPSR_ZDPS.Fonts.SourceHanSansSC-Regular.otf", new GlyphRange(0x4E00, 0x9FFF));
+            ff = new FontFile("BPSR_FDPS.Fonts.SourceHanSansSC-Regular.otf", new GlyphRange(0x4E00, 0x9FFF));
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Korean character supporting font
-            ff = new FontFile("BPSR_ZDPS.Fonts.NotoSansKR-Regular.ttf", new GlyphRange(0x4E00, 0x9FFF));
+            ff = new FontFile("BPSR_FDPS.Fonts.NotoSansKR-Regular.ttf", new GlyphRange(0x4E00, 0x9FFF));
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
@@ -372,14 +372,14 @@ namespace BPSR_ZDPS
             // Note: Segoe-Bold will not support multi-language when it's used
             HelperMethods.Fonts.Add("Segoe-Bold", io.Fonts.AddFontFromFileTTF(@"C:\Windows\Fonts\segoeuib.ttf", 18.0f));
 
-            ff = new FontFile("BPSR_ZDPS.Fonts.FAS.ttf", new GlyphRange(0x0021, 0xF8FF));
+            ff = new FontFile("BPSR_FDPS.Fonts.FAS.ttf", new GlyphRange(0x0021, 0xF8FF));
             res = ff.BindToImGui(18.0f);
             HelperMethods.Fonts.Add("FASIcons", res);
             ff.Dispose();
 
             // Windows 11 doesn't actually have this anymore so we can't rely on the system, we have to embed it
             //HelperMethods.Fonts.Add("Cascadia-Mono", io.Fonts.AddFontFromFileTTF(@"C:\Windows\Fonts\CascadiaMono.ttf", 18.0f));
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaMono.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaMono.ttf");
             res = ff.BindToImGui(18.0f);
             HelperMethods.Fonts.Add("Cascadia-Mono", res);
             ff.Dispose();
@@ -387,22 +387,22 @@ namespace BPSR_ZDPS
             // The below fonts are being merged into Cascadia-Mono
 
             // Japanese character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextJP.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextJP.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese Simplified character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextSC.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextSC.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese Traditional character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextTC.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextTC.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Korean character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.NanumGothicCoding.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.NanumGothicCoding.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
         }

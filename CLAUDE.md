@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ZDPS is a Damage Meter and Companion Tool for Blue Protocol: Star Resonance (Season 1 version). It captures network packets to parse combat data and provides real-time metrics including DPS, healing, tanking, and NPC damage tracking. The application automatically splits encounters by phases/wipes and stores all encounter history in a local database for later analysis.
+Fuwa DPS is a Damage Meter and Companion Tool for Blue Protocol: Star Resonance (Season 1 version). It captures network packets to parse combat data and provides real-time metrics including DPS, healing, tanking, and NPC damage tracking. The application automatically splits encounters by phases/wipes and stores all encounter history in a local database for later analysis.
 
 ## Build Commands
 
@@ -16,7 +16,7 @@ dotnet restore
 dotnet build
 
 # Run the main application
-dotnet run --project BPSR-ZDPS/BPSR-ZDPS.csproj
+dotnet run --project BPSR-FDPS/BPSR-FDPS.csproj
 
 # Publish single-file executable (used for releases)
 publish.bat
@@ -38,22 +38,22 @@ The `publish.bat` script creates a self-contained executable in `./publish` and 
 
 The solution contains 3 projects:
 
-1. **BPSR-ZDPS** - Main desktop application executable
+1. **BPSR-FDPS** - Main desktop application executable
    - UI windows implemented with ImGui
    - Managers for game state (encounters, entities, chat, etc.)
    - Database layer with migrations
 
-2. **BPSR-ZDPSLib** - Core library
+2. **BPSR-FDPSLib** - Core library
    - Packet capture and TCP reassembly
    - Protocol buffer definitions (`protos/`)
    - Game data blob structures (`Blobs/`)
    - gRPC service definitions
 
-3. **BPSR-ZDPSServ** - Deduplication server component
+3. **BPSR-FDPSServ** - Deduplication server component
 
 ## Key Architecture Components
 
-### Packet Capture ([BPSR-ZDPSLib/NetCap.cs](BPSR-ZDPSLib/NetCap.cs))
+### Packet Capture ([BPSR-FDPSLib/NetCap.cs](BPSR-FDPSLib/NetCap.cs))
 
 The packet capture system uses SharpPcap to intercept network traffic. Key components:
 
@@ -64,7 +64,7 @@ The packet capture system uses SharpPcap to intercept network traffic. Key compo
 
 Game messages are dispatched via registered handlers using `NotifyId` (serviceId + methodId pairs).
 
-### Managers ([BPSR-ZDPS/Managers/](BPSR-ZDPS/Managers/))
+### Managers ([BPSR-FDPS/Managers/](BPSR-FDPS/Managers/))
 
 Core game state management:
 
@@ -75,7 +75,7 @@ Core game state management:
 - **IntegrationManager** - Third-party service integrations (BPTimer spawn tracking)
 - **ModuleOptimizer** - Fast module combination optimizer using AVX2 CPU optimizations
 
-### UI Windows ([BPSR-ZDPS/Windows/](BPSR-ZDPS/Windows/))
+### UI Windows ([BPSR-FDPS/Windows/](BPSR-FDPS/Windows/))
 
 All windows use ImGui immediate mode rendering:
 
@@ -85,14 +85,14 @@ All windows use ImGui immediate mode rendering:
 - **SettingsWindow** - Application configuration
 - **Raid Manager Windows** - Cooldown tracker, countdowns, raid warnings, threat meter
 
-### Database ([BPSR-ZDPS/Database/](BPSR-ZDPS/Database/))
+### Database ([BPSR-FDPS/Database/](BPSR-FDPS/Database/))
 
 - SQLite with Dapper ORM
 - Zstandard compression for encounter data storage
 - Migration system for schema updates
 - Can run in-memory or file-backed mode
 
-### Data Directory ([BPSR-ZDPS/Data/](BPSR-ZDPS/Data/))
+### Data Directory ([BPSR-FDPS/Data/](BPSR-FDPS/Data/))
 
 JSON data files for:
 - Skills, buffs, monsters

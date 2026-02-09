@@ -1,6 +1,6 @@
-﻿using BPSR_ZDPS.Database;
-using BPSR_ZDPS.Database.Migrations;
-using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.Database;
+using BPSR_FDPS.Database.Migrations;
+using BPSR_FDPS.DataTypes;
 using Dapper;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Text;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class DB
     {

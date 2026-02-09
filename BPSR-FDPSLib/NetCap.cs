@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Net;
 using ZstdSharp;
 
-namespace BPSR_ZDPSLib;
+namespace BPSR_FDPSLib;
 
 public class NetCap
 {

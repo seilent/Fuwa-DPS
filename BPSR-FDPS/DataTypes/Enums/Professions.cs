@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS.DataTypes.Enums
+namespace BPSR_FDPS.DataTypes.Enums
 {
     public static class Professions
     {

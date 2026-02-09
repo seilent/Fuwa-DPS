@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPSLib.ServiceMethods;
+﻿namespace BPSR_FDPSLib.ServiceMethods;
 
 public enum MatchNtf
 {

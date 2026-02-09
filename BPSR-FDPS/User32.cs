@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace BPSR_ZDPS;
+namespace BPSR_FDPS;
 
 public class User32
 {

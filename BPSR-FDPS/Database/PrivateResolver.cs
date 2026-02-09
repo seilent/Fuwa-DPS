@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
-namespace BPSR_ZDPS.Database
+namespace BPSR_FDPS.Database
 {
     public class PrivateResolver : DefaultContractResolver
     {

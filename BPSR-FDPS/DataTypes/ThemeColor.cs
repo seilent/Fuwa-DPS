@@ -1,4 +1,4 @@
-namespace BPSR_ZDPS.DataTypes
+namespace BPSR_FDPS.DataTypes
 {
     /// <summary>
     /// Semantic color keys for theme-aware UI colors.

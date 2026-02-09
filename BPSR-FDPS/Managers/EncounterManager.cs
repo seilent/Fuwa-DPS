@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPSLib;
-using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPSLib;
+using BPSR_FDPS.DataTypes;
 using Newtonsoft.Json;
 using ProtoBuf;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class EncounterManager
     {
@@ -156,7 +156,7 @@ namespace BPSR_ZDPS
                 BattleStateMachine.DeferredEncounterEndFinalData.EncounterId == Current.EncounterId)
             {
                 // Active deferred end for this encounter - don't create a new one yet
-                Log.Information($"[DeferredEnd] StartEncounter: Respecting existing deferred end for EncounterId={Current.EncounterId}");
+                Serilog.Log.Information($"[DeferredEnd] StartEncounter: Respecting existing deferred end for EncounterId={Current.EncounterId}");
                 return;
             }
 

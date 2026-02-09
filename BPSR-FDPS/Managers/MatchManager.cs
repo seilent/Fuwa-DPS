@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPSLib;
-using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPSLib;
+using BPSR_FDPS.DataTypes;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using Serilog;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class MatchManager
     {
@@ -32,7 +32,7 @@ namespace BPSR_ZDPS
         {
             foreach (var matchPlayerInfo in vData.VRequest.MatchPlayerInfo)
             {
-                // Unless player moves/teleports after starting ZDPS, the AppState.PlayerUID will be 0 initially
+                // Unless player moves/teleports after starting Fuwa DPS, the AppState.PlayerUID will be 0 initially
                 if (matchPlayerInfo.CharId == AppState.PlayerUID)
                 {
                     if (matchPlayerInfo.ReadyStatus == EMatchReadyStatus.Ready)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPSLib.Blobs;
+namespace BPSR_FDPSLib.Blobs;
 
 public class DungeonPlayerList : BlobType
 {

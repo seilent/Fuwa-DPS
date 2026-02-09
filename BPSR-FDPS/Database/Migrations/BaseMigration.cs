@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Data.Common;
 
-namespace BPSR_ZDPS.Database.Migrations
+namespace BPSR_FDPS.Database.Migrations
 {
     public class BaseMigration
     {

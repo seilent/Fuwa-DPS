@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using Serilog;
 using System.Data.Common;
 
-namespace BPSR_ZDPS.Database.Migrations
+namespace BPSR_FDPS.Database.Migrations
 {
     public class SkillStatsMigration : BaseMigration
     {
@@ -96,7 +96,7 @@ namespace BPSR_ZDPS.Database.Migrations
                                         new Zproto.Vec3(),
                                         null,
                                         null,
-                                        new BPSR_ZDPSLib.ExtraPacketData(snapshot.Timestamp.Value));
+                                        new BPSR_FDPSLib.ExtraPacketData(snapshot.Timestamp.Value));
 
                                     entity.SkillMetrics[skillStat.Key] = metrics;
                                 }

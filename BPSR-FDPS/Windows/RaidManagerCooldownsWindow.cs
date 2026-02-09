@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class RaidManagerCooldownsWindow
     {

@@ -369,10 +369,10 @@ FodyWeavers.xsd
 # Visual Studio Code
 .vscode/
 
-# ZDPS Application Specific Files
+# Fuwa DPS Application Specific Files
 # Debug log files
-ZDPS_log.txt
-ZDPS_log_last_run.txt
+FuwaDPS_log.txt
+FuwaDPS_log_last_run.txt
 
 # SQLite database
 ZDatabase.db

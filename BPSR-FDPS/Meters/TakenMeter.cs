@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Windows;
 using Hexa.NET.ImGui;
 using Serilog;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Meters
+namespace BPSR_FDPS.Meters
 {
     public class TakenMeter : MeterBase
     {

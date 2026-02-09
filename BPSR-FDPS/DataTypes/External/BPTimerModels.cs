@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS.DataTypes.External
+namespace BPSR_FDPS.DataTypes.External
 {
     public class MobsResponse
     {
@@ -132,7 +132,7 @@ namespace BPSR_ZDPS.DataTypes.External
     }
 }
 
-namespace BPSR_ZDPS.Managers.External
+namespace BPSR_FDPS.Managers.External
 {
     public static partial class BPTimerManager
     {

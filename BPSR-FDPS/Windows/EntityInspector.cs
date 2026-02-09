@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Hexa.NET.ImGui;
 using Hexa.NET.ImPlot;
 using Silk.NET.Core.Native;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public class EntityInspector
     {

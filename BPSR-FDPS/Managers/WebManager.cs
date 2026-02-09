@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Newtonsoft.Json;
 using Serilog;
 using SixLabors.ImageSharp;
@@ -12,7 +12,7 @@ using System.Text;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS.Web
+namespace BPSR_FDPS.Web
 {
     public static class WebManager
     {
@@ -20,8 +20,8 @@ namespace BPSR_ZDPS.Web
 
         static WebManager()
         {
-            HttpClient.DefaultRequestHeaders.Add("User-Agent", $"ZDPS/{Utils.AppVersion}");
-            HttpClient.DefaultRequestHeaders.Add("X-ZDPS-Version", Utils.AppVersion.ToString());
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", $"FuwaDPS/{Utils.AppVersion}");
+            HttpClient.DefaultRequestHeaders.Add("X-FuwaDPS-Version", Utils.AppVersion.ToString());
         }
 
         public static void SubmitReportToWebhook(Encounter encounter, Image<Rgba32> img, string webhookUrl)
@@ -45,7 +45,7 @@ namespace BPSR_ZDPS.Web
                     var fileContent = new StreamContent(imgMs);
                     fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
                     form.Add(fileContent, "report", "report.png");
-                    form.Headers.Add("X-ZDPS-ZTeamID", $"{teamId}");
+                    form.Headers.Add("X-Fuwa DPS-ZTeamID", $"{teamId}");
 
                     string url = "";
                     if (Settings.Instance.WebhookReportsMode == EWebhookReportsMode.FallbackDiscordDeduplication)
@@ -181,8 +181,8 @@ namespace BPSR_ZDPS.Web
             request.Headers.Add("Cache-Control", "no-cache");
             request.Headers.Add("X-API-Key", apiKey);
 
-            client.DefaultRequestHeaders.Add("User-Agent", $"ZDPS/{Utils.AppVersion}");
-            client.DefaultRequestHeaders.Add("X-ZDPS-Version", Utils.AppVersion.ToString());
+            client.DefaultRequestHeaders.Add("User-Agent", $"FuwaDPS/{Utils.AppVersion}");
+            client.DefaultRequestHeaders.Add("X-FuwaDPS-Version", Utils.AppVersion.ToString());
             var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
             if (cancellationToken != null && cancellationToken.Value.IsCancellationRequested)
@@ -355,7 +355,7 @@ namespace BPSR_ZDPS.Web
             string bossDetails = $"{(!string.IsNullOrEmpty(encounter.BossName) ? $"**Boss**: {encounter.BossName}{(encounter.BossHpPct > 0 ? $" ({Math.Round(encounter.BossHpPct / 1000.0f, 2)}%)" : "")}" : "")}";
 
             var msgContentBuilder = new StringBuilder();
-            msgContentBuilder.AppendLine("**ZDPS Report**");
+            msgContentBuilder.AppendLine("**Fuwa DPS Report**");
             msgContentBuilder.AppendLine($"**Reporter**: {AppState.PlayerName}");
             msgContentBuilder.AppendLine(encounterName);
             if (!string.IsNullOrEmpty(bossDetails))
@@ -366,7 +366,7 @@ namespace BPSR_ZDPS.Web
             msgContentBuilder.AppendLine($"**Duration**: `{(encounter.EndTime - encounter.StartTime).ToString(@"hh\:mm\:ss")}`{gameTimeStatus}");
             msgContentBuilder.AppendLine($"**ZTeamID**: ``{teamId}``");
 
-            var msg = new DiscordWebhookPayload("ZDPS", msgContentBuilder.ToString())
+            var msg = new DiscordWebhookPayload("Fuwa DPS", msgContentBuilder.ToString())
             {
                 AvatarURL = "https://i.imgur.com/FsXoGt4.png"
             };
@@ -374,16 +374,16 @@ namespace BPSR_ZDPS.Web
             return msg;
         }
 
-        public static void CheckForZDPSUpdates()
+        public static void CheckForFuwaDPSUpdates()
         {
             try
             {
-                Log.Information("Checking for ZDPS update...");
+                Log.Information("Checking for Fuwa DPS update...");
                 var task = Task.Factory.StartNew(async () =>
                 {
                     try
                     {
-                        var url = $"{Settings.Instance.LatestZDPSVersionCheckURL}";
+                        var url = $"{Settings.Instance.LatestFuwaDPSVersionCheckURL}";
                         var result = await HttpClient.GetAsync(url);
                         var response = await result.Content.ReadAsStringAsync();
                         if (!string.IsNullOrEmpty(response))
@@ -393,27 +393,27 @@ namespace BPSR_ZDPS.Web
                             if (isRunningLatest >= 0)
                             {
                                 // Running latest version
-                                Log.Information("ZDPS is running latest version already.");
+                                Log.Information("Fuwa DPS is running latest version already.");
                                 AppState.IsUpdateAvailable = false;
                             }
                             else
                             {
                                 // Update available
-                                Log.Information($"ZDPS update is available. Found v{latestVersion} online.");
+                                Log.Information($"Fuwa DPS update is available. Found v{latestVersion} online.");
                                 AppState.IsUpdateAvailable = true;
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "Error checking for ZDPS update.");
+                        Log.Error(ex, "Error checking for Fuwa DPS update.");
                         AppState.IsUpdateAvailable = false;
                     }
                 });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error checking for ZDPS update task.");
+                Log.Error(ex, "Error checking for Fuwa DPS update task.");
                 AppState.IsUpdateAvailable = false;
             }
         }

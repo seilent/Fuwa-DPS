@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
-    using BPSR_ZDPS.DataTypes;
+    using BPSR_FDPS.DataTypes;
     using Silk.NET.Direct3D11;
     using Silk.NET.DXGI;
     using Hexa.NET.ImGui;
@@ -246,32 +246,32 @@ namespace BPSR_ZDPS
             // Merging additional fonts into Segoe for multi-language support
 
             // Japanese character supporting font (this is a bit heavy to load into memory - 5MB)
-            //ff = new FontFile("BPSR_ZDPS.Fonts.fot-seuratpron-m.otf");
-            var ff = new FontFile("BPSR_ZDPS.Fonts.fot-seuratpron-m.otf", new GlyphRange(0x3000, 0x303F));
+            //ff = new FontFile("BPSR_FDPS.Fonts.fot-seuratpron-m.otf");
+            var ff = new FontFile("BPSR_FDPS.Fonts.fot-seuratpron-m.otf", new GlyphRange(0x3000, 0x303F));
             var res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese character supporting font (this is very heavy to load into memory - 16MB)
-            ff = new FontFile("BPSR_ZDPS.Fonts.SourceHanSansSC-Regular.otf", new GlyphRange(0x4E00, 0x9FFF));
+            ff = new FontFile("BPSR_FDPS.Fonts.SourceHanSansSC-Regular.otf", new GlyphRange(0x4E00, 0x9FFF));
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Korean character supporting font
-            ff = new FontFile("BPSR_ZDPS.Fonts.NotoSansKR-Regular.ttf", new GlyphRange(0x4E00, 0x9FFF));
+            ff = new FontFile("BPSR_FDPS.Fonts.NotoSansKR-Regular.ttf", new GlyphRange(0x4E00, 0x9FFF));
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Note: Segoe-Bold will not support multi-language when it's used
             HelperMethods.Fonts.Add("Segoe-Bold_Offscreen", io.Fonts.AddFontFromFileTTF(@"C:\Windows\Fonts\segoeuib.ttf", 18.0f));
 
-            ff = new FontFile("BPSR_ZDPS.Fonts.FAS.ttf", new GlyphRange(0x0021, 0xF8FF));
+            ff = new FontFile("BPSR_FDPS.Fonts.FAS.ttf", new GlyphRange(0x0021, 0xF8FF));
             res = ff.BindToImGui(18.0f);
             HelperMethods.Fonts.Add("FASIcons_Offscreen", res);
             ff.Dispose();
 
             // Windows 11 doesn't actually have this anymore so we can't rely on the system, we have to embed it
             //HelperMethods.Fonts.Add("Cascadia-Mono", io.Fonts.AddFontFromFileTTF(@"C:\Windows\Fonts\CascadiaMono.ttf", 18.0f));
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaMono.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaMono.ttf");
             res = ff.BindToImGui(18.0f);
             HelperMethods.Fonts.Add("Cascadia-Mono_Offscreen", res);
             ff.Dispose();
@@ -279,22 +279,22 @@ namespace BPSR_ZDPS
             // The below fonts are being merged into Cascadia-Mono
 
             // Japanese character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextJP.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextJP.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese Simplified character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextSC.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextSC.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Chinese Traditional character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.CascadiaNextTC.wght.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.CascadiaNextTC.wght.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
 
             // Korean character supporting monospace font
-            ff = new FontFile("BPSR_ZDPS.Fonts.NanumGothicCoding.ttf");
+            ff = new FontFile("BPSR_FDPS.Fonts.NanumGothicCoding.ttf");
             res = ff.BindToImGui(18.0f, true);
             ff.Dispose();
         }

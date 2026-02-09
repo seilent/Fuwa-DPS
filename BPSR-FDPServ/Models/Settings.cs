@@ -1,4 +1,4 @@
-﻿namespace BPSR_DeepsServ.Models
+﻿namespace BPSR_FDPServ.Models
 {
     public class Settings
     {

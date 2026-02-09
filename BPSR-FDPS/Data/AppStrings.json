@@ -188,8 +188,8 @@
         "ja": "カスタム実行ファイル名："
     },
     "Settings_Network_Tooltip": {
-        "en": "Select which game version you want ZDPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
-        "ja": "ZDPSがキャプチャするゲームバージョンを選択してください。\n「自動」は、現在実行中のバージョンを自動的に検出して使用します。同時に2つのクライアントを実行すると、データの問題が発生する可能性があります。\n「Steam」および「スタンドアロン」はそれぞれのバージョンのデータのみをリッスンするため、両方を同時に実行してDPSを報告できます。"
+        "en": "Select which game version you want Fuwa DPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
+        "ja": "Fuwa DPSがキャプチャするゲームバージョンを選択してください。\n「自動」は、現在実行中のバージョンを自動的に検出して使用します。同時に2つのクライアントを実行すると、データの問題が発生する可能性があります。\n「Steam」および「スタンドアロン」はそれぞれのバージョンのデータのみをリッスンするため、両方を同時に実行してDPSを報告できます。"
     },
     "Settings_Network_CustomTooltip": {
         "en": "Use this if your game version is not listed.\nNote: You will need to enter the name of the game executable for this to work.\nIt is located next to a file named 'GameAssembly.dll'.",
@@ -208,8 +208,8 @@
         "ja": "重要な注意事項："
     },
     "Settings_Keybinds_AdminNote": {
-        "en": "Keybinds only work while the game is in focus if ZDPS is being run as Administrator. This is a limitation imposed by the Game Devs.",
-        "ja": "キーバインドは、ZDPSが管理者権限で実行されている場合にのみ、ゲームがフォーカスされているときに機能します。これはゲーム開発者によって課せられた制限です。"
+        "en": "Keybinds only work while the game is in focus if Fuwa DPS is being run as Administrator. This is a limitation imposed by the Game Devs.",
+        "ja": "キーバインドは、Fuwa DPSが管理者権限で実行されている場合にのみ、ゲームがフォーカスされているときに機能します。これはゲーム開発者によって課せられた制限です。"
     },
     "Settings_Keybinds_Description": {
         "en": "Below are global hotkey keybinds for the application. Click on the box and press a key to bind it. Modifier keys (Ctrl/Alt/Shift) are not supported.",
@@ -224,8 +224,8 @@
         "ja": "エンカウンターリセット"
     },
     "Settings_Keybinds_EncounterResetWarning": {
-        "en": "[Split Encounters On New Phases] is Enabled. You likely do not need this keybind to manually reset an Encounter. ZDPS will handle Encounter separation for you.",
-        "ja": "[フェーズ変更時にエンカウンターを分割]が有効になっています。エンカウンターを手動でリセットするためにこのキーバインドを使用する必要はおそらくありません。ZDPSがエンカウンターの分割を自動的に処理します。"
+        "en": "[Split Encounters On New Phases] is Enabled. You likely do not need this keybind to manually reset an Encounter. Fuwa DPS will handle Encounter separation for you.",
+        "ja": "[フェーズ変更時にエンカウンターを分割]が有効になっています。エンカウンターを手動でリセットするためにこのキーバインドを使用する必要はおそらくありません。Fuwa DPSがエンカウンターの分割を自動的に処理します。"
     },
     "Settings_Keybinds_PinnedWindowClickthrough": {
         "en": "Pinned Window Clickthrough",
@@ -236,24 +236,24 @@
         "ja": "これにより、マウス入力が固定された（最前面の）ウィンドウを「通過」し、そのウィンドウを無視して、ゲームや別のアプリケーションなど、背後にあるものと対話できるようになります。"
     },
     "Settings_UpdateChecking_Title": {
-        "en": "ZDPS Update Checking",
-        "ja": "ZDPSアップデート確認"
+        "en": "Fuwa DPS Update Checking",
+        "ja": "Fuwa DPSアップデート確認"
     },
     "Settings_Update_CheckOnStartup": {
-        "en": "Check For ZDPS Updates On Startup: ",
-        "ja": "起動時にZDPSのアップデートを確認する："
+        "en": "Check For Fuwa DPS Updates On Startup: ",
+        "ja": "起動時にFuwa DPSのアップデートを確認する："
     },
     "Settings_Update_CheckOnStartupTooltip": {
-        "en": "When enabled, ZDPS will check online for available updates when the application is launched.",
+        "en": "When enabled, Fuwa DPS will check online for available updates when the application is launched.",
         "ja": "有効にすると、アプリケーションの起動時にオンラインで利用可能なアップデートを確認します。"
     },
     "Settings_Update_VersionCheckURL": {
-        "en": "Latest ZDPS Version Check URL: ",
-        "ja": "最新のZDPSバージョン確認URL："
+        "en": "Latest Fuwa DPS Version Check URL: ",
+        "ja": "最新のFuwa DPSバージョン確認URL："
     },
     "Settings_Update_VersionCheckURLTooltip": {
-        "en": "The URL to check for ZDPS version updates at.",
-        "ja": "ZDPSのバージョンアップデートを確認するURL。"
+        "en": "The URL to check for Fuwa DPS version updates at.",
+        "ja": "Fuwa DPSのバージョンアップデートを確認するURL。"
     },
     "Settings_Database_Title": {
         "en": "Database",
@@ -264,8 +264,8 @@
         "ja": "エンカウンターデータの保存にデータベースを使用する："
     },
     "Settings_Database_UseDatabaseTooltip": {
-        "en": "When enabled, all encounter data is saved into a local database file (ZDatabase.db) to reduce memory usage and allow viewing between ZDPS sessions. Applies after restarting ZDPS.",
-        "ja": "有効にすると、すべてのエンカウンターデータがローカルデータベースファイル（ZDatabase.db）に保存され、メモリ使用量を削減し、ZDPSセッション間で表示できるようになります。ZDPSを再起動後に適用されます。"
+        "en": "When enabled, all encounter data is saved into a local database file (ZDatabase.db) to reduce memory usage and allow viewing between Fuwa DPS sessions. Applies after restarting Fuwa DPS.",
+        "ja": "有効にすると、すべてのエンカウンターデータがローカルデータベースファイル（ZDatabase.db）に保存され、メモリ使用量を削減し、Fuwa DPSセッション間で表示できるようになります。Fuwa DPSを再起動後に適用されます。"
     },
     "Settings_Database_RetentionPolicy": {
         "en": "Database Encounter History Retention Policy: ",
@@ -296,8 +296,8 @@
         "ja": "オープンワールドでのエンカウンター保存一時停止を許可する："
     },
     "Settings_Database_AllowPausingTooltip": {
-        "en": "When enabled, a button is added to the top of the Main Window that allows the current Encounter to not be saved to the Database.\nThis is only available while in the Open World and will automatically disable when map changing. Benchmarking and Manual New Encounter creation will be disabled while Paused.\nNote: At least one map change is required before the button will appear after starting ZDPS.",
-        "ja": "有効にすると、メインウィンドウの上部にボタンが追加され、現在のエンカウンターをデータベースに保存しないようにできます。\nこれはオープンワールドにいる場合にのみ利用可能で、マップ変更時に自動的に無効になります。一時停止中はベンチマークと手動エンカウンター作成は無効になります。\n注：ボタンが表示されるには、ZDPSを開始した後に少なくとも1回のマップ変更が必要です。"
+        "en": "When enabled, a button is added to the top of the Main Window that allows the current Encounter to not be saved to the Database.\nThis is only available while in the Open World and will automatically disable when map changing. Benchmarking and Manual New Encounter creation will be disabled while Paused.\nNote: At least one map change is required before the button will appear after starting Fuwa DPS.",
+        "ja": "有効にすると、メインウィンドウの上部にボタンが追加され、現在のエンカウンターをデータベースに保存しないようにできます。\nこれはオープンワールドにいる場合にのみ利用可能で、マップ変更時に自動的に無効になります。一時停止中はベンチマークと手動エンカウンター作成は無効になります。\n注：ボタンが表示されるには、Fuwa DPSを開始した後に少なくとも1回のマップ変更が必要です。"
     },
     "Settings_Combat_Title": {
         "en": "Combat",
@@ -324,8 +324,8 @@
         "ja": "自動ワイプ検出を使用する："
     },
     "Settings_Combat_AutoWipeDetectionTooltip": {
-        "en": "When enabled, ZDPS will attempt to detect party wipes against bosses and start a new encounter automatically.",
-        "ja": "有効にすると、ZDPSはボスに対するパーティの全滅を検出し、自動的に新しいエンカウンターを開始しようとします。"
+        "en": "When enabled, Fuwa DPS will attempt to detect party wipes against bosses and start a new encounter automatically.",
+        "ja": "有効にすると、Fuwa DPSはボスに対するパーティの全滅を検出し、自動的に新しいエンカウンターを開始しようとします。"
     },
     "Settings_Combat_SkipTeleportCheck": {
         "en": "Skip Teleport State Check In Automatic Wipe Detection: ",
@@ -432,12 +432,12 @@
         "ja": "有効にすると、検出されたサブ職業名をメーターに表示できます。サブ職業が検出されない場合は、基本クラス名のみが表示されます。基本クラスが見つからない場合は「未知」が表示されます。"
     },
     "Settings_UI_GamepadNavigation": {
-        "en": "Allow Gamepad Navigation Input In ZDPS: ",
-        "ja": "ZDPSでゲームパッドナビゲーションを許可する："
+        "en": "Allow Gamepad Navigation Input In Fuwa DPS: ",
+        "ja": "Fuwa DPSでゲームパッドナビゲーションを許可する："
     },
     "Settings_UI_GamepadNavigationTooltip": {
-        "en": "When enabled, gamepad input can navigate and control the ZDPS windows.\nNote: Gamepad input may control the windows even without them specifically in focus.",
-        "ja": "有効にすると、ゲームパッド入力でZDPSウィンドウをナビゲートおよび制御できます。\n注：ゲームパッド入力は、ウィンドウがフォーカスされていない場合でも制御できる可能性があります。"
+        "en": "When enabled, gamepad input can navigate and control the Fuwa DPS windows.\nNote: Gamepad input may control the windows even without them specifically in focus.",
+        "ja": "有効にすると、ゲームパッド入力でFuwa DPSウィンドウをナビゲートおよび制御できます。\n注：ゲームパッド入力は、ウィンドウがフォーカスされていない場合でも制御できる可能性があります。"
     },
     "Settings_UI_KeepPastEncounter": {
         "en": "Keep Past Encounter In Meter UI Until Next Damage: ",
@@ -648,8 +648,8 @@
         "ja": "低パフォーマンスモード："
     },
     "Settings_UI_LowPerformanceModeTooltip": {
-        "en": "When enabled, will force ZDPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from ZDPS.",
-        "ja": "有効にすると、ZDPSが低いレートで実行され、ウィンドウの移動時にUIが stuttering する可能性があります。ZDPSのCPU使用率が非常に高い場合のみ有効にしてください。"
+        "en": "When enabled, will force Fuwa DPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from Fuwa DPS.",
+        "ja": "有効にすると、Fuwa DPSが低いレートで実行され、ウィンドウの移動時にUIが stuttering する可能性があります。Fuwa DPSのCPU使用率が非常に高い場合のみ有効にしてください。"
     },
     "Settings_UI_Appearance": {
         "en": "Appearance",
@@ -740,8 +740,8 @@
         "ja": "自然と森林環境に触発された落ち着くダークグリーンテーマ。"
     },
     "Settings_UI_ThemeTooltip": {
-        "en": "Select the visual theme for the ZDPS interface. Takes effect immediately after saving.",
-        "ja": "ZDPSインターフェースのビジュアルテーマを選択します。保存後にすぐに有効になります。"
+        "en": "Select the visual theme for the Fuwa DPS interface. Takes effect immediately after saving.",
+        "ja": "Fuwa DPSインターフェースのビジュアルテーマを選択します。保存後にすぐに有効になります。"
     },
     "Settings_UI_Language": {
         "en": "Language: ",
@@ -756,8 +756,8 @@
         "ja": "日本語"
     },
     "Settings_UI_LanguageTooltip": {
-        "en": "Select the language for profession names and other localized text. Requires ZDPS restart to take full effect.",
-        "ja": "職業名とその他のローカライズされたテキストの言語を選択します。完全に有効にするにはZDPSの再起動が必要です。"
+        "en": "Select the language for profession names and other localized text. Requires Fuwa DPS restart to take full effect.",
+        "ja": "職業名とその他のローカライズされたテキストの言語を選択します。完全に有効にするにはFuwa DPSの再起動が必要です。"
     },
     "Settings_Matchmaking_Title": {
         "en": "Matchmaking",
@@ -852,8 +852,8 @@
         "ja": "エンカウンターレポートをファイルに保存する："
     },
     "Settings_Integrations_SaveReportTooltip": {
-        "en": "When enabled, writes a report file to the Reports folder located next to ZDPS.",
-        "ja": "有効にすると、ZDPSの横にあるReportsフォルダにレポートファイルを書き込みます。"
+        "en": "When enabled, writes a report file to the Reports folder located next to Fuwa DPS.",
+        "ja": "有効にすると、Fuwa DPSの横にあるReportsフォルダにレポートファイルを書き込みます。"
     },
     "Settings_Integrations_ReportRetentionPolicy": {
         "en": "Report File Retention Policy: ",
@@ -924,8 +924,8 @@
         "ja": "外部サーバーを使用して同じレポートが短期間にすでに送信されているかを確認した後、外部サーバーがDiscord Webhookに転送します。"
     },
     "Settings_Integrations_WebhookModeTooltip": {
-        "en": "Select the type of Webhook Mode you want to use for sending ZDPS Reports.\n'Discord Deduplication' is recommended if other users may be sending the same Encounter Report to the same Discord Channel at the same time to avoid duplicate messages.",
-        "ja": "ZDPSレポートの送信に使用するWebhookモードのタイプを選択します。\n同じDiscordチャンネルに同時に同じエンカウンターレポートを送信する可能性のある他のユーザーがいる場合は、重複メッセージを避けるために「Discord重複排除」をお勧めします。"
+        "en": "Select the type of Webhook Mode you want to use for sending Fuwa DPS Reports.\n'Discord Deduplication' is recommended if other users may be sending the same Encounter Report to the same Discord Channel at the same time to avoid duplicate messages.",
+        "ja": "Fuwa DPSレポートの送信に使用するWebhookモードのタイプを選択します。\n同じDiscordチャンネルに同時に同じエンカウンターレポートを送信する可能性のある他のユーザーがいる場合は、重複メッセージを避けるために「Discord重複排除」をお勧めします。"
     },
     "Settings_Integrations_WebhookSendTo": {
         "en": "Send Encounter Reports To {0}: ",
@@ -1028,8 +1028,8 @@
         "ja": "開発"
     },
     "Settings_Development_Note": {
-        "en": "NOTE: This version of ZDPS is designed only for BPSR Season 1.",
-        "ja": "注：このバージョンのZDPSはBPSRシーズン1専用に設計されています。"
+        "en": "NOTE: This version of Fuwa DPS is designed only for BPSR Season 1.",
+        "ja": "注：このバージョンのFuwa DPSはBPSRシーズン1専用に設計されています。"
     },
     "Settings_Development_ReloadDataTables": {
         "en": "Reload DataTables",
@@ -1060,8 +1060,8 @@
         "ja": "デバッグログをファイルに書き込む："
     },
     "Settings_Development_LogToFileTooltip": {
-        "en": "When enabled, writes a debug log for ZDPS (ZDPS_log.txt). Applies after restarting ZDPS.",
-        "ja": "有効にすると、ZDPSのデバッグログ（ZDPS_log.txt）を書き込みます。ZDPSを再起動後に適用されます。"
+        "en": "When enabled, writes a debug log for Fuwa DPS (Fuwa DPS_log.txt). Applies after restarting Fuwa DPS.",
+        "ja": "有効にすると、Fuwa DPSのデバッグログ（Fuwa DPS_log.txt）を書き込みます。Fuwa DPSを再起動後に適用されます。"
     },
     "Settings_Development_OpenGitHub": {
         "en": "Open GitHub Project Page",
@@ -1652,8 +1652,8 @@
         "ja": "低パフォーマンスモード："
     },
     "Settings_UI_LowPerfTooltip": {
-        "en": "When enabled, will force ZDPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from ZDPS.",
-        "ja": "有効にすると、ZDPSが低いレートで実行され、ウィンドウを移動するときにUIがカクつく可能性があります。ZDPSのCPU使用率が非常に高い場合のみ有効にしてください。"
+        "en": "When enabled, will force Fuwa DPS to run at a lower rate, potentially causing stuttering UI when moving windows. Only turn this on if you experience Very High CPU usage from Fuwa DPS.",
+        "ja": "有効にすると、Fuwa DPSが低いレートで実行され、ウィンドウを移動するときにUIがカクつく可能性があります。Fuwa DPSのCPU使用率が非常に高い場合のみ有効にしてください。"
     },
     "Settings_Matchmaking_Header": {
         "en": "Matchmaking",
@@ -1728,8 +1728,8 @@
         "ja": "重要な注意点："
     },
     "Settings_Common_RestartRequired": {
-        "en": "Changing the [{0}] setting requires restarting ZDPS to take effect.",
-        "ja": "[{0}]設定を変更するには、ZDPSを再起動する必要があります。"
+        "en": "Changing the [{0}] setting requires restarting Fuwa DPS to take effect.",
+        "ja": "[{0}]設定を変更するには、Fuwa DPSを再起動する必要があります。"
     },
     "Settings_Common_ClearKeybinding": {
         "en": "Clear Keybinding.",
@@ -1740,8 +1740,8 @@
         "ja": "ESCキーを押してキーバインドをキャンセル。"
     },
     "Settings_Network_Tooltip": {
-        "en": "Select which game version you want ZDPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
-        "ja": "ZDPSがキャプチャするゲームバージョンを選択します。\n自動は現在実行中のバージョンを自動的に検出して使用します。自動では、同時に2つのクライアントを実行するとデータの問題が発生します。\nSteamとスタンドアロンはそれぞれのバージョンからのデータのみをリッスンし、両方を同時に実行して1つのDPSのみをレポートできるようにします。"
+        "en": "Select which game version you want Fuwa DPS to capture from.\nAuto will automatically detect and use the currently running version. Two simultaneous clients will cause data problems while on Auto.\nSteam and Standalone will only listen for data from their respective versions, allowing both to be run simultaneously and only report DPS for one.",
+        "ja": "Fuwa DPSがキャプチャするゲームバージョンを選択します。\n自動は現在実行中のバージョンを自動的に検出して使用します。自動では、同時に2つのクライアントを実行するとデータの問題が発生します。\nSteamとスタンドアロンはそれぞれのバージョンからのデータのみをリッスンし、両方を同時に実行して1つのDPSのみをレポートできるようにします。"
     },
     "Common_Yes": {
         "en": "Yes",
@@ -1811,9 +1811,9 @@
         "en": "Delete Confirmation",
         "ja": "削除の確認"
     },
-    "Common_ExitZDPS": {
-        "en": "Exit ZDPS",
-        "ja": "ZDPSを終了"
+    "Common_ExitFuwa DPS": {
+        "en": "Exit Fuwa DPS",
+        "ja": "Fuwa DPSを終了"
     },
     "Chat_AddButton": {
         "en": "+",
@@ -1848,8 +1848,8 @@
         "ja": "[ {0} ] をクリップボードにコピーします。"
     },
     "Chat_Tooltip_BlockUser": {
-        "en": "Blocks this users ({0}) messages from showing in your ZDPS chat.",
-        "ja": "このユーザー（{0}）のメッセージがZDPSチャットに表示されないようにブロックします。"
+        "en": "Blocks this users ({0}) messages from showing in your Fuwa DPS chat.",
+        "ja": "このユーザー（{0}）のメッセージがFuwa DPSチャットに表示されないようにブロックします。"
     },
     "Chat_Unblock": {
         "en": "Unblock",
@@ -2092,8 +2092,8 @@
         "ja": "後で通知する"
     },
     "UpdateCheck_Description": {
-        "en": "ZDPS is able to check for updates on startup so you never miss when a new ZDPS version is released. It is recommended to enable this setting.",
-        "ja": "ZDPSは起動時に更新を確認できるため、新しいZDPSバージョンのリリースを見逃すことはありません。この設定を有効にすることをお勧めします。"
+        "en": "Fuwa DPS is able to check for updates on startup so you never miss when a new Fuwa DPS version is released. It is recommended to enable this setting.",
+        "ja": "Fuwa DPSは起動時に更新を確認できるため、新しいFuwa DPSバージョンのリリースを見逃すことはありません。この設定を有効にすることをお勧めします。"
     },
     "UpdateCheck_EnableNow": {
         "en": "Enable Now",

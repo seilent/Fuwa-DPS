@@ -1,3 +1,3 @@
-dotnet publish "BPSR-ZDPS/BPSR-ZDPS.csproj" -r win-x64 -c Release -o ./publish /p:PublishSingleFile=true /p:PublishTrimmed=false /p:TrimMode=Link /p:IncludeAllContentForSelfExtract=false --self-contained false
-move "publish\BPSR-ZDPS.exe" "publish\BPSR-ZDPS.exe"
-copy "BPSR-ZDPS\Data" "publish\Data"
+dotnet publish "BPSR-FDPS/BPSR-FDPS.csproj" -r win-x64 -c Release -o ./publish /p:PublishSingleFile=true /p:PublishTrimmed=false /p:TrimMode=Link /p:IncludeAllContentForSelfExtract=false --self-contained false
+move "publish\BPSR-FDPS.exe" "publish\BPSR-FDPS.exe"
+copy "BPSR-FDPS\Data" "publish\Data"

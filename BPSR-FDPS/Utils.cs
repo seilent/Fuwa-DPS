@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Silk.NET.Direct3D11;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using System.IO.Hashing;
 using ZLinq;
 using System.Text.RegularExpressions;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static unsafe class Utils
     {
@@ -150,7 +150,7 @@ namespace BPSR_ZDPS
         }
 
         /// <summary>
-        /// Generates the ZDPS TeamId for the given Encounter. This is not the same as the TeamId used by the game for parties.
+        /// Generates the Fuwa DPS TeamId for the given Encounter. This is not the same as the TeamId used by the game for parties.
         /// </summary>
         /// <param name="encounter"></param>
         /// <returns></returns>
@@ -367,7 +367,7 @@ namespace BPSR_ZDPS
         public static unsafe void SetCurrentWindowIcon()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string iconAssemblyPath = "BPSR_ZDPS.Resources.MainWindowIcon.png";
+            string iconAssemblyPath = "BPSR_FDPS.Resources.MainWindowIcon.png";
             using (var iconStream = assembly.GetManifestResourceStream(iconAssemblyPath))
             {
                 if (iconStream != null)

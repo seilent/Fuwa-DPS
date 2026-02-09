@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPSLib;
+﻿using BPSR_FDPSLib;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,13 @@ using Zproto;
 using Google.Protobuf.Collections;
 using System.Numerics;
 using Silk.NET.Core.Native;
-using BPSR_ZDPS.DataTypes;
+using BPSR_FDPS.DataTypes;
 using static HexaGen.Runtime.MemoryPool;
 using System.Collections.Concurrent;
 using ZLinq;
-using BPSR_ZDPS.Windows;
+using BPSR_FDPS.Windows;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class MessageManager
     {
@@ -38,48 +38,48 @@ namespace BPSR_ZDPS
                 ExeNames = Utils.GameCapturePreferenceToExeNames(Settings.Instance.GameCapturePreference)
             });
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncContainerData, ProcessSyncContainerData);
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncContainerDirtyData, ProcessSyncContainerDirtyData);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncContainerData, ProcessSyncContainerData);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncContainerDirtyData, ProcessSyncContainerDirtyData);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncNearDeltaInfo, ProcessSyncNearDeltaInfo);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncNearDeltaInfo, ProcessSyncNearDeltaInfo);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncToMeDeltaInfo, ProcessSyncToMeDeltaInfo);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncToMeDeltaInfo, ProcessSyncToMeDeltaInfo);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncNearEntities, ProcessSyncNearEntities);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncNearEntities, ProcessSyncNearEntities);
 
-            netCap.RegisterNotifyHandler(936649811, (uint)BPSR_ZDPSLib.ServiceMethods.WorldActivityNtf.SyncHitInfo, ProcessSyncHitInfo);
+            netCap.RegisterNotifyHandler(936649811, (uint)BPSR_FDPSLib.ServiceMethods.WorldActivityNtf.SyncHitInfo, ProcessSyncHitInfo);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncDungeonData, ProcessSyncDungeonData);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncDungeonData, ProcessSyncDungeonData);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.SyncDungeonDirtyData, ProcessSyncDungeonDirtyData);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.SyncDungeonDirtyData, ProcessSyncDungeonDirtyData);
 
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.NotifyAllMemberReady, ProcessNotifyAllMemberReady);
-            netCap.RegisterWorldNotifyHandler(BPSR_ZDPSLib.ServiceMethods.WorldNtf.NotifyCaptainReady, ProcessNotifyCaptainReady);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.NotifyAllMemberReady, ProcessNotifyAllMemberReady);
+            netCap.RegisterWorldNotifyHandler(BPSR_FDPSLib.ServiceMethods.WorldNtf.NotifyCaptainReady, ProcessNotifyCaptainReady);
 
-            netCap.RegisterMatchNotifyHandler(BPSR_ZDPSLib.ServiceMethods.MatchNtf.EnterMatchResult, ProcessEnterMatchResult);
-            netCap.RegisterMatchNotifyHandler(BPSR_ZDPSLib.ServiceMethods.MatchNtf.CancelMatchResult, ProcessCancelMatchResult);
-            netCap.RegisterMatchNotifyHandler(BPSR_ZDPSLib.ServiceMethods.MatchNtf.MatchReadyStatus, ProcessMatchReadyStatus);
+            netCap.RegisterMatchNotifyHandler(BPSR_FDPSLib.ServiceMethods.MatchNtf.EnterMatchResult, ProcessEnterMatchResult);
+            netCap.RegisterMatchNotifyHandler(BPSR_FDPSLib.ServiceMethods.MatchNtf.CancelMatchResult, ProcessCancelMatchResult);
+            netCap.RegisterMatchNotifyHandler(BPSR_FDPSLib.ServiceMethods.MatchNtf.MatchReadyStatus, ProcessMatchReadyStatus);
 
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NoticeUpdateTeamInfo, ProcessNoticeUpdateTeamInfo);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NoticeUpdateTeamMemberInfo, ProcessNoticeUpdateTeamMemberInfo);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyJoinTeam, ProcessNotifyJoinTeam);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyLeaveTeam, ProcessNotifyLeaveTeam);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NoticeUpdateTeamInfo, ProcessNoticeUpdateTeamInfo);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NoticeUpdateTeamMemberInfo, ProcessNoticeUpdateTeamMemberInfo);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyJoinTeam, ProcessNotifyJoinTeam);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyLeaveTeam, ProcessNotifyLeaveTeam);
             //
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyBeTransferLeader, ProcessNotifyBeTransferLeader);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NoticeTeamDissolve, ProcessNoticeTeamDissolve);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamActivityState, ProcessNotifyTeamActivityState);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityResult, ProcessTeamActivityResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityListResult, ProcessTeamActivityListResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityVoteResult, ProcessTeamActivityVoteResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyCharMatchResult, ProcessNotifyCharMatchResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMatchResult, ProcessNotifyTeamMatchResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyCharAbortMatch, ProcessNotifyCharAbortMatch);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.UpdateTeamMemBeCall, ProcessUpdateTeamMemBeCall);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMemBeCall, ProcessNotifyTeamMemBeCall);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMemBeCallResult, ProcessNotifyTeamMemBeCallResult);
-            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_ZDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamEnterErr, ProcessNotifyTeamEnterErr);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyBeTransferLeader, ProcessNotifyBeTransferLeader);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NoticeTeamDissolve, ProcessNoticeTeamDissolve);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamActivityState, ProcessNotifyTeamActivityState);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityResult, ProcessTeamActivityResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityListResult, ProcessTeamActivityListResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.TeamActivityVoteResult, ProcessTeamActivityVoteResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyCharMatchResult, ProcessNotifyCharMatchResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMatchResult, ProcessNotifyTeamMatchResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyCharAbortMatch, ProcessNotifyCharAbortMatch);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.UpdateTeamMemBeCall, ProcessUpdateTeamMemBeCall);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMemBeCall, ProcessNotifyTeamMemBeCall);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamMemBeCallResult, ProcessNotifyTeamMemBeCallResult);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.GrpcTeamNtf, (uint)BPSR_FDPSLib.ServiceMethods.GrpcTeamNtf.NotifyTeamEnterErr, ProcessNotifyTeamEnterErr);
 
-            netCap.RegisterNotifyHandler((ulong)EServiceId.ChitChatNtf, (uint)BPSR_ZDPSLib.ServiceMethods.ChitChatNtf.NotifyNewestChitChatMsgs, Managers.ChatManager.ProcessChatMessage);
+            netCap.RegisterNotifyHandler((ulong)EServiceId.ChitChatNtf, (uint)BPSR_FDPSLib.ServiceMethods.ChitChatNtf.NotifyNewestChitChatMsgs, Managers.ChatManager.ProcessChatMessage);
 
             // Uncomment to debug print unhandled events
             //netCap.RegisterUnhandledHandler(ProcessUnhandled);
@@ -1208,7 +1208,7 @@ namespace BPSR_ZDPS
                 }
 
                 var buf = dirty.VData.Buffer.ToByteArray();
-                var ser = new BPSR_ZDPSLib.Blobs.CharSerialize(new BlobReader(buf));
+                var ser = new BPSR_FDPSLib.Blobs.CharSerialize(new BlobReader(buf));
 
                 if (ser.CharBaseInfo != null)
                 {
@@ -1317,7 +1317,7 @@ namespace BPSR_ZDPS
             foreach (var targetData in vData.Target.TargetData)
             {
                 BattleStateMachine.DungeonTargetDataHistoryAdd(targetData.Value);
-                BPSR_ZDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Enqueue(targetData);
+                BPSR_FDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Enqueue(targetData);
                 System.Diagnostics.Debug.WriteLine($"Target.TargetData[{targetData.Key}]: TargetId={targetData.Value.TargetId},Nums={targetData.Value.Nums},Complete={targetData.Value.Complete}");
             }
 
@@ -1496,7 +1496,7 @@ namespace BPSR_ZDPS
 
             var buf = dirty.VData.Buffer.ToByteArray();
 
-            var dun = new BPSR_ZDPSLib.Blobs.DungeonDirtyData(new BlobReader(buf));
+            var dun = new BPSR_FDPSLib.Blobs.DungeonDirtyData(new BlobReader(buf));
 
             if (dun?.PlayerList != null && dun?.PlayerList.PlayerInfos.Count > 0)
             {
@@ -1613,13 +1613,13 @@ namespace BPSR_ZDPS
                     // We can provide a list of predetermined id's for users to opt out of tracking here and rely on other targets or states
 
                     // Since people may never open this window, let's ensure the list doesn't just grow forever
-                    if (BPSR_ZDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Count() > 100)
+                    if (BPSR_FDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Count() > 100)
                     {
-                        BPSR_ZDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.TryDequeue(out _);
+                        BPSR_FDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.TryDequeue(out _);
                     }
 
                     BattleStateMachine.DungeonTargetDataHistoryAdd(target.Value);
-                    BPSR_ZDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Enqueue(new KeyValuePair<int, DungeonTargetData>(target.Key, target.Value));
+                    BPSR_FDPS.Windows.DebugDungeonTracker.DungeonTargetDataTracker.Enqueue(new KeyValuePair<int, DungeonTargetData>(target.Key, target.Value));
                 }
             }
         }

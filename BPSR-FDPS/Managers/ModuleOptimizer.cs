@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes.Modules;
+﻿using BPSR_FDPS.DataTypes.Modules;
 using Serilog;
 using System.Configuration;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.Numerics;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS.Managers
+namespace BPSR_FDPS.Managers
 {
     public class ModuleOptimizer
     {

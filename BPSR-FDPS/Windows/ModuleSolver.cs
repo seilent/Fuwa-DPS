@@ -1,6 +1,6 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.DataTypes.Modules;
-using BPSR_ZDPS.Managers;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.DataTypes.Modules;
+using BPSR_FDPS.Managers;
 using Hexa.NET.ImGui;
 using Newtonsoft.Json;
 using Serilog;
@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics.X86;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class ModuleSolver
     {

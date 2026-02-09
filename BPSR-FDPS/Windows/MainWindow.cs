@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPSLib;
-using BPSR_ZDPS.Meters;
+﻿using BPSR_FDPSLib;
+using BPSR_FDPS.Meters;
 using Hexa.NET.ImGui;
 using Serilog;
 using System;
@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 using static Zproto.WorldNtfCsharp.Types;
 using Zproto;
 using Newtonsoft.Json;
-using BPSR_ZDPS.DataTypes;
+using BPSR_FDPS.DataTypes;
 using Hexa.NET.GLFW;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public class MainWindow
     {
@@ -133,7 +133,7 @@ namespace BPSR_ZDPS.Windows
                 return;
             }
 
-            if (!ImGui.Begin("ZDPS", ref p_open, window_flags))
+            if (!ImGui.Begin("Fuwa DPS", ref p_open, window_flags))
             {
                 ImGui.End();
                 return;
@@ -239,12 +239,12 @@ namespace BPSR_ZDPS.Windows
                 }
                 else
                 {
-                    if (Settings.Instance.CheckForZDPSUpdatesOnStartup)
+                    if (Settings.Instance.CheckForFuwaDPSUpdatesOnStartup)
                     {
-                        Web.WebManager.CheckForZDPSUpdates();
+                        Web.WebManager.CheckForFuwaDPSUpdates();
                     }
 
-                    if (!Settings.Instance.HasPromptedEnableUpdateChecks && !HasPromptedOneTimeEnableUpdateChecks && !Settings.Instance.CheckForZDPSUpdatesOnStartup)
+                    if (!Settings.Instance.HasPromptedEnableUpdateChecks && !HasPromptedOneTimeEnableUpdateChecks && !Settings.Instance.CheckForFuwaDPSUpdatesOnStartup)
                     {
                         HasPromptedOneTimeEnableUpdateChecks = true;
                         UpdateCheckPromptWindow.Open();
@@ -326,9 +326,9 @@ namespace BPSR_ZDPS.Windows
                     MessageManager.InitializeCapturing();
                 }
 
-                if (Settings.Instance.CheckForZDPSUpdatesOnStartup)
+                if (Settings.Instance.CheckForFuwaDPSUpdatesOnStartup)
                 {
-                    Web.WebManager.CheckForZDPSUpdates();
+                    Web.WebManager.CheckForFuwaDPSUpdates();
                 }
             }
 

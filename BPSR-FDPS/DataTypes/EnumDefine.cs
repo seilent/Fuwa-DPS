@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS.DataTypes
+namespace BPSR_FDPS.DataTypes
 {
     public static class Enum
     {

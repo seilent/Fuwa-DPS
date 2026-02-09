@@ -1,11 +1,11 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Windows;
 using Hexa.NET.ImGui;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System.Numerics;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class ReportImgGen
     {

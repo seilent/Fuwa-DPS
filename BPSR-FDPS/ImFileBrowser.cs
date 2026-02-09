@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static log4net.Appender.ColoredConsoleAppender;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class ImFileBrowser
     {

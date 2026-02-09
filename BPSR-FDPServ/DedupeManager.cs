@@ -1,8 +1,8 @@
-﻿using BPSR_DeepsServ.Models;
+﻿using BPSR_FDPServ.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 
-namespace BPSR_DeepsServ
+namespace BPSR_FDPServ
 {
     public class DedupeManager(IOptions<Settings> settings)
     {

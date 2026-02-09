@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPSLib
+﻿namespace BPSR_FDPSLib
 {
     public class ExtraPacketData(DateTime arrivalTime)
     {

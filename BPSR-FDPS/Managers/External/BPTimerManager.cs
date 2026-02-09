@@ -1,6 +1,6 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.DataTypes.External;
-using BPSR_ZDPS.Web;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.DataTypes.External;
+using BPSR_FDPS.Web;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS.Managers.External
+namespace BPSR_FDPS.Managers.External
 {
     public static partial class BPTimerManager
     {

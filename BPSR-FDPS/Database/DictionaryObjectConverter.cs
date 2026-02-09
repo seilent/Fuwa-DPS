@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BPSR_ZDPS.Database
+namespace BPSR_FDPS.Database
 {
     public class DictionaryObjectConverter : JsonConverter
     {

@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class AppState
     {

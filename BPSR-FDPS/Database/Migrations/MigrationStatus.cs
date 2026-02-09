@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPS.Database.Migrations
+﻿namespace BPSR_FDPS.Database.Migrations
 {
     public class MigrationStatus
     {

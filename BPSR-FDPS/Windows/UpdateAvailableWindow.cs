@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Windows;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class UpdateAvailableWindow
     {
@@ -44,7 +44,7 @@ namespace BPSR_ZDPS
 
             ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Theme.GetColor(ThemeColor.SuccessText));
 
-            if (ImGui.BeginPopupModal($"ZDPS Update Available###{TITLE_ID}", ref IsOpened, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking))
+            if (ImGui.BeginPopupModal($"Fuwa DPS Update Available###{TITLE_ID}", ref IsOpened, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking))
             {
                 if (RunOnceDelayed == 0)
                 {
@@ -64,11 +64,11 @@ namespace BPSR_ZDPS
 
                 if (ImGui.BeginChild("##AlertChild", new Vector2(ImGui.GetContentRegionAvail().X, ImGui.GetContentRegionAvail().Y - ImGui.GetItemRectSize().Y * 2)))
                 {
-                    ImGui.TextUnformatted("There is a new update available for ZDPS!");
+                    ImGui.TextUnformatted("There is a new update available for Fuwa DPS!");
                     ImGui.TextUnformatted("It is strongly recommended to always update to the latest version available.");
 
                     ImGui.PushStyleColor(ImGuiCol.Text, Theme.GetColor(ThemeColor.WarningText));
-                    ImGui.TextUnformatted("Reminder: This is the Season 1 version of ZDPS when downloading updates!");
+                    ImGui.TextUnformatted("Reminder: This is the Season 1 version of Fuwa DPS when downloading updates!");
                     ImGui.PopStyleColor();
 
                     ImGui.EndChild();
@@ -84,7 +84,7 @@ namespace BPSR_ZDPS
                     {
                         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
                         {
-                            FileName = Settings.Instance.ZDPSWebsiteURL,
+                            FileName = Settings.Instance.FuwaDPSWebsiteURL,
                             UseShellExecute = true,
                         });
                     }
@@ -96,7 +96,7 @@ namespace BPSR_ZDPS
                     ImGui.CloseCurrentPopup();
                 }
                 ImGui.PopStyleColor();
-                ImGui.SetItemTooltip($"Click to open [ {Settings.Instance.ZDPSWebsiteURL} ]");
+                ImGui.SetItemTooltip($"Click to open [ {Settings.Instance.FuwaDPSWebsiteURL} ]");
 
                 ImGui.SameLine(ImGui.GetContentRegionAvail().X - 250);
 

@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Hexa.NET.GLFW;
 using Hexa.NET.ImGui;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class HelperMethods
     {

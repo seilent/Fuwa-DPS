@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Zproto;
 
-namespace BPSR_ZDPS.DataTypes
+namespace BPSR_FDPS.DataTypes
 {
     public class DiscordWebhookPayload(string username, string content)
     {

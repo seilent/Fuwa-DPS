@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Web;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Web;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public class EncounterReportWindow
     {
@@ -50,7 +50,7 @@ namespace BPSR_ZDPS.Windows
 
             ImGui.PushFont(HelperMethods.Fonts["Cascadia-Mono_Offscreen"], 18f);
 
-            string TitleText = $"ZDPS Report (v{Utils.AppVersion}) - Encounter: {encounter.SceneName} ({(encounter.EndTime - encounter.StartTime).ToString("hh\\:mm\\:ss")}) [ZTeamId: {Utils.CreateZTeamId(encounter)}]";
+            string TitleText = $"Fuwa DPS Report (v{Utils.AppVersion}) - Encounter: {encounter.SceneName} ({(encounter.EndTime - encounter.StartTime).ToString("hh\\:mm\\:ss")}) [ZTeamId: {Utils.CreateZTeamId(encounter)}]";
             ImGui.SetNextWindowSize(new Vector2(-1, -1), ImGuiCond.Always);
             ImGui.Begin($"{TitleText}###EncounterReportWindow", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoResize);
 

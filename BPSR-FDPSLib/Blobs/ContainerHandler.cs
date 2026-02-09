@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPSLib.Blobs;
+﻿namespace BPSR_FDPSLib.Blobs;
 
 public class ContainerHandler
 {

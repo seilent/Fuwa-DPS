@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public unsafe static class TextureSaveUtil
     {

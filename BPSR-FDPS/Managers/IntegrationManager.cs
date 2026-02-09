@@ -1,6 +1,6 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Managers.External;
-using BPSR_ZDPS.Web;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Managers.External;
+using BPSR_FDPS.Web;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class IntegrationManager
     {

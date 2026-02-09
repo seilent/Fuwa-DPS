@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPS;
+﻿namespace BPSR_FDPS;
 
 using Hexa.NET.ImGui;
 using Silk.NET.Direct3D11;

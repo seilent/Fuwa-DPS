@@ -5,9 +5,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using static BPSR_ZDPS.DataTypes.Enums.Professions;
+using static BPSR_FDPS.DataTypes.Enums.Professions;
 
-namespace BPSR_ZDPS.DataTypes
+namespace BPSR_FDPS.DataTypes
 {
     public static class Professions
     {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Zproto;
 
-namespace BPSR_ZDPSLib.Blobs;
+namespace BPSR_FDPSLib.Blobs;
 
 public class DungeonVarData : BlobType
 {

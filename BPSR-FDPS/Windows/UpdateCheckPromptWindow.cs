@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Windows;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class UpdateCheckPromptWindow
     {
@@ -44,7 +44,7 @@ namespace BPSR_ZDPS
 
             ImGui.PushStyleColor(ImGuiCol.TitleBgActive, Theme.GetColor(ThemeColor.SuccessText));
 
-            if (ImGui.BeginPopupModal($"ZDPS Enable Update Checking###{TITLE_ID}", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.AlwaysAutoResize))
+            if (ImGui.BeginPopupModal($"Fuwa DPS Enable Update Checking###{TITLE_ID}", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.AlwaysAutoResize))
             {
                 if (RunOnceDelayed == 0)
                 {
@@ -61,7 +61,7 @@ namespace BPSR_ZDPS
                     RunOnceDelayed++;
                 }
 
-                ImGui.TextWrapped("ZDPS is able to check for updates on startup so you never miss when a new ZDPS version is released. It is recommended to enable this setting.");
+                ImGui.TextWrapped("Fuwa DPS is able to check for updates on startup so you never miss when a new Fuwa DPS version is released. It is recommended to enable this setting.");
 
                 ImGui.NewLine();
                 ImGui.TextUnformatted("Would you like to enable this now?");
@@ -75,7 +75,7 @@ namespace BPSR_ZDPS
                 ImGui.PushStyleColor(ImGuiCol.Button, Theme.GetColor(ThemeColor.SuccessText));
                 if (ImGui.Button("Enable Now", new Vector2(250, 0)))
                 {
-                    Settings.Instance.CheckForZDPSUpdatesOnStartup = true;
+                    Settings.Instance.CheckForFuwaDPSUpdatesOnStartup = true;
                     Settings.Instance.HasPromptedEnableUpdateChecks = true;
                     Settings.Save();
                     ImGui.CloseCurrentPopup();

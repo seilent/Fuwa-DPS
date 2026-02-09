@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPS.DataTypes
+﻿namespace BPSR_FDPS.DataTypes
 {
     public class SkillFightLevelTable
     {

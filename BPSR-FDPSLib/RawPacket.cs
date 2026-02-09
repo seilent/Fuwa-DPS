@@ -1,6 +1,6 @@
 ﻿using System.Buffers;
 
-namespace BPSR_ZDPSLib;
+namespace BPSR_FDPSLib;
 
 public class RawPacket
 {

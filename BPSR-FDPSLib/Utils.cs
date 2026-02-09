@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Serilog;
 
-namespace BPSR_ZDPSLib;
+namespace BPSR_FDPSLib;
 
 public class Utils
 {

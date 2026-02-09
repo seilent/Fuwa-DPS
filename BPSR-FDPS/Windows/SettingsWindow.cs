@@ -1,5 +1,5 @@
-﻿using BPSR_ZDPSLib;
-using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPSLib;
+using BPSR_FDPS.DataTypes;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class SettingsWindow
     {
@@ -33,7 +33,7 @@ namespace BPSR_ZDPS.Windows
         static bool splitEncountersOnNewPhases;
         static bool excludeDragonsFromPhaseSplit;
         static bool displayTruePerSecondValuesInMeters;
-        static bool allowGamepadNavigationInputInZDPS;
+        static bool allowGamepadNavigationInputInFuwaDPS;
         static bool keepPastEncounterInMeterUntilNextDamage;
         static bool useDatabaseForEncounterHistory;
         static int databaseRetentionPolicyDays;
@@ -85,8 +85,8 @@ namespace BPSR_ZDPS.Windows
         static string webhookReportsDiscordUrl;
         static string webhookReportsCustomUrl;
 
-        static bool checkForZDPSUpdatesOnStartup;
-        static string latestZDPSVersionCheckURL;
+        static bool checkForFuwaDPSUpdatesOnStartup;
+        static string latestFuwaDPSVersionCheckURL;
 
         static bool lowPerformanceMode;
 
@@ -348,7 +348,7 @@ namespace BPSR_ZDPS.Windows
                         ImGui.AlignTextToFramePadding();
                         ImGui.Text(AppStrings.GetLocalized("Settings_Update_CheckOnStartup"));
                         ImGui.SameLine();
-                        ImGui.Checkbox("##CheckForZDPSUpdatesOnStartup", ref checkForZDPSUpdatesOnStartup);
+                        ImGui.Checkbox("##CheckForFuwa DPSUpdatesOnStartup", ref checkForFuwaDPSUpdatesOnStartup);
                         ImGui.Indent();
                         ImGui.BeginDisabled(true);
                         ImGui.TextWrapped(AppStrings.GetLocalized("Settings_Update_CheckOnStartupTooltip"));
@@ -359,12 +359,12 @@ namespace BPSR_ZDPS.Windows
                         ImGui.Text(AppStrings.GetLocalized("Settings_Update_VersionCheckURL"));
                         ImGui.SameLine();
                         ImGui.SetNextItemWidth(-1);
-                        if (ImGui.InputText("##LatestZDPSVersionCheckURL", ref latestZDPSVersionCheckURL, 512))
+                        if (ImGui.InputText("##LatestFuwa DPSVersionCheckURL", ref latestFuwaDPSVersionCheckURL, 512))
                         {
                             // If the value was empty, revert back to the default URL
-                            if (string.IsNullOrEmpty(latestZDPSVersionCheckURL))
+                            if (string.IsNullOrEmpty(latestFuwaDPSVersionCheckURL))
                             {
-                                latestZDPSVersionCheckURL = "https://bpsr.gacha.boo/dps/version.txt";
+                                latestFuwaDPSVersionCheckURL = "https://bpsr.gacha.boo/dps/version.txt";
                             }
                         }
                         ImGui.Indent();
@@ -606,7 +606,7 @@ namespace BPSR_ZDPS.Windows
                         ImGui.AlignTextToFramePadding();
                         ImGui.Text(AppStrings.GetLocalized("Settings_UI_GamepadNavigation"));
                         ImGui.SameLine();
-                        ImGui.Checkbox("##AllowGamepadNavigationInputInZDPS", ref allowGamepadNavigationInputInZDPS);
+                        ImGui.Checkbox("##AllowGamepadNavigationInputInFuwa DPS", ref allowGamepadNavigationInputInFuwaDPS);
                         ImGui.Indent();
                         ImGui.BeginDisabled(true);
                         ImGui.TextWrapped(AppStrings.GetLocalized("Settings_UI_GamepadNavigationTooltip"));
@@ -1484,7 +1484,7 @@ namespace BPSR_ZDPS.Windows
                         var contentRegionAvail = ImGui.GetContentRegionAvail();
                         ImGui.BeginChild("##DevelopmentTabContent", new Vector2(contentRegionAvail.X, contentRegionAvail.Y - 56), ImGuiChildFlags.Borders);
 
-                        ImGui.TextUnformatted("NOTE: This version of ZDPS is designed only for BPSR Season 1.");
+                        ImGui.TextUnformatted("NOTE: This version of Fuwa DPS is designed only for BPSR Season 1.");
 
                         ImGui.SeparatorText("Development");
                         if (ImGui.Button("Reload DataTables"))
@@ -1525,7 +1525,7 @@ namespace BPSR_ZDPS.Windows
                         ImGui.Checkbox("##LogToFile", ref logToFile);
                         ImGui.Indent();
                         ImGui.BeginDisabled(true);
-                        ImGui.TextWrapped("When enabled, writes a debug log for ZDPS (ZDPS_log.txt). Applies after restarting ZDPS.");
+                        ImGui.TextWrapped("When enabled, writes a debug log for Fuwa DPS (Fuwa DPS_log.txt). Applies after restarting Fuwa DPS.");
                         ImGui.EndDisabled();
                         ImGui.Unindent();
 
@@ -1533,13 +1533,13 @@ namespace BPSR_ZDPS.Windows
                         {
                             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
                             {
-                                FileName = Settings.Instance.ZDPSWebsiteURL,
+                                FileName = Settings.Instance.FuwaDPSWebsiteURL,
                                 UseShellExecute = true,
                             });
                         }
                         ImGui.Indent();
                         ImGui.BeginDisabled(true);
-                        ImGui.TextWrapped($"Open a web page to the GitHub Project located at\n{Settings.Instance.ZDPSWebsiteURL}");
+                        ImGui.TextWrapped($"Open a web page to the GitHub Project located at\n{Settings.Instance.FuwaDPSWebsiteURL}");
                         ImGui.EndDisabled();
                         ImGui.Unindent();
 
@@ -1618,7 +1618,7 @@ namespace BPSR_ZDPS.Windows
             splitEncountersOnNewPhases = Settings.Instance.SplitEncountersOnNewPhases;
             excludeDragonsFromPhaseSplit = Settings.Instance.ExcludeDragonsFromPhaseSplit;
             displayTruePerSecondValuesInMeters = Settings.Instance.DisplayTruePerSecondValuesInMeters;
-            allowGamepadNavigationInputInZDPS = Settings.Instance.AllowGamepadNavigationInputInZDPS;
+            allowGamepadNavigationInputInFuwaDPS = Settings.Instance.AllowGamepadNavigationInputInFuwaDPS;
             keepPastEncounterInMeterUntilNextDamage = Settings.Instance.KeepPastEncounterInMeterUntilNextDamage;
 
             useDatabaseForEncounterHistory = Settings.Instance.UseDatabaseForEncounterHistory;
@@ -1661,8 +1661,8 @@ namespace BPSR_ZDPS.Windows
             webhookReportsDiscordUrl = Settings.Instance.WebhookReportsDiscordUrl;
             webhookReportsCustomUrl = Settings.Instance.WebhookReportsCustomUrl;
 
-            checkForZDPSUpdatesOnStartup = Settings.Instance.CheckForZDPSUpdatesOnStartup;
-            latestZDPSVersionCheckURL = Settings.Instance.LatestZDPSVersionCheckURL;
+            checkForFuwaDPSUpdatesOnStartup = Settings.Instance.CheckForFuwaDPSUpdatesOnStartup;
+            latestFuwaDPSVersionCheckURL = Settings.Instance.LatestFuwaDPSVersionCheckURL;
 
             windowSettings = (WindowSettings)Settings.Instance.WindowSettings.Clone();
 
@@ -1696,7 +1696,7 @@ namespace BPSR_ZDPS.Windows
 
                 MessageManager.InitializeCapturing();
             }
-            if (allowGamepadNavigationInputInZDPS)
+            if (allowGamepadNavigationInputInFuwaDPS)
             {
                 io.ConfigFlags |= ImGuiConfigFlags.NavEnableGamepad;
             }
@@ -1727,7 +1727,7 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.SplitEncountersOnNewPhases = splitEncountersOnNewPhases;
             Settings.Instance.ExcludeDragonsFromPhaseSplit = excludeDragonsFromPhaseSplit;
             Settings.Instance.DisplayTruePerSecondValuesInMeters = displayTruePerSecondValuesInMeters;
-            Settings.Instance.AllowGamepadNavigationInputInZDPS = allowGamepadNavigationInputInZDPS;
+            Settings.Instance.AllowGamepadNavigationInputInFuwaDPS = allowGamepadNavigationInputInFuwaDPS;
             Settings.Instance.KeepPastEncounterInMeterUntilNextDamage = keepPastEncounterInMeterUntilNextDamage;
 
             Settings.Instance.UseDatabaseForEncounterHistory = useDatabaseForEncounterHistory;
@@ -1766,8 +1766,8 @@ namespace BPSR_ZDPS.Windows
             Settings.Instance.WebhookReportsDiscordUrl = webhookReportsDiscordUrl;
             Settings.Instance.WebhookReportsCustomUrl = webhookReportsCustomUrl;
 
-            Settings.Instance.CheckForZDPSUpdatesOnStartup = checkForZDPSUpdatesOnStartup;
-            Settings.Instance.LatestZDPSVersionCheckURL = latestZDPSVersionCheckURL;
+            Settings.Instance.CheckForFuwaDPSUpdatesOnStartup = checkForFuwaDPSUpdatesOnStartup;
+            Settings.Instance.LatestFuwaDPSVersionCheckURL = latestFuwaDPSVersionCheckURL;
 
             Settings.Instance.WindowSettings = (WindowSettings)windowSettings.Clone();
 
@@ -1812,7 +1812,7 @@ namespace BPSR_ZDPS.Windows
                 ImGui.PushFont(HelperMethods.Fonts["Segoe-Bold"], ImGui.GetFontSize());
                 ImGui.TextUnformatted("Important Note:");
                 ImGui.PopFont();
-                ImGui.TextWrapped($"Changing the [{settingName}] setting requires restarting ZDPS to take effect.");
+                ImGui.TextWrapped($"Changing the [{settingName}] setting requires restarting Fuwa DPS to take effect.");
                 ImGui.EndChild();
                 ImGui.PopStyleColor();
             }

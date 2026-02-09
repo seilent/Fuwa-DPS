@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPSLib;
+﻿using BPSR_FDPSLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public static class GrpcTeamManager
     {

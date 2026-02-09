@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using System.Data.Common;
 using System.Text;
 
-namespace BPSR_ZDPS.Database.Migrations
+namespace BPSR_FDPS.Database.Migrations
 {
     public class NamespaceMigration_1 : BaseMigration
     {
@@ -31,8 +31,8 @@ namespace BPSR_ZDPS.Database.Migrations
                         {
                             var txt = streamReader.ReadToEnd();
                             var sb = new StringBuilder(txt);
-                            sb.Replace("BPSR-DeepsLib", "BPSR-ZDPSLib");
-                            sb.Replace("BPSR_ZDPS.CombatStats2, BPSR-ZDPS", "BPSR_ZDPS.CombatStats, BPSR-ZDPS");
+                            sb.Replace("BPSR-DeepsLib", "BPSR-FDPSLib");
+                            sb.Replace("BPSR_FDPS.CombatStats2, BPSR-FDPS", "BPSR_FDPS.CombatStats, BPSR-FDPS");
 
                             using (var memoryStream = new MemoryStream())
                             {

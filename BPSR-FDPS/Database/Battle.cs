@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPS
+﻿namespace BPSR_FDPS
 {
     public class Battle
     {

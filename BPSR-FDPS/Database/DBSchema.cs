@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class DBSchema
     {

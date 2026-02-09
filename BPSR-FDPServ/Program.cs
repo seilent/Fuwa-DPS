@@ -1,7 +1,7 @@
-using BPSR_DeepsServ.Models;
+using BPSR_FDPServ.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BPSR_DeepsServ
+namespace BPSR_FDPServ
 {
     public class Program
     {
@@ -14,7 +14,7 @@ namespace BPSR_DeepsServ
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
-            builder.Services.Configure<Settings>(builder.Configuration.GetSection("ZDPS"));
+            builder.Services.Configure<Settings>(builder.Configuration.GetSection("FuwaDPS"));
             builder.Services.AddSingleton<DedupeManager>();
             builder.Services.AddSingleton<DiscordWebHookManager>();
 
@@ -25,14 +25,14 @@ namespace BPSR_DeepsServ
 
             var app = builder.Build();
 
-            var zdpsSetings = builder.Configuration.GetSection("ZDPS").Get<Settings>() ?? new Settings();
-            if (zdpsSetings?.EnableDiscordWebhookProxy ?? false)
+            var fuwaDpsSettings = builder.Configuration.GetSection("FuwaDPS").Get<Settings>() ?? new Settings();
+            if (fuwaDpsSettings?.EnableDiscordWebhookProxy ?? false)
             {
                 var reportsAPI = app.MapGroup("/report");
                 reportsAPI.MapPost("/discord/{id}/{token}", HandleDiscordReport).DisableAntiforgery();
             }
 
-            if (zdpsSetings?.EnableReportDeduplicationAPI ?? false)
+            if (fuwaDpsSettings?.EnableReportDeduplicationAPI ?? false)
             {
                 app.MapGet("/dedupecheck/{teamId}", HandleDedupeRequest).DisableAntiforgery();
             }
@@ -50,7 +50,7 @@ namespace BPSR_DeepsServ
         {
             try
             {
-                if (request.Headers.TryGetValue("X-ZDPS-TeamId", out var teamIdStr))
+                if (request.Headers.TryGetValue("X-FuwaDPS-TeamId", out var teamIdStr))
                 {
                     if (ulong.TryParse(teamIdStr, out var teamId))
                     {

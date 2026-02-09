@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPSLib.Blobs;
+namespace BPSR_FDPSLib.Blobs;
 
 public class FightPointData : BlobType
 {

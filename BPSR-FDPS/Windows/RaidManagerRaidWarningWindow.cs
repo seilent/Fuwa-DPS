@@ -1,12 +1,12 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.Managers;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.Managers;
 using Hexa.NET.ImGui;
 using System.Collections.Concurrent;
 using System.Numerics;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class RaidManagerRaidWarningWindow
     {
@@ -498,7 +498,7 @@ namespace BPSR_ZDPS.Windows
 
         static void CenterDisplay()
         {
-            var gameProc = BPSR_ZDPSLib.Utils.GetCachedProcessEntry();
+            var gameProc = BPSR_FDPSLib.Utils.GetCachedProcessEntry();
             if (gameProc != null && gameProc.ProcessId > 0 && !string.IsNullOrEmpty(gameProc.ProcessName))
             {
                 try
@@ -539,7 +539,7 @@ namespace BPSR_ZDPS.Windows
 
         static void DefaultSize()
         {
-            var gameProc = BPSR_ZDPSLib.Utils.GetCachedProcessEntry();
+            var gameProc = BPSR_FDPSLib.Utils.GetCachedProcessEntry();
             if (gameProc != null && gameProc.ProcessId > 0 && !string.IsNullOrEmpty(gameProc.ProcessName))
             {
                 try

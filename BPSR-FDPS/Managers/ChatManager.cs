@@ -1,11 +1,11 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.DataTypes.Chat;
-using BPSR_ZDPSLib;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.DataTypes.Chat;
+using BPSR_FDPSLib;
 using System.Collections.Concurrent;
 using Zproto;
 using static Zproto.ChitChatNtf.Types;
 
-namespace BPSR_ZDPS.Managers
+namespace BPSR_FDPS.Managers
 {
     public class ChatManager
     {

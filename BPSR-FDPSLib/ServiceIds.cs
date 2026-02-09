@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPSLib
+namespace BPSR_FDPSLib
 {
     public enum EServiceId : ulong
     {

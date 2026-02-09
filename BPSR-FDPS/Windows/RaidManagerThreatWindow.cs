@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZLinq;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class RaidManagerThreatWindow
     {
@@ -228,7 +228,7 @@ namespace BPSR_ZDPS.Windows
 
                 MenuBarSize = ImGui.GetWindowSize();
 
-                ImGui.Text($"Raid Manager - {TITLE} (ZDPS BETA)");
+                ImGui.Text($"Raid Manager - {TITLE} (Fuwa DPS BETA)");
 
                 ImGui.SetCursorPosX(MenuBarSize.X - (MenuBarButtonWidth * 4));
                 ImGui.PushFont(HelperMethods.Fonts["FASIcons"], ImGui.GetFontSize());

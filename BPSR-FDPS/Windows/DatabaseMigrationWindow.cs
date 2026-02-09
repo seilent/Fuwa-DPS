@@ -1,4 +1,4 @@
-﻿using BPSR_ZDPS.DataTypes;
+﻿using BPSR_FDPS.DataTypes;
 using Hexa.NET.ImGui;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class DatabaseMigrationWindow
     {
@@ -56,7 +56,7 @@ namespace BPSR_ZDPS.Windows
                 }
 
                 ImGui.TextUnformatted("The ZDatabase is being migrated to a new version.");
-                ImGui.TextUnformatted("Please do not exit ZDPS while the migration is running.");
+                ImGui.TextUnformatted("Please do not exit Fuwa DPS while the migration is running.");
 
                 int currentMigration = DB.MigrationStatus.CurrentMigrationNum;
                 int totalMigrations = DB.MigrationStatus.TotalMigrationsNeeded;
@@ -93,7 +93,7 @@ namespace BPSR_ZDPS.Windows
                     ImGui.TextWrapped(DB.MigrationStatus.ErrorMsg);
                     ImGui.PopStyleColor();
 
-                    if (ImGui.Button("Exit ZDPS", new Vector2(-1, 0)))
+                    if (ImGui.Button("Exit Fuwa DPS", new Vector2(-1, 0)))
                     {
                         Hexa.NET.GLFW.GLFW.SetWindowShouldClose(HelperMethods.GLFWwindow, 1);
                     }

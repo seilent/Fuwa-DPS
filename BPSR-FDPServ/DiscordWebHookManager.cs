@@ -1,4 +1,4 @@
-﻿using BPSR_DeepsServ.Models;
+﻿using BPSR_FDPServ.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 using System.IO.Hashing;
@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace BPSR_DeepsServ
+namespace BPSR_FDPServ
 {
     public class DiscordWebHookManager(IOptions<Settings> settings) : DedupeManager(settings)
     {

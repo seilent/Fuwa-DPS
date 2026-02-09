@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zproto;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public static class DebugDungeonTracker
     {
@@ -17,7 +17,7 @@ namespace BPSR_ZDPS.Windows
         public static bool IsOpened = false;
         static int RunOnceDelayed = 0;
 
-        //public static ConcurrentQueue<KeyValuePair< int, BPSR_ZDPSLib.Blobs.DungeonTargetData>> DungeonTargetDataTracker = new();
+        //public static ConcurrentQueue<KeyValuePair< int, BPSR_FDPSLib.Blobs.DungeonTargetData>> DungeonTargetDataTracker = new();
         public static ConcurrentQueue<KeyValuePair<int, Zproto.DungeonTargetData>> DungeonTargetDataTracker = new();
 
         public static void Open()

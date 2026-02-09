@@ -1,6 +1,6 @@
 ﻿using Zproto;
 
-namespace BPSR_ZDPSLib.Blobs;
+namespace BPSR_FDPSLib.Blobs;
 
 public class DungeonFlowInfo(BlobReader blob) : BlobType(ref blob)
 {

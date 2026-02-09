@@ -1,10 +1,10 @@
-﻿using BPSR_ZDPS.DataTypes.Chat;
-using BPSR_ZDPS.DataTypes.External;
-using BPSR_ZDPS.Windows;
+﻿using BPSR_FDPS.DataTypes.Chat;
+using BPSR_FDPS.DataTypes.External;
+using BPSR_FDPS.Windows;
 using Newtonsoft.Json;
 using System.Numerics;
 
-namespace BPSR_ZDPS.DataTypes;
+namespace BPSR_FDPS.DataTypes;
 
 public class Settings
 {
@@ -27,9 +27,9 @@ public class Settings
     public bool SkipTeleportStateCheckInAutomaticWipeDetection { get; set; } = false;
     public bool DisableWipeRecalculationOverwriting { get; set; } = false;
     public bool SplitEncountersOnNewPhases { get; set; } = true;
-    public bool ExcludeDragonsFromPhaseSplit { get; set; } = false;
+    public bool ExcludeDragonsFromPhaseSplit { get; set; } = true;
     public bool DisplayTruePerSecondValuesInMeters { get; set; } = false;
-    public bool AllowGamepadNavigationInputInZDPS { get; set; } = false;
+    public bool AllowGamepadNavigationInputInFuwaDPS { get; set; } = false;
     public bool KeepPastEncounterInMeterUntilNextDamage { get; set; } = true;
     public bool UseDatabaseForEncounterHistory { get; set; } = true;
     public int DatabaseRetentionPolicyDays { get; set; } = 0;
@@ -75,9 +75,9 @@ public class Settings
     public string WebhookReportsDiscordUrl { get; set; } = "";
     public string WebhookReportsCustomUrl { get; set; } = "";
 
-    public bool CheckForZDPSUpdatesOnStartup { get; set; } = false;
-    public string LatestZDPSVersionCheckURL { get; set; } = "https://bpsr.gacha.boo/dps/version.txt";
-    public string ZDPSWebsiteURL { get; set; } = "https://bpsr.gacha.boo/dps/fuwadpslatest.zip";
+    public bool CheckForFuwaDPSUpdatesOnStartup { get; set; } = false;
+    public string LatestFuwaDPSVersionCheckURL { get; set; } = "https://bpsr.gacha.boo/dps/version.txt";
+    public string FuwaDPSWebsiteURL { get; set; } = "https://bpsr.gacha.boo/dps/fuwadpslatest.zip";
     public bool HasPromptedEnableUpdateChecks { get; set; } = false;
 
     // Settings specific to External components
@@ -90,7 +90,7 @@ public class Settings
 
     public ETheme Theme { get; set; } = ETheme.Dark;
 
-    public string Locale { get; set; } = "en";  // en, zh, ja
+    public string Locale { get; set; } = "ja";  // en, zh, ja
 
     public uint HotkeysEncounterReset { get; set; }
     public uint HotkeysPinnedWindowClickthrough { get; set; }

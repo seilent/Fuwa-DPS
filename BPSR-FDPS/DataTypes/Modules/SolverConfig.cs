@@ -2,7 +2,7 @@
 using System.Collections.Frozen;
 using System.Text;
 
-namespace BPSR_ZDPS.DataTypes.Modules
+namespace BPSR_FDPS.DataTypes.Modules
 {
     public class SolverConfig
     {

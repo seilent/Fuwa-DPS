@@ -1,13 +1,13 @@
-﻿using BPSR_ZDPS.DataTypes;
-using BPSR_ZDPS.DataTypes.Chat;
-using BPSR_ZDPS.Managers;
+﻿using BPSR_FDPS.DataTypes;
+using BPSR_FDPS.DataTypes.Chat;
+using BPSR_FDPS.Managers;
 using Hexa.NET.ImGui;
 using System.Globalization;
 using System.Numerics;
 using ZLinq;
 using Zproto;
 
-namespace BPSR_ZDPS.Windows
+namespace BPSR_FDPS.Windows
 {
     public class ChatWindow
     {

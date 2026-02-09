@@ -1,7 +1,7 @@
-﻿using BPSR_DeepsServ.Models;
+﻿using BPSR_FDPServ.Models;
 using System.Text.Json.Serialization;
 
-namespace BPSR_DeepsServ
+namespace BPSR_FDPServ
 {
     [JsonSourceGenerationOptions(WriteIndented = true)]
     [JsonSerializable(typeof(HttpResponseMessage))]

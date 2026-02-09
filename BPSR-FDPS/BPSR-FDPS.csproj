@@ -4,7 +4,7 @@
     <OutputType Condition="'$(Configuration)' == 'Debug'">Exe</OutputType>
 	<OutputType Condition="'$(Configuration)' == 'Release'">WinExe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>BPSR_ZDPS</RootNamespace>
+    <RootNamespace>BPSR_FDPS</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BPSR-ZDPSLib\BPSR-ZDPSLib.csproj" />
+    <ProjectReference Include="..\BPSR-FDPSLib\BPSR-FDPSLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

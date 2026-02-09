@@ -1,4 +1,4 @@
-﻿namespace BPSR_ZDPS.DataTypes.Chat
+﻿namespace BPSR_FDPS.DataTypes.Chat
 {
     public class UserBlock
     {

@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public unsafe class D3D11Manager : IDisposable
     {
@@ -107,7 +107,7 @@ namespace BPSR_ZDPS
             IDXGIFactory.CreateSwapChainForHwnd((IUnknown*)Device.Handle, Hwnd, &desc, &fullscreenDesc, (IDXGIOutput*)null, &swapChain.Handle);
             // IDXGIFactory.MakeWindowAssociation(Hwnd, 1 << 0);
 
-            if (BPSR_ZDPS.DataTypes.Settings.Instance.LowPerformanceMode)
+            if (BPSR_FDPS.DataTypes.Settings.Instance.LowPerformanceMode)
             {
                 // This mostly removes the render/input lag without needing to increase refresh rate
                 ComPtr<IDXGIDevice1> dxgiDevice;

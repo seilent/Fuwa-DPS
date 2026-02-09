@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BPSR_ZDPS
+namespace BPSR_FDPS
 {
     public class ThreadSafeOrderedDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
