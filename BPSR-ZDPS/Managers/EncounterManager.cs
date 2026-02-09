@@ -39,7 +39,7 @@ namespace BPSR_ZDPS
         public static bool HasLoggedSamplingModeThisEncounter = false;
 
         // Dragon boss IDs that should not be split into separate phases when ExcludeDragonsFromPhaseSplit is enabled
-        internal static readonly HashSet<int> DragonBossIds = new() { 102101, 102401, 102701 };
+        internal static readonly HashSet<int> DragonBossIds = new() { 102101, 102104, 102105, 102401, 102450, 102451, 102701, 102720, 102721 };
 
         static EncounterManager()
         {
@@ -147,6 +147,17 @@ namespace BPSR_ZDPS
             {
                 currentDifficulty = Current.ExData.DungeonDifficulty;
                 nextEncounterIdModifier = 1;
+            }
+
+            // Check if there's an active deferred end for the current encounter
+            if (BattleStateMachine.DeferredEncounterEndFinalTime != null &&
+                BattleStateMachine.DeferredEncounterEndFinalData != null &&
+                Current != null &&
+                BattleStateMachine.DeferredEncounterEndFinalData.EncounterId == Current.EncounterId)
+            {
+                // Active deferred end for this encounter - don't create a new one yet
+                Log.Information($"[DeferredEnd] StartEncounter: Respecting existing deferred end for EncounterId={Current.EncounterId}");
+                return;
             }
 
             Current = new Encounter(CurrentBattleId);
