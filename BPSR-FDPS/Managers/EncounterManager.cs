@@ -129,15 +129,8 @@ namespace BPSR_FDPS
                 }
 
                 CheckTimeOutStatus(reason);
-
-                // Only force immediate end if there's no deferred end already scheduled
-                // If a deferred end exists (e.g., 5-second dragon buffer), respect that timing
-                if (BattleStateMachine.DeferredEncounterEndFinalData == null ||
-                    BattleStateMachine.DeferredEncounterEndFinalData.EncounterId != Current.EncounterId)
-                {
-                    BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.Subtract(new TimeSpan(0, 0, 1)), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
-                    BattleStateMachine.CheckDeferredCalls();
-                }
+                BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.Subtract(new TimeSpan(0, 0, 1)), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
+                BattleStateMachine.CheckDeferredCalls();
             }
 
             int currentDifficulty = 0;
