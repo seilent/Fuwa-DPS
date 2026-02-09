@@ -293,16 +293,12 @@ namespace BPSR_ZDPS.Windows
                         // Window stays on top if there's damage OR recent activity OR we're in startup grace period
                         bool shouldBeOnTop = hasDpsDamage || hasRecentActivity || inStartupGracePeriod;
 
-                        // Debug logging for troubleshooting
-                        System.Diagnostics.Debug.WriteLine($"[AutoTop] State: Damage={hasDpsDamage}, RecentActivity={timeSinceActivity:F1}s ago, StartupGrace={inStartupGracePeriod} ({timeSinceStartup:F1}s/{STARTUP_GRACE_PERIOD_SECONDS}s), ShouldBeOnTop={shouldBeOnTop}, CurrentState={_lastKnownTopMostState}");
-
                         // Check if the actual OS window state differs from what we want
                         if (shouldBeOnTop != _lastKnownTopMostState)
                         {
                             if (shouldBeOnTop)
                             {
                                 // In active combat with damage, re-enable topmost
-                                System.Diagnostics.Debug.WriteLine($"[AutoTop] Re-enabling topmost (opacity: {LastPinnedOpacity}%)");
                                 Utils.SetWindowTopmost();
                                 Utils.SetWindowOpacity(LastPinnedOpacity * 0.01f);
                                 IsTemporarilyNotTopMost = false;
@@ -310,7 +306,6 @@ namespace BPSR_ZDPS.Windows
                             else if (IsPinned)
                             {
                                 // No DPS damage, temporarily disable topmost
-                                System.Diagnostics.Debug.WriteLine("[AutoTop] Disabling topmost (inactivity timeout)");
                                 Utils.UnsetWindowTopmost();
                                 Utils.SetWindowOpacity(1.0f);
                                 IsTemporarilyNotTopMost = true;

@@ -26,7 +26,7 @@ public class TcpReassembler
             var newConn = new TcpConnection(ep, destEp, this);
             Connections.TryAdd(ep, newConn);
             OnNewConnection?.Invoke(newConn);
-            Log.Information("Got a new connection {ep}", ep);
+            // Log.Information("Got a new connection {ep}", ep);
         }
 
         var conn = Connections[ep];

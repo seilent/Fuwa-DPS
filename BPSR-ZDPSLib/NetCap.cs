@@ -66,7 +66,7 @@ public class NetCap
         CaptureDevice.OnPacketArrival += DeviceOnOnPacketArrival;
         CaptureDevice.StartCapture();
 
-        Log.Information("Capture device started");
+        // Log.Information("Capture device started");
     }
 
     public void RegisterUnhandledHandler(Action<NotifyId, ReadOnlySpan<byte>, ExtraPacketData> handler)
@@ -153,7 +153,7 @@ public class NetCap
     private void OnNewConnection(TcpReassembler.TcpConnection conn)
     {
         // DEBUG: Log new game connection detected
-        System.Diagnostics.Debug.WriteLine($"[Connection] New: {conn.EndPoint} -> {conn.DestEndPoint}");
+        // System.Diagnostics.Debug.WriteLine($"[Connection] New: {conn.EndPoint} -> {conn.DestEndPoint}");
         var task = Task.Factory.StartNew(async () =>
         {
             NumConnectionReaders++;
@@ -369,7 +369,7 @@ public class NetCap
                 var dev = (LibPcapLiveDevice)liveDevice;
                 if (dev.Name == Config.CaptureDeviceName)
                 {
-                    Log.Information("Matched capture device: {DeviceName}, {FriendlyName}", dev.Name, dev.Interface?.FriendlyName);
+                    // Log.Information("Matched capture device: {DeviceName}, {FriendlyName}", dev.Name, dev.Interface?.FriendlyName);
                     return dev;
                 }
             }
