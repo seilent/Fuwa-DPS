@@ -148,23 +148,15 @@ namespace BPSR_FDPS
             }
         }
 
-        public static void SetDeferredEncounterEndFinalData(DateTime dateTime, EncounterEndFinalData data, bool allowRefresh = false)
+        public static void SetDeferredEncounterEndFinalData(DateTime dateTime, EncounterEndFinalData data)
         {
             if (DeferredEncounterEndFinalData != null && DeferredEncounterEndFinalData.EncounterId == data.EncounterId)
             {
                 // We have previously set the End Final data for this Encounter, if we have no Time set then the actual Signal has been completed and we don't want to do it again
-                // If the time however does exist and is later than our incoming time, then we'll allow updating it to be sooner
                 if (DeferredEncounterEndFinalTime == null)
                 {
                     // Encounter has already signaled the final end
                     Log.Debug("SetDeferredEncounterEndFinalData - Encounter has already signaled the final end");
-                    return;
-                }
-                // For dragon raids, allow refreshing the buffer (updating to a later time)
-                else if (!allowRefresh && dateTime.CompareTo(DeferredEncounterEndFinalTime) >= 0)
-                {
-                    // We'll only allow updating the time to be sooner, not later (unless allowRefresh is true)
-                    Log.Debug("SetDeferredEncounterEndFinalData - New time is not sooner than already set callback");
                     return;
                 }
             }

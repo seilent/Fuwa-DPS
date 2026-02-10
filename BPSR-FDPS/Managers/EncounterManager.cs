@@ -130,19 +130,17 @@ namespace BPSR_FDPS
 
                 CheckTimeOutStatus(reason);
 
-                // For dragon raid wipes, use the normal deferred end period (2s) to catch delayed damage with refresh
-                // For other reasons, use the immediate past timestamp (-1s) to end quickly
-                double delaySeconds = (reason == EncounterStartReason.Wipe && Current.IsDragonEncounter) ? 2.0 : -1.0;
-                bool allowRefresh = (reason == EncounterStartReason.Wipe && Current.IsDragonEncounter);
+                // For wipes, use 2-second deferred end to catch delayed damage with buffer refresh
+                // For other reasons (NewObjective, Restart, etc.), use immediate past timestamp to end quickly
+                bool isWipe = reason == EncounterStartReason.Wipe;
+                double delaySeconds = isWipe ? 2.0 : -1.0;
 
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
                     DateTime.Now.AddSeconds(delaySeconds),
-                    new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
-                    allowRefresh: allowRefresh
+                    new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current }
                 );
 
-                // Only call CheckDeferredCalls immediately for non-dragon-wipe reasons (i.e., when delaySeconds < 0)
-                // For dragon raid wipes, we want the deferred period to actually expire before ending the encounter
+                // Only call CheckDeferredCalls immediately for non-wipe reasons
                 if (delaySeconds < 0)
                 {
                     BattleStateMachine.CheckDeferredCalls();
@@ -265,20 +263,11 @@ namespace BPSR_FDPS
             // DEBUG: Log encounter end
             System.Diagnostics.Debug.WriteLine($"[Encounter] Ended: EncounterId={Current?.EncounterId}, Boss={Current?.BossName}, Final={isKnownFinal}, Reason={reason}");
 
-            if (isKnownFinal)
-            {
-                // All encounters get 2-second buffer to catch delayed damage
-                // Dragon raids allow refreshing the buffer when activity occurs
-                BattleStateMachine.SetDeferredEncounterEndFinalData(
-                    DateTime.Now.AddSeconds(2.0),
-                    new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
-                    allowRefresh: Current.IsDragonEncounter  // Allow refreshing buffer for dragon raids when activity occurs
-                );
-            }
-            else
-            {
-                BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.AddSeconds(5), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
-            }
+            // All encounters get 2-second buffer with refresh capability to catch delayed damage
+            BattleStateMachine.SetDeferredEncounterEndFinalData(
+                DateTime.Now.AddSeconds(2.0),
+                new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current }
+            );
 
             EntityCache.Instance.Save();
         }
@@ -896,7 +885,7 @@ namespace BPSR_FDPS
             attackerEntity.AddDamage(targetUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
 
             // Refresh dragon raid buffer if active
-            RefreshDragonRaidBufferIfActive(extraPacketData);
+            RefreshEncounterBufferIfActive(extraPacketData);
         }
 
         public void AddHealing(
@@ -949,7 +938,7 @@ namespace BPSR_FDPS
             entity.AddHealing(targetUuid, skillId, skillLevel, damage, overhealing, effectiveHealing, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
 
             // Refresh dragon raid buffer if active
-            RefreshDragonRaidBufferIfActive(extraPacketData);
+            RefreshEncounterBufferIfActive(extraPacketData);
         }
 
         public void AddTakenDamage(
@@ -982,7 +971,7 @@ namespace BPSR_FDPS
             targetEntity.AddTakenDamage(attackerUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
 
             // Refresh dragon raid buffer if active
-            RefreshDragonRaidBufferIfActive(extraPacketData);
+            RefreshEncounterBufferIfActive(extraPacketData);
         }
 
         public void AddShieldGained(long entityUuid, long shieldBuffUuid, long value, long initialValue, long maxValue = 0)
@@ -991,22 +980,20 @@ namespace BPSR_FDPS
             //GetOrCreateEntity(entityUuid).AddBuffEventAttribute(shieldBuffUuid, "AttrShieldList", 0);
         }
 
-        private static void RefreshDragonRaidBufferIfActive(ExtraPacketData extraPacketData)
+        private static void RefreshEncounterBufferIfActive(ExtraPacketData extraPacketData)
         {
-            // If we have a deferred end for a dragon raid and activity occurs, refresh the buffer
+            // If we have a deferred end for the current encounter and activity occurs, refresh the buffer
             if (BattleStateMachine.DeferredEncounterEndFinalTime != null &&
                 BattleStateMachine.DeferredEncounterEndFinalData != null &&
                 EncounterManager.Current != null &&
-                EncounterManager.Current.EncounterId == BattleStateMachine.DeferredEncounterEndFinalData.EncounterId &&
-                EncounterManager.Current.IsDragonEncounter)
+                EncounterManager.Current.EncounterId == BattleStateMachine.DeferredEncounterEndFinalData.EncounterId)
             {
                 // Refresh the 2-second buffer
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
                     extraPacketData.ArrivalTime.AddSeconds(2),
-                    BattleStateMachine.DeferredEncounterEndFinalData,
-                    allowRefresh: true
+                    BattleStateMachine.DeferredEncounterEndFinalData
                 );
-                System.Diagnostics.Debug.WriteLine($"[Encounter] Refreshed dragon raid buffer: EncounterId={EncounterManager.Current.EncounterId}");
+                System.Diagnostics.Debug.WriteLine($"[Encounter] Refreshed buffer: EncounterId={EncounterManager.Current.EncounterId}");
             }
         }
 
