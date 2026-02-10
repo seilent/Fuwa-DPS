@@ -129,8 +129,24 @@ namespace BPSR_FDPS
                 }
 
                 CheckTimeOutStatus(reason);
-                BattleStateMachine.SetDeferredEncounterEndFinalData(DateTime.Now.Subtract(new TimeSpan(0, 0, 1)), new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current });
-                BattleStateMachine.CheckDeferredCalls();
+
+                // For dragon raid wipes, use the normal deferred end period (2s) to catch delayed damage with refresh
+                // For other reasons, use the immediate past timestamp (-1s) to end quickly
+                double delaySeconds = (reason == EncounterStartReason.Wipe && Current.IsDragonEncounter) ? 2.0 : -1.0;
+                bool allowRefresh = (reason == EncounterStartReason.Wipe && Current.IsDragonEncounter);
+
+                BattleStateMachine.SetDeferredEncounterEndFinalData(
+                    DateTime.Now.AddSeconds(delaySeconds),
+                    new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
+                    allowRefresh: allowRefresh
+                );
+
+                // Only call CheckDeferredCalls immediately for non-dragon-wipe reasons (i.e., when delaySeconds < 0)
+                // For dragon raid wipes, we want the deferred period to actually expire before ending the encounter
+                if (delaySeconds < 0)
+                {
+                    BattleStateMachine.CheckDeferredCalls();
+                }
             }
 
             int currentDifficulty = 0;
@@ -251,12 +267,10 @@ namespace BPSR_FDPS
 
             if (isKnownFinal)
             {
-                // Dragon raids get 5-second buffer to catch delayed damage, non-dragon gets 2-second buffer
-                double delaySeconds = Current.IsDragonEncounter ? 5.0 : 2.0;
-
-                // We don't actually want to end instantly because some packets are going to be delayed and come in _after_ this and they are typically the most important ones to not miss
+                // All encounters get 2-second buffer to catch delayed damage
+                // Dragon raids allow refreshing the buffer when activity occurs
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
-                    DateTime.Now.AddSeconds(delaySeconds),
+                    DateTime.Now.AddSeconds(2.0),
                     new EncounterEndFinalData() { EncounterId = Current.EncounterId, BattleId = Current.BattleId, Reason = reason, Encounter = Current },
                     allowRefresh: Current.IsDragonEncounter  // Allow refreshing buffer for dragon raids when activity occurs
                 );
@@ -986,9 +1000,9 @@ namespace BPSR_FDPS
                 EncounterManager.Current.EncounterId == BattleStateMachine.DeferredEncounterEndFinalData.EncounterId &&
                 EncounterManager.Current.IsDragonEncounter)
             {
-                // Refresh the 5-second buffer
+                // Refresh the 2-second buffer
                 BattleStateMachine.SetDeferredEncounterEndFinalData(
-                    extraPacketData.ArrivalTime.AddSeconds(5),
+                    extraPacketData.ArrivalTime.AddSeconds(2),
                     BattleStateMachine.DeferredEncounterEndFinalData,
                     allowRefresh: true
                 );
