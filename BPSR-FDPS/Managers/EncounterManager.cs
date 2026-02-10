@@ -813,12 +813,45 @@ namespace BPSR_FDPS
             entity.RegisterSkillActivation(skillId);
         }
 
+        private bool WouldEntityBeShownInAnyMeter(Entity entity)
+        {
+            // Must be a character entity (not monsters/NPCs)
+            if (entity.EntityType != Zproto.EEntityType.EntChar)
+                return false;
+
+            // Party member filter (applies to all meters)
+            if (Settings.Instance.OnlyShowPartyMembersInMeters &&
+                AppState.PartyTeamId != 0 &&
+                AppState.PlayerUUID != 0 &&
+                AppState.PlayerUUID != entity.UUID)
+            {
+                var teamId = entity.GetAttrKV("AttrTeamId") as long?;
+                if (teamId == null || AppState.PartyTeamId != teamId)
+                    return false;
+            }
+
+            // Check if shown in DPS meter
+            bool shownInDps = !Settings.Instance.OnlyShowDamageContributorsInMeters || entity.TotalDamage > 0;
+
+            // Check if shown in Healing meter
+            bool shownInHealing = entity.TotalHealing > 0;
+
+            // Check if shown in Tanking meter
+            bool shownInTanking = entity.TotalTakenDamage > 0 || entity.TotalDeaths > 0;
+
+            return shownInDps || shownInHealing || shownInTanking;
+        }
+
         public void AddDamage(
             long attackerUuid, long targetUuid, int skillId, int skillLevel, long damage, long hpLessen, long shieldBreak,
             EDamageProperty damageElement, EDamageType damageType, EDamageMode damageMode,
             bool isCrit, bool isLucky, bool isCauseLucky, bool isMiss, bool isDead, Vec3 damagePos, ExtraPacketData extraPacketData)
         {
-            LastUpdate = extraPacketData.ArrivalTime;
+            var attackerEntity = GetOrCreateEntity(attackerUuid);
+            if (WouldEntityBeShownInAnyMeter(attackerEntity))
+            {
+                LastUpdate = extraPacketData.ArrivalTime;
+            }
 
             var attackerType = (EEntityType)Utils.UuidToEntityType(attackerUuid);
             var targetType = (EEntityType)Utils.UuidToEntityType(targetUuid);
@@ -846,7 +879,7 @@ namespace BPSR_FDPS
                 }
             }
 
-            GetOrCreateEntity(attackerUuid).AddDamage(targetUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
+            attackerEntity.AddDamage(targetUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
 
             // Refresh dragon raid buffer if active
             RefreshDragonRaidBufferIfActive(extraPacketData);
@@ -857,7 +890,11 @@ namespace BPSR_FDPS
             EDamageProperty damageElement, EDamageType damageType, EDamageMode damageMode,
             bool isCrit, bool isLucky, bool isCauseLucky, bool isMiss, bool isDead, Vec3 damagePos, ExtraPacketData extraPacketData)
         {
-            LastUpdate = extraPacketData.ArrivalTime;
+            var entity = GetOrCreateEntity(attackerUuid);
+            if (WouldEntityBeShownInAnyMeter(entity))
+            {
+                LastUpdate = extraPacketData.ArrivalTime;
+            }
 
             var attackerType = (EEntityType)Utils.UuidToEntityType(attackerUuid);
 
@@ -869,8 +906,6 @@ namespace BPSR_FDPS
             {
                 TotalHealing += (ulong)damage;
             }
-
-            var entity = GetOrCreateEntity(attackerUuid);
             var targetEntity = GetOrCreateEntity(targetUuid);
 
             long? currentHp = targetEntity.GetAttrKV("AttrHp") as long?;
@@ -908,7 +943,11 @@ namespace BPSR_FDPS
             EDamageProperty damageElement, EDamageType damageType, EDamageMode damageMode,
             bool isCrit, bool isLucky, bool isCauseLucky, bool isMiss, bool isDead, Vec3 damagePos, ExtraPacketData extraPacketData)
         {
-            LastUpdate = extraPacketData.ArrivalTime;
+            var targetEntity = GetOrCreateEntity(targetUuid);
+            if (WouldEntityBeShownInAnyMeter(targetEntity))
+            {
+                LastUpdate = extraPacketData.ArrivalTime;
+            }
 
             var targetType = (EEntityType)Utils.UuidToEntityType(targetUuid);
             if (targetType == EEntityType.EntMonster)
@@ -923,10 +962,10 @@ namespace BPSR_FDPS
                 if (damageType != EDamageType.Immune)
                 {
                     TotalTakenDamage += (ulong)damage;
-                } 
+                }
             }
 
-            GetOrCreateEntity(targetUuid).AddTakenDamage(attackerUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
+            targetEntity.AddTakenDamage(attackerUuid, skillId, skillLevel, damage, hpLessen, shieldBreak, damageElement, damageType, damageMode, isCrit, isLucky, isCauseLucky, isMiss, isDead, damagePos, extraPacketData);
 
             // Refresh dragon raid buffer if active
             RefreshDragonRaidBufferIfActive(extraPacketData);
