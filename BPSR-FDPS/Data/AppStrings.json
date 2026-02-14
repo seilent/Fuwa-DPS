@@ -196,8 +196,8 @@
         "ja": "ゲームバージョンがリストにない場合に使用します。\n注意：動作させるにはゲームの実行ファイル名を入力する必要があります。\n'GameAssembly.dll'というファイルの隣にあります。"
     },
     "Settings_Network_CustomExeTooltip": {
-        "en": "The executable file name of the game to listen to. Ex: BPSR_STEAM",
-        "ja": "リッスンするゲームの実行ファイル名。例：BPSR_STEAM"
+        "en": "The executable file name of the game to listen to. Ex: StarASIA_STEAM",
+        "ja": "リッスンするゲームの実行ファイル名。例：StarASIA_STEAM"
     },
     "Settings_Keybinds_Title": {
         "en": "Keybinds",
@@ -1444,8 +1444,8 @@
         "ja": "対象のゲームバージョンがリストにない場合に使用します。\n注：機能させるには、ゲーム実行ファイルの名前を入力する必要があります。\nこれは「GameAssembly.dll」というファイルの隣にあります。"
     },
     "Settings_Network_CustomExeNameTooltip": {
-        "en": "The executable file name of the game to listen to. Ex: BPSR_STEAM",
-        "ja": "対象とするゲームの実行ファイル名。例：BPSR_STEAM"
+        "en": "The executable file name of the game to listen to. Ex: StarASIA_STEAM",
+        "ja": "対象とするゲームの実行ファイル名。例：StarASIA_STEAM"
     },
     "Settings_UI_OpacityHeader": {
         "en": "Pinned (Top Most) Window Opacities",

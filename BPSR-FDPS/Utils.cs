@@ -397,8 +397,8 @@ namespace BPSR_FDPS
         {
             string[] exeNameToCapture = pref switch
             {
-                EGameCapturePreference.Auto => ["BPSR", "BPSR_STEAM", "BPSR_EPIC", "StarSEA", "StarASIA"],
-                EGameCapturePreference.Steam => ["BPSR_STEAM"],
+                EGameCapturePreference.Auto => ["BPSR", "StarASIA_STEAM", "BPSR_EPIC", "StarSEA", "StarASIA"],
+                EGameCapturePreference.Steam => ["StarASIA_STEAM"],
                 EGameCapturePreference.Standalone => ["BPSR"],
                 EGameCapturePreference.Epic => ["BPSR_EPIC"],
                 EGameCapturePreference.HaoPlaySea => ["StarSEA"],

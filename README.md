@@ -282,7 +282,7 @@ Fuwa DPS will attempt to select the most likely network device on your machine a
 By default, Fuwa DPS captures game data from the automatically detected running game process. However, some users may decide to run multiple version of the game at once (`Standalone`, `Steam`, `Epic`, etc.). In these cases, you will want to change this setting to be for the specific version you want to actually capture the data of. Otherwise both clients will send their data to Fuwa DPS and result in incorrect data reporting.
 
 > [!IMPORTANT]
-> If your game platform/region is missing from the dropdown list, or game data is not being detected while set to `Auto`, you may need to use the `Custom` option. When this is selected, a new textbox will appear for you to enter the _name_ of your game executable (without the `.exe` extension). For example, this would be `BPSR_STEAM` if running on Steam. Your game executable is located next to a file named `GameAssembly.dll` in the game installation directory.
+> If your game platform/region is missing from the dropdown list, or game data is not being detected while set to `Auto`, you may need to use the `Custom` option. When this is selected, a new textbox will appear for you to enter the _name_ of your game executable (without the `.exe` extension). For example, this would be `StarASIA_STEAM` if running on Steam. Your game executable is located next to a file named `GameAssembly.dll` in the game installation directory.
 >
 > If you need to make use of `Custom` please contact us with the executable name you are having to use, along with what platform/region it is for. By doing so we can add proper support to it in the dropdown list and in `Auto` detection.
 
