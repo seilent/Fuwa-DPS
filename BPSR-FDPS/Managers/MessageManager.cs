@@ -611,7 +611,15 @@ namespace BPSR_FDPS
                         EncounterManager.Current.SetAttrKV(uuid, "AttrLuck", reader.ReadInt32());
                         break;
                     case EAttrType.AttrHp:
-                        EncounterManager.Current.SetAttrKV(uuid, "AttrHp", reader.ReadInt64());
+                        long newHp = reader.ReadInt64();
+                        EncounterManager.Current.SetAttrKV(uuid, "AttrHp", newHp);
+
+                        // DEBUG: Log HP changes for potential boss death tracking
+                        if (EncounterManager.Current != null &&
+                            EncounterManager.Current.Entities.TryGetValue(uuid, out var entity))
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[AttrHp] UUID={uuid}, Name={entity.Name}, MonsterType={entity.MonsterType}, HP={newHp}");
+                        }
                         break;
                     case EAttrType.AttrMaxHp:
                         EncounterManager.Current.SetAttrKV(uuid, "AttrMaxHp", reader.ReadInt64());
@@ -1342,6 +1350,9 @@ namespace BPSR_FDPS
             // All known bosses have 100% HP
             // In order to track this, we must hold onto the last couple player states
 
+            // DEBUG: Log when CheckForWipe is called
+            System.Diagnostics.Debug.WriteLine($"[CheckForWipe] Called, Current.EncounterId={EncounterManager.Current?.EncounterId}");
+
             if (!Settings.Instance.UseAutomaticWipeDetection)
             {
                 return;
@@ -1470,8 +1481,11 @@ namespace BPSR_FDPS
                             // Might need to use MaxHpTotal?
                             if (hp != null && maxHp != null && hp > 0 && maxHp > 0 && hp >= maxHp)
                             {
+                                // DEBUG: Log wipe detection
+                                System.Diagnostics.Debug.WriteLine($"[WipeDetection] Boss {boss.Value.Name} at full HP ({hp}/{maxHp}), triggering wipe");
                                 EncounterManager.Current.SetWipeState(true);
                                 //System.Diagnostics.Debug.WriteLine($"We've hit a wipe (bossesAtMaxHp = {bossesAtMaxHp})! Start up a new encounter");
+                                System.Diagnostics.Debug.WriteLine($"[WipeDetection] Calling StartEncounter(Wipe) - will overwrite DPS list");
                                 EncounterManager.StartEncounter(false, EncounterStartReason.Wipe);
                             }
                             else

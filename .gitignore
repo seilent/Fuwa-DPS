@@ -385,3 +385,6 @@ EntityCache.bin
 
 # Published output (from publish.bat)
 publish/
+
+# Trash
+nul

@@ -170,6 +170,7 @@ namespace BPSR_FDPS
             Current = new Encounter(CurrentBattleId);
             Current.EncounterId = DB.GetNextEncounterId() + nextEncounterIdModifier;
             System.Diagnostics.Debug.WriteLine($"Created new encounter for EncounterId {Current.EncounterId} + ({nextEncounterIdModifier})");
+            System.Diagnostics.Debug.WriteLine($"[NewEncounter] Created EncounterId={Current.EncounterId}, Reason={reason}, PreviousEncounterId={priorEncounter?.EncounterId ?? 0}");
             if (priorEncounter != null && (reason == EncounterStartReason.NewObjective || reason == EncounterStartReason.Wipe || reason == EncounterStartReason.Restart))
             {
                 // Bring over basic data and attributes for the characters of the previous phase into the new one
