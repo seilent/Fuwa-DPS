@@ -88,7 +88,7 @@ public class Settings
 
     public bool LowPerformanceMode { get; set; } = false;
 
-    public ETheme Theme { get; set; } = ETheme.Dark;
+    public ETheme Theme { get; set; } = ETheme.Black;
 
     public string Locale { get; set; } = "ja";  // en, zh, ja
 

@@ -980,6 +980,7 @@ namespace BPSR_FDPS.Windows
             EncounterManager.StopEncounter();
             Log.Information($"Starting new manual encounter at {DateTime.Now}");
             EncounterManager.StartEncounter(true);
+            ResetMeters();
         }
 
         public void ToggleMouseClickthrough()
