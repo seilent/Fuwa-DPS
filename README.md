@@ -1,4 +1,5 @@
 # Fuwa DPS - Damage Meter And Companion Tool (Season 1 Version)
+From https://github.com/Blue-Protocol-Source/BPSR-ZDPS
 Fuwa DPS is a Damage Meter and Companion Tool for Blue Protocol: Star Resonance. It's built on modern frameworks, making it fast and efficient at performing the role of a DPS Meter. It however also packs a lot of additional features in it such as complete [Encounter History](#Encounter-History-Browser), [Module Optimizer](#Module-Optimizer), [Log Reporting](#Integrations), [Field Boss/Magical Creature Spawn Tracking](#BPTimer-Integration), [Cooldown Tracking](#Cooldown-Priority-Tracker), [Raid Warnings](#Raid-Warnings), [Chat](#Chat), and more.
 
 ![Example of Fuwa DPS in action on the DPS Meter tab](Screenshots/FuwaDPS_DPSMeter.png)
